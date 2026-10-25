@@ -1,63 +1,780 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Учёт заказов — демо</title>
-<style>
-:root{--ink:#1d2433;--bg:#f3f5f9;--line:#dde3ee;--acc:#3b5bdb;--mut:#667089}
-*{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-.wrap{max-width:760px;margin:0 auto;padding:14px 14px 40px}
-.demo{background:#fff3cd;border:1px solid #f1d98a;border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:12px}
-h1{font-size:24px;margin:6px 0 12px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.st{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}.st b{display:block;font-size:20px}.st span{color:var(--mut);font-size:12px}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid .w{grid-column:1/-1}
-input,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;font:inherit;background:#fff}
-button{font:inherit;cursor:pointer}.main{background:var(--acc);color:#fff;border:0;border-radius:10px;padding:12px;font-weight:700}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.tools button,.tools select{padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#fff}
-.ord{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
-.ord:first-child{border-top:0}.ord small{color:var(--mut)}.ord .sum{font-weight:700;text-align:right}
-.ord select{padding:6px;font-size:13px}.del{border:0;background:none;color:#c0392b;font-size:13px}
-.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;background:#e8ecf7}
-.s-Новый{background:#e8ecf7}.s-Оплачен{background:#dcf5e6}.s-Отправлен{background:#fdf0d0}.s-Выдан{background:#e6e6e6}
-.empty{color:var(--mut);text-align:center;padding:20px}
-</style></head><body><div class="wrap">
-<div class="demo">Демо-проект. Данные хранятся только в этом браузере (на этом устройстве) и никуда не отправляются. Имена в примерах вымышленные.</div>
-<h1>Учёт заказов</h1>
-<div class="stats"><div class="st"><b id="cnt">0</b><span>заказов</span></div><div class="st"><b id="all">0 ₽</b><span>на сумму</span></div><div class="st"><b id="paid">0 ₽</b><span>оплачено</span></div></div>
-<div class="card"><div class="grid">
-<input id="cl" placeholder="Клиент"><input id="ph" placeholder="Телефон или @ник">
-<input id="it" class="w" placeholder="Что заказали">
-<input id="pr" type="number" min="0" placeholder="Сумма, ₽"><select id="stt"></select>
-<button class="main w" id="add">Добавить заказ</button></div></div>
-<div class="tools"><select id="flt"></select><button id="demoBtn">Заполнить примером</button><button id="csv">Скачать CSV</button><button id="clr">Очистить всё</button></div>
-<div class="card" id="list"></div></div>
-<script>
-// ===== НАСТРОЙКИ =====
-const CONFIG={statuses:["Новый","Оплачен","Отправлен","Выдан"],key:"orders_demo_v1"};
-// =====================
-const $=id=>document.getElementById(id);let data=[];
-function load(){try{data=JSON.parse(localStorage.getItem(CONFIG.key)||"[]")}catch(e){data=[]}}
-function save(){try{localStorage.setItem(CONFIG.key,JSON.stringify(data))}catch(e){}}
-const fmt=n=>(+n).toLocaleString("ru-RU")+" ₽";const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-$("stt").innerHTML=CONFIG.statuses.map(s=>`<option>${s}</option>`).join("");
-$("flt").innerHTML='<option value="">Все статусы</option>'+CONFIG.statuses.map(s=>`<option>${s}</option>`).join("");
-function draw(){
- const f=$("flt").value,rows=data.filter(o=>!f||o.st===f);
- $("cnt").textContent=data.length;$("all").textContent=fmt(data.reduce((a,o)=>a+o.pr,0));
- $("paid").textContent=fmt(data.filter(o=>o.st!=="Новый").reduce((a,o)=>a+o.pr,0));
- $("list").innerHTML=rows.length?rows.slice().reverse().map(o=>`<div class="ord"><div><b>${esc(o.cl)}</b> <small>${esc(o.ph)}</small><br>${esc(o.it)}<br><small>${o.d}</small></div><div class="sum">${fmt(o.pr)}</div>
- <div><select data-id="${o.id}" class="s-${o.st}">${CONFIG.statuses.map(s=>`<option ${s===o.st?"selected":""}>${s}</option>`).join("")}</select></div><div style="text-align:right"><button class="del" data-del="${o.id}">удалить</button></div></div>`).join(""):'<div class="empty">Заказов пока нет. Добавьте первый выше.</div>';
- $("list").querySelectorAll("select").forEach(s=>s.onchange=()=>{data.find(o=>o.id==s.dataset.id).st=s.value;save();draw()});
- $("list").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{data=data.filter(o=>o.id!=b.dataset.del);save();draw()});
-}
-$("add").onclick=()=>{const cl=$("cl").value.trim(),it=$("it").value.trim(),pr=+$("pr").value;
- if(!cl||!it||!(pr>=0)||$("pr").value===""){alert("Заполните клиента, заказ и сумму");return}
- data.push({id:Date.now()+Math.random(),cl,ph:$("ph").value.trim(),it,pr,st:$("stt").value,d:new Date().toLocaleDateString("ru-RU")});
- ["cl","ph","it","pr"].forEach(i=>$(i).value="");save();draw()};
-$("flt").onchange=draw;
-$("demoBtn").onclick=()=>{const d=new Date().toLocaleDateString("ru-RU");[["Анна К.","@anna_demo","Футболка оверсайз, 2 шт.",2400,"Оплачен"],["Игорь","+7 900 000-00-01","Чехол для телефона",600,"Новый"],["Мария","@maria_demo","Худи чёрное, M",3200,"Отправлен"],["Олег","+7 900 000-00-02","Кружка с печатью",450,"Выдан"]].forEach((r,i)=>data.push({id:Date.now()+i,cl:r[0],ph:r[1],it:r[2],pr:r[3],st:r[4],d}));save();draw()};
-$("clr").onclick=()=>{if(confirm("Удалить все заказы на этом устройстве?")){data=[];save();draw()}};
-$("csv").onclick=()=>{const q=v=>'"'+String(v).replace(/"/g,'""')+'"';const t="﻿Дата;Клиент;Контакт;Заказ;Сумма;Статус\n"+data.map(o=>[o.d,o.cl,o.ph,o.it,o.pr,o.st].map(q).join(";")).join("\n");
- const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/csv;charset=utf-8"}));a.download="zakazy.csv";a.click()};
-load();draw();
-</script></body></html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Учёт заказов — демо CRM</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --ink-secondary: #374151;
+      --mut: #6b7280;
+      --bg: #f3f5f9;
+      --card: #ffffff;
+      --line: #e2e8f0;
+      --line-hover: #cbd5e1;
+      --acc: #3b5bdb;
+      --acc-hover: #2f4ac0;
+      --acc-soft: #eef2ff;
+      --danger: #dc2626;
+      --danger-soft: #fef2f2;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --warn-ink: #92400e;
+      --radius-lg: 16px;
+      --radius-md: 11px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 16px 14px 48px;
+    }
+
+    /* Демо-плашка */
+    .demo {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-ink);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    .demo-icon {
+      flex-shrink: 0;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    /* Шапка */
+    .header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 4px 0 14px;
+      flex-wrap: wrap;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .header-sub {
+      font-size: 13px;
+      color: var(--mut);
+    }
+
+    /* Карточки статистики */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .st {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .st b {
+      display: block;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 2px;
+    }
+    .st span {
+      color: var(--mut);
+      font-size: 12px;
+      display: block;
+    }
+
+    /* Базовая карточка */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--mut);
+      margin: 0 0 10px;
+    }
+
+    /* Форма добавления */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .grid .w {
+      grid-column: 1 / -1;
+    }
+
+    input, select {
+      width: 100%;
+      min-width: 0;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      font: inherit;
+      font-size: 14px;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    }
+    input::placeholder {
+      color: #9ca3af;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.15);
+    }
+    input.input-error {
+      border-color: var(--danger);
+      background: var(--danger-soft);
+    }
+
+    button {
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease, transform 0.05s ease;
+    }
+    button:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .main {
+      background: var(--acc);
+      color: #fff;
+      border: 0;
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .main:hover:not(:disabled) {
+      background: var(--acc-hover);
+    }
+
+    /* Уведомления и ошибки формы */
+    .form-msg {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .form-msg.err {
+      display: block;
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid #fecaca;
+    }
+    .form-msg.ok {
+      display: block;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* Панель инструментов и фильтрации */
+    .toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .filters-row {
+      display: grid;
+      grid-template-columns: 1fr 170px;
+      gap: 8px;
+    }
+    .actions-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-tool {
+      flex: 1 1 auto;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--card);
+      color: var(--ink-secondary);
+      font-weight: 500;
+      font-size: 13px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .btn-tool:hover:not(:disabled) {
+      border-color: var(--line-hover);
+      background: #f8fafc;
+    }
+    .btn-tool.btn-danger-outline:hover:not(:disabled) {
+      border-color: #fca5a5;
+      color: var(--danger);
+      background: var(--danger-soft);
+    }
+
+    /* Заголовок списка */
+    .list-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2px 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--mut);
+    }
+    .link-reset {
+      border: 0;
+      background: none;
+      color: var(--acc);
+      padding: 0;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .link-reset:hover {
+      text-decoration: underline;
+    }
+
+    /* Элемент списка заказов */
+    .ord {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px 12px;
+      align-items: center;
+      padding: 13px 0;
+      border-top: 1px solid var(--line);
+    }
+    .ord:first-child {
+      border-top: 0;
+    }
+    .ord-client {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+    .ord-client b {
+      font-size: 15px;
+      color: var(--ink);
+    }
+    .ord-contact {
+      color: var(--mut);
+      font-size: 13px;
+    }
+    .ord-item {
+      color: var(--ink-secondary);
+      font-size: 14px;
+      margin-bottom: 3px;
+      word-break: break-word;
+    }
+    .ord-date {
+      color: var(--mut);
+      font-size: 12px;
+    }
+    .ord .sum {
+      font-weight: 800;
+      font-size: 16px;
+      text-align: right;
+      white-space: nowrap;
+      align-self: start;
+    }
+    .ord-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    /* Статусы заказов */
+    .ord select.status-select {
+      width: auto;
+      min-width: 132px;
+      padding: 6px 28px 6px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+    .s-Новый {
+      background: #eef2ff;
+      color: #3730a3;
+      border-color: #c7d2fe;
+    }
+    .s-Оплачен {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+    .s-Отправлен {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+    .s-Выдан {
+      background: #f1f5f9;
+      color: #475569;
+      border-color: #cbd5e1;
+    }
+
+    .del {
+      border: 0;
+      background: transparent;
+      color: var(--danger);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+    }
+    .del:hover {
+      background: var(--danger-soft);
+    }
+
+    /* Пустые состояния и загрузка */
+    .empty {
+      color: var(--mut);
+      text-align: center;
+      padding: 28px 16px;
+      font-size: 14px;
+    }
+    .empty-title {
+      display: block;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    /* Адаптивность для узких мобильных экранов */
+    @media (max-width: 480px) {
+      .stats {
+        gap: 8px;
+      }
+      .st {
+        padding: 10px;
+      }
+      .st b {
+        font-size: 17px;
+      }
+      .filters-row {
+        grid-template-columns: 1fr;
+      }
+      input, select {
+        padding: 10px;
+        font-size: 13.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="demo" role="note">
+      <span class="demo-icon">💡</span>
+      <div>Демо-проект. Данные хранятся только в этом браузере (на этом устройстве) и никуда не отправляются. Имена в примерах вымышленные.</div>
+    </div>
+
+    <div class="header">
+      <h1>Учёт заказов</h1>
+      <span class="header-sub" id="storageStatus">Локальное хранилище активно</span>
+    </div>
+
+    <div class="stats">
+      <div class="st">
+        <b id="cnt">0</b>
+        <span id="cntLabel">заказов</span>
+      </div>
+      <div class="st">
+        <b id="all">0 ₽</b>
+        <span>на сумму</span>
+      </div>
+      <div class="st">
+        <b id="paid">0 ₽</b>
+        <span>оплачено</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Новый заказ</div>
+      <div class="grid">
+        <input id="cl" placeholder="Имя клиента" autocomplete="off">
+        <input id="ph" placeholder="Телефон / @ник" autocomplete="off">
+        <input id="it" class="w" placeholder="Что заказали (товар, размер)" autocomplete="off">
+        <input id="pr" type="number" min="0" step="1" inputmode="numeric" placeholder="Сумма, ₽">
+        <select id="stt" aria-label="Статус нового заказа"></select>
+        <button class="main w" id="add" type="button">Добавить заказ</button>
+      </div>
+      <div id="formMsg" class="form-msg" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="filters-row">
+        <input id="srch" type="search" placeholder="Поиск по клиенту или товару...">
+        <select id="flt" aria-label="Фильтр по статусу"></select>
+      </div>
+      <div class="actions-row">
+        <button class="btn-tool" id="demoBtn" type="button">Заполнить примером</button>
+        <button class="btn-tool" id="csv" type="button">Скачать CSV</button>
+        <button class="btn-tool btn-danger-outline" id="clr" type="button">Очистить всё</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="list-meta" id="listMeta" style="display:none">
+        <span id="shownCount">Показано: 0</span>
+        <button type="button" class="link-reset" id="resetFlt" style="display:none">Сбросить фильтр</button>
+      </div>
+      <div id="list">
+        <div class="empty">Загрузка заказов...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== НАСТРОЙКИ =====
+    const CONFIG = {
+      statuses: ["Новый", "Оплачен", "Отправлен", "Выдан"],
+      key: "orders_demo_v1"
+    };
+    // =====================
+
+    const $ = id => document.getElementById(id);
+    let data = [];
+    let msgTimer = null;
+
+    // Склонение числительных (1 заказ, 2 заказа, 5 заказов)
+    function pluralizeOrders(n) {
+      const mod10 = n % 10;
+      const mod100 = n % 100;
+      if (mod10 === 1 && mod100 !== 11) return "заказ";
+      if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "заказа";
+      return "заказов";
+    }
+
+    function showNotice(text, type = "ok") {
+      const box = $("formMsg");
+      box.textContent = text;
+      box.className = "form-msg " + type;
+      clearTimeout(msgTimer);
+      msgTimer = setTimeout(() => {
+        box.className = "form-msg";
+      }, 3500);
+    }
+
+    function load() {
+      try {
+        const raw = localStorage.getItem(CONFIG.key);
+        const parsed = JSON.parse(raw || "[]");
+        data = Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        data = [];
+        $("storageStatus").textContent = "Режим без сохранения (ошибка памяти)";
+      }
+    }
+
+    function save() {
+      try {
+        localStorage.setItem(CONFIG.key, JSON.stringify(data));
+      } catch (e) {
+        showNotice("Не удалось сохранить изменения в память браузера", "err");
+      }
+    }
+
+    const fmt = n => (+n || 0).toLocaleString("ru-RU") + " ₽";
+    const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[c]));
+
+    // Инициализация селектов
+    $("stt").innerHTML = CONFIG.statuses.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+    $("flt").innerHTML = '<option value="">Все статусы</option>' + CONFIG.statuses.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+
+    function getFilteredRows() {
+      const f = $("flt").value;
+      const q = $("srch").value.trim().toLowerCase();
+      return data.filter(o => {
+        const matchStatus = !f || o.st === f;
+        const matchQuery = !q || [o.cl, o.ph, o.it].some(val => String(val || "").toLowerCase().includes(q));
+        return matchStatus && matchQuery;
+      });
+    }
+
+    function draw() {
+      const f = $("flt").value;
+      const q = $("srch").value.trim();
+      const rows = getFilteredRows();
+
+      // Обновление карточек статистики
+      const totalCount = data.length;
+      const totalSum = data.reduce((a, o) => a + (+o.pr || 0), 0);
+      const paidSum = data.filter(o => o.st !== "Новый").reduce((a, o) => a + (+o.pr || 0), 0);
+
+      $("cnt").textContent = totalCount;
+      $("cntLabel").textContent = pluralizeOrders(totalCount);
+      $("all").textContent = fmt(totalSum);
+      $("paid").textContent = fmt(paidSum);
+
+      // Доступность кнопок экспорта и очистки
+      $("csv").disabled = totalCount === 0;
+      $("clr").disabled = totalCount === 0;
+
+      // Шапка списка и индикатор фильтрации
+      const isFiltered = Boolean(f || q);
+      if (totalCount > 0) {
+        $("listMeta").style.display = "flex";
+        $("shownCount").textContent = isFiltered
+          ? `Найдено: ${rows.length} из ${totalCount}`
+          : `Всего в списке: ${totalCount} ${pluralizeOrders(totalCount)}`;
+        $("resetFlt").style.display = isFiltered ? "inline" : "none";
+      } else {
+        $("listMeta").style.display = "none";
+      }
+
+      // Отрисовка списка или пустых состояний
+      if (totalCount === 0) {
+        $("list").innerHTML = `
+          <div class="empty">
+            <span class="empty-title">Заказов пока нет</span>
+            Добавьте первый заказ через форму выше или нажмите «Заполнить примером».
+          </div>`;
+        return;
+      }
+
+      if (rows.length === 0) {
+        $("list").innerHTML = `
+          <div class="empty">
+            <span class="empty-title">Ничего не найдено</span>
+            По выбранному фильтру или поисковому запросу заказов нет.
+          </div>`;
+        return;
+      }
+
+      $("list").innerHTML = rows.slice().reverse().map(o => `
+        <div class="ord">
+          <div>
+            <div class="ord-client">
+              <b>${esc(o.cl)}</b>
+              ${o.ph ? `<span class="ord-contact">${esc(o.ph)}</span>` : ""}
+            </div>
+            <div class="ord-item">${esc(o.it)}</div>
+            <div class="ord-date">${esc(o.d)}</div>
+          </div>
+          <div class="sum">${fmt(o.pr)}</div>
+          <div class="ord-actions">
+            <select data-id="${esc(o.id)}" class="status-select s-${esc(o.st)}" aria-label="Статус заказа ${esc(o.cl)}">
+              ${CONFIG.statuses.map(s => `<option value="${esc(s)}" ${s === o.st ? "selected" : ""}>${esc(s)}</option>`).join("")}
+            </select>
+            <button type="button" class="del" data-del="${esc(o.id)}">удалить</button>
+          </div>
+        </div>
+      `).join("");
+
+      $("list").querySelectorAll("select.status-select").forEach(s => {
+        s.onchange = () => {
+          const item = data.find(o => String(o.id) === String(s.dataset.id));
+          if (item) {
+            item.st = s.value;
+            save();
+            draw();
+          }
+        };
+      });
+
+      $("list").querySelectorAll("[data-del]").forEach(b => {
+        b.onclick = () => {
+          data = data.filter(o => String(o.id) !== String(b.dataset.del));
+          save();
+          draw();
+        };
+      });
+    }
+
+    // Снятие подсветки ошибки при вводе
+    ["cl", "it", "pr"].forEach(id => {
+      $(id).addEventListener("input", () => $(id).classList.remove("input-error"));
+    });
+
+    // Добавление нового заказа
+    function addOrder() {
+      const clEl = $("cl"), phEl = $("ph"), itEl = $("it"), prEl = $("pr");
+      const cl = clEl.value.trim();
+      const ph = phEl.value.trim();
+      const it = itEl.value.trim();
+      const rawPr = prEl.value.trim();
+      const pr = Number(rawPr);
+
+      let hasError = false;
+      if (!cl) { clEl.classList.add("input-error"); hasError = true; }
+      if (!it) { itEl.classList.add("input-error"); hasError = true; }
+      if (rawPr === "" || Number.isNaN(pr) || pr < 0) { prEl.classList.add("input-error"); hasError = true; }
+
+      if (hasError) {
+        showNotice("Пожалуйста, укажите клиента, описание заказа и корректную сумму.", "err");
+        return;
+      }
+
+      data.push({
+        id: String(Date.now()) + "_" + Math.floor(Math.random() * 10000),
+        cl,
+        ph,
+        it,
+        pr: Math.round(pr),
+        st: $("stt").value,
+        d: new Date().toLocaleDateString("ru-RU")
+      });
+
+      ["cl", "ph", "it", "pr"].forEach(i => {
+        $(i).value = "";
+        $(i).classList.remove("input-error");
+      });
+      $("stt").value = CONFIG.statuses[0];
+
+      save();
+      draw();
+      showNotice(`Заказ для клиента «${cl}» добавлен.`, "ok");
+    }
+
+    $("add").onclick = addOrder;
+
+    // Поддержка клавиши Enter в полях формы
+    ["cl", "ph", "it", "pr"].forEach(id => {
+      $(id).addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          addOrder();
+        }
+      });
+    });
+
+    $("flt").onchange = draw;
+    $("srch").oninput = draw;
+    $("resetFlt").onclick = () => {
+      $("flt").value = "";
+      $("srch").value = "";
+      draw();
+    };
+
+    // Заполнение реалистичными демоданными (без дублирования существующих записей)
+    $("demoBtn").onclick = () => {
+      const today = new Date().toLocaleDateString("ru-RU");
+      const demoSamples = [
+        ["Анна К.", "@anna_demo", "Футболка оверсайз, 2 шт.", 2400, "Оплачен"],
+        ["Игорь", "+7 900 000-00-01", "Чехол для телефона", 600, "Новый"],
+        ["Мария", "@maria_demo", "Худи чёрное, M", 3200, "Отправлен"],
+        ["Олег", "+7 900 000-00-02", "Кружка с печатью", 450, "Выдан"]
+      ];
+
+      let addedCount = 0;
+      demoSamples.forEach((r, i) => {
+        const exists = data.some(o => o.cl === r[0] && o.it === r[2] && o.pr === r[3]);
+        if (!exists) {
+          data.push({
+            id: "demo_" + Date.now() + "_" + i,
+            cl: r[0],
+            ph: r[1],
+            it: r[2],
+            pr: r[3],
+            st: r[4],
+            d: today
+          });
+          addedCount++;
+        }
+      });
+
+      if (addedCount === 0) {
+        showNotice("Демонстрационные заказы уже находятся в списке.", "ok");
+      } else {
+        save();
+        draw();
+        showNotice(`Добавлено примеров: ${addedCount}.`, "ok");
+      }
+    };
+
+    // Очистка всех заказов
+    $("clr").onclick = () => {
+      if (!data.length) return;
+      if (confirm("Удалить все заказы на этом устройстве?")) {
+        data = [];
+        $("flt").value = "";
+        $("srch").value = "";
+        save();
+        draw();
+        showNotice("Все заказы удалены.", "ok");
+      }
+    };
+
+    // Скачивание CSV (выгружает в порядке отображения на экране: от новых к старым)
+    $("csv").onclick = () => {
+      if (!data.length) return;
+      const rowsToExport = getFilteredRows().slice().reverse();
+      const exportList = rowsToExport.length ? rowsToExport : data.slice().reverse();
+
+      const q = v => '"' + String(v ?? "").replace(/"/g, '""') + '"';
+      const csvContent = "\uFEFFДата;Клиент;Контакт;Заказ;Сумма;Статус\n" +
+        exportList.map(o => [o.d, o.cl, o.ph, o.it, o.pr, o.st].map(q).join(";")).join("\n");
+
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "zakazy.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+
+    load();
+    draw();
+  </script>
+</body>
+</html>
