@@ -1,251 +1,50 @@
 <!doctype html>
-<html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Колесо призов — Магазин «Тёплый дом»</title>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Новогодняя открытка — демо</title>
 <style>
-:root{--bg:#1b1140;--ink:#fff;--acc:#ffcb2e;--mut:#b8b0e0}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 50% 0,#3a2090,var(--bg) 60%);color:var(--ink);min-height:100vh}
-.wrap{max-width:480px;margin:0 auto;padding:16px 16px 40px;text-align:center}
-.demo{background:#3b3320;color:#ffe9a8;border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:10px;text-align:left}
-h1{font-size:28px;margin:6px 0 4px}
-p.sub{color:var(--mut);margin:0 0 14px;font-size:15px}
-.stage{position:relative;width:min(88vw,380px);margin:8px auto}
-canvas{width:100%;height:auto;display:block}
-.pin{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-top:34px solid var(--acc);filter:drop-shadow(0 2px 3px #0008);z-index:2}
-button.main{padding:15px 34px;border:0;border-radius:99px;background:var(--acc);color:#2a1a00;font-weight:800;font-size:19px;font-family:inherit;cursor:pointer;margin-top:14px;transition:transform .1s,opacity .15s;user-select:none}
-button.main:active:not(:disabled){transform:scale(0.98)}
-button.main:disabled{opacity:.55;cursor:default}
-.res{display:none;background:#fff;color:#1b1140;border-radius:18px;padding:18px;margin-top:16px;text-align:left;box-shadow:0 12px 30px rgba(0,0,0,0.25)}
-.res h2{margin:0 0 4px;font-size:22px}
-.code{font:700 22px ui-monospace,Consolas,monospace;background:#fff6d6;border:2px dashed #e0a800;border-radius:10px;padding:10px 8px;text-align:center;margin:10px 0 4px;cursor:pointer;user-select:none;transition:background .15s}
-.code:active{background:#ffecb3}
-.code-hint{text-align:center;font-size:12px;color:#7c729c;margin-bottom:10px}
-input{width:100%;padding:12px;border:1px solid #d6d2ea;border-radius:10px;font-size:16px;font-family:inherit;margin:5px 0;outline:none}
-input:focus{border-color:#4b2fc2}
-.res button{width:100%;padding:14px;border:0;border-radius:12px;background:#4b2fc2;color:#fff;font-weight:700;font-size:16px;font-family:inherit;cursor:pointer;margin-top:8px}
-#box{white-space:pre-wrap;background:#f1eefc;border-radius:10px;padding:10px;font-size:13px;margin-top:10px;display:none}
-.small{font-size:12px;color:var(--mut);margin-top:14px;line-height:1.4}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="demo" id="demo" hidden>Демо-проект. Заявка не отправляется, пока не указан Telegram в CONFIG.</div>
-  <h1 id="h1"></h1>
-  <p class="sub" id="sub"></p>
-  <div class="stage">
-    <div class="pin"></div>
-    <canvas id="cv" width="760" height="760"></canvas>
-  </div>
-  <button type="button" class="main" id="spin">Крутить колесо</button>
-
-  <div class="res" id="res">
-    <h2 id="pz"></h2>
-    <div id="cond" style="color:#5a5278;font-size:14px"></div>
-    <div class="code" id="code" title="Нажмите, чтобы скопировать"></div>
-    <div class="code-hint" id="codeHint">Нажмите на промокод, чтобы скопировать</div>
-    <input id="nm" placeholder="Ваше имя" autocomplete="name">
-    <input id="ph" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel">
-    <button type="button" id="get">Забрать приз в Telegram</button>
-    <div id="box"></div>
-  </div>
-
-  <div class="small" id="rules"></div>
-</div>
-
+:root{--bg:#0b1d3a;--ink:#fff;--acc:#ffd166}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(#0b1d3a,#1a3a6b);color:var(--ink);min-height:100vh;overflow-x:hidden}
+canvas#snow{position:fixed;inset:0;pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:16px;text-align:center}
+.demo{background:#3b3320;color:#ffe9a8;border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:12px;text-align:left}
+#gift{margin-top:60px}.box{font-size:120px;cursor:pointer;display:inline-block;animation:bob 1.6s infinite ease-in-out;user-select:none}
+@keyframes bob{50%{transform:translateY(-12px) rotate(3deg)}}
+h1{font-size:30px;margin:10px 0}.hint{color:#b8c8ee}
+#card{display:none;background:#ffffff14;border:1px solid #ffffff33;border-radius:22px;padding:26px 20px;margin-top:40px;backdrop-filter:blur(6px)}
+#card h2{color:var(--acc);font-size:32px;margin:0 0 12px}#txt{font-size:19px;min-height:140px;white-space:pre-line}.sign{margin-top:14px;font-weight:700}
+.tree{font-size:56px}
+.btn{display:inline-block;margin-top:14px;padding:13px 22px;border:0;border-radius:99px;background:var(--acc);color:#2a1a00;font-weight:800;font-size:16px;font-family:inherit;cursor:pointer}
+.builder{background:#ffffff14;border:1px solid #ffffff33;border-radius:18px;padding:16px;text-align:left;margin-top:20px}
+textarea,input{width:100%;padding:12px;border-radius:10px;border:0;font:inherit;margin:6px 0}textarea{min-height:120px}
+.link{display:flex;justify-content:space-between;gap:8px;background:#ffffff14;border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px;word-break:break-all;align-items:center}.link button{padding:7px 10px;border:0;border-radius:8px;background:var(--acc);font-weight:700;cursor:pointer;flex:none}
+.small{font-size:12px;color:#b8c8ee;margin-top:20px}
+</style><style>.demo,.demo-bar{display:none!important}</style>
+</head><body><canvas id="snow"></canvas><div class="wrap">
+<div class="demo" id="demo" hidden>Демо-проект. Компания вымышленная. Откройте с параметром ?to=Имя, чтобы увидеть персональную открытку, или без него, чтобы увидеть конструктор ссылок.</div>
+<div id="view"></div></div>
 <script>
 // ===== НАСТРОЙКИ ПОД КЛИЕНТА =====
-const CONFIG = {
-  title: "Новогоднее колесо призов",
-  subtitle: "Магазин «Тёплый дом»: крутите колесо и забирайте гарантированный подарок",
-  telegram: "ramiltools",
-  oncePerDevice: true, // true = 1 попытка на устройство с сохранением приза
-  codePrefix: "NY",
-  prizes: [
-    { n: "Скидка 5%", w: 30, c: "#7c4dff" },
-    { n: "Скидка 10%", w: 20, c: "#ff5c8a" },
-    { n: "Кофе в подарок", w: 15, c: "#00b8a9" },
-    { n: "Скидка 15%", w: 10, c: "#ff9f1c" },
-    { n: "Подарочная свеча", w: 10, c: "#4c9be8" },
-    { n: "Скидка 3%", w: 30, c: "#9b5de5" },
-    { n: "Скидка 20%", w: 5, c: "#e63946" },
-    { n: "Бесплатная доставка", w: 15, c: "#2a9d8f" }
-  ],
-  cond: "Приз действует до 31.12 при покупке от 1 000 ₽. Один подарок в одни руки.",
-  rules: "Укажите имя и телефон после вращения, чтобы закрепить промокод за вашим номером."
-};
+const CONFIG={from:"Команда «Север-Строй» (вымышленная)",year:"2027",
+ text:"Пусть новый год принесёт спокойные дни, интересные проекты и тёплые вечера с близкими.\nСпасибо, что вы с нами!",
+ telegram:"[ник_клиента_без_@]"};
 // =================================
-
-const $ = id => document.getElementById(id);
-const demo = CONFIG.telegram.includes("[") || !CONFIG.telegram.trim();
-if (demo) $("demo").hidden = false;
-
-$("h1").textContent = CONFIG.title;
-$("sub").textContent = CONFIG.subtitle;
-$("rules").textContent = CONFIG.rules;
-
-const P = CONFIG.prizes, N = P.length, cv = $("cv"), ctx = cv.getContext("2d"), R = 380;
-let rot = 0, busy = false, won = null;
-
-// Разбивка длинных названий на 2 строки, чтобы текст не налезал на центр колеса
-function wrapPrizeText(text) {
-  const words = text.split(" ");
-  if (words.length > 2) return [words.slice(0, 2).join(" "), words.slice(2).join(" ")];
-  if (words.length === 2 && text.length > 12) return [words[0], words[1]];
-  return [text];
-}
-
-function draw() {
-  ctx.clearRect(0, 0, 760, 760);
-  ctx.save();
-  ctx.translate(R, R);
-  ctx.rotate(rot);
-
-  for (let i = 0; i < N; i++) {
-    const a0 = i * 2 * Math.PI / N, a1 = (i + 1) * 2 * Math.PI / N;
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.arc(0, 0, R - 8, a0 - Math.PI / 2, a1 - Math.PI / 2);
-    ctx.closePath();
-    ctx.fillStyle = P[i].c;
-    ctx.fill();
-    ctx.strokeStyle = "#fff";
-    ctx.lineWidth = 5;
-    ctx.stroke();
-
-    ctx.save();
-    ctx.rotate((a0 + a1) / 2 - Math.PI / 2);
-    ctx.fillStyle = "#fff";
-    ctx.font = "bold 25px system-ui, Arial";
-    ctx.textAlign = "right";
-    const lines = wrapPrizeText(P[i].n);
-    lines.forEach((l, k) => ctx.fillText(l, R - 34, (k - (lines.length - 1) / 2) * 28 + 8));
-    ctx.restore();
-  }
-
-  ctx.restore();
-  ctx.beginPath();
-  ctx.arc(R, R, 46, 0, 7);
-  ctx.fillStyle = "#fff";
-  ctx.fill();
-  ctx.fillStyle = "#4b2fc2";
-  ctx.font = "bold 24px system-ui, Arial";
-  ctx.textAlign = "center";
-  ctx.fillText("★", R, R + 9);
-}
-
-function pick() {
-  const t = P.reduce((a, p) => a + p.w, 0);
-  let r = Math.random() * t;
-  for (let i = 0; i < N; i++) {
-    r -= P[i].w;
-    if (r <= 0) return i;
-  }
-  return N - 1;
-}
-
-function lockKey() { return "wheel_v2_" + CONFIG.title; }
-
-function showResult(prizeObj, scroll = true) {
-  won = prizeObj;
-  $("pz").textContent = "Ваш приз: " + won.n;
-  $("cond").textContent = CONFIG.cond;
-  $("code").textContent = won.code;
-  $("res").style.display = "block";
-  if (scroll) $("res").scrollIntoView({ behavior: "smooth", block: "center" });
-}
-
-// Восстановление выигранного приза после перезагрузки страницы
-if (CONFIG.oncePerDevice) {
-  try {
-    const saved = JSON.parse(localStorage.getItem(lockKey()) || "null");
-    if (saved && saved.n && saved.code) {
-      $("spin").disabled = true;
-      $("spin").textContent = "Вы уже крутили колесо";
-      showResult(saved, false);
-    }
-  } catch (e) {}
-}
-
-$("spin").onclick = () => {
-  if (busy) return;
-  busy = true;
-  $("spin").disabled = true;
-  $("res").style.display = "none";
-
-  const idx = pick(), seg = 2 * Math.PI / N, target = -(idx + 0.5) * seg + (Math.random() - 0.5) * seg * 0.6;
-  const start = rot, end = target - Math.PI * 2 * (5 + Math.floor(Math.random() * 3));
-  const dur = 4200, t0 = performance.now();
-
-  (function f(t) {
-    const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3.2);
-    rot = start + (end - start) * e;
-    draw();
-    if (p < 1) requestAnimationFrame(f);
-    else fin(P[idx]);
-  })(t0);
-};
-
-function fin(prize) {
-  busy = false;
-  const code = CONFIG.codePrefix + "-" + Math.floor(1000 + Math.random() * 9000);
-  const prizeData = { n: prize.n, code };
-  showResult(prizeData, true);
-
-  if (CONFIG.oncePerDevice) {
-    $("spin").textContent = "Вы уже крутили колесо";
-    try { localStorage.setItem(lockKey(), JSON.stringify(prizeData)); } catch (e) {}
-  } else {
-    $("spin").disabled = false;
-  }
-}
-
-// Копирование промокода по клику
-$("code").onclick = () => {
-  if (!won) return;
-  try { navigator.clipboard.writeText(won.code); } catch (e) {}
-  $("codeHint").textContent = "✓ Промокод скопирован в буфер обмена";
-  setTimeout(() => { $("codeHint").textContent = "Нажмите на промокод, чтобы скопировать"; }, 2500);
-};
-
-// Маска ввода телефона +7 (XXX) XXX-XX-XX
-$("ph").addEventListener("input", e => {
-  let d = e.target.value.replace(/\D/g, "");
-  if (!d) { e.target.value = ""; return; }
-  if (d[0] === "8" || d[0] === "7") d = d.slice(1);
-  d = d.slice(0, 10);
-  let res = "+7";
-  if (d.length > 0) res += " (" + d.slice(0, 3);
-  if (d.length >= 4) res += ") " + d.slice(3, 6);
-  if (d.length >= 7) res += "-" + d.slice(6, 8);
-  if (d.length >= 9) res += "-" + d.slice(8, 10);
-  e.target.value = res;
-});
-
-$("get").onclick = () => {
-  const n = $("nm").value.trim(), p = $("ph").value.trim();
-  if (n.length < 2 || p.replace(/\D/g, "").length < 11) {
-    alert("Пожалуйста, укажите ваше имя и полный номер телефона");
-    return;
-  }
-  const t = `🎁 Выигрыш в колесе призов\n` +
-            `👤 Имя: ${n}\n` +
-            `📞 Телефон: ${p}\n` +
-            `🏆 Приз: ${won.n}\n` +
-            `🎟 Промокод: ${won.code}`;
-
-  if (demo) {
-    const b = $("box");
-    b.style.display = "block";
-    b.textContent = "Демо-режим, так приз придёт магазину:\n\n" + t;
-  } else {
-    window.location.href = "https://t.me/" + CONFIG.telegram + "?text=" + encodeURIComponent(t);
-  }
-};
-
-draw();
-</script>
-</body>
-</html>
+const $=id=>document.getElementById(id);const q=new URLSearchParams(location.search);const to=(q.get("to")||"").trim().slice(0,40);
+if(CONFIG.telegram.includes("["))$("demo").hidden=false;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+if(to){$("view").innerHTML=`<div id="gift"><div class="box" id="bx">🎁</div><h1>Для ${esc(to)}</h1><div class="hint">Нажмите на подарок</div></div><div id="card"><div class="tree">🎄</div><h2>С Новым ${esc(CONFIG.year)} годом, ${esc(to)}!</h2><div id="txt"></div><div class="sign">${esc(CONFIG.from)}</div><button class="btn" id="again">Ещё раз</button></div>`;
+ const open=()=>{$("gift").style.display="none";$("card").style.display="block";type(CONFIG.text)};$("bx").onclick=open;$("again").onclick=()=>{$("gift").style.display="block";$("card").style.display="none"};}
+else{$("view").innerHTML=`<h1>Конструктор новогодних открыток</h1><div class="hint">Вставьте имена, каждое с новой строки. Получите персональную ссылку для каждого.</div>
+ <div class="builder"><textarea id="names" placeholder="Анна&#10;Игорь&#10;Мария Петровна"></textarea><button class="btn" id="mk">Создать ссылки</button><div id="out"></div><button class="btn" id="all" style="display:none">Скопировать все</button></div>
+ <div class="small">Каждая ссылка открывает открытку с именем получателя: можно разослать сотрудникам и клиентам. Страница должна быть опубликована в интернете, чтобы ссылки работали у других.</div>`;
+ $("mk").onclick=()=>{const base=location.origin==="null"||location.protocol==="file:"?location.href.split("?")[0]:location.origin+location.pathname;const names=$("names").value.split("\n").map(s=>s.trim()).filter(Boolean).slice(0,200);
+  $("out").innerHTML=names.map(n=>{const u=base+"?to="+encodeURIComponent(n);return `<div class="link"><span>${esc(n)}: ${esc(u)}</span><button data-u="${esc(u)}">Копировать</button></div>`}).join("");$("all").style.display=names.length?"inline-block":"none";window.__L=names.map(n=>n+": "+base+"?to="+encodeURIComponent(n)).join("\n");
+  $("out").querySelectorAll("button").forEach(b=>b.onclick=()=>cp(b.dataset.u))};
+ $("all").onclick=()=>cp(window.__L)}
+function cp(t){try{navigator.clipboard.writeText(t).then(()=>{},()=>fb(t))}catch(e){fb(t)}}
+function fb(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove()}
+function type(s){const el=$("txt");el.textContent="";let i=0;(function n(){if(i<=s.length){el.textContent=s.slice(0,i++);setTimeout(n,28)}})()}
+// снег
+const cv=$("snow"),c=cv.getContext("2d");let W,H,fl=[];function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener("resize",rs);
+for(let i=0;i<70;i++)fl.push({x:Math.random()*2000,y:Math.random()*1200,r:1+Math.random()*3,v:.5+Math.random()*1.5,s:Math.random()*6});
+(function f(){c.clearRect(0,0,W,H);c.fillStyle="#fff";fl.forEach(p=>{p.y+=p.v;p.x+=Math.sin(p.y/40+p.s)*.4;if(p.y>H){p.y=-5;p.x=Math.random()*W}c.globalAlpha=.4+p.r/5;c.beginPath();c.arc(p.x%W,p.y,p.r,0,7);c.fill()});requestAnimationFrame(f)})();
+</script></body></html>
