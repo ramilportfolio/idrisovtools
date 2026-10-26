@@ -1033,7 +1033,7 @@
       background: var(--card);
       color: var(--ink);
       font: inherit;
-      font-size: 14.5px;
+      font-size: 16px;
       margin-bottom: 10px;
       transition: border-color 0.15s ease;
     }
@@ -1245,17 +1245,17 @@
 
     .contact-item {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      padding: 20px;
-      border-radius: 14px;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 16px;
       background: var(--bg);
       border: 1px solid var(--line);
       text-decoration: none;
       min-width: 0;
       cursor: pointer;
-      transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+      transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
     }
 
     .contact-item.full-row {
@@ -1266,37 +1266,188 @@
       border-color: var(--acc);
       background: var(--card);
       transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-item-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .contact-brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-brand-icon svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    .contact-brand-icon.tg-brand {
+      background: linear-gradient(135deg, #2aabee, #229ed9);
+      color: #ffffff;
+    }
+
+    .contact-brand-icon.wa-brand {
+      background: linear-gradient(135deg, #25d366, #1ebe57);
+      color: #ffffff;
+    }
+
+    .contact-brand-icon.max-brand {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: #ffffff;
+    }
+
+    .contact-brand-icon.vk-brand {
+      background: linear-gradient(135deg, #0077ff, #0056cc);
+      color: #ffffff;
+    }
+
+    .contact-brand-icon.mail-brand {
+      background: linear-gradient(135deg, var(--acc), #6366f1);
+      color: #ffffff;
+    }
+
+    .contact-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
     }
 
     .contact-item-label {
-      font-size: 12.5px;
+      font-size: 11.5px;
       font-weight: 700;
       color: var(--mut);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
     .contact-item-val {
       font-size: 15.5px;
       font-weight: 700;
       color: var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      min-width: 0;
-    }
-
-    .contact-item-val span:first-child {
+      line-height: 1.25;
       overflow-wrap: anywhere;
       word-break: break-word;
+    }
+
+    .contact-item-sub {
+      font-size: 12px;
+      color: var(--mut);
+      font-weight: 500;
     }
 
     .contact-item-arrow {
       color: var(--acc);
       font-weight: 700;
-      font-size: 14px;
+      font-size: 18px;
       flex-shrink: 0;
+      transition: transform 0.18s ease;
+      margin-left: 6px;
+    }
+
+    .contact-item:hover .contact-item-arrow {
+      transform: translateX(3px);
+    }
+
+    /* Специальная карточка электронной почты */
+    .email-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 20px 22px;
+      cursor: pointer;
+    }
+
+    .email-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .email-meta-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .email-meta-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .email-sub {
+      font-size: 12.5px;
+      color: var(--mut);
+      font-weight: 500;
+    }
+
+    .copy-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 99px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 12.5px;
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(15, 20, 28, 0.04);
+    }
+
+    .email-card:hover .copy-pill {
+      border-color: var(--acc);
+      color: var(--acc);
+    }
+
+    .copy-pill.copied {
+      background: #10b981;
+      border-color: #10b981;
+      color: #ffffff !important;
+    }
+
+    .email-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .email-address {
+      font-size: 16.5px;
+      font-weight: 800;
+      color: var(--acc);
+      letter-spacing: -0.01em;
+      word-break: break-all;
+    }
+
+    .email-hint {
+      font-size: 12px;
+      color: var(--mut);
+      font-weight: 500;
     }
 
     /* Модальное окно живого предпросмотра */
@@ -1462,6 +1613,9 @@
       .wrap {
         padding: 0 16px;
       }
+      section {
+        scroll-margin-top: 112px;
+      }
       .about-grid,
       .skills-grid,
       .price-grid,
@@ -1491,7 +1645,7 @@
         flex-wrap: nowrap;
         overflow-x: auto;
         gap: 8px;
-        padding: 8px 2px 4px;
+        padding: 8px 28px 4px 2px;
         border-top: 1px solid var(--line);
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
@@ -1545,7 +1699,7 @@
         flex-wrap: nowrap;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 6px;
+        padding: 0 28px 6px 0;
         scrollbar-width: none;
         mask-image: linear-gradient(to right, black 88%, transparent 100%);
         -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
@@ -1605,8 +1759,17 @@
         font-size: 14px;
       }
       .contact-item {
-        padding: 16px 18px;
-        border-radius: 12px;
+        padding: 14px 16px;
+        border-radius: 14px;
+      }
+      .contact-brand-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+      }
+      .contact-brand-icon svg {
+        width: 22px;
+        height: 22px;
       }
       .contact-item-val {
         font-size: 15px;
@@ -1641,6 +1804,13 @@
       .wrap {
         padding: 0 14px;
       }
+      .hero-guarantees {
+        gap: 6px 8px;
+      }
+      .hero-guarantees span {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
       .hero-actions {
         flex-direction: column;
         padding: 0;
@@ -1667,6 +1837,30 @@
         font-size: 18px;
       }
       .stat-box small {
+        font-size: 11.5px;
+      }
+      .card .thumb {
+        height: 185px;
+      }
+      .email-card {
+        padding: 16px;
+      }
+      .email-meta-wrap {
+        gap: 10px;
+      }
+      .email-sub {
+        font-size: 11.5px;
+      }
+      .email-card-bottom {
+        padding-top: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .email-address {
+        font-size: 15px;
+      }
+      .email-hint {
         font-size: 11.5px;
       }
     }
@@ -2090,43 +2284,99 @@
       <div class="contact-box">
         <div class="contact-cards">
           <a class="contact-item" id="contactTgRow" href="https://t.me/ramiltools" target="_blank" rel="noopener">
-            <span class="contact-item-label">Telegram</span>
-            <span class="contact-item-val">
-              <span id="contactTgLabel">Написать в Telegram</span>
-              <span class="contact-item-arrow">→</span>
-            </span>
+            <div class="contact-item-main">
+              <div class="contact-brand-icon tg-brand">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m22 2-7 20-4-9-9-4Z"/>
+                  <path d="M22 2 11 13"/>
+                </svg>
+              </div>
+              <div class="contact-item-info">
+                <span class="contact-item-label">Telegram</span>
+                <span class="contact-item-val" id="contactTgLabel">Написать в Telegram</span>
+                <span class="contact-item-sub">@ramiltools • обычно онлайн</span>
+              </div>
+            </div>
+            <span class="contact-item-arrow">→</span>
           </a>
 
           <a class="contact-item" id="contactWaRow" href="https://wa.me/79613626062" target="_blank" rel="noopener">
-            <span class="contact-item-label">WhatsApp</span>
-            <span class="contact-item-val">
-              <span id="contactWaLabel">Написать в WhatsApp</span>
-              <span class="contact-item-arrow">→</span>
-            </span>
+            <div class="contact-item-main">
+              <div class="contact-brand-icon wa-brand">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <g transform="translate(1.2, 1.2)">
+                    <path d="M10.8 3.3a7.5 7.5 0 0 0-6.4 11.4l-1 3.7 3.8-1a7.5 7.5 0 1 0 3.6-14.1Z" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.4 7.6c-.16-.36-.33-.37-.48-.37h-.4c-.15 0-.4.05-.6.28-.2.23-.76.75-.76 1.83s.78 2.12.89 2.27c.11.15 1.52 2.43 3.74 3.3 1.85.73 2.23.59 2.63.55.4-.04 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.15-.42-.26l-1.26-.62c-.22-.11-.37-.16-.51.09-.14.22-.58.73-.71.88-.13.15-.26.17-.47.06-.22-.11-.93-.34-1.77-1.09-.66-.58-1.1-1.3-1.23-1.52-.13-.22-.02-.34.09-.45.1-.1.22-.25.33-.38.11-.13.15-.22.22-.37.07-.15.03-.28-.02-.38-.05-.1-.48-1.18-.66-1.61Z" fill="#ffffff"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="contact-item-info">
+                <span class="contact-item-label">WhatsApp</span>
+                <span class="contact-item-val" id="contactWaLabel">Написать в WhatsApp</span>
+                <span class="contact-item-sub">+7 (961) 362-60-62</span>
+              </div>
+            </div>
+            <span class="contact-item-arrow">→</span>
           </a>
 
           <a class="contact-item" id="contactMaxRow" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener">
-            <span class="contact-item-label">Мессенджер Max</span>
-            <span class="contact-item-val">
-              <span id="contactMaxLabel">Написать в Max</span>
-              <span class="contact-item-arrow">→</span>
-            </span>
+            <div class="contact-item-main">
+              <div class="contact-brand-icon max-brand">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6.2 16.5V7.5h2.4l3.4 5.2 3.4-5.2h2.4v9h-2.1v-5.6l-3.1 4.7h-1.2l-3.1-4.7v5.6H6.2Z" fill="#ffffff"/>
+                </svg>
+              </div>
+              <div class="contact-item-info">
+                <span class="contact-item-label">Мессенджер Max</span>
+                <span class="contact-item-val" id="contactMaxLabel">Написать в Max</span>
+                <span class="contact-item-sub">Прямой чат в приложении</span>
+              </div>
+            </div>
+            <span class="contact-item-arrow">→</span>
           </a>
 
           <a class="contact-item" id="contactVkRow" href="https://vk.com/id449983999" target="_blank" rel="noopener">
-            <span class="contact-item-label">Социальная сеть</span>
-            <span class="contact-item-val">
-              <span>Страница ВКонтакте</span>
-              <span class="contact-item-arrow">→</span>
-            </span>
+            <div class="contact-item-main">
+              <div class="contact-brand-icon vk-brand">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12.8 16.5c-4.5 0-7.1-3.1-7.2-8.3h2.3c.1 3.8 1.8 5.4 3.1 5.7V8.2h2.1v3.3c1.3-.1 2.6-1.6 3.1-3.3h2.1c-.4 2.1-1.8 3.6-2.8 4.2 1 .5 2.7 1.8 3.3 4.1h-2.3c-.5-1.6-1.8-2.8-3.5-3v3h-.2Z" fill="#ffffff"/>
+                </svg>
+              </div>
+              <div class="contact-item-info">
+                <span class="contact-item-label">Социальная сеть</span>
+                <span class="contact-item-val">Страница ВКонтакте</span>
+                <span class="contact-item-sub">vk.com/id449983999</span>
+              </div>
+            </div>
+            <span class="contact-item-arrow">→</span>
           </a>
 
-          <a class="contact-item full-row" id="contactMailRow" href="mailto:idrisov.smm@gmail.com" title="Нажмите, чтобы скопировать почту">
-            <span class="contact-item-label">Почта для документов (нажмите для копирования)</span>
-            <span class="contact-item-val">
-              <span id="contactMailLabel">idrisov.smm@gmail.com</span>
-              <span class="contact-item-arrow">📋 Скопировать</span>
-            </span>
+          <a class="contact-item full-row email-card" id="contactMailRow" href="mailto:idrisov.smm@gmail.com" title="Нажмите, чтобы скопировать почту" aria-label="Скопировать электронную почту">
+            <div class="email-card-top">
+              <div class="email-meta-wrap">
+                <div class="contact-brand-icon mail-brand">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect width="20" height="16" x="2" y="4" rx="3"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                  </svg>
+                </div>
+                <div class="email-meta-info">
+                  <span class="contact-item-label">Электронная почта</span>
+                  <span class="email-sub">Для ТЗ, договоров и документов</span>
+                </div>
+              </div>
+              <span class="copy-pill" id="copyMailPill">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                </svg>
+                <span id="copyMailText">Скопировать</span>
+              </span>
+            </div>
+            <div class="email-card-bottom">
+              <span class="email-address" id="contactMailLabel">idrisov.smm@gmail.com</span>
+              <span class="email-hint">Нажмите для быстрого копирования</span>
+            </div>
           </a>
         </div>
       </div>
@@ -2346,22 +2596,40 @@
       link.href = `${tgLink}?text=${encodeURIComponent(msg)}`;
     });
 
-    // Копирование почты при нажатии на ячейку
+    // Копирование почты при нажатии на карточку
     let toastTimer = null;
-    document.getElementById("contactMailRow").addEventListener("click", function (e) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        e.preventDefault();
-        navigator.clipboard.writeText(CONFIG.email).then(() => {
-          const toast = document.getElementById("toast");
-          toast.textContent = `Почта ${CONFIG.email} скопирована`;
-          toast.classList.add("show");
-          clearTimeout(toastTimer);
-          toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
-        }).catch(() => {
-          window.location.href = "mailto:" + CONFIG.email;
-        });
-      }
-    });
+    let pillTimer = null;
+    const mailRow = document.getElementById("contactMailRow");
+    const mailPill = document.getElementById("copyMailPill");
+    const mailText = document.getElementById("copyMailText");
+
+    if (mailRow) {
+      mailRow.addEventListener("click", function (e) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          e.preventDefault();
+          navigator.clipboard.writeText(CONFIG.email).then(() => {
+            if (mailPill) {
+              mailPill.classList.add("copied");
+              if (mailText) mailText.textContent = "Скопировано!";
+              clearTimeout(pillTimer);
+              pillTimer = setTimeout(() => {
+                mailPill.classList.remove("copied");
+                if (mailText) mailText.textContent = "Скопировать";
+              }, 2200);
+            }
+            const toast = document.getElementById("toast");
+            if (toast) {
+              toast.textContent = `Почта ${CONFIG.email} скопирована`;
+              toast.classList.add("show");
+              clearTimeout(toastTimer);
+              toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+            }
+          }).catch(() => {
+            window.location.href = "mailto:" + CONFIG.email;
+          });
+        }
+      });
+    }
 
     // Автоматический подсчёт количества работ на кнопках фильтра
     const filterLabels = {
