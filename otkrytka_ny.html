@@ -1,50 +1,511 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Новогодняя открытка — демо</title>
 <style>
-:root{--bg:#0b1d3a;--ink:#fff;--acc:#ffd166}
-*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(#0b1d3a,#1a3a6b);color:var(--ink);min-height:100vh;overflow-x:hidden}
-canvas#snow{position:fixed;inset:0;pointer-events:none;z-index:0}
-.wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:16px;text-align:center}
-.demo{background:#3b3320;color:#ffe9a8;border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:12px;text-align:left}
-#gift{margin-top:60px}.box{font-size:120px;cursor:pointer;display:inline-block;animation:bob 1.6s infinite ease-in-out;user-select:none}
-@keyframes bob{50%{transform:translateY(-12px) rotate(3deg)}}
-h1{font-size:30px;margin:10px 0}.hint{color:#b8c8ee}
-#card{display:none;background:#ffffff14;border:1px solid #ffffff33;border-radius:22px;padding:26px 20px;margin-top:40px;backdrop-filter:blur(6px)}
-#card h2{color:var(--acc);font-size:32px;margin:0 0 12px}#txt{font-size:19px;min-height:140px;white-space:pre-line}.sign{margin-top:14px;font-weight:700}
-.tree{font-size:56px}
-.btn{display:inline-block;margin-top:14px;padding:13px 22px;border:0;border-radius:99px;background:var(--acc);color:#2a1a00;font-weight:800;font-size:16px;font-family:inherit;cursor:pointer}
-.builder{background:#ffffff14;border:1px solid #ffffff33;border-radius:18px;padding:16px;text-align:left;margin-top:20px}
-textarea,input{width:100%;padding:12px;border-radius:10px;border:0;font:inherit;margin:6px 0}textarea{min-height:120px}
-.link{display:flex;justify-content:space-between;gap:8px;background:#ffffff14;border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px;word-break:break-all;align-items:center}.link button{padding:7px 10px;border:0;border-radius:8px;background:var(--acc);font-weight:700;cursor:pointer;flex:none}
-.small{font-size:12px;color:#b8c8ee;margin-top:20px}
-</style><style>.demo,.demo-bar{display:none!important}</style>
-</head><body><canvas id="snow"></canvas><div class="wrap">
-<div class="demo" id="demo" hidden>Демо-проект. Компания вымышленная. Откройте с параметром ?to=Имя, чтобы увидеть персональную открытку, или без него, чтобы увидеть конструктор ссылок.</div>
-<div id="view"></div></div>
+:root {
+  --bg: #0b1d3a;
+  --bg-2: #1a3a6b;
+  --ink: #fff;
+  --acc: #ffd166;
+  --acc-hover: #ffca4b;
+  --ok: #10b981;
+  --muted: #b8c8ee;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, var(--bg), var(--bg-2));
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+canvas#snow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  text-align: center;
+}
+#gift {
+  margin-top: 48px;
+  animation: fadeIn .35s ease;
+}
+.box {
+  font-size: 116px;
+  line-height: 1.1;
+  cursor: pointer;
+  display: inline-block;
+  animation: bob 1.6s infinite ease-in-out;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,.35));
+}
+@keyframes bob {
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+h1 {
+  font-size: clamp(26px, 6vw, 32px);
+  line-height: 1.2;
+  margin: 12px 0 8px;
+  text-wrap: balance;
+}
+.hint {
+  color: var(--muted);
+  font-size: 15.5px;
+}
+#card {
+  display: none;
+  background: rgba(255, 255, 255, .09);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 22px;
+  padding: 26px 20px;
+  margin-top: 28px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .28);
+  animation: fadeIn .4s ease;
+}
+#card h2 {
+  color: var(--acc);
+  font-size: clamp(24px, 6vw, 31px);
+  line-height: 1.2;
+  margin: 6px 0 14px;
+  text-wrap: balance;
+}
+#txt {
+  font-size: 18.5px;
+  line-height: 1.55;
+  white-space: pre-line;
+  margin: 0 auto;
+  max-width: 38ch;
+}
+#txt .ghost-tail {
+  visibility: hidden;
+}
+.sign {
+  margin-top: 18px;
+  font-weight: 700;
+  color: #e6eefc;
+}
+.tree {
+  font-size: 56px;
+  line-height: 1.1;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 13px 24px;
+  border: 0;
+  border-radius: 99px;
+  background: var(--acc);
+  color: #2a1a00;
+  font-weight: 800;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .12s, background .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover { background: var(--acc-hover); }
+.btn:active { transform: scale(.97); }
+.btn.sec {
+  background: rgba(255, 255, 255, .16);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .28);
+}
+.btn.sec:hover {
+  background: rgba(255, 255, 255, .24);
+}
+
+.builder {
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 18px;
+  padding: 16px;
+  text-align: left;
+  margin-top: 18px;
+  backdrop-filter: blur(6px);
+}
+textarea, input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  font: inherit;
+  margin: 4px 0 10px;
+  background: #fff;
+  color: #0b1d3a;
+  resize: vertical;
+}
+textarea:focus, input:focus {
+  outline: none;
+  border-color: var(--acc);
+}
+textarea { min-height: 112px; }
+.builder-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.builder-actions .btn {
+  margin-top: 0;
+}
+#out {
+  margin-top: 12px;
+}
+.link-card {
+  background: rgba(255, 255, 255, .09);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 8px 0;
+}
+.link-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.link-name {
+  font-weight: 700;
+  font-size: 15.5px;
+  color: var(--acc);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.link-url {
+  font-size: 12.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+}
+.link-btns {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.sm-btn {
+  padding: 7px 11px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--acc);
+  color: #2a1a00;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s, color .15s;
+}
+.sm-btn.ghost {
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+}
+.sm-btn.ghost:hover {
+  background: rgba(255, 255, 255, .24);
+}
+.small {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 18px;
+  line-height: 1.45;
+}
+.footer-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 13px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<canvas id="snow"></canvas>
+<div class="wrap">
+  <div id="view"></div>
+</div>
+
 <script>
 // ===== НАСТРОЙКИ ПОД КЛИЕНТА =====
-const CONFIG={from:"Команда «Север-Строй» (вымышленная)",year:"2027",
- text:"Пусть новый год принесёт спокойные дни, интересные проекты и тёплые вечера с близкими.\nСпасибо, что вы с нами!",
- telegram:"[ник_клиента_без_@]"};
+const CONFIG = {
+  from: "Команда «Север-Строй» (вымышленная)",
+  year: "2027",
+  text: "Пусть новый год принесёт спокойные дни, интересные проекты и тёплые вечера с близкими.\nСпасибо, что вы с нами!",
+  // Базовый адрес для генерации ссылок при локальном открытии файла с телефона (content:// или file://).
+  // Когда файл загружен на хостинг (http/https), адрес определяется автоматически.
+  publicUrl: "https://ramil-tools.ru/otkrytka_ny.html",
+  telegram: "[ник_клиента_без_@]"
+};
 // =================================
-const $=id=>document.getElementById(id);const q=new URLSearchParams(location.search);const to=(q.get("to")||"").trim().slice(0,40);
-if(CONFIG.telegram.includes("["))$("demo").hidden=false;
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-if(to){$("view").innerHTML=`<div id="gift"><div class="box" id="bx">🎁</div><h1>Для ${esc(to)}</h1><div class="hint">Нажмите на подарок</div></div><div id="card"><div class="tree">🎄</div><h2>С Новым ${esc(CONFIG.year)} годом, ${esc(to)}!</h2><div id="txt"></div><div class="sign">${esc(CONFIG.from)}</div><button class="btn" id="again">Ещё раз</button></div>`;
- const open=()=>{$("gift").style.display="none";$("card").style.display="block";type(CONFIG.text)};$("bx").onclick=open;$("again").onclick=()=>{$("gift").style.display="block";$("card").style.display="none"};}
-else{$("view").innerHTML=`<h1>Конструктор новогодних открыток</h1><div class="hint">Вставьте имена, каждое с новой строки. Получите персональную ссылку для каждого.</div>
- <div class="builder"><textarea id="names" placeholder="Анна&#10;Игорь&#10;Мария Петровна"></textarea><button class="btn" id="mk">Создать ссылки</button><div id="out"></div><button class="btn" id="all" style="display:none">Скопировать все</button></div>
- <div class="small">Каждая ссылка открывает открытку с именем получателя: можно разослать сотрудникам и клиентам. Страница должна быть опубликована в интернете, чтобы ссылки работали у других.</div>`;
- $("mk").onclick=()=>{const base=location.origin==="null"||location.protocol==="file:"?location.href.split("?")[0]:location.origin+location.pathname;const names=$("names").value.split("\n").map(s=>s.trim()).filter(Boolean).slice(0,200);
-  $("out").innerHTML=names.map(n=>{const u=base+"?to="+encodeURIComponent(n);return `<div class="link"><span>${esc(n)}: ${esc(u)}</span><button data-u="${esc(u)}">Копировать</button></div>`}).join("");$("all").style.display=names.length?"inline-block":"none";window.__L=names.map(n=>n+": "+base+"?to="+encodeURIComponent(n)).join("\n");
-  $("out").querySelectorAll("button").forEach(b=>b.onclick=()=>cp(b.dataset.u))};
- $("all").onclick=()=>cp(window.__L)}
-function cp(t){try{navigator.clipboard.writeText(t).then(()=>{},()=>fb(t))}catch(e){fb(t)}}
-function fb(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove()}
-function type(s){const el=$("txt");el.textContent="";let i=0;(function n(){if(i<=s.length){el.textContent=s.slice(0,i++);setTimeout(n,28)}})()}
-// снег
-const cv=$("snow"),c=cv.getContext("2d");let W,H,fl=[];function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener("resize",rs);
-for(let i=0;i<70;i++)fl.push({x:Math.random()*2000,y:Math.random()*1200,r:1+Math.random()*3,v:.5+Math.random()*1.5,s:Math.random()*6});
-(function f(){c.clearRect(0,0,W,H);c.fillStyle="#fff";fl.forEach(p=>{p.y+=p.v;p.x+=Math.sin(p.y/40+p.s)*.4;if(p.y>H){p.y=-5;p.x=Math.random()*W}c.globalAlpha=.4+p.r/5;c.beginPath();c.arc(p.x%W,p.y,p.r,0,7);c.fill()});requestAnimationFrame(f)})();
-</script></body></html>
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+let typeTimer = null;
+let savedNamesText = "";
+
+function isWebProtocol() {
+  return location.protocol === "http:" || location.protocol === "https:";
+}
+
+function baseUrl() {
+  if (isWebProtocol()) {
+    return location.origin + location.pathname;
+  }
+  return CONFIG.publicUrl || location.href.split("?")[0].split("#")[0];
+}
+
+function getRecipientFromUrl() {
+  const q = new URLSearchParams(location.search || location.hash.replace(/^#/, ""));
+  return (q.get("to") || "").trim().slice(0, 40);
+}
+
+function renderGreeting(recipientName) {
+  if (typeTimer) clearTimeout(typeTimer);
+  $("view").innerHTML = `
+    <div id="gift">
+      <div class="box" id="bx" role="button" tabindex="0" aria-label="Открыть подарок">🎁</div>
+      <h1>${esc(recipientName)}, вам подарок!</h1>
+      <div class="hint">Нажмите на коробку, чтобы открыть открытку</div>
+    </div>
+    <div id="card">
+      <div class="tree">🎄</div>
+      <h2>С Новым ${esc(CONFIG.year)} годом, ${esc(recipientName)}!</h2>
+      <div id="txt"></div>
+      <div class="sign">${esc(CONFIG.from)}</div>
+      <div>
+        <button class="btn" id="again" type="button">Ещё раз</button>
+      </div>
+      <div class="small" style="margin-top:18px">
+        <button class="footer-link" id="back-builder" type="button">← Конструктор открыток</button>
+      </div>
+    </div>`;
+
+  const open = () => {
+    $("gift").style.display = "none";
+    $("card").style.display = "block";
+    type(CONFIG.text);
+  };
+
+  $("bx").onclick = open;
+  $("bx").onkeydown = e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      open();
+    }
+  };
+
+  $("again").onclick = () => {
+    if (typeTimer) clearTimeout(typeTimer);
+    $("gift").style.display = "block";
+    $("card").style.display = "none";
+  };
+
+  $("back-builder").onclick = () => {
+    if (typeTimer) clearTimeout(typeTimer);
+    if (isWebProtocol() && location.search) {
+      history.pushState({}, "", location.pathname);
+    }
+    renderBuilder();
+  };
+}
+
+function renderBuilder() {
+  if (typeTimer) clearTimeout(typeTimer);
+  $("view").innerHTML = `
+    <h1>Конструктор новогодних открыток</h1>
+    <div class="hint">Вставьте имена, каждое с новой строки. Получите персональную ссылку для каждого.</div>
+    <div class="builder">
+      <textarea id="names" autocapitalize="words" spellcheck="false" placeholder="Анна&#10;Игорь&#10;Мария Петровна"></textarea>
+      <div class="builder-actions">
+        <button class="btn" id="mk" type="button">Создать ссылки</button>
+        <button class="btn sec" id="all" type="button" style="display:none">Скопировать все</button>
+      </div>
+      <div id="out"></div>
+    </div>
+    <div class="small">Каждая ссылка открывает открытку с именем получателя: можно разослать сотрудникам и клиентам. Страница должна быть опубликована в интернете, чтобы ссылки работали у других.</div>`;
+
+  if (savedNamesText) {
+    $("names").value = savedNamesText;
+  }
+
+  const buildLinks = () => {
+    savedNamesText = $("names").value;
+    const base = baseUrl();
+    const rawNames = savedNamesText.split("\n").map(s => s.trim()).filter(Boolean);
+    const names = [...new Set(rawNames)].slice(0, 200);
+
+    if (!names.length) {
+      $("out").innerHTML = `<div style="padding:10px 4px 2px;color:var(--acc);font-size:13.5px">Введите хотя бы одно имя в поле выше.</div>`;
+      $("all").style.display = "none";
+      return;
+    }
+
+    $("out").innerHTML = names.map(n => {
+      const encodedUrl = base + "?to=" + encodeURIComponent(n);
+      const readableUrl = base + "?to=" + n.replace(/\s+/g, "+");
+      return `
+        <div class="link-card">
+          <div class="link-top">
+            <div class="link-name">${esc(n)}</div>
+            <div class="link-btns">
+              <button class="sm-btn ghost open-one" type="button" data-name="${esc(n)}">Открыть</button>
+              <button class="sm-btn copy-one" type="button" data-u="${esc(encodedUrl)}">Копировать</button>
+            </div>
+          </div>
+          <div class="link-url">${esc(readableUrl)}</div>
+        </div>`;
+    }).join("");
+
+    $("all").style.display = "inline-flex";
+    window.__L = names.map(n => n + ": " + base + "?to=" + encodeURIComponent(n)).join("\n");
+
+    $("out").querySelectorAll(".copy-one").forEach(b => {
+      b.onclick = () => cp(b.dataset.u, b, "Скопировано ✓");
+    });
+
+    // Открываем открытку прямо внутри страницы, чтобы всё работало даже локально (content:// / file://)
+    $("out").querySelectorAll(".open-one").forEach(b => {
+      b.onclick = () => {
+        const name = b.dataset.name;
+        if (isWebProtocol()) {
+          history.pushState({ to: name }, "", location.pathname + "?to=" + encodeURIComponent(name));
+        }
+        renderGreeting(name);
+      };
+    });
+  };
+
+  $("mk").onclick = buildLinks;
+  $("all").onclick = () => cp(window.__L, $("all"), "Все ссылки скопированы ✓");
+
+  if (savedNamesText.trim()) {
+    buildLinks();
+  }
+}
+
+window.addEventListener("popstate", () => {
+  const to = getRecipientFromUrl();
+  if (to) renderGreeting(to);
+  else renderBuilder();
+});
+
+function cp(t, btn, msg) {
+  try {
+    navigator.clipboard.writeText(t).then(() => flashBtn(btn, msg), () => fb(t, btn, msg));
+  } catch (e) {
+    fb(t, btn, msg);
+  }
+}
+
+function fb(t, btn, msg) {
+  const a = document.createElement("textarea");
+  a.value = t;
+  a.style.position = "fixed";
+  a.style.opacity = "0";
+  document.body.appendChild(a);
+  a.select();
+  try {
+    document.execCommand("copy");
+    flashBtn(btn, msg);
+  } catch (e) {}
+  a.remove();
+}
+
+function flashBtn(btn, msg) {
+  if (!btn) return;
+  if (!btn.dataset.orig) btn.dataset.orig = btn.textContent;
+  btn.textContent = msg || "Скопировано ✓";
+  btn.style.background = "var(--ok)";
+  btn.style.color = "#fff";
+  clearTimeout(btn.__t);
+  btn.__t = setTimeout(() => {
+    btn.textContent = btn.dataset.orig;
+    btn.style.background = "";
+    btn.style.color = "";
+  }, 1600);
+}
+
+// Печатная машинка без прыжков слов со строки на строку (через невидимый хвост)
+function type(s) {
+  if (typeTimer) clearTimeout(typeTimer);
+  const el = $("txt");
+  let i = 0;
+  (function step() {
+    if (i <= s.length) {
+      const visible = esc(s.slice(0, i));
+      const hidden = esc(s.slice(i));
+      el.innerHTML = visible + `<span class="ghost-tail">${hidden}</span>`;
+      i++;
+      typeTimer = setTimeout(step, 26);
+    }
+  })();
+}
+
+// Инициализация
+const initialTo = getRecipientFromUrl();
+if (initialTo) {
+  renderGreeting(initialTo);
+} else {
+  renderBuilder();
+}
+
+// Снег
+const cv = $("snow"), c = cv.getContext("2d");
+let W, H, fl = [];
+function rs() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+rs();
+addEventListener("resize", rs);
+for (let i = 0; i < 70; i++) {
+  fl.push({
+    x: Math.random() * 2000,
+    y: Math.random() * 1200,
+    r: 1 + Math.random() * 3,
+    v: .5 + Math.random() * 1.5,
+    s: Math.random() * 6
+  });
+}
+(function f() {
+  c.clearRect(0, 0, W, H);
+  c.fillStyle = "#fff";
+  fl.forEach(p => {
+    p.y += p.v;
+    p.x += Math.sin(p.y / 40 + p.s) * .4;
+    if (p.y > H) { p.y = -5; p.x = Math.random() * W; }
+    c.globalAlpha = .4 + p.r / 5;
+    c.beginPath();
+    c.arc(p.x % W, p.y, p.r, 0, 7);
+    c.fill();
+  });
+  requestAnimationFrame(f);
+})();
+</script>
+</body>
+</html>
