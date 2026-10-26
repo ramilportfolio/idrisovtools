@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Калькулятор ремонта — демо</title>
+<title>Калькулятор стоимости ремонта помещений</title>
 <style>
 :root {
   --ink: #161e2e;
@@ -26,14 +26,6 @@ body {
   color: var(--ink);
 }
 .wrap { max-width: 560px; margin: 0 auto; padding: 12px 16px 36px; }
-.demo {
-  background: #fff3cd;
-  border: 1px solid #f1d98a;
-  border-radius: 10px;
-  padding: 7px 11px;
-  font-size: 12.5px;
-  margin-bottom: 10px;
-}
 h1 { font-size: 24px; margin: 4px 0 2px; letter-spacing: -0.01em; }
 p.sub { color: var(--mut); margin: 0 0 12px; font-size: 14.5px; }
 .card {
@@ -281,7 +273,7 @@ const CONFIG = {
   "min": 50000,
   "termLabel": "Срок работ",
   "termRule": "(S.area>70?'от 50 дней':S.area>40?'от 35 дней':'от 20 дней')",
-  "note": "Точную смету составит мастер после замера. Расчёт не является офертой. Цены условные.",
+  "note": "Точную смету составит мастер после бесплатного замера. Расчёт не является офертой.",
   "fields": [
     {
       "id": "area",
@@ -335,8 +327,6 @@ const CONFIG = {
 const $ = id => document.getElementById(id);
 const S = {};
 const fmt = n => Math.round(n).toLocaleString("ru-RU") + "\u00A0₽";
-const demo = CONFIG.telegram.includes("[");
-if (demo || CONFIG.demoBanner) $("demo").hidden = false;
 
 $("h1").textContent = CONFIG.title;
 $("sub").textContent = CONFIG.subtitle;

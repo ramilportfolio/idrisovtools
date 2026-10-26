@@ -1,11 +1,10 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Квиз для фитнес-клуба — демо</title>
+<title>Подбор программы тренировок — Фитнес-квиз</title>
 <style>
 :root{--ink:#14181f;--acc:#4c5bf0;--bg:#f5f7fb;--card:#fff;--mut:#525d6f;--line:#e1e7f0}
 *{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
 .wrap{max-width:540px;margin:0 auto;padding:16px 16px 40px}
-.demo{background:#fff3cd;border:1px solid #f1d98a;border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:12px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:12px}
 .bar{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin-bottom:16px}
 .bar div{height:100%;background:var(--acc);transition:width .25s ease}
@@ -65,13 +64,29 @@ function draw(){
   }else{
     box.innerHTML=`<h3 style="margin:0 0 8px">Отлично! Программа подобрана</h3>
     <p style="color:#525d6f;font-size:14px;margin:0 0 10px">Оставьте имя и телефон, чтобы закрепить купон на бесплатное пробное занятие с тренером:</p>
-    <input id="nm" placeholder="Ваше имя"><input id="ph" type="tel" placeholder="+7 ___ ___-__-__">
+    <input id="nm" placeholder="Ваше имя" autocomplete="name">
+    <input id="ph" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel">
     <button class="btn" id="send">Получить пробную тренировку</button>
     <button class="opt" id="agn" style="margin-top:8px;text-align:center">Пройти заново</button>`;
-    document.getElementById("agn").onclick=()=>{cur=0;ans=[];document.getElementById("box").style.display="none";draw()};
+    
+    const phEl = document.getElementById("ph");
+    phEl.addEventListener("input", e => {
+      let d = e.target.value.replace(/\D/g, "");
+      if (!d) { e.target.value = ""; return; }
+      if (d[0] === "8" || d[0] === "7") d = d.slice(1);
+      d = d.slice(0, 10);
+      let res = "+7";
+      if (d.length > 0) res += " (" + d.slice(0, 3);
+      if (d.length >= 4) res += ") " + d.slice(3, 6);
+      if (d.length >= 7) res += "-" + d.slice(6, 8);
+      if (d.length >= 9) res += "-" + d.slice(8, 10);
+      e.target.value = res;
+    });
+
+    document.getElementById("agn").onclick=()=>{cur=0;ans=[];draw()};
     document.getElementById("send").onclick=()=>{
       const n=document.getElementById("nm").value.trim(),p=document.getElementById("ph").value.trim();
-      if(n.length<2||p.replace(/\D/g,"").length<10){alert("Введите имя и телефон");return}
+      if(n.length<2||p.replace(/\D/g,"").length<11){alert("Пожалуйста, укажите имя и полный номер телефона");return}
       const res = `🏋️ Заявка на пробную тренировку\n` +
                   `👤 Имя: ${n}\n` +
                   `📞 Телефон: ${p}\n\n` +
