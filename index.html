@@ -1240,16 +1240,16 @@
     .contact-cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 12px;
     }
 
     .contact-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 18px 20px;
-      border-radius: 16px;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: 14px;
       background: var(--bg);
       border: 1px solid var(--line);
       text-decoration: none;
@@ -1269,28 +1269,27 @@
       box-shadow: var(--shadow-sm);
     }
 
-    .contact-item-main {
+    .contact-item-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       min-width: 0;
-      flex: 1;
     }
 
     .contact-brand-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 13px;
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
 
     .contact-brand-icon svg {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       display: block;
     }
 
@@ -1319,135 +1318,25 @@
       color: #ffffff;
     }
 
-    .contact-item-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 0;
-    }
-
-    .contact-item-label {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--mut);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .contact-item-val {
-      font-size: 15.5px;
+    .contact-name {
+      font-size: 16px;
       font-weight: 700;
       color: var(--ink);
-      line-height: 1.25;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .contact-item-sub {
-      font-size: 12px;
-      color: var(--mut);
-      font-weight: 500;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
     }
 
     .contact-item-arrow {
       color: var(--acc);
       font-weight: 700;
       font-size: 18px;
+      line-height: 1;
       flex-shrink: 0;
       transition: transform 0.18s ease;
-      margin-left: 6px;
     }
 
     .contact-item:hover .contact-item-arrow {
       transform: translateX(3px);
-    }
-
-    /* Специальная карточка электронной почты */
-    .email-card {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 20px 22px;
-      cursor: pointer;
-    }
-
-    .email-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      width: 100%;
-    }
-
-    .email-meta-wrap {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      min-width: 0;
-    }
-
-    .email-meta-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 0;
-    }
-
-    .email-sub {
-      font-size: 12.5px;
-      color: var(--mut);
-      font-weight: 500;
-    }
-
-    .copy-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 99px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      color: var(--ink);
-      font-size: 12.5px;
-      font-weight: 700;
-      flex-shrink: 0;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(15, 20, 28, 0.04);
-    }
-
-    .email-card:hover .copy-pill {
-      border-color: var(--acc);
-      color: var(--acc);
-    }
-
-    .copy-pill.copied {
-      background: #10b981;
-      border-color: #10b981;
-      color: #ffffff !important;
-    }
-
-    .email-card-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 6px 16px;
-      padding-top: 12px;
-      border-top: 1px dashed var(--line);
-    }
-
-    .email-address {
-      font-size: 16.5px;
-      font-weight: 800;
-      color: var(--acc);
-      letter-spacing: -0.01em;
-      word-break: break-all;
-    }
-
-    .email-hint {
-      font-size: 12px;
-      color: var(--mut);
-      font-weight: 500;
     }
 
     /* Модальное окно живого предпросмотра */
@@ -1758,20 +1647,23 @@
         padding: 13px;
         font-size: 14px;
       }
+      .contact-cards {
+        gap: 10px;
+      }
       .contact-item {
-        padding: 14px 16px;
-        border-radius: 14px;
+        padding: 12px 14px;
+        border-radius: 12px;
       }
       .contact-brand-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 11px;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
       }
       .contact-brand-icon svg {
-        width: 22px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
       }
-      .contact-item-val {
+      .contact-name {
         font-size: 15px;
       }
       footer.site-footer {
@@ -1841,27 +1733,6 @@
       }
       .card .thumb {
         height: 185px;
-      }
-      .email-card {
-        padding: 16px;
-      }
-      .email-meta-wrap {
-        gap: 10px;
-      }
-      .email-sub {
-        font-size: 11.5px;
-      }
-      .email-card-bottom {
-        padding-top: 10px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-      }
-      .email-address {
-        font-size: 15px;
-      }
-      .email-hint {
-        font-size: 11.5px;
       }
     }
   </style>
@@ -2284,24 +2155,20 @@
       <div class="contact-box">
         <div class="contact-cards">
           <a class="contact-item" id="contactTgRow" href="https://t.me/ramiltools" target="_blank" rel="noopener">
-            <div class="contact-item-main">
+            <div class="contact-item-left">
               <div class="contact-brand-icon tg-brand">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="m22 2-7 20-4-9-9-4Z"/>
                   <path d="M22 2 11 13"/>
                 </svg>
               </div>
-              <div class="contact-item-info">
-                <span class="contact-item-label">Telegram</span>
-                <span class="contact-item-val" id="contactTgLabel">Написать в Telegram</span>
-                <span class="contact-item-sub">@ramiltools • обычно онлайн</span>
-              </div>
+              <span class="contact-name" id="contactTgLabel">Telegram</span>
             </div>
             <span class="contact-item-arrow">→</span>
           </a>
 
           <a class="contact-item" id="contactWaRow" href="https://wa.me/79613626062" target="_blank" rel="noopener">
-            <div class="contact-item-main">
+            <div class="contact-item-left">
               <div class="contact-brand-icon wa-brand">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <g transform="translate(1.2, 1.2)">
@@ -2310,73 +2177,46 @@
                   </g>
                 </svg>
               </div>
-              <div class="contact-item-info">
-                <span class="contact-item-label">WhatsApp</span>
-                <span class="contact-item-val" id="contactWaLabel">Написать в WhatsApp</span>
-                <span class="contact-item-sub">+7 (961) 362-60-62</span>
-              </div>
+              <span class="contact-name" id="contactWaLabel">WhatsApp</span>
             </div>
             <span class="contact-item-arrow">→</span>
           </a>
 
           <a class="contact-item" id="contactMaxRow" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener">
-            <div class="contact-item-main">
+            <div class="contact-item-left">
               <div class="contact-brand-icon max-brand">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M6.2 16.5V7.5h2.4l3.4 5.2 3.4-5.2h2.4v9h-2.1v-5.6l-3.1 4.7h-1.2l-3.1-4.7v5.6H6.2Z" fill="#ffffff"/>
                 </svg>
               </div>
-              <div class="contact-item-info">
-                <span class="contact-item-label">Мессенджер Max</span>
-                <span class="contact-item-val" id="contactMaxLabel">Написать в Max</span>
-                <span class="contact-item-sub">Прямой чат в приложении</span>
-              </div>
+              <span class="contact-name" id="contactMaxLabel">Max</span>
             </div>
             <span class="contact-item-arrow">→</span>
           </a>
 
           <a class="contact-item" id="contactVkRow" href="https://vk.com/id449983999" target="_blank" rel="noopener">
-            <div class="contact-item-main">
+            <div class="contact-item-left">
               <div class="contact-brand-icon vk-brand">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M12.8 16.5c-4.5 0-7.1-3.1-7.2-8.3h2.3c.1 3.8 1.8 5.4 3.1 5.7V8.2h2.1v3.3c1.3-.1 2.6-1.6 3.1-3.3h2.1c-.4 2.1-1.8 3.6-2.8 4.2 1 .5 2.7 1.8 3.3 4.1h-2.3c-.5-1.6-1.8-2.8-3.5-3v3h-.2Z" fill="#ffffff"/>
                 </svg>
               </div>
-              <div class="contact-item-info">
-                <span class="contact-item-label">Социальная сеть</span>
-                <span class="contact-item-val">Страница ВКонтакте</span>
-                <span class="contact-item-sub">vk.com/id449983999</span>
-              </div>
+              <span class="contact-name" id="contactVkLabel">ВКонтакте</span>
             </div>
             <span class="contact-item-arrow">→</span>
           </a>
 
-          <a class="contact-item full-row email-card" id="contactMailRow" href="mailto:idrisov.smm@gmail.com" title="Нажмите, чтобы скопировать почту" aria-label="Скопировать электронную почту">
-            <div class="email-card-top">
-              <div class="email-meta-wrap">
-                <div class="contact-brand-icon mail-brand">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect width="20" height="16" x="2" y="4" rx="3"/>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                  </svg>
-                </div>
-                <div class="email-meta-info">
-                  <span class="contact-item-label">Электронная почта</span>
-                  <span class="email-sub">Для ТЗ, договоров и документов</span>
-                </div>
-              </div>
-              <span class="copy-pill" id="copyMailPill">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+          <a class="contact-item full-row" id="contactMailRow" href="mailto:idrisov.smm@gmail.com" title="Написать на почту idrisov.smm@gmail.com">
+            <div class="contact-item-left">
+              <div class="contact-brand-icon mail-brand">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="20" height="16" x="2" y="4" rx="3"/>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                 </svg>
-                <span id="copyMailText">Скопировать</span>
-              </span>
+              </div>
+              <span class="contact-name" id="contactMailLabel">Почта</span>
             </div>
-            <div class="email-card-bottom">
-              <span class="email-address" id="contactMailLabel">idrisov.smm@gmail.com</span>
-              <span class="email-hint">Нажмите для быстрого копирования</span>
-            </div>
+            <span class="contact-item-arrow">→</span>
           </a>
         </div>
       </div>
@@ -2423,9 +2263,9 @@
       avatar: "",
       telegram: "ramiltools",
       whatsapp: "79613626062",
-      whatsappLabel: "Написать в WhatsApp",
+      whatsappLabel: "WhatsApp",
       max: "https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc",
-      maxLabel: "Написать в Max",
+      maxLabel: "Max",
       vk: "https://vk.com/id449983999",
       email: "idrisov.smm@gmail.com"
     };
@@ -2583,11 +2423,11 @@
       if (el) el.href = CONFIG.vk;
     });
 
-    document.getElementById("contactTgLabel").textContent = "Написать в Telegram";
+    document.getElementById("contactTgLabel").textContent = "Telegram";
     document.getElementById("contactMaxLabel").textContent = CONFIG.maxLabel;
     document.getElementById("contactWaLabel").textContent = CONFIG.whatsappLabel;
     document.getElementById("contactMailRow").href = "mailto:" + CONFIG.email;
-    document.getElementById("contactMailLabel").textContent = CONFIG.email;
+    document.getElementById("contactMailLabel").textContent = "Почта";
 
     // Ссылки для заказа в карточках цен
     document.querySelectorAll(".price-order-link").forEach(link => {
@@ -2596,27 +2436,13 @@
       link.href = `${tgLink}?text=${encodeURIComponent(msg)}`;
     });
 
-    // Копирование почты при нажатии на карточку
+    // При клике на почту — открытие почтового клиента и копирование адреса
     let toastTimer = null;
-    let pillTimer = null;
     const mailRow = document.getElementById("contactMailRow");
-    const mailPill = document.getElementById("copyMailPill");
-    const mailText = document.getElementById("copyMailText");
-
     if (mailRow) {
-      mailRow.addEventListener("click", function (e) {
+      mailRow.addEventListener("click", function () {
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          e.preventDefault();
           navigator.clipboard.writeText(CONFIG.email).then(() => {
-            if (mailPill) {
-              mailPill.classList.add("copied");
-              if (mailText) mailText.textContent = "Скопировано!";
-              clearTimeout(pillTimer);
-              pillTimer = setTimeout(() => {
-                mailPill.classList.remove("copied");
-                if (mailText) mailText.textContent = "Скопировать";
-              }, 2200);
-            }
             const toast = document.getElementById("toast");
             if (toast) {
               toast.textContent = `Почта ${CONFIG.email} скопирована`;
@@ -2624,9 +2450,7 @@
               clearTimeout(toastTimer);
               toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
             }
-          }).catch(() => {
-            window.location.href = "mailto:" + CONFIG.email;
-          });
+          }).catch(() => {});
         }
       });
     }
