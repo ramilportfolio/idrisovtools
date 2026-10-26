@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Колесо призов — Интерактивная промо-акция</title>
+<style>
+:root {
+  --ink: #0f172a;
+  --bg: #0f172a;
+  --card: #1e293b;
+  --card-light: #334155;
+  --acc: #f59e0b;
+  --acc-hover: #d97706;
+  --acc-soft: rgba(245, 158, 11, 0.15);
+  --line: #334155;
+  --mut: #94a3b8;
+  --ok: #10b981;
+  --gold: #fbbf24;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  margin: 0;
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: radial-gradient(circle at 50% 10%, #1e293b 0%, #0b0f19 100%);
+  color: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.wrap {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px 16px 40px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+.demo-banner {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fde68a;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+h1 {
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: 800;
+  margin: 6px 0 6px;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+p.sub {
+  color: var(--mut);
+  margin: 0 0 20px;
+  font-size: 14.5px;
+}
+.wheel-container {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin: 0 auto 24px;
+}
+@media (max-width: 360px) {
+  .wheel-container { width: 280px; height: 280px; }
+}
+canvas#wheelCanvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px rgba(245, 158, 11, 0.25), 0 16px 40px rgba(0, 0, 0, 0.5);
+  background: #1e293b;
+}
+.pointer {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 36px;
+  z-index: 20;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+}
+.pointer polygon {
+  fill: #ef4444;
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+.center-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  z-index: 15;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease;
+}
+.center-hub:hover {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+.spin-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 15px 32px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  width: 100%;
+  max-width: 280px;
+}
+.spin-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
+}
+.spin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.win-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.win-modal.show {
+  display: flex;
+}
+.win-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+.win-icon {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.win-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 6px;
+}
+.win-prize {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--gold);
+  margin: 0 0 16px;
+}
+.promo-box {
+  background: rgba(0,0,0,0.25);
+  border: 1px dashed var(--gold);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #fff;
+  margin-bottom: 16px;
+  user-select: all;
+}
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: #0f172a;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 10px;
+  outline: none;
+  font-family: inherit;
+}
+.form-input:focus {
+  border-color: var(--gold);
+}
+.win-btn {
+  width: 100%;
+  background: #10b981;
+  color: #fff;
+  border: none;
+  padding: 13px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: 0.15s;
+}
+.win-btn:hover {
+  background: #059669;
+}
+.win-law {
+  font-size: 11px;
+  color: var(--mut);
+  margin-top: 10px;
+  line-height: 1.35;
+}
+.close-link {
+  display: inline-block;
+  color: var(--mut);
+  font-size: 13px;
+  margin-top: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+canvas#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 120;
+}
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="wrap">
+  <div class="demo-banner">
+    🎁 <b>Демо-режим:</b> Интерактивное колесо призов для сайта или Telegram-канала. Посетитель крутит колесо, оставляет контакт и получает промокод.
+  </div>
+
+  <h1>Испытайте удачу!</h1>
+  <p class="sub">Вращайте колесо и получите персональный бонус к заказу</p>
+
+  <div class="wheel-container">
+    <svg class="pointer" viewBox="0 0 32 36">
+      <polygon points="16,36 3,6 29,6"/>
+    </svg>
+    <canvas id="wheelCanvas" width="640" height="640"></canvas>
+    <div class="center-hub" id="centerHub" title="Нажмите, чтобы вращать">🎯</div>
+  </div>
+
+  <button type="button" class="spin-btn" id="spinBtn">Крутить колесо!</button>
+</div>
+
+<!-- Модальное окно выигрыша -->
+<div class="win-modal" id="winModal">
+  <div class="win-card">
+    <div class="win-icon">🎉</div>
+    <div class="win-title">Поздравляем!</div>
+    <div class="win-prize" id="winPrizeText">Скидка 15%</div>
+    
+    <div style="font-size:12.5px;color:var(--mut);margin-bottom:6px">Ваш промокод на скидку:</div>
+    <div class="promo-box" id="promoCodeBox">PRIZE-2026-X8</div>
+
+    <form id="claimForm">
+      <input type="text" class="form-input" id="clientName" placeholder="Ваше имя" required>
+      <input type="tel" class="form-input" id="clientPhone" placeholder="+7 (___) ___-__-__" required>
+      <button type="submit" class="win-btn" id="claimBtn">Забрать подарок в Telegram →</button>
+    </form>
+    
+    <div class="win-law">
+      🔒 Нажимая кнопку, вы соглашаетесь на обработку персональных данных (в соответствии с 152-ФЗ РФ).
+    </div>
+    <span class="close-link" id="closeModalLink">Закрыть окно</span>
+  </div>
+</div>
+
+<script>
+const SECTORS = [
+  { label: "Скидка 10%", color: "#3b82f6", text: "#ffffff" },
+  { label: "Подарок 🎁", color: "#8b5cf6", text: "#ffffff" },
+  { label: "Скидка 500 ₽", color: "#ec4899", text: "#ffffff" },
+  { label: "Скидка 15%", color: "#f59e0b", text: "#ffffff" },
+  { label: "Доставка 0 ₽", color: "#10b981", text: "#ffffff" },
+  { label: "Скидка 20%", color: "#06b6d4", text: "#ffffff" },
+  { label: "Сюрприз ⭐", color: "#e11d48", text: "#ffffff" },
+  { label: "Скидка 7%", color: "#6366f1", text: "#ffffff" }
+];
+
+const canvas = document.getElementById("wheelCanvas");
+const ctx = canvas.getContext("2d");
+const spinBtn = document.getElementById("spinBtn");
+const centerHub = document.getElementById("centerHub");
+const winModal = document.getElementById("winModal");
+const winPrizeText = document.getElementById("winPrizeText");
+const promoCodeBox = document.getElementById("promoCodeBox");
+
+const totalSectors = SECTORS.length;
+const arc = (2 * Math.PI) / totalSectors;
+let currentAngle = 0;
+let isSpinning = false;
+
+function drawWheel() {
+  const size = canvas.width;
+  const center = size / 2;
+  const radius = center - 12;
+
+  ctx.clearRect(0, 0, size, size);
+
+  for (let i = 0; i < totalSectors; i++) {
+    const angle = currentAngle + i * arc;
+    
+    // Рисуем сектор
+    ctx.beginPath();
+    ctx.fillStyle = SECTORS[i].color;
+    ctx.moveTo(center, center);
+    ctx.arc(center, center, radius, angle, angle + arc);
+    ctx.lineTo(center, center);
+    ctx.fill();
+
+    // Обводка сектора
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Текст сектора
+    ctx.save();
+    ctx.fillStyle = SECTORS[i].text;
+    ctx.font = "bold 26px system-ui, -apple-system, Segoe UI, sans-serif";
+    ctx.translate(center, center);
+    ctx.rotate(angle + arc / 2);
+    ctx.textAlign = "right";
+    ctx.shadowColor = "rgba(0,0,0,0.5)";
+    ctx.shadowBlur = 4;
+    ctx.fillText(SECTORS[i].label, radius - 28, 9);
+    ctx.restore();
+  }
+
+  // Внешний золотой обод
+  ctx.beginPath();
+  ctx.arc(center, center, radius, 0, 2 * Math.PI);
+  ctx.strokeStyle = "#fbbf24";
+  ctx.lineWidth = 8;
+  ctx.stroke();
+}
+drawWheel();
+
+function spinWheel() {
+  if (isSpinning) return;
+  isSpinning = true;
+  spinBtn.disabled = true;
+
+  // Выбираем случайный призовой сектор
+  const targetSectorIndex = Math.floor(Math.random() * totalSectors);
+  
+  // Рассчитываем конечный угол так, чтобы стрелка сверху (3*PI/2) указала на нужный сектор
+  const extraRotations = 5 + Math.floor(Math.random() * 3); // 5-7 полных оборотов
+  const targetSectorCenter = targetSectorIndex * arc + arc / 2;
+  // Верхняя точка = 3 * Math.PI / 2
+  const targetAngle = (3 * Math.PI / 2) - targetSectorCenter;
+  
+  const startAngle = currentAngle % (2 * Math.PI);
+  let delta = targetAngle - startAngle;
+  while (delta < 0) delta += 2 * Math.PI;
+  const totalRotation = delta + extraRotations * 2 * Math.PI;
+
+  const duration = 4500;
+  const startTime = performance.now();
+
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easedProgress = easeOutCubic(progress);
+
+    currentAngle = startAngle + totalRotation * easedProgress;
+    drawWheel();
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      isSpinning = false;
+      spinBtn.disabled = false;
+      showWinner(SECTORS[targetSectorIndex].label);
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+spinBtn.addEventListener("click", spinWheel);
+centerHub.addEventListener("click", spinWheel);
+
+function generatePromoCode() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code = "PRIZE-";
+  for (let i = 0; i < 4; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
+}
+
+function showWinner(prize) {
+  winPrizeText.textContent = prize;
+  const promo = generatePromoCode();
+  promoCodeBox.textContent = promo;
+  winModal.classList.add("show");
+  startConfetti();
+}
+
+document.getElementById("closeModalLink").addEventListener("click", () => {
+  winModal.classList.remove("show");
+});
+
+// Маска ввода телефона
+const phoneInput = document.getElementById("clientPhone");
+phoneInput.addEventListener("input", e => {
+  let d = e.target.value.replace(/\D/g, "");
+  if (!d) { e.target.value = ""; return; }
+  if (d[0] === "8" || d[0] === "7") d = d.slice(1);
+  else if (d[0] === "9") d = d;
+  d = d.slice(0, 10);
+  let res = "+7";
+  if (d.length > 0) res += " (" + d.slice(0, 3);
+  if (d.length >= 4) res += ") " + d.slice(3, 6);
+  if (d.length >= 7) res += "-" + d.slice(6, 8);
+  if (d.length >= 9) res += "-" + d.slice(8, 10);
+  e.target.value = res;
+});
+
+// Отправка заявки в Telegram
+document.getElementById("claimForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = document.getElementById("clientName").value.trim();
+  const phone = document.getElementById("clientPhone").value.trim();
+  const prize = winPrizeText.textContent;
+  const promo = promoCodeBox.textContent;
+
+  const text = `🎉 Заявка с Колеса Призов!\n` +
+    `👤 Имя: ${name}\n` +
+    `📞 Телефон: ${phone}\n` +
+    `🎁 Выигрыш: ${prize}\n` +
+    `🔑 Промокод: ${promo}`;
+
+  window.open("https://t.me/ramiltools?text=" + encodeURIComponent(text), "_blank", "noopener");
+});
+
+// Анимация конфетти
+const confettiCanvas = document.getElementById("confetti");
+const cCtx = confettiCanvas.getContext("2d");
+let confettiParticles = [];
+let confettiRunning = false;
+
+function startConfetti() {
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
+  confettiParticles = [];
+  const colors = ["#fbbf24", "#f59e0b", "#ec4899", "#3b82f6", "#10b981", "#8b5cf6"];
+  
+  for (let i = 0; i < 90; i++) {
+    confettiParticles.push({
+      x: Math.random() * confettiCanvas.width,
+      y: -20 - Math.random() * 50,
+      r: 4 + Math.random() * 6,
+      d: Math.random() * 40,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      tilt: Math.random() * 10 - 10,
+      tiltAngleInc: (Math.random() * 0.07) + 0.05,
+      tiltAngle: 0
+    });
+  }
+  
+  if (!confettiRunning) {
+    confettiRunning = true;
+    requestAnimationFrame(renderConfetti);
+  }
+}
+
+function renderConfetti() {
+  if (!confettiRunning) return;
+  cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  
+  let stillActive = false;
+  confettiParticles.forEach(p => {
+    p.tiltAngle += p.tiltAngleInc;
+    p.y += (Math.cos(p.d) + 3 + p.r / 2);
+    p.tilt = Math.sin(p.tiltAngle) * 12;
+
+    if (p.y < confettiCanvas.height) {
+      stillActive = true;
+      cCtx.beginPath();
+      cCtx.lineWidth = p.r;
+      cCtx.strokeStyle = p.color;
+      cCtx.moveTo(p.x + p.tilt + p.r, p.y);
+      cCtx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r);
+      cCtx.stroke();
+    }
+  });
+
+  if (stillActive) {
+    requestAnimationFrame(renderConfetti);
+  } else {
+    confettiRunning = false;
+    cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  }
+}
+</script>
+</body>
+</html>

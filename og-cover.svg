@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f17"/>
+      <stop offset="50%" stop-color="#131924"/>
+      <stop offset="100%" stop-color="#0b0f17"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4c5bf0"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M 44 0 L 0 0 0 44" fill="none" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <circle cx="1050" cy="120" r="320" fill="url(#glow)" opacity="0.14" filter="blur(80px)"/>
+  <circle cx="100" cy="550" r="280" fill="url(#glow)" opacity="0.12" filter="blur(80px)"/>
+
+  <rect x="50" y="50" width="1100" height="530" rx="28" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2"/>
+
+  <!-- Badge -->
+  <rect x="90" y="90" width="310" height="42" rx="12" fill="rgba(76, 91, 240, 0.18)" stroke="#4c5bf0" stroke-width="1.5"/>
+  <text x="245" y="117" fill="#818cf8" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="700" text-anchor="middle" letter-spacing="1">РАЗРАБОТКА ДЛЯ БИЗНЕСА</text>
+
+  <!-- Title -->
+  <text x="90" y="210" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" letter-spacing="-1">Сайты, калькуляторы и боты</text>
+  <text x="90" y="275" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" letter-spacing="-1">для вашего бизнеса</text>
+
+  <!-- Subtitle -->
+  <text x="90" y="350" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="22">0 ₽ абонплаты • Заявки сразу в Telegram • 12 рабочих демо-проектов</text>
+
+  <!-- Divider -->
+  <line x1="90" y1="420" x2="1110" y2="420" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5"/>
+
+  <!-- Footer Info -->
+  <circle cx="105" cy="485" r="8" fill="#4c5bf0"/>
+  <text x="125" y="492" fill="#38bdf8" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800">ramil-tools.ru</text>
+  <text x="320" y="492" fill="#64748b" font-family="system-ui, -apple-system, sans-serif" font-size="20">• Стерлитамак и онлайн по всей РФ</text>
+
+  <rect x="900" y="460" width="210" height="50" rx="14" fill="#4c5bf0"/>
+  <text x="1005" y="492" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" text-anchor="middle">СМОТРЕТЬ РАБОТЫ →</text>
+</svg>

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Калькулятор натяжных потолков</title>
+<style>
+:root{--ink:#14213d;--acc:#e07a1f;--bg:#f4f6fa;--card:#fff;--mut:#5b6882;--line:#dfe5ef}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 40px}
+.demo{background:#fff3cd;border:1px solid #f1d98a;border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:12px}
+h1{font-size:26px;margin:8px 0 4px}
+p.sub{color:var(--mut);margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+label{display:block;font-weight:600;margin:14px 0 6px}
+label:first-child{margin-top:0}
+input[type=number],input[type=text],input[type=tel]{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:16px;font-family:inherit;outline:none;transition:border-color .15s}
+input[type=text]:focus,input[type=tel]:focus{border-color:var(--acc)}
+input[type=range]{width:100%;height:6px;accent-color:var(--acc);cursor:pointer;margin:8px 0 4px}
+.range-limits{display:flex;justify-content:space-between;font-size:12px;color:var(--mut)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg button{padding:12px 6px;border:1px solid var(--line);background:#fff;border-radius:10px;font:inherit;font-weight:500;cursor:pointer;user-select:none}
+.seg button.on{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.step{display:flex;align-items:center;gap:8px}
+.step button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:20px;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:center;transition:transform .1s,background .15s}
+.step button:active{background:#f1f5f9;transform:scale(0.95)}
+.step b{min-width:26px;text-align:center}
+.total{background:var(--ink);color:#fff;border-radius:16px;padding:18px;margin-bottom:12px}
+.total .sum{font-size:38px;font-weight:800;color:#ffd7a8;margin:2px 0 10px;white-space:nowrap}
+.total small{opacity:.8}
+#lines{border-top:1px solid rgba(255,255,255,0.12);padding-top:8px}
+.line{display:flex;justify-content:space-between;gap:12px;font-size:14px;opacity:.92;padding:3px 0}
+.line span:last-child,.line b{white-space:nowrap}
+.term-line{border-top:1px dashed rgba(255,255,255,0.2);margin-top:6px;padding-top:8px}
+button.main{width:100%;padding:14px;border:0;border-radius:12px;background:var(--acc);color:#fff;font-weight:700;font-size:17px;font-family:inherit;cursor:pointer;transition:transform .1s}
+button.main:active{transform:scale(0.99)}
+#box{white-space:pre-wrap;background:#eef2f8;border-radius:10px;padding:10px;font-size:13px;margin-top:10px;display:none}
+.note{font-size:12px;color:var(--mut);margin-top:10px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="demo" id="demo" hidden>Демо-проект. Заявка не отправляется, пока не указан Telegram в CONFIG.</div>
+  <h1>Сколько стоит потолок?</h1>
+  <p class="sub">Рассчитайте за 30 секунд и отправьте заявку мастеру</p>
+
+  <div class="card">
+    <div class="row">
+      <label style="margin:0">Площадь потолка: <b id="aOut">20</b> м²</label>
+      <div class="step">
+        <button type="button" data-k="area" data-d="-1">−</button>
+        <button type="button" data-k="area" data-d="1">+</button>
+      </div>
+    </div>
+    <input type="range" id="area" min="5" max="120" value="20">
+    <div class="range-limits"><span>5 м²</span><span>120 м²</span></div>
+
+    <label>Полотно</label>
+    <div class="seg" id="type"></div>
+
+    <label>Светильники</label>
+    <div class="row">
+      <span>Точечные, шт.</span>
+      <div class="step">
+        <button type="button" data-k="spots" data-d="-1">−</button>
+        <b id="spots">4</b>
+        <button type="button" data-k="spots" data-d="1">+</button>
+      </div>
+    </div>
+
+    <label>Дополнительно</label>
+    <div class="row">
+      <span>Люстра (монтаж)</span>
+      <div class="step">
+        <button type="button" data-k="lust" data-d="-1">−</button>
+        <b id="lust">1</b>
+        <button type="button" data-k="lust" data-d="1">+</button>
+      </div>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <span>Шторный карниз, м</span>
+      <div class="step">
+        <button type="button" data-k="cor" data-d="-1">−</button>
+        <b id="cor">0</b>
+        <button type="button" data-k="cor" data-d="1">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="total">
+    <small>Ориентировочная стоимость</small>
+    <div class="sum" id="sum">0 ₽</div>
+    <div id="lines"></div>
+    <div class="line term-line"><span>Срок монтажа</span><b id="days"></b></div>
+  </div>
+
+  <div class="card">
+    <label for="name">Ваше имя</label>
+    <input type="text" id="name" placeholder="Например, Анна" autocomplete="name">
+    <label for="phone">Телефон</label>
+    <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+    <button type="button" class="main" id="send" style="margin-top:14px">Отправить заявку</button>
+    <div id="box"></div>
+    <div class="note">Точную цену назовёт мастер после замера. Расчёт не является офертой.</div>
+  </div>
+</div>
+
+<script>
+// ===== НАСТРОЙКИ ПОД КЛИЕНТА =====
+const CONFIG = {
+  telegram: "ramiltools", // ник мастера без @
+  types: [{n:"Матовый",p:450},{n:"Глянцевый",p:520},{n:"Тканевый",p:950}], // ₽ за м²
+  spot: 350, lust: 800, cornice: 600 // ₽ за шт., шт., метр
+};
+// =================================
+
+const S = {area:20, type:0, spots:4, lust:1, cor:0};
+const $ = id => document.getElementById(id);
+// Неразрывный пробел защищает знак ₽ от переноса на новую строку в Telegram
+const fmt = n => n.toLocaleString("ru-RU").replace(/\s/g, "\u00a0") + "\u00a0₽";
+const isDemo = CONFIG.telegram.includes("[") || !CONFIG.telegram.trim();
+if (isDemo) $("demo").hidden = false;
+
+CONFIG.types.forEach((t, i) => {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.textContent = t.n;
+  b.onclick = () => { S.type = i; calc(); };
+  $("type").appendChild(b);
+});
+
+document.querySelectorAll(".step button").forEach(b => b.onclick = () => {
+  const k = b.dataset.k;
+  const min = k === "area" ? 5 : 0;
+  const max = k === "area" ? 120 : 50;
+  S[k] = Math.max(min, Math.min(max, S[k] + +b.dataset.d));
+  if (k === "area") $("area").value = S.area;
+  calc();
+});
+
+$("area").oninput = e => { S.area = +e.target.value; calc(); };
+
+function calc() {
+  const t = CONFIG.types[S.type];
+  const a = S.area * t.p, b = S.spots * CONFIG.spot, c = S.lust * CONFIG.lust, d = S.cor * CONFIG.cornice;
+  const sum = a + b + c + d;
+  $("aOut").textContent = S.area;
+  ["spots", "lust", "cor"].forEach(k => $(k).textContent = S[k]);
+  [...$("type").children].forEach((x, i) => x.classList.toggle("on", i === S.type));
+
+  const rows = [
+    ["Полотно «" + t.n + "», " + S.area + "\u00a0м²", a],
+    ["Светильники ×" + S.spots, b],
+    ["Люстра ×" + S.lust, c],
+    ["Карниз, " + S.cor + "\u00a0м", d]
+  ].filter(r => r[1] > 0);
+
+  $("lines").innerHTML = rows.map(r => `<div class="line"><span>${r[0]}</span><span>${fmt(r[1])}</span></div>`).join("");
+  $("sum").textContent = fmt(sum);
+  $("days").textContent = S.area > 60 ? "2 дня" : "1 день";
+  S.sum = sum;
+  S.rows = rows;
+}
+
+// Маска ввода телефона +7 (XXX) XXX-XX-XX
+$("phone").addEventListener("input", e => {
+  let d = e.target.value.replace(/\D/g, "");
+  if (!d) { e.target.value = ""; return; }
+  if (d[0] === "8" || d[0] === "7") d = d.slice(1);
+  d = d.slice(0, 10);
+  let res = "+7";
+  if (d.length > 0) res += " (" + d.slice(0, 3);
+  if (d.length >= 4) res += ") " + d.slice(3, 6);
+  if (d.length >= 7) res += "-" + d.slice(6, 8);
+  if (d.length >= 9) res += "-" + d.slice(8, 10);
+  e.target.value = res;
+});
+
+$("send").onclick = () => {
+  const n = $("name").value.trim(), p = $("phone").value.trim();
+  if (n.length < 2 || p.replace(/\D/g, "").length < 11) {
+    alert("Пожалуйста, укажите ваше имя и полный номер телефона");
+    return;
+  }
+  const text = `🏠 Заявка на натяжной потолок\n` +
+               `👤 Имя: ${n}\n` +
+               `📞 Телефон: ${p}\n\n` +
+               `📋 Расчёт:\n` +
+               S.rows.map(r => `• ${r[0]} — ${fmt(r[1])}`).join("\n") +
+               `\n⏱ Срок монтажа: ${$("days").textContent}` +
+               `\n\n💰 Итого: ${fmt(S.sum)}`;
+
+  if (isDemo) {
+    const b = $("box");
+    b.style.display = "block";
+    b.textContent = "Демо-режим, так будет выглядеть заявка у мастера:\n\n" + text;
+  } else {
+    window.location.href = "https://t.me/" + CONFIG.telegram + "?text=" + encodeURIComponent(text);
+  }
+};
+
+calc();
+</script>
+</body>
+</html>

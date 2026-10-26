@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Калькулятор химчистки</title>
+  <style>
+    :root {
+      --bg-page: #f0f4f8;
+      --bg-card: #ffffff;
+      --bg-dark: #0f172a;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .calculator-wrapper {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .card-section {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+    }
+
+    .control-row {
+      margin-bottom: 18px;
+    }
+
+    .control-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .control-label {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .control-label b {
+      font-weight: 700;
+    }
+
+    .stepper-wrap {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .stepper-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, transform 0.1s;
+      user-select: none;
+    }
+
+    .stepper-btn:active {
+      background: #e0f2fe;
+      border-color: #7dd3fc;
+      transform: scale(0.96);
+    }
+
+    .stepper-val {
+      font-size: 17px;
+      font-weight: 700;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .select-box {
+      width: 100%;
+      padding: 13px 14px;
+      font-size: 15px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background-color: #ffffff;
+      color: var(--text-main);
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+      cursor: pointer;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 18px 0;
+    }
+
+    .addon-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      cursor: pointer;
+      gap: 12px;
+      user-select: none;
+    }
+
+    .addon-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .addon-checkbox {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .addon-title {
+      font-size: 15px;
+      line-height: 1.35;
+      color: var(--text-main);
+    }
+
+    .addon-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap; /* Защита от переноса знака рубля */
+      flex-shrink: 0;
+    }
+
+    /* Темный блок расчета стоимости */
+    .summary-card {
+      background: var(--bg-dark);
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .summary-subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .summary-total {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      white-space: nowrap;
+    }
+
+    .summary-divider {
+      height: 1px;
+      background: #1e293b;
+      margin-bottom: 14px;
+    }
+
+    .summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .summary-row-label {
+      color: #cbd5e1;
+    }
+
+    /* ИСПРАВЛЕНИЕ: запрещаем разрыв суммы и знака рубля */
+    .summary-row-value {
+      color: #ffffff;
+      font-weight: 600;
+      white-space: nowrap;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* Форма заявки */
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 14px;
+      font-size: 15px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 4px;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .submit-btn:active {
+      transform: scale(0.99);
+    }
+
+    .disclaimer {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.4;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator-wrapper">
+  <h1>Сколько стоит химчистка?</h1>
+  <p class="subtitle">Выездная чистка диванов, матрасов и ковров на дому (вымышленная служба «ЭкоЧистка»)</p>
+
+  <div class="card-section">
+    <!-- Посадочные места -->
+    <div class="control-row">
+      <span class="control-label">Посадочных мест дивана: <b id="seatsTitle">3 мест</b></span>
+      <div class="stepper-wrap">
+        <button type="button" class="stepper-btn" onclick="updateSeats(-1)">−</button>
+        <span class="stepper-val" id="seatsVal">3</span>
+        <button type="button" class="stepper-btn" onclick="updateSeats(1)">+</button>
+      </div>
+    </div>
+
+    <!-- Тип обивки -->
+    <div class="control-row">
+      <label class="control-label" for="fabricSelect">Тип обивки</label>
+      <select id="fabricSelect" class="select-box" onchange="renderCalculator()">
+        <option value="700" data-title="Ткань / велюр / рогожка">Ткань / велюр / рогожка</option>
+        <option value="850" data-title="Светлая ткань / флок">Светлая ткань / флок</option>
+        <option value="950" data-title="Натуральная кожа / экокожа">Натуральная кожа / экокожа</option>
+      </select>
+    </div>
+
+    <!-- Съёмные подушки -->
+    <div class="control-row">
+      <span class="control-label">Съёмные подушки: <b id="pillowsTitle">2 шт.</b></span>
+      <div class="stepper-wrap">
+        <button type="button" class="stepper-btn" onclick="updatePillows(-1)">−</button>
+        <span class="stepper-val" id="pillowsVal">2</span>
+        <button type="button" class="stepper-btn" onclick="updatePillows(1)">+</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Доп. услуги -->
+    <label class="addon-item">
+      <div class="addon-left">
+        <input type="checkbox" class="addon-checkbox" id="addonStains" value="600" data-title="Удаление сложных пятен и запахов" onchange="renderCalculator()">
+        <span class="addon-title">Удаление сложных пятен и запахов</span>
+      </div>
+      <span class="addon-price">+600&nbsp;₽</span>
+    </label>
+
+    <label class="addon-item">
+      <div class="addon-left">
+        <input type="checkbox" class="addon-checkbox" id="addonMattress" value="1800" data-title="Химчистка матраса (двуспальный)" onchange="renderCalculator()">
+        <span class="addon-title">Химчистка матраса (двуспальный)</span>
+      </div>
+      <span class="addon-price">+1&nbsp;800&nbsp;₽</span>
+    </label>
+
+    <label class="addon-item">
+      <div class="addon-left">
+        <input type="checkbox" class="addon-checkbox" id="addonDrying" value="700" data-title="Ускоренная сушка феном (сразу сухой)" onchange="renderCalculator()">
+        <span class="addon-title">Ускоренная сушка феном (сразу сухой)</span>
+      </div>
+      <span class="addon-price">+700&nbsp;₽</span>
+    </label>
+  </div>
+
+  <!-- Блок итоговой стоимости -->
+  <div class="summary-card">
+    <div class="summary-subtitle">Ориентировочная стоимость</div>
+    <div class="summary-total" id="totalPrice">2 500&nbsp;₽</div>
+    <div class="summary-divider"></div>
+    <div class="summary-list" id="summaryDetails"></div>
+  </div>
+
+  <!-- Блок отправки заявки -->
+  <form class="card-section" onsubmit="sendToTelegram(event)">
+    <div class="form-group">
+      <label class="form-label" for="clientName">Ваше имя</label>
+      <input type="text" id="clientName" class="form-input" placeholder="Например, Анна" required>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="clientPhone">Телефон</label>
+      <input type="tel" id="clientPhone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+    </div>
+
+    <button type="submit" class="submit-btn">Отправить заявку</button>
+    <p class="disclaimer">Выезд по городу бесплатный. Точную цену мастер подтвердит по фото мебели. Расчёт не является офертой. Цены условные.</p>
+  </form>
+</div>
+
+<script>
+  // Укажите здесь ваш ник в Telegram (без символа @)
+  const TELEGRAM_USERNAME = "ramiltools";
+
+  let seats = 3;
+  let pillows = 2;
+  const pillowUnitCost = 200;
+
+  // Форматирование числа с неразрывным пробелом и знаком рубля
+  function formatRub(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0") + "\u00A0₽";
+  }
+
+  function getWorkTime(seatsCount, hasExtras) {
+    if (seatsCount <= 3 && !hasExtras) return "1,5–2 часа";
+    if (seatsCount <= 6) return "2–3 часа";
+    return "2–3 часа";
+  }
+
+  function updateSeats(delta) {
+    seats = Math.max(1, Math.min(12, seats + delta));
+    document.getElementById("seatsVal").textContent = seats;
+    document.getElementById("seatsTitle").textContent = seats + " мест";
+    renderCalculator();
+  }
+
+  function updatePillows(delta) {
+    pillows = Math.max(0, Math.min(20, pillows + delta));
+    document.getElementById("pillowsVal").textContent = pillows;
+    document.getElementById("pillowsTitle").textContent = pillows + " шт.";
+    renderCalculator();
+  }
+
+  function renderCalculator() {
+    const fabricSelect = document.getElementById("fabricSelect");
+    const selectedOption = fabricSelect.options[fabricSelect.selectedIndex];
+    const seatPrice = parseInt(selectedOption.value, 10);
+    const fabricTitle = selectedOption.getAttribute("data-title");
+
+    const sofaCost = seats * seatPrice;
+    const pillowsCost = pillows * pillowUnitCost;
+
+    let total = sofaCost + pillowsCost;
+    let detailsHTML = `
+      <div class="summary-row">
+        <span class="summary-row-label">Диван (${seats} мест), ${fabricTitle}</span>
+        <span class="summary-row-value">${formatRub(sofaCost)}</span>
+      </div>
+    `;
+
+    if (pillows > 0) {
+      detailsHTML += `
+        <div class="summary-row">
+          <span class="summary-row-label">Съёмные подушки: ${pillows} шт.</span>
+          <span class="summary-row-value">${formatRub(pillowsCost)}</span>
+        </div>
+      `;
+    }
+
+    const addons = ["addonStains", "addonMattress", "addonDrying"];
+    let hasExtras = false;
+
+    addons.forEach(id => {
+      const el = document.getElementById(id);
+      if (el.checked) {
+        hasExtras = true;
+        const price = parseInt(el.value, 10);
+        const title = el.getAttribute("data-title");
+        total += price;
+        detailsHTML += `
+          <div class="summary-row">
+            <span class="summary-row-label">${title}</span>
+            <span class="summary-row-value">${formatRub(price)}</span>
+          </div>
+        `;
+      }
+    });
+
+    const workTime = getWorkTime(seats, hasExtras);
+    detailsHTML += `
+      <div class="summary-row">
+        <span class="summary-row-label">Время работы мастера</span>
+        <span class="summary-row-value">${workTime}</span>
+      </div>
+    `;
+
+    document.getElementById("totalPrice").textContent = formatRub(total);
+    document.getElementById("summaryDetails").innerHTML = detailsHTML;
+  }
+
+  // ИСПРАВЛЕНИЕ: Надёжная маска телефона +7 (XXX) XXX-XX-XX
+  const phoneInput = document.getElementById("clientPhone");
+
+  phoneInput.addEventListener("input", function (e) {
+    let digits = e.target.value.replace(/\D/g, "");
+    if (!digits) {
+      e.target.value = "";
+      return;
+    }
+
+    if (digits[0] === "7" || digits[0] === "8") {
+      digits = digits.substring(1);
+    } else if (digits[0] === "9") {
+      // если начали вводить сразу с 9
+    }
+
+    digits = digits.substring(0, 10);
+
+    let formatted = "+7";
+    if (digits.length > 0) {
+      formatted += " (" + digits.substring(0, 3);
+    }
+    if (digits.length >= 4) {
+      formatted += ") " + digits.substring(3, 6);
+    }
+    if (digits.length >= 7) {
+      formatted += "-" + digits.substring(6, 8);
+    }
+    if (digits.length >= 9) {
+      formatted += "-" + digits.substring(8, 10);
+    }
+
+    e.target.value = formatted;
+  });
+
+  phoneInput.addEventListener("focus", function (e) {
+    if (!e.target.value) {
+      e.target.value = "+7 (";
+    }
+  });
+
+  phoneInput.addEventListener("blur", function (e) {
+    if (e.target.value === "+7 (" || e.target.value === "+7") {
+      e.target.value = "";
+    }
+  });
+
+  // ИСПРАВЛЕНИЕ: Полная и аккуратно оформленная заявка в Telegram
+  function sendToTelegram(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("clientName").value.trim();
+    const phone = document.getElementById("clientPhone").value.trim();
+    const digitsCount = phone.replace(/\D/g, "").length;
+
+    if (digitsCount < 11) {
+      alert("Пожалуйста, введите полный номер телефона.");
+      return;
+    }
+
+    const fabricSelect = document.getElementById("fabricSelect");
+    const selectedOption = fabricSelect.options[fabricSelect.selectedIndex];
+    const seatPrice = parseInt(selectedOption.value, 10);
+    const fabricTitle = selectedOption.getAttribute("data-title");
+
+    const sofaCost = seats * seatPrice;
+    const pillowsCost = pillows * pillowUnitCost;
+    let total = sofaCost + pillowsCost;
+
+    let lines = [
+      "🧼 Заявка: Химчистка мебели",
+      "",
+      `👤 Имя: ${name}`,
+      `📞 Телефон: ${phone}`,
+      "",
+      "📋 Расчёт стоимости:",
+      `• Диван (${seats} мест, ${fabricTitle}): ${formatRub(sofaCost)}`
+    ];
+
+    if (pillows > 0) {
+      lines.push(`• Съёмные подушки (${pillows} шт.): ${formatRub(pillowsCost)}`);
+    }
+
+    const addons = ["addonStains", "addonMattress", "addonDrying"];
+    let hasExtras = false;
+    addons.forEach(id => {
+      const el = document.getElementById(id);
+      if (el.checked) {
+        hasExtras = true;
+        const price = parseInt(el.value, 10);
+        const title = el.getAttribute("data-title");
+        total += price;
+        lines.push(`• ${title}: ${formatRub(price)}`);
+      }
+    });
+
+    lines.push("");
+    lines.push(`⏱ Время работы: ${getWorkTime(seats, hasExtras)}`);
+    lines.push(`💰 Итого: ${formatRub(total)}`);
+
+    const text = encodeURIComponent(lines.join("\n"));
+    window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${text}`, "_blank");
+  }
+
+  // Первичный рендер при загрузке
+  renderCalculator();
+</script>
+
+</body>
+</html>
