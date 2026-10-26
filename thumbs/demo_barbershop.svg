@@ -1,27 +1,66 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" width="100%" height="100%">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1e293b"/>
-    </linearGradient>
-    <linearGradient id="acc" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#94a3b8"/>
-      <stop offset="100%" stop-color="#64748b"/>
-    </linearGradient>
-    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
-      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-    </pattern>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
   </defs>
-  <rect width="700" height="420" fill="url(#bg)"/>
-  <rect width="700" height="420" fill="url(#grid)"/>
-  <circle cx="620" cy="80" r="140" fill="url(#acc)" opacity="0.18" filter="blur(40px)"/>
-  <rect x="36" y="36" width="628" height="348" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
-  <rect x="64" y="68" width="140" height="32" rx="8" fill="rgba(148,163,184,0.15)" stroke="#94a3b8" stroke-width="1"/>
-  <text x="134" y="89" fill="#cbd5e1" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">САЙТ + ЗАПИСЬ</text>
-  <text x="64" y="155" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="800">Сайт барбершопа</text>
-  <text x="64" y="200" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="16">Прайс • Выбор мастера • Форма записи на удобное время</text>
-  <line x1="64" y1="280" x2="636" y2="280" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="64" y="325" fill="#64748b" font-family="system-ui, -apple-system, sans-serif" font-size="14">⚡ Интерактивное рабочее демо</text>
-  <rect x="470" y="300" width="166" height="40" rx="10" fill="#475569"/>
-  <text x="553" y="325" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="13.5" font-weight="700" text-anchor="middle">СМОТРЕТЬ ДЕМО →</text>
+  <rect width="700" height="420" fill="#0f172a"/>
+  
+  <g transform="translate(40, 24)" filter="url(#shadow)">
+    <rect width="620" height="372" rx="14" fill="#18181b"/>
+    <path d="M0 14 C0 6.27 6.27 0 14 0 L606 0 C613.73 0 620 6.27 620 14 L620 38 L0 38 Z" fill="#27272a"/>
+    <circle cx="20" cy="19" r="5" fill="#ef4444"/>
+    <circle cx="36" cy="19" r="5" fill="#f59e0b"/>
+    <circle cx="52" cy="19" r="5" fill="#10b981"/>
+    <text x="310" y="24" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Барбершоп «Blade &amp; Beard» • Онлайн-запись</text>
+
+    <g transform="translate(24, 52)">
+      <text x="0" y="20" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="800">Выберите услугу и время</text>
+      <text x="0" y="38" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="12">Премиальные стрижки, уход за бородой и напитки</text>
+
+      <!-- Services Row -->
+      <g transform="translate(0, 52)">
+        <rect x="0" y="0" width="280" height="60" rx="10" fill="#27272a" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="16" y="26" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="11" font-weight="700">ВЫБРАНА УСЛУГА</text>
+        <text x="16" y="46" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="700">✂️ Мужская стрижка • 1 200 ₽</text>
+
+        <rect x="292" y="0" width="280" height="60" rx="10" fill="#27272a" stroke="#3f3f46" stroke-width="1"/>
+        <text x="308" y="26" fill="#71717a" font-family="system-ui, sans-serif" font-size="11" font-weight="600">ДОПОЛНИТЕЛЬНО</text>
+        <text x="308" y="46" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="600">🧔 Моделирование бороды • 800 ₽</text>
+      </g>
+
+      <!-- Masters -->
+      <text x="0" y="136" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12.5" font-weight="700">Мастер:</text>
+      <g transform="translate(0, 146)">
+        <rect x="0" y="0" width="180" height="34" rx="8" fill="#f59e0b"/>
+        <text x="90" y="22" fill="#18181b" font-family="system-ui, sans-serif" font-size="12.5" font-weight="800" text-anchor="middle">✓ Любой свободный</text>
+
+        <rect x="195" y="0" width="180" height="34" rx="8" fill="#27272a" stroke="#3f3f46" stroke-width="1"/>
+        <text x="285" y="22" fill="#e4e4e7" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600" text-anchor="middle">Артём (Топ-барбер)</text>
+
+        <rect x="390" y="0" width="182" height="34" rx="8" fill="#27272a" stroke="#3f3f46" stroke-width="1"/>
+        <text x="481" y="22" fill="#e4e4e7" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600" text-anchor="middle">Тимур</text>
+      </g>
+
+      <!-- Time slots -->
+      <text x="0" y="206" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12.5" font-weight="700">Свободное время на сегодня:</text>
+      <g transform="translate(0, 216)">
+        <rect x="0" y="0" width="80" height="30" rx="6" fill="#f59e0b"/>
+        <text x="40" y="20" fill="#18181b" font-family="system-ui, sans-serif" font-size="12" font-weight="800" text-anchor="middle">14:00</text>
+
+        <rect x="90" y="0" width="80" height="30" rx="6" fill="#27272a" stroke="#3f3f46" stroke-width="1"/>
+        <text x="130" y="20" fill="#e4e4e7" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">15:30</text>
+
+        <rect x="180" y="0" width="80" height="30" rx="6" fill="#27272a" stroke="#3f3f46" stroke-width="1"/>
+        <text x="220" y="20" fill="#e4e4e7" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">17:00</text>
+
+        <rect x="270" y="0" width="80" height="30" rx="6" fill="#27272a" stroke="#3f3f46" stroke-width="1"/>
+        <text x="310" y="20" fill="#e4e4e7" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">18:30</text>
+      </g>
+
+      <!-- CTA -->
+      <rect x="380" y="260" width="192" height="38" rx="8" fill="#f59e0b"/>
+      <text x="476" y="284" fill="#18181b" font-family="system-ui, sans-serif" font-size="13" font-weight="800" text-anchor="middle">Подтвердить запись →</text>
+    </g>
+  </g>
 </svg>

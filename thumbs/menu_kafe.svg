@@ -1,27 +1,69 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" width="100%" height="100%">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#451a03"/>
-    </linearGradient>
-    <linearGradient id="acc" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#d97706"/>
-      <stop offset="100%" stop-color="#b45309"/>
-    </linearGradient>
-    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
-      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-    </pattern>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
   </defs>
-  <rect width="700" height="420" fill="url(#bg)"/>
-  <rect width="700" height="420" fill="url(#grid)"/>
-  <circle cx="620" cy="80" r="140" fill="url(#acc)" opacity="0.18" filter="blur(40px)"/>
-  <rect x="36" y="36" width="628" height="348" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
-  <rect x="64" y="68" width="150" height="32" rx="8" fill="rgba(217,119,6,0.15)" stroke="#d97706" stroke-width="1"/>
-  <text x="139" y="89" fill="#fbbf24" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">МЕНЮ И КОРЗИНА</text>
-  <text x="64" y="155" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="800">Меню кофейни и заказ</text>
-  <text x="64" y="200" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="16">Разделы • Корзина • Выбор добавок • Отправка в Telegram</text>
-  <line x1="64" y1="280" x2="636" y2="280" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="64" y="325" fill="#64748b" font-family="system-ui, -apple-system, sans-serif" font-size="14">⚡ Интерактивное рабочее демо</text>
-  <rect x="470" y="300" width="166" height="40" rx="10" fill="#d97706"/>
-  <text x="553" y="325" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="13.5" font-weight="700" text-anchor="middle">СМОТРЕТЬ ДЕМО →</text>
+  <rect width="700" height="420" fill="#0f172a"/>
+  
+  <g transform="translate(40, 24)" filter="url(#shadow)">
+    <rect width="620" height="372" rx="14" fill="#fafaf9"/>
+    <path d="M0 14 C0 6.27 6.27 0 14 0 L606 0 C613.73 0 620 6.27 620 14 L620 38 L0 38 Z" fill="#e7e5e4"/>
+    <circle cx="20" cy="19" r="5" fill="#ef4444"/>
+    <circle cx="36" cy="19" r="5" fill="#f59e0b"/>
+    <circle cx="52" cy="19" r="5" fill="#10b981"/>
+    <text x="310" y="24" fill="#78716c" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Кофейня «Espresso Bar» • Меню и заказ</text>
+
+    <g transform="translate(24, 50)">
+      <!-- Category Tabs -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="90" height="32" rx="16" fill="#d97706"/>
+        <text x="45" y="20" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="700" text-anchor="middle">☕ Кофе</text>
+
+        <rect x="100" y="0" width="90" height="32" rx="16" fill="#ffffff" stroke="#d6d3d1" stroke-width="1"/>
+        <text x="145" y="20" fill="#44403c" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">🥐 Выпечка</text>
+
+        <rect x="200" y="0" width="90" height="32" rx="16" fill="#ffffff" stroke="#d6d3d1" stroke-width="1"/>
+        <text x="245" y="20" fill="#44403c" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">🍰 Десерты</text>
+
+        <rect x="300" y="0" width="90" height="32" rx="16" fill="#ffffff" stroke="#d6d3d1" stroke-width="1"/>
+        <text x="345" y="20" fill="#44403c" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">🧃 Напитки</text>
+      </g>
+
+      <!-- Products Grid -->
+      <g transform="translate(0, 46)">
+        <!-- Card 1 -->
+        <rect x="0" y="0" width="278" height="136" rx="12" fill="#ffffff" stroke="#e7e5e4" stroke-width="1"/>
+        <text x="16" y="28" fill="#1c1917" font-family="system-ui, sans-serif" font-size="15" font-weight="800">Капучино Grand</text>
+        <text x="16" y="48" fill="#78716c" font-family="system-ui, sans-serif" font-size="12">350 мл • Двойной эспрессо</text>
+        <text x="16" y="78" fill="#d97706" font-family="system-ui, sans-serif" font-size="16" font-weight="800">220 ₽</text>
+        <!-- Counter -->
+        <rect x="180" y="58" width="82" height="30" rx="8" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
+        <text x="195" y="78" fill="#b45309" font-family="system-ui, sans-serif" font-size="14" font-weight="700">−</text>
+        <text x="221" y="78" fill="#92400e" font-family="system-ui, sans-serif" font-size="13" font-weight="800" text-anchor="middle">1</text>
+        <text x="247" y="78" fill="#b45309" font-family="system-ui, sans-serif" font-size="14" font-weight="700">+</text>
+
+        <!-- Card 2 -->
+        <rect x="294" y="0" width="278" height="136" rx="12" fill="#ffffff" stroke="#e7e5e4" stroke-width="1"/>
+        <text x="310" y="28" fill="#1c1917" font-family="system-ui, sans-serif" font-size="15" font-weight="800">Круассан миндальный</text>
+        <text x="310" y="48" fill="#78716c" font-family="system-ui, sans-serif" font-size="12">Свежая выпечка • Марципан</text>
+        <text x="310" y="78" fill="#d97706" font-family="system-ui, sans-serif" font-size="16" font-weight="800">190 ₽</text>
+        <!-- Counter -->
+        <rect x="474" y="58" width="82" height="30" rx="8" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
+        <text x="489" y="78" fill="#b45309" font-family="system-ui, sans-serif" font-size="14" font-weight="700">−</text>
+        <text x="515" y="78" fill="#92400e" font-family="system-ui, sans-serif" font-size="13" font-weight="800" text-anchor="middle">1</text>
+        <text x="541" y="78" fill="#b45309" font-family="system-ui, sans-serif" font-size="14" font-weight="700">+</text>
+      </g>
+
+      <!-- Cart Bottom Bar -->
+      <g transform="translate(0, 200)">
+        <rect x="0" y="0" width="572" height="58" rx="12" fill="#292524"/>
+        <text x="20" y="26" fill="#a8a29e" font-family="system-ui, sans-serif" font-size="11" font-weight="700">ВАША КОРЗИНА (2 ТОВАРА)</text>
+        <text x="20" y="46" fill="#fef3c7" font-family="system-ui, sans-serif" font-size="18" font-weight="800">Итого: 410 ₽</text>
+
+        <rect x="380" y="10" width="176" height="38" rx="8" fill="#d97706"/>
+        <text x="468" y="34" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Оформить заказ →</text>
+      </g>
+    </g>
+  </g>
 </svg>
