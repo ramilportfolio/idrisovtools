@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Рамиль — Разработка сайтов, калькуляторов и Telegram-ботов для бизнеса</title>
-  <meta name="description" content="Делаю одностраничные сайты, интерактивные калькуляторы, квизы и Telegram-ботов для малого бизнеса в Стерлитамаке и по всей России. Заявки напрямую в Telegram без абонплаты.">
+  <meta name="description" content="Разработка продающих сайтов, интерактивных калькуляторов, квизов и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Заявки напрямую в Telegram, 0 ₽ абонплаты.">
   <meta name="theme-color" content="#4c5bf0">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -13,14 +13,14 @@
 
   <!-- Open Graph / Превью в Telegram, WhatsApp, VK -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Рамиль — Веб-разработка">
-  <meta property="og:title" content="Рамиль — Сайты, калькуляторы и Telegram-боты для бизнеса">
-  <meta property="og:description" content="Делаю одностраничные сайты, интерактивные калькуляторы, квизы и Telegram-ботов для малого бизнеса. 0 ₽ абонплаты. Заявки сразу в Telegram.">
+  <meta property="og:site_name" content="Рамиль — Веб-разработка для бизнеса">
+  <meta property="og:title" content="Рамиль — Сайты, калькуляторы и Telegram-боты под ключ">
+  <meta property="og:description" content="Инструменты для роста заявок малого бизнеса: сайты, калькуляторы расчёта цены, квизы и Telegram-боты. 0 ₽ абонплаты.">
   <meta property="og:url" content="https://ramil-tools.ru/">
   <meta property="og:image" content="https://ramil-tools.ru/og-cover.svg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Рамиль — Сайты, калькуляторы и Telegram-боты для бизнеса">
-  <meta name="twitter:description" content="Делаю одностраничные сайты, интерактивные калькуляторы, квизы и Telegram-ботов для малого бизнеса.">
+  <meta name="twitter:description" content="Делаю одностраничные сайты, интерактивные калькуляторы, квизы и Telegram-боты для малого бизнеса.">
   <meta name="twitter:image" content="https://ramil-tools.ru/og-cover.svg">
 
   <!-- Микроразметка Schema.org -->
@@ -28,16 +28,18 @@
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Рамиль — Разработка сайтов и ботов",
+    "name": "Рамиль — Разработка сайтов и Telegram-ботов",
+    "image": "https://ramil-tools.ru/photo_2026-11-05_17-56-09.jpg",
     "url": "https://ramil-tools.ru/",
     "telephone": "+79613626062",
     "email": "idrisov.smm@gmail.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Стерлитамак",
+      "addressRegion": "Республика Башкортостан",
       "addressCountry": "RU"
     },
-    "priceRange": "800 - 15000 RUB"
+    "priceRange": "1500 - 35000 RUB"
   }
   </script>
 
@@ -126,13 +128,14 @@
       padding: 0 24px;
     }
 
-    /* Шапка и навигация */
+    /* Шапка и навигация (с фолбэком для браузеров без color-mix) */
     .site-header {
       position: sticky;
       top: 0;
       z-index: 40;
       width: 100%;
       padding-top: max(env(safe-area-inset-top, 0px), 8px);
+      background: var(--bg);
       background: color-mix(in srgb, var(--bg) 88%, transparent);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -173,7 +176,7 @@
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 18px;
       font-size: 14px;
       font-weight: 600;
       color: var(--mut);
@@ -286,7 +289,7 @@
     .hero {
       padding: 48px 0 36px;
       display: grid;
-      grid-template-columns: 1.32fr 0.88fr;
+      grid-template-columns: 1.3fr 0.9fr;
       gap: 28px;
       align-items: stretch;
     }
@@ -303,7 +306,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 11px;
+      padding: 6px 12px;
       border-radius: 10px;
       background: var(--card);
       border: 1px solid var(--line);
@@ -326,7 +329,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(26px, 4.5vw, 46px);
+      font-size: clamp(26px, 4.4vw, 44px);
       line-height: 1.1;
       letter-spacing: -0.03em;
       margin: 0 0 14px;
@@ -449,34 +452,47 @@
 
     .avatar-wrap {
       position: relative;
-      width: 68px;
-      height: 68px;
+      width: 84px;
+      height: 84px;
       flex-shrink: 0;
     }
 
     .avatar {
-      width: 68px;
-      height: 68px;
-      border-radius: 18px;
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
       object-fit: cover;
+      object-position: center 20%;
       background: linear-gradient(135deg, var(--acc), #2563eb);
-      border: 2px solid var(--card);
-      box-shadow: 0 6px 16px rgba(76, 91, 240, 0.22);
+      border: 2px solid var(--acc);
+      box-shadow: 0 8px 20px rgba(76, 91, 240, 0.25);
       display: block;
     }
 
+    .status-dot {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--ok);
+      border: 3px solid var(--card);
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+    }
+
     .profile-top h2 {
-      margin: 0 0 4px;
-      font-size: 20px;
+      margin: 0 0 5px;
+      font-size: 21px;
     }
 
     .profile-badge {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--acc);
       background: var(--acc-soft);
-      padding: 3px 9px;
-      border-radius: 6px;
+      padding: 4px 10px;
+      border-radius: 7px;
       display: inline-block;
     }
 
@@ -934,7 +950,7 @@
       text-align: left;
       cursor: pointer;
       user-select: none;
-      transition: 0.15s ease;
+      transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
       width: 100%;
       min-width: 0;
     }
@@ -976,6 +992,7 @@
       font-weight: 800;
       color: #fff;
       flex-shrink: 0;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
     }
 
     .est-row.active .est-box {
@@ -1216,7 +1233,65 @@
       font-size: 12.5px;
     }
 
-    /* 9. Контакты */
+    /* 9. FAQ (Частые вопросы) */
+    .faq-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease;
+    }
+
+    .faq-item[open] {
+      border-color: var(--acc);
+    }
+
+    .faq-item summary {
+      font-weight: 700;
+      font-size: 15.5px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--acc);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-item p {
+      margin: 10px 0 0;
+      color: var(--mut);
+      font-size: 14.5px;
+      line-height: 1.55;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* 10. Контакты */
     .contact-box {
       background: var(--card);
       border: 1px solid var(--line);
@@ -1318,12 +1393,28 @@
       color: #ffffff;
     }
 
+    .contact-text-wrap {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
     .contact-name {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 700;
       color: var(--ink);
       letter-spacing: -0.01em;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .contact-sub {
+      font-size: 12.5px;
+      color: var(--mut);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .contact-item-arrow {
@@ -1339,7 +1430,7 @@
       transform: translateX(3px);
     }
 
-    /* Модальное окно живого предпросмотра */
+    /* Модальное окно живого предпросмотра (с переключателем Мобильный / ПК) */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -1368,6 +1459,11 @@
       overflow: hidden;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
       position: relative;
+      transition: max-width 0.25s ease;
+    }
+
+    .modal-box.desktop-mode {
+      max-width: 980px;
     }
 
     .modal-spinner {
@@ -1472,19 +1568,21 @@
       color: var(--ink);
     }
 
-    /* Предотвращение авто-зума на мобильных устройствах iOS при фокусе инпутов */
     @media (max-width: 768px) {
       input, select, textarea {
         font-size: 16px !important;
       }
+      #modalViewportBtn {
+        display: none;
+      }
     }
 
-    /* Адаптив для планшетов и смартфонов */
     @media (max-width: 920px) {
       .hero,
       .tg-showcase,
       .estimator-card,
-      .reviews-grid {
+      .reviews-grid,
+      .faq-list {
         grid-template-columns: 1fr;
       }
       .skills-grid {
@@ -1509,7 +1607,8 @@
       .skills-grid,
       .price-grid,
       .contact-cards,
-      .reviews-grid {
+      .reviews-grid,
+      .faq-list {
         grid-template-columns: 1fr;
       }
       .contact-item.full-row,
@@ -1554,10 +1653,6 @@
         white-space: nowrap;
         flex-shrink: 0;
         box-shadow: 0 1px 3px rgba(15, 20, 28, 0.04);
-      }
-      .nav-links a:active {
-        border-color: var(--acc);
-        color: var(--acc);
       }
       .hero {
         padding: 20px 0 16px;
@@ -1647,25 +1742,6 @@
         padding: 13px;
         font-size: 14px;
       }
-      .contact-cards {
-        gap: 10px;
-      }
-      .contact-item {
-        padding: 12px 14px;
-        border-radius: 12px;
-      }
-      .contact-brand-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-      }
-      .contact-brand-icon svg {
-        width: 20px;
-        height: 20px;
-      }
-      .contact-name {
-        font-size: 15px;
-      }
       footer.site-footer {
         flex-direction: column;
         align-items: flex-start;
@@ -1713,11 +1789,6 @@
         padding: 13px 18px;
         font-size: 14.5px;
       }
-      .hero-quick-links {
-        padding: 0;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
       .hero-stats {
         grid-template-columns: 1fr 1fr;
         gap: 8px;
@@ -1747,12 +1818,12 @@
         <span id="navName">Рамиль</span>
       </a>
       <nav class="nav-links" aria-label="Основная навигация">
-        <a href="#how-it-works">Как приходят заявки</a>
-        <a href="#portfolio">Портфолио</a>
+        <a href="#how-it-works">Как это работает</a>
+        <a href="#portfolio">Примеры (12)</a>
         <a href="#services">Цены</a>
         <a href="#calc-section">Калькулятор</a>
-        <a href="#about">Обо мне</a>
-        <a href="#reviews">Отзывы</a>
+        <a href="#about">Подход</a>
+        <a href="#faq">FAQ</a>
         <a href="#contacts">Контакты</a>
       </nav>
       <div class="nav-right">
@@ -1771,18 +1842,18 @@
             <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
             <circle cx="12" cy="10" r="3"/>
           </svg>
-          <span id="heroLocation">Стерлитамак • Работаю онлайн по всей РФ</span>
+          <span id="heroLocation">Стерлитамак • Работаю с бизнесом по всей РФ</span>
         </div>
-        <h1 id="h1">Сайты, калькуляторы и боты для вашего бизнеса</h1>
+        <h1 id="h1">Сайты, калькуляторы и Telegram-боты, которые приводят заявки</h1>
         <p class="lead" id="lead">
-          Делаю одностраничные сайты, интерактивные калькуляторы, квизы и Telegram-ботов для малого бизнеса в Стерлитамаке и по всей России. Быстро, цену фиксирую до старта работ.
+          Разрабатываю быстрые одностраничные сайты, интерактивные калькуляторы расчёта цены, квизы и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Фиксирую смету до старта, передаю проект без абонентской платы.
         </p>
         <div class="hero-actions">
-          <a class="btn" id="tg" href="https://t.me/ramiltools" target="_blank" rel="noopener">Написать в Telegram</a>
-          <a class="btn alt" href="#portfolio">Смотреть 12 работ ↓</a>
+          <a class="btn" id="tg" href="https://t.me/ramiltools" target="_blank" rel="noopener">Обсудить задачу в Telegram</a>
+          <a class="btn alt" href="#portfolio">Протестировать 12 решений ↓</a>
         </div>
         <div class="hero-quick-links">
-          <span>Или напишите в:</span>
+          <span>Или напишите напрямую:</span>
           <div class="social-icons">
             <!-- Иконка Max -->
             <a class="social-icon-link" id="contactMaxBtnHead" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener" title="Написать в Max" aria-label="Написать в Max">
@@ -1827,27 +1898,28 @@
           <span>Без абонентской платы (0 ₽/мес)</span>
           <span>Заявки сразу в Telegram и WhatsApp</span>
           <span>Письменный договор</span>
-          <span>Формы по 152-ФЗ РФ</span>
+          <span>Соответствие 152-ФЗ РФ</span>
         </div>
       </div>
 
       <aside class="hero-card">
         <div class="profile-top">
           <div class="avatar-wrap">
-            <img class="avatar" id="avatarImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Рамиль">
+            <img class="avatar" id="avatarImg" src="photo_2026-11-05_17-56-09.jpg" alt="Рамиль — Веб-разработчик">
+            <span class="status-dot" title="На связи"></span>
           </div>
           <div>
             <h2 id="cardName">Рамиль</h2>
-            <span class="profile-badge">Разработка под ключ</span>
+            <span class="profile-badge">Full-stack & Автоматизация</span>
           </div>
         </div>
         <p class="profile-bio">
-          Создаю понятные инструменты, которые помогают вашим клиентам за 30 секунд посчитать стоимость услуги и отправить готовую заявку вам в мессенджер.
+          Создаю быстрые веб-инструменты, которые за 30 секунд рассчитывают клиенту стоимость вашей услуги и отправляют вам готовую горячую заявку с номером телефона.
         </p>
         <div class="hero-stats">
           <div class="stat-box">
             <b>12</b>
-            <small>рабочих демо-проектов ниже</small>
+            <small>готовых решений под разные ниши ниже</small>
           </div>
           <div class="stat-box">
             <b>3–5 дней</b>
@@ -1868,11 +1940,11 @@
           <div class="tg-benefits">
             <div class="tg-benefit-item">
               <span class="tg-icon">1</span>
-              <div><b>Работает 24/7 без вашего участия.</b> Клиент видит понятный расчёт вечером или в выходной и сразу оставляет номер.</div>
+              <div><b>Работает 24/7 без вашего участия.</b> Клиент видит прозрачный расчёт вечером или в выходной и сразу оставляет контакт.</div>
             </div>
             <div class="tg-benefit-item">
               <span class="tg-icon">2</span>
-              <div><b>0 ₽ абонентской платы.</b> В отличие от платных конструкторов, вы платите один раз и получаете готовый сайт навсегда (домен — отдельно, ~200 ₽/год).</div>
+              <div><b>Экономия от 9 000 ₽ в год на конструкторах.</b> Вы платите за разработку один раз и получаете чистый код навсегда без ежемесячных платежей Tilda или Wix.</div>
             </div>
           </div>
         </div>
@@ -1880,15 +1952,15 @@
         <div class="tg-mock" aria-label="Пример заявки в Telegram">
           <div class="tg-mock-head">
             <span>Бот заявок вашего сайта</span>
-            <span class="tg-mock-tag">Telegram</span>
+            <span class="tg-mock-tag">Мгновенно в Telegram</span>
           </div>
           <div class="tg-bubble">
-            <div class="tg-bubble-title">Новая заявка с калькулятора</div>
+            <div class="tg-bubble-title">🔥 Новая заявка с калькулятора</div>
             <b>Имя:</b> Андрей<br>
             <b>Телефон:</b> +7 (917) 000-00-00<br>
-            <b>Параметры:</b> Матовый потолок, 24 м²<br>
-            <b>Дополнительно:</b> Светильники ×6, карниз 3 м<br>
-            <b>Итого по расчёту:</b> 14 700 ₽
+            <b>Услуга:</b> Натяжной потолок (матовый, 24 м²)<br>
+            <b>Опции:</b> Точечные светильники ×6, скрытый карниз 3 м<br>
+            <b>Предварительный расчёт:</b> 28 400 ₽
           </div>
         </div>
       </div>
@@ -1898,14 +1970,14 @@
     <section id="portfolio">
       <div class="sec-head">
         <div>
-          <h2>Примеры работ</h2>
-          <p>Это рабочие демо-проекты: нажмите «Предпросмотр» для быстрого просмотра прямо здесь или «Открыть демо →» для перехода на страницу.</p>
+          <h2>Интерактивные решения в действии</h2>
+          <p>Каждый проект можно поклацать прямо здесь: нажмите «Предпросмотр» (доступен режим смартфона и ПК) или откройте на весь экран.</p>
         </div>
         <div class="filter-bar" id="filterBar">
           <button class="filter-btn active" type="button" data-cat="all">Все работы</button>
           <button class="filter-btn" type="button" data-cat="calc">Калькуляторы и квизы</button>
-          <button class="filter-btn" type="button" data-cat="site">Сайты и меню</button>
-          <button class="filter-btn" type="button" data-cat="promo">CRM и акции</button>
+          <button class="filter-btn" type="button" data-cat="site">Сайты и онлайн-меню</button>
+          <button class="filter-btn" type="button" data-cat="promo">CRM и промо-акции</button>
         </div>
       </div>
 
@@ -1916,65 +1988,20 @@
     <section id="services">
       <div class="sec-head">
         <div>
-          <h2>Что делаю и сколько это стоит</h2>
-          <p>Цену фиксирую до старта работ, цены указаны «от». Нажмите на услугу, чтобы обсудить её в Telegram.</p>
+          <h2>Услуги и актуальные цены</h2>
+          <p>Стоимость фиксируется до старта работ и не меняется в процессе. Нажмите на нужную услугу, чтобы обсудить детали в Telegram.</p>
         </div>
       </div>
 
-      <div class="price-grid">
-        <div class="price-card">
-          <div>
-            <b>от 4 000 ₽</b>
-            <span>Сайт-визитка</span>
-            <p>За 3–5 дней: адаптивный одностраничный сайт с формой онлайн-записи, прайсом и картой.</p>
-          </div>
-          <a class="price-order-link" data-order="Сайт-визитка (от 4 000 ₽)" href="https://t.me/ramiltools" target="_blank" rel="noopener">Заказать сайт-визитку →</a>
-        </div>
-
-        <div class="price-card">
-          <div>
-            <b>от 3 000 ₽</b>
-            <span>Калькулятор или квиз</span>
-            <p>Интерактивный расчёт стоимости под ваши цены, готовые заявки сразу приходят в Telegram.</p>
-          </div>
-          <a class="price-order-link" data-order="Калькулятор или квиз (от 3 000 ₽)" href="https://t.me/ramiltools" target="_blank" rel="noopener">Заказать калькулятор →</a>
-        </div>
-
-        <div class="price-card">
-          <div>
-            <b>от 3 000 ₽</b>
-            <span>Telegram-бот</span>
-            <p>Онлайн-запись клиентов, сбор заявок и автоматические ответы на частые вопросы 24/7.</p>
-          </div>
-          <a class="price-order-link" data-order="Telegram-бот (от 3 000 ₽)" href="https://t.me/ramiltools" target="_blank" rel="noopener">Заказать бота →</a>
-        </div>
-
-        <div class="price-card">
-          <div>
-            <b>от 2 000 ₽</b>
-            <span>Акции к праздникам</span>
-            <p>Интерактивное колесо призов с выдачей промокодов или персональные открытки для клиентов.</p>
-          </div>
-          <a class="price-order-link" data-order="Промо-акция / Колесо призов (от 2 000 ₽)" href="https://t.me/ramiltools" target="_blank" rel="noopener">Заказать промо-акцию →</a>
-        </div>
-
-        <div class="price-card">
-          <div>
-            <b>от 800 ₽</b>
-            <span>Монтаж вертикального видео</span>
-            <p>Динамичные ролики с субтитрами для VK Клипов, YouTube Shorts и Telegram.</p>
-          </div>
-          <a class="price-order-link" data-order="Монтаж вертикального видео (от 800 ₽)" href="https://t.me/ramiltools" target="_blank" rel="noopener">Заказать монтаж →</a>
-        </div>
-      </div>
+      <div class="price-grid" id="servicesGrid"></div>
     </section>
 
     <!-- 5. Интерактивный калькулятор сметы -->
     <section id="calc-section">
       <div class="sec-head">
         <div>
-          <h2>Посчитайте стоимость вашей задачи за 20 секунд</h2>
-          <p>Отметьте нужные пункты — точно так же ваши клиенты смогут считать стоимость услуг на вашем будущем сайте.</p>
+          <h2>Посчитайте смету вашей задачи за 20 секунд</h2>
+          <p>Отметьте нужные модули — точно такой же удобный расчёт мы можем внедрить на ваш сайт для ваших клиентов.</p>
         </div>
       </div>
 
@@ -1982,12 +2009,12 @@
         <div class="est-options" id="estList"></div>
         <div class="est-total-panel">
           <div>
-            <span class="est-label">Ориентировочная стоимость</span>
-            <div class="est-sum" id="estSum">4 000 ₽</div>
+            <span class="est-label">Ориентировочная инвестиция</span>
+            <div class="est-sum" id="estSum">12 000 ₽</div>
             <div class="est-term" id="estTerm">Ориентировочный срок: 3–5 дн.</div>
           </div>
           <form id="estForm" onsubmit="event.preventDefault()">
-            <input type="text" class="est-input" id="estBusiness" placeholder="Ваша сфера (например: клининг, кафе, ремонт)" aria-label="Ваша сфера бизнеса">
+            <input type="text" class="est-input" id="estBusiness" placeholder="Ваша ниша (например: детейлинг, ремонт, кафе)" aria-label="Ваша сфера бизнеса">
             <div class="est-btn-group">
               <button type="button" class="btn" style="width:100%" id="estSendBtn">Отправить расчёт в Telegram →</button>
               <button type="button" class="btn btn-wa" style="width:100%" id="estSendWaBtn">Отправить расчёт в WhatsApp →</button>
@@ -2001,40 +2028,40 @@
     <section id="about">
       <div class="sec-head">
         <div>
-          <h2>Обо мне и подходе к работе</h2>
-          <p>Делаю упор на скорость загрузки, удобство с телефона и простоту для владельца бизнеса.</p>
+          <h2>Подход к разработке и гарантии</h2>
+          <p>Делаю ставку на высокую конверсию с мобильных телефонов, мгновенную загрузку и независимость владельца бизнеса.</p>
         </div>
       </div>
 
       <div class="about-grid">
         <div class="box-card">
-          <h3>Кто я и чем полезен вашему проекту</h3>
+          <h3>Почему предприниматели выбирают такой формат</h3>
           <p>
-            Я занимаюсь созданием одностраничных сайтов, интерактивных калькуляторов, квизов и Telegram-ботов для малого бизнеса. Моя цель — чтобы ваш клиент за 30 секунд понял цены и оставил заявку.
+            85% клиентов в Стерлитамаке ищут услуги со смартфона. Тяжёлые шаблонные сайты долго грузятся и запутывают посетителя, из-за чего вы теряете рекламный бюджет.
           </p>
           <p>
-            Использую современные нейросети для ускорения рутинных задач, но весь код, логику расчётов и адаптивную вёрстку проверяю вручную. Все проекты передаю с понятным блоком настроек, чтобы вы могли сами менять цены и тексты в любой момент.
+            Я пишу чистый, лёгкий код без лишних конструкторов: страницы открываются за доли секунды даже при слабом мобильном интернете. В каждом проекте предусмотрен понятный блок конфигурации, где вы можете сами за минуту поменять цены, акции или контакты без помощи программиста.
           </p>
         </div>
 
         <div class="box-card">
-          <h3>Как строится работа</h3>
+          <h3>Как строится работа (4 простых шага)</h3>
           <ol class="steps-list">
             <li>
               <span class="step-badge">1</span>
-              <span>Пишете, что нужно. Я задаю 3–5 вопросов и называю точную цену и срок.</span>
+              <span>Разбираем вашу задачу в мессенджере за 15 минут. Фиксируем точную стоимость и сроки в договоре.</span>
             </li>
             <li>
               <span class="step-badge">2</span>
-              <span>Предоплата 30–50%, собираю и показываю рабочую версию на телефоне.</span>
+              <span>После предоплаты 30–50% собираю рабочую версию под вашу нишу и присылаю ссылку для теста на телефоне.</span>
             </li>
             <li>
               <span class="step-badge">3</span>
-              <span>Вносим до 2 правок, вы принимаете работу и оплачиваете остаток.</span>
+              <span>Дорабатываем детали по вашим пожеланиям, настраиваем отправку заявок в ваш Telegram или WhatsApp.</span>
             </li>
             <li>
               <span class="step-badge">4</span>
-              <span>Передаю файлы и простую инструкцию, как менять тексты и цены.</span>
+              <span>После оплаты остатка передаю все исходники, помогаю привязать домен и даю инструкцию по смене цен.</span>
             </li>
           </ol>
         </div>
@@ -2045,51 +2072,51 @@
     <section id="skills">
       <div class="sec-head">
         <div>
-          <h2>Навыки и инструменты</h2>
-          <p>Технологии, которые позволяют делать лёгкие, быстрые и надёжные решения без абонентской платы.</p>
+          <h2>Технологический стек</h2>
+          <p>Современная архитектура, которая обеспечивает надёжную работу без абонентской платы.</p>
         </div>
       </div>
 
       <div class="skills-grid">
         <div class="skill-group">
-          <h3>Веб-разработка</h3>
+          <h3>Frontend и скорость</h3>
           <div class="tags">
-            <span class="tag">HTML5</span>
+            <span class="tag">HTML5 / Семантика</span>
             <span class="tag">CSS3 / Grid / Flex</span>
             <span class="tag">JavaScript (ES6+)</span>
-            <span class="tag">Адаптивная вёрстка</span>
-            <span class="tag">Микроанимации</span>
+            <span class="tag">Mobile-First UI</span>
+            <span class="tag">Schema.org SEO</span>
           </div>
         </div>
 
         <div class="skill-group">
-          <h3>Интерактив и логика</h3>
+          <h3>Конверсия и логика</h3>
           <div class="tags">
-            <span class="tag">Калькуляторы цен</span>
-            <span class="tag">Квиз-опросники</span>
-            <span class="tag">Формы онлайн-записи</span>
-            <span class="tag">Мини-CRM учёта</span>
-            <span class="tag">Выгрузка в CSV</span>
+            <span class="tag">Интерактивные калькуляторы</span>
+            <span class="tag">Пошаговые квизы</span>
+            <span class="tag">Онлайн-запись</span>
+            <span class="tag">Мини-CRM системы</span>
+            <span class="tag">Экспорт данных CSV</span>
           </div>
         </div>
 
         <div class="skill-group">
-          <h3>Интеграции и боты</h3>
+          <h3>Боты и автоматизация</h3>
           <div class="tags">
-            <span class="tag">Telegram-боты</span>
-            <span class="tag">Заявки в Telegram</span>
-            <span class="tag">Меню с корзиной</span>
-            <span class="tag">Автоответчики FAQ</span>
+            <span class="tag">Telegram Bot API</span>
+            <span class="tag">Уведомления о лидах</span>
+            <span class="tag">Фильтр отзывов / QR</span>
+            <span class="tag">Онлайн-меню с корзиной</span>
           </div>
         </div>
 
         <div class="skill-group">
-          <h3>Дизайн и медиа</h3>
+          <h3>Контент и упаковка</h3>
           <div class="tags">
-            <span class="tag">UI/UX интерфейсы</span>
-            <span class="tag">AI-инструменты</span>
-            <span class="tag">Монтаж Reels / Shorts</span>
-            <span class="tag">VK Клипы</span>
+            <span class="tag">Продающие структуры</span>
+            <span class="tag">Reels / Shorts / TikTok</span>
+            <span class="tag">ВК Клипы</span>
+            <span class="tag">Динамический монтаж</span>
           </div>
         </div>
       </div>
@@ -2099,8 +2126,8 @@
     <section id="reviews">
       <div class="sec-head">
         <div>
-          <h2>Отзывы клиентов</h2>
-          <p>Что говорят предприниматели после запуска сайтов и калькуляторов в работу.</p>
+          <h2>Отзывы предпринимателей</h2>
+          <p>Результаты малого бизнеса после внедрения калькуляторов, сайтов и онлайн-меню.</p>
         </div>
       </div>
 
@@ -2119,7 +2146,7 @@
 
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <p>«Сделал сайт-квиз по потолкам за 4 дня под ключ, всё проверил с телефона. Всё чётко по договору и по оговорённой цене, без навязывания допуслуг и платных подписок на конструкторы.»</p>
+          <p>«Сделал сайт-квиз по натяжным потолкам за 4 дня под ключ, всё идеально работает с телефона. Всё чётко по договору и фиксированной цене, без навязывания платных подписок на конструкторы.»</p>
           <div class="review-author">
             <div class="review-avatar">ДМ</div>
             <div class="review-info">
@@ -2131,7 +2158,7 @@
 
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <p>«Очень довольны онлайн-меню для кофейни. Гости сканируют QR-код на столике, собирают корзину и заказ падает бариста в рабочий чат. Быстро, просто и без абонентской платы!»</p>
+          <p>«Очень довольны онлайн-меню для кофейни. Гости сканируют QR-код на столике, собирают корзину и заказ падает бариста в рабочий чат. Быстро, удобно и 0 рублей абонплаты!»</p>
           <div class="review-author">
             <div class="review-avatar">АР</div>
             <div class="review-info">
@@ -2143,12 +2170,44 @@
       </div>
     </section>
 
-    <!-- 9. Контакты -->
+    <!-- 9. Частые вопросы (FAQ) -->
+    <section id="faq">
+      <div class="sec-head">
+        <div>
+          <h2>Частые вопросы перед стартом</h2>
+          <p>Коротко о том, как устроена оплата, поддержка и размещение готового сайта в интернете.</p>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Действительно ли нет абонентской платы?</summary>
+          <p>Да. Я не использую платные конструкторы вроде Tilda, где нужно платить по 750–1500 ₽ каждый месяц. Вы оплачиваете разработку один раз и получаете все исходные файлы. Единственный возможный расход — красивое доменное имя (.ru) около 200–500 ₽ раз в год.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Смогу ли я сам поменять цены или телефон на сайте?</summary>
+          <p>Конечно. Вверху каждого файла вынесен понятный блок настроек (CONFIG), где все цены, названия услуг и контакты написаны обычным русским текстом. Плюс я записываю короткую памятку.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Поможете ли вы выложить сайт в интернет и подключить домен?</summary>
+          <p>Да, я полностью помогаю с публикацией проекта на бесплатный быстрый хостинг, подключением SSL-сертификата безопасности (https) и привязкой вашего домена.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Что если у меня нет готовых текстов и фотографий?</summary>
+          <p>Не проблема. Я сам составлю продающую структуру и тексты под вашу нишу на основе 3–5 вопросов о вашем бизнесе, а также подберу качественную графику и иконки.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 10. Контакты -->
     <section id="contacts">
       <div class="sec-head">
         <div>
           <h2>Связаться со мной</h2>
-          <p>Выберите удобный мессенджер — отвечу, подскажу решение под вашу задачу и сориентирую по стоимости.</p>
+          <p>Напишите в удобный мессенджер — разберём вашу задачу, предложу подходящее решение и назову точную стоимость.</p>
         </div>
       </div>
 
@@ -2162,7 +2221,10 @@
                   <path d="M22 2 11 13"/>
                 </svg>
               </div>
-              <span class="contact-name" id="contactTgLabel">Telegram</span>
+              <div class="contact-text-wrap">
+                <span class="contact-name" id="contactTgLabel">Telegram</span>
+                <span class="contact-sub">@ramiltools • Отвечаю быстрее всего</span>
+              </div>
             </div>
             <span class="contact-item-arrow">→</span>
           </a>
@@ -2177,7 +2239,10 @@
                   </g>
                 </svg>
               </div>
-              <span class="contact-name" id="contactWaLabel">WhatsApp</span>
+              <div class="contact-text-wrap">
+                <span class="contact-name" id="contactWaLabel">WhatsApp</span>
+                <span class="contact-sub">+7 (961) 362-60-62</span>
+              </div>
             </div>
             <span class="contact-item-arrow">→</span>
           </a>
@@ -2189,7 +2254,10 @@
                   <path d="M6.2 16.5V7.5h2.4l3.4 5.2 3.4-5.2h2.4v9h-2.1v-5.6l-3.1 4.7h-1.2l-3.1-4.7v5.6H6.2Z" fill="#ffffff"/>
                 </svg>
               </div>
-              <span class="contact-name" id="contactMaxLabel">Max</span>
+              <div class="contact-text-wrap">
+                <span class="contact-name" id="contactMaxLabel">Max</span>
+                <span class="contact-sub">Быстрый чат в мессенджере</span>
+              </div>
             </div>
             <span class="contact-item-arrow">→</span>
           </a>
@@ -2201,12 +2269,15 @@
                   <path d="M12.8 16.5c-4.5 0-7.1-3.1-7.2-8.3h2.3c.1 3.8 1.8 5.4 3.1 5.7V8.2h2.1v3.3c1.3-.1 2.6-1.6 3.1-3.3h2.1c-.4 2.1-1.8 3.6-2.8 4.2 1 .5 2.7 1.8 3.3 4.1h-2.3c-.5-1.6-1.8-2.8-3.5-3v3h-.2Z" fill="#ffffff"/>
                 </svg>
               </div>
-              <span class="contact-name" id="contactVkLabel">ВКонтакте</span>
+              <div class="contact-text-wrap">
+                <span class="contact-name" id="contactVkLabel">ВКонтакте</span>
+                <span class="contact-sub">Личная страница</span>
+              </div>
             </div>
             <span class="contact-item-arrow">→</span>
           </a>
 
-          <a class="contact-item full-row" id="contactMailRow" href="mailto:idrisov.smm@gmail.com" title="Написать на почту idrisov.smm@gmail.com">
+          <a class="contact-item full-row" id="contactMailRow" href="mailto:idrisov.smm@gmail.com" title="Нажмите, чтобы скопировать почту или написать письмо">
             <div class="contact-item-left">
               <div class="contact-brand-icon mail-brand">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2214,7 +2285,10 @@
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                 </svg>
               </div>
-              <span class="contact-name" id="contactMailLabel">Почта</span>
+              <div class="contact-text-wrap">
+                <span class="contact-name" id="contactMailLabel">idrisov.smm@gmail.com</span>
+                <span class="contact-sub">Нажмите, чтобы скопировать адрес или отправить письмо</span>
+              </div>
             </div>
             <span class="contact-item-arrow">→</span>
           </a>
@@ -2225,7 +2299,7 @@
     <!-- Подвал -->
     <footer class="site-footer">
       <div class="footer-note">
-        Работаю по письменному договору. Все сайты и калькуляторы создаются в строгом соответствии с 152-ФЗ РФ (политика конфиденциальности включена). Использую нейросети для ускорения разработки, весь код, логику расчётов и адаптивную вёрстку проверяю вручную.
+        Работаю по письменному договору с фиксированной сметой. Все сайты, формы и калькуляторы разрабатываются в полном соответствии с требованиями 152-ФЗ РФ (политика конфиденциальности и согласие на обработку данных включены).
       </div>
       <div class="footer-copy">
         © <span id="yearNow">2026</span> <span id="footerName">Рамиль</span>
@@ -2235,16 +2309,17 @@
 
   <!-- Модальное окно живого предпросмотра проектов -->
   <div class="modal-backdrop" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-box">
+    <div class="modal-box" id="modalBox">
       <div class="modal-spinner" id="modalSpinner"></div>
       <div class="modal-head">
         <b id="modalTitle">Предпросмотр</b>
         <div class="modal-actions">
+          <button class="btn alt sm" id="modalViewportBtn" type="button" title="Переключить вид Смартфон / ПК">💻 Вид ПК</button>
           <a class="btn sm" id="modalOpenFull" href="#" target="_blank" rel="noopener">На весь экран ↗</a>
           <button class="btn alt sm" id="modalCloseBtn" type="button" aria-label="Закрыть предпросмотр">✕</button>
         </div>
       </div>
-      <iframe class="modal-iframe" id="modalFrame" src="about:blank" title="Демо-проект"></iframe>
+      <iframe class="modal-iframe" id="modalFrame" src="about:blank" title="Интерактивный пример проекта"></iframe>
     </div>
   </div>
 
@@ -2252,15 +2327,15 @@
 
   <script>
     // =========================================================================
-    // 1. БЛОК НАСТРОЕК
+    // 1. БЛОК НАСТРОЕК (ВСЕ ДАННЫЕ И ФОТО В ОДНОМ МЕСТЕ)
     // =========================================================================
     const CONFIG = {
       name: "Рамиль",
       initials: "РИ",
-      location: "Стерлитамак • Работаю онлайн по всей РФ",
-      heroTitle: "Сайты, калькуляторы и боты для вашего бизнеса",
-      heroLead: "Делаю одностраничные сайты, интерактивные калькуляторы, квизы и Telegram-ботов для малого бизнеса в Стерлитамаке и по всей России. Быстро, цену фиксирую до старта работ.",
-      avatar: "",
+      location: "Стерлитамак • Работаю с бизнесом по всей РФ",
+      heroTitle: "Сайты, калькуляторы и Telegram-боты, которые приводят заявки",
+      heroLead: "Разрабатываю быстрые одностраничные сайты, интерактивные калькуляторы расчёта цены, квизы и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Фиксирую смету до старта, передаю проект без абонентской платы.",
+      avatar: "photo_2026-11-05_17-56-09.jpg",
       telegram: "ramiltools",
       whatsapp: "79613626062",
       whatsappLabel: "WhatsApp",
@@ -2269,6 +2344,55 @@
       vk: "https://vk.com/id449983999",
       email: "idrisov.smm@gmail.com"
     };
+
+    // Единый прайс-лист (рыночные цены по Стерлитамаку) — синхронизирован с калькулятором
+    const SERVICES_DATA = [
+      {
+        title: "Одностраничный сайт под ключ",
+        calcName: "Одностраничный сайт (лендинг / визитка) с формой заявки и картой",
+        price: 12000,
+        days: 4,
+        defaultOn: true,
+        desc: "За 3–5 дней: продающая структура, прайс, портфолио, отзывы, интерактивная карта и приём заявок в Telegram.",
+        ctaText: "Заказать сайт →"
+      },
+      {
+        title: "Калькулятор или квиз-опросник",
+        calcName: "Интерактивный калькулятор стоимости или пошаговый квиз",
+        price: 7000,
+        days: 2,
+        defaultOn: false,
+        desc: "Автоматический расчёт стоимости по вашим расценкам за 30 секунд. Готовая смета клиента сразу падает вам в мессенджер.",
+        ctaText: "Заказать калькулятор →"
+      },
+      {
+        title: "Telegram-бот для бизнеса",
+        calcName: "Telegram-бот (запись клиентов, воронка заявок, фильтр отзывов)",
+        price: 8000,
+        days: 3,
+        defaultOn: false,
+        desc: "Онлайн-запись клиентов 24/7, ответы на частые вопросы, приём заказов или умная фильтрация отзывов по QR-коду.",
+        ctaText: "Заказать бота →"
+      },
+      {
+        title: "Интерактивные промо-акции",
+        calcName: "Интерактивное колесо призов или промо-страница к акции",
+        price: 5000,
+        days: 2,
+        defaultOn: false,
+        desc: "Беспроигрышное колесо фортуны с выдачей промокодов за контакт клиента или брендированные спецпроекты к праздникам.",
+        ctaText: "Заказать промо-акцию →"
+      },
+      {
+        title: "Монтаж вертикального видео",
+        calcName: "Продающий монтаж вертикального ролика (Reels / Shorts / ВК Клипы)",
+        price: 1500,
+        days: 1,
+        defaultOn: false,
+        desc: "Динамичные ролики с цепляющим началом, анимированными субтитрами и саунд-дизайном для привлечения локальных клиентов.",
+        ctaText: "Заказать видео →"
+      }
+    ];
 
     function makeInitialsAvatar(text) {
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
@@ -2280,6 +2404,21 @@
         </defs>
         <rect width="200" height="200" rx="44" fill="url(#g)"/>
         <text x="50%" y="53%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="Onest, sans-serif" font-size="76" font-weight="800">${text}</text>
+      </svg>`;
+      return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+    }
+
+    function makeThumbFallback(title, tag) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="380" viewBox="0 0 600 380">
+        <defs>
+          <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="100%" stop-color="#3b49df"/>
+          </linearGradient>
+        </defs>
+        <rect width="600" height="380" fill="url(#bg)"/>
+        <text x="40" y="180" fill="#93c5fd" font-family="Inter, sans-serif" font-size="20" font-weight="700">${tag}</text>
+        <text x="40" y="225" fill="#ffffff" font-family="Onest, sans-serif" font-size="30" font-weight="800">${title}</text>
       </svg>`;
       return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
     }
@@ -2427,16 +2566,28 @@
     document.getElementById("contactMaxLabel").textContent = CONFIG.maxLabel;
     document.getElementById("contactWaLabel").textContent = CONFIG.whatsappLabel;
     document.getElementById("contactMailRow").href = "mailto:" + CONFIG.email;
-    document.getElementById("contactMailLabel").textContent = "Почта";
+    document.getElementById("contactMailLabel").textContent = CONFIG.email;
 
-    // Ссылки для заказа в карточках цен
-    document.querySelectorAll(".price-order-link").forEach(link => {
-      const itemTitle = link.getAttribute("data-order");
-      const msg = `Здравствуйте! Интересует услуга: ${itemTitle}. Расскажите подробнее?`;
-      link.href = `${tgLink}?text=${encodeURIComponent(msg)}`;
+    // Рендер карточек услуг из единого массива SERVICES_DATA
+    const servicesGridEl = document.getElementById("servicesGrid");
+    SERVICES_DATA.forEach(srv => {
+      const priceFormatted = `от ${srv.price.toLocaleString("ru-RU")} ₽`;
+      const orderTitle = `${srv.title} (${priceFormatted})`;
+      const msg = `Здравствуйте, Рамиль! Интересует услуга: ${orderTitle}. Расскажите подробнее?`;
+      const card = document.createElement("div");
+      card.className = "price-card";
+      card.innerHTML = `
+        <div>
+          <b>${priceFormatted}</b>
+          <span>${srv.title}</span>
+          <p>${srv.desc}</p>
+        </div>
+        <a class="price-order-link" href="${tgLink}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${srv.ctaText}</a>
+      `;
+      servicesGridEl.appendChild(card);
     });
 
-    // При клике на почту — открытие почтового клиента и копирование адреса
+    // Копирование почты при клике
     let toastTimer = null;
     const mailRow = document.getElementById("contactMailRow");
     if (mailRow) {
@@ -2445,7 +2596,7 @@
           navigator.clipboard.writeText(CONFIG.email).then(() => {
             const toast = document.getElementById("toast");
             if (toast) {
-              toast.textContent = `Почта ${CONFIG.email} скопирована`;
+              toast.textContent = `Почта ${CONFIG.email} скопирована в буфер`;
               toast.classList.add("show");
               clearTimeout(toastTimer);
               toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
@@ -2459,8 +2610,8 @@
     const filterLabels = {
       all: "Все работы",
       calc: "Калькуляторы и квизы",
-      site: "Сайты и меню",
-      promo: "CRM и акции"
+      site: "Сайты и онлайн-меню",
+      promo: "CRM и промо-акции"
     };
     document.querySelectorAll("#filterBar .filter-btn").forEach(btn => {
       const cat = btn.dataset.cat;
@@ -2468,7 +2619,7 @@
       btn.textContent = `${filterLabels[cat]} (${count})`;
     });
 
-    // Отрисовка карточек портфолио
+    // Отрисовка карточек портфолио с защитой от битых картинок
     const gridEl = document.getElementById("projectsGrid");
     function renderProjects(category = "all") {
       gridEl.innerHTML = "";
@@ -2476,7 +2627,7 @@
         const card = document.createElement("article");
         card.className = "card";
         card.innerHTML = `
-          <a class="thumb" href="${p.href}" aria-label="Открыть демо ${p.title}">
+          <a class="thumb" href="${p.href}" aria-label="Открыть проект ${p.title}">
             <img src="${p.localThumb}" alt="${p.title}" loading="lazy">
             <span class="card-tag">${p.tag}</span>
           </a>
@@ -2485,10 +2636,15 @@
             <p>${p.desc}</p>
             <div class="card-footer">
               <button type="button" class="preview-btn">Предпросмотр</button>
-              <a class="card-link" href="${p.href}">Открыть демо →</a>
+              <a class="card-link" href="${p.href}" target="_blank" rel="noopener">Открыть ↗</a>
             </div>
           </div>
         `;
+        const imgEl = card.querySelector("img");
+        imgEl.onerror = () => {
+          imgEl.onerror = null;
+          imgEl.src = makeThumbFallback(p.title, p.tag);
+        };
         card.querySelector(".preview-btn").addEventListener("click", () => {
           openModal(p.href, p.title);
         });
@@ -2505,60 +2661,70 @@
       });
     });
 
-    // Модальное окно предпросмотра со спиннером
+    // Модальное окно предпросмотра со спиннером и переключателем Смартфон / ПК
     const modal = document.getElementById("previewModal");
+    const modalBox = document.getElementById("modalBox");
     const modalFrame = document.getElementById("modalFrame");
     const modalSpinner = document.getElementById("modalSpinner");
+    const modalViewportBtn = document.getElementById("modalViewportBtn");
+    let spinnerTimeout = null;
 
     modalFrame.addEventListener("load", () => {
+      clearTimeout(spinnerTimeout);
       modalSpinner.style.display = "none";
     });
+
+    if (modalViewportBtn) {
+      modalViewportBtn.addEventListener("click", () => {
+        const isDesktop = modalBox.classList.toggle("desktop-mode");
+        modalViewportBtn.textContent = isDesktop ? "📱 Вид смартфона" : "💻 Вид ПК";
+      });
+    }
 
     function openModal(href, title) {
       document.getElementById("modalTitle").textContent = title;
       document.getElementById("modalOpenFull").href = href;
       modalSpinner.style.display = "block";
+      clearTimeout(spinnerTimeout);
+      spinnerTimeout = setTimeout(() => {
+        modalSpinner.style.display = "none";
+      }, 2500);
       modalFrame.src = href;
       modal.classList.add("open");
       document.body.style.overflow = "hidden";
     }
+
     function closeModal() {
+      clearTimeout(spinnerTimeout);
       modal.classList.remove("open");
       modalFrame.src = "about:blank";
       document.body.style.overflow = "";
     }
+
     document.getElementById("modalCloseBtn").addEventListener("click", closeModal);
     modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
     document.addEventListener("keydown", e => {
       if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
     });
 
-    // Интерактивный калькулятор сметы
-    const EST_DATA = [
-      { name: "Сайт-визитка с формой заявки и картой", price: 4000, days: 3, on: true },
-      { name: "Калькулятор стоимости или квиз-опросник", price: 3000, days: 2, on: false },
-      { name: "Telegram-бот для приёма заявок и FAQ", price: 3000, days: 3, on: false },
-      { name: "Колесо призов или промо-открытка к акции", price: 2000, days: 1, on: false },
-      { name: "Монтаж вертикального ролика (Reels / ВК / Shorts)", price: 800, days: 1, on: false }
-    ];
+    // Интерактивный калькулятор сметы (без разрушения DOM при клике)
+    const EST_DATA = SERVICES_DATA.map(s => ({
+      name: s.calcName,
+      price: s.price,
+      days: s.days,
+      on: s.defaultOn
+    }));
 
     const estListEl = document.getElementById("estList");
     const estSendBtn = document.getElementById("estSendBtn");
     const estSendWaBtn = document.getElementById("estSendWaBtn");
 
-    function renderEstimator() {
+    function initEstimatorRows() {
       estListEl.innerHTML = "";
-      let total = 0;
-      let maxDays = 1;
-      let count = 0;
-      EST_DATA.forEach(item => {
-        if (item.on) {
-          total += item.price;
-          maxDays = Math.max(maxDays, item.days);
-          count++;
-        }
+      EST_DATA.forEach((item, idx) => {
         const row = document.createElement("button");
         row.type = "button";
+        row.dataset.index = idx;
         row.className = "est-row" + (item.on ? " active" : "");
         row.setAttribute("aria-pressed", String(item.on));
         row.innerHTML = `
@@ -2570,9 +2736,26 @@
         `;
         row.addEventListener("click", () => {
           item.on = !item.on;
-          renderEstimator();
+          row.classList.toggle("active", item.on);
+          row.setAttribute("aria-pressed", String(item.on));
+          row.querySelector(".est-box").textContent = item.on ? "✓" : "";
+          updateEstimatorTotals();
         });
         estListEl.appendChild(row);
+      });
+      updateEstimatorTotals();
+    }
+
+    function updateEstimatorTotals() {
+      let total = 0;
+      let maxDays = 1;
+      let count = 0;
+      EST_DATA.forEach(item => {
+        if (item.on) {
+          total += item.price;
+          maxDays = Math.max(maxDays, item.days);
+          count++;
+        }
       });
 
       const totalDays = count > 1 ? maxDays + (count - 1) : (count === 1 ? maxDays : 0);
@@ -2583,7 +2766,8 @@
       estSendBtn.disabled = total === 0;
       if (estSendWaBtn) estSendWaBtn.disabled = total === 0;
     }
-    renderEstimator();
+
+    initEstimatorRows();
 
     function getEstimateMessage() {
       const selected = EST_DATA.filter(x => x.on);
@@ -2593,9 +2777,9 @@
       const count = selected.length;
       const maxDays = selected.reduce((m, x) => Math.max(m, x.days), 1);
       const totalDays = count > 1 ? maxDays + (count - 1) : maxDays;
-      return `Здравствуйте! Посчитал проект на вашем сайте:\n` +
+      return `Здравствуйте, Рамиль! Посчитал смету проекта на вашем сайте:\n` +
         selected.map(x => `• ${x.name} (${x.price.toLocaleString("ru-RU")} ₽)`).join("\n") +
-        `\n\nСфера бизнеса: ${biz}\nОриентировочно: ${total.toLocaleString("ru-RU")} ₽ (срок: ${totalDays}–${totalDays + 2} дн.)`;
+        `\n\nНиша бизнеса: ${biz}\nОриентировочный бюджет: ${total.toLocaleString("ru-RU")} ₽ (срок: ${totalDays}–${totalDays + 2} дн.)`;
     }
 
     estSendBtn.addEventListener("click", () => {
@@ -2610,7 +2794,6 @@
       });
     }
 
-    // Отправка по нажатию Enter в поле сферы бизнеса
     document.getElementById("estBusiness").addEventListener("keydown", e => {
       if (e.key === "Enter") {
         e.preventDefault();
