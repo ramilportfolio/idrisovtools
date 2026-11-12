@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Калькулятор химчистки</title>
+<meta name="description" content="Демо калькулятора химчистки с расчётом стоимости для выбранных предметов мебели и ковров.">
+<meta name="robots" content="noindex,follow">
   <style>
     :root {
       --bg-page: #f0f4f8;
@@ -29,8 +31,11 @@
       color: var(--text-main);
       padding: 16px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
+
+    body > .demo-site-bar { align-self: stretch; }
 
     .calculator-wrapper {
       width: 100%;
@@ -317,6 +322,10 @@
 .tg-modal-close { width: 100%; background: #3b82f6; color: #fff; border: 0; border-radius: 10px; padding: 12px; font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
 .tg-modal-close:hover { background: #2563eb; }
 </style>
+
+<link rel="stylesheet" href="assets/demo-bar.css">
+<script src="assets/demo-bar.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 </head>
 <body>
 
@@ -404,6 +413,7 @@
     </div>
 
     <button type="submit" class="submit-btn">Отправить заявку</button>
+    <p class="demo-privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p>
     <p class="disclaimer">Выезд по городу бесплатный. Точную цену мастер подтвердит по фото мебели. Расчёт не является офертой.</p>
   </form>
 </div>
@@ -644,5 +654,6 @@ document.addEventListener("keydown", function(e) {
     <button type="button" class="tg-modal-close" onclick="closeTgModal()">Попробовать другой расчёт</button>
   </div>
 </div>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
 </body>
 </html>

@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Калькулятор стоимости ремонта помещений</title>
+<meta name="description" content="Демо расчёта ремонта помещения с выбором пакета работ, площади и дополнительных услуг.">
+<meta name="robots" content="noindex,follow">
 <style>
 :root {
   --ink: #161e2e;
@@ -234,6 +236,10 @@ button.main:hover { background: var(--acc-hover); }
 .tg-modal-close { width: 100%; background: #3b82f6; color: #fff; border: 0; border-radius: 10px; padding: 12px; font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
 .tg-modal-close:hover { background: #2563eb; }
 </style>
+
+<link rel="stylesheet" href="assets/demo-bar.css">
+<script src="assets/demo-bar.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -257,6 +263,7 @@ button.main:hover { background: var(--acc-hover); }
     <input type="tel" id="phone" inputmode="tel" autocomplete="tel" placeholder="+7 (900) 000-00-00" maxlength="18">
     <div class="err" id="err" role="alert"></div>
     <button class="main" id="send" type="button" style="margin-top:14px">Отправить расчёт в Telegram</button>
+    <p class="demo-privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p>
     <div id="box"></div>
     <div class="note" id="note"></div>
   </div>
@@ -588,5 +595,6 @@ document.addEventListener("keydown", function(e) {
     <button type="button" class="tg-modal-close" onclick="closeTgModal()">Попробовать другой расчёт</button>
   </div>
 </div>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
 </body>
 </html>

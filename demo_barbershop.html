@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Барбершоп «Северный» — Мужские стрижки и онлайн-запись</title>
+<meta name="description" content="Демо сайта барбершопа с меню услуг и записью к выбранному мастеру на свободное время.">
+<meta name="robots" content="noindex,follow">
 <style>
   :root {
     color-scheme: light;
@@ -134,6 +136,10 @@
 .tg-modal-close { width: 100%; background: #3b82f6; color: #fff; border: 0; border-radius: 10px; padding: 12px; font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
 .tg-modal-close:hover { background: #2563eb; }
 </style>
+
+<link rel="stylesheet" href="assets/demo-bar.css">
+<script src="assets/demo-bar.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 </head>
 <body>
 
@@ -217,6 +223,7 @@
         <label class="field"><span>Телефон</span><input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (900) 000-00-00" maxlength="18"></label>
         <p class="error" id="error" role="alert"></p>
         <button class="btn" type="submit">Записаться</button>
+        <p class="demo-privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p>
       </form>
       <div class="done" id="done" hidden>
         <h3>Запись принята</h3>
@@ -238,11 +245,11 @@
       </dl>
       <dl>
         <dt>Телефон</dt><dd><a href="tel:+79000000000">+7 (900) 000-00-00</a></dd>
-        <dt>Telegram</dt><dd><a href="javascript:void(0)" onclick="return false;">@barbershop_bot</a></dd>
+        <dt>Telegram</dt><dd><span>@barbershop_bot</span></dd>
       </dl>
     </div>
   </section>
-  <footer>Сайт-визитка барбершопа с модулем онлайн-записи и ботом в Telegram.</footer>
+  <footer>Сайт-визитка барбершопа с модулем онлайн-записи и ботом в Telegram. <span class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></span></footer>
 </div>
 
 <script>

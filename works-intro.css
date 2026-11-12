@@ -1,0 +1,274 @@
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("fonts/montserrat-black-cyrillic.woff2") format("woff2");
+  unicode-range: U+0020, U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+.works-interlude,
+.works-smoke {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: max(600px, calc(100svh - 74px));
+  margin: 0;
+  padding: 0;
+}
+
+.works-interlude {
+  background: #f2f0ea;
+  color: #211415;
+}
+
+.works-interlude__title {
+  position: absolute;
+  z-index: 1;
+  top: 56%;
+  left: 50%;
+  width: max-content;
+  max-width: none;
+  margin: 0;
+  font: 900 clamp(102px, 12.30vw, 244px)/.8 "Montserrat", "Inter", sans-serif;
+  letter-spacing: -.074em;
+  text-transform: uppercase;
+  transform: translate3d(-50%, calc(-50% + var(--works-word-y, 0px)), 0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.works-interlude__glows,
+.works-interlude__cards {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.works-interlude__glow {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  width: var(--size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 39%, #ff3a25, #c71721 68%, #ad1722);
+  filter: blur(var(--blur, 28px));
+  opacity: var(--opacity, .61);
+  transform: translate3d(var(--glow-x, 0px), calc(var(--works-drift, 0px) * var(--speed)), 0);
+  mix-blend-mode: multiply;
+  will-change: transform, translate;
+  backface-visibility: hidden;
+}
+
+.works-interlude.is-in-view .works-interlude__glow {
+  animation: works-glow-float var(--duration, 9s) ease-in-out infinite alternate;
+}
+
+@keyframes works-glow-float {
+  to {
+    translate: var(--float-x, 14px) var(--float-y, -24px);
+  }
+}
+
+.works-seal {
+  position: absolute;
+  z-index: 3;
+  top: 34%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: clamp(150px, 18vw, 255px);
+  aspect-ratio: 1;
+  color: #ad211e;
+  transform: translate3d(-50%, calc(-50% + var(--works-seal-y, 0px)), 0);
+  filter: drop-shadow(0 10px 18px #8a242521);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.works-seal svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.works-seal__name {
+  position: relative;
+  margin-top: .1em;
+  color: #9a181d;
+  font: 400 clamp(34px, 5.05vw, 77px)/1 "Great Vibes", "Segoe Script", cursive;
+}
+
+.works-interlude__cards {
+  z-index: 2;
+}
+
+.works-interlude__card {
+  position: absolute;
+  inset: var(--top, auto) var(--right, auto) var(--bottom, auto) var(--left, auto);
+  width: clamp(110px, var(--width, 14vw), 242px);
+  margin: 0;
+  padding: 6px;
+  background: #f8f7f3;
+  border: 1px solid #c7bdb4;
+  border-radius: 3px;
+  box-shadow: 0 13px 26px #2e151825, 0 1px 4px #2b171814;
+  transform: translate3d(calc(var(--works-card-x, 0px) * var(--side)), calc(var(--works-drift, 0px) * var(--speed)), 0) rotate(var(--tilt));
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.works-interlude__card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+  background: #ded9d3;
+  filter: grayscale(1) contrast(.9);
+}
+
+.works-interlude__card figcaption {
+  padding: 5px 2px 1px;
+  color: #4d3635;
+  font: 650 11px/1.25 var(--font-sans);
+}
+
+.works-smoke {
+  display: grid;
+  place-items: center;
+  background: #050505;
+  color: #f2f0ea;
+}
+
+.works-smoke__atmosphere,
+.works-smoke__light,
+.works-smoke__particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.works-smoke__atmosphere {
+  z-index: -3;
+  filter: brightness(.82);
+  background:
+    url("assets/works-smoke.webp") center / cover no-repeat,
+    radial-gradient(ellipse at center, #777471, #262424 27%, #050505 75%);
+}
+
+.works-smoke__atmosphere canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .55s ease-out;
+}
+
+.works-smoke.is-live .works-smoke__atmosphere canvas {
+  opacity: 1;
+}
+
+.works-smoke::before {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 48% 28% at center, #05050580, #05050536 57%, transparent 100%),
+    radial-gradient(ellipse at center, transparent 27%, #050505cb 100%);
+  pointer-events: none;
+  content: "";
+}
+
+.works-smoke__light {
+  z-index: -1;
+  opacity: var(--works-flash, .06);
+  background:
+    radial-gradient(ellipse at center, #fff 0%, #fff7ee 4%, #f1eeea53 19%, transparent 49%),
+    radial-gradient(ellipse at center, #fffff91a 24%, transparent 77%);
+  mix-blend-mode: screen;
+}
+
+.works-smoke__particles {
+  z-index: 0;
+}
+
+.works-smoke__title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0 .06em;
+  color: #f2f0ea;
+  font: 600 clamp(106px, 17vw, 258px)/1 "Cormorant Garamond", Georgia, serif;
+  letter-spacing: -.065em;
+  text-shadow: 0 0 27px #eee2d747, 0 3px 18px #0808076e;
+  opacity: var(--works-title-opacity, 1);
+  transform: translate(var(--works-title-x, 0px), var(--works-title-y, 0px));
+}
+
+@media (max-width: 820px) {
+  .works-interlude {
+    min-height: clamp(510px, 81svh, 670px);
+  }
+
+  .works-interlude__title {
+    top: 57%;
+    font-size: clamp(67px, 15vw, 126px);
+    line-height: .83;
+    text-align: center;
+  }
+
+  .works-interlude__title span {
+    display: block;
+  }
+
+  .works-seal {
+    top: 28%;
+    width: clamp(118px, 28vw, 177px);
+  }
+
+  .works-seal__name {
+    font-size: clamp(35px, 7.5vw, 57px);
+  }
+
+  .works-interlude__card {
+    width: clamp(89px, 25vw, 153px);
+    padding: 4px;
+  }
+
+  .works-interlude__card figcaption {
+    font-size: 12px;
+  }
+
+  .works-interlude__glow {
+    filter: blur(20px);
+  }
+
+  .works-smoke {
+    min-height: clamp(330px, 68svh, 545px);
+  }
+
+  .works-smoke__title {
+    font-size: clamp(82px, 24vw, 163px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works-interlude .works-interlude__glow {
+    animation: none;
+  }
+
+  .works-interlude__title,
+  .works-smoke__title {
+    opacity: 1;
+  }
+
+  .works-smoke__particles,
+  .works-smoke__atmosphere canvas {
+    display: none;
+  }
+}

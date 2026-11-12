@@ -1,25 +1,35 @@
 <!doctype html>
-<html lang="ru" data-theme="light">
+<html lang="ru">
 <head>
   <meta charset="utf-8">
+  <link rel="preload" as="font" href="fonts/cormorant-garamond-cyrillic.woff2" type="font/woff2" crossorigin>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Рамиль — Разработка сайтов, калькуляторов и Telegram-ботов для бизнеса</title>
   <meta name="description" content="Разработка продающих сайтов, интерактивных калькуляторов, квизов и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Заявки напрямую в Telegram, 0 ₽ абонплаты.">
-  <meta name="theme-color" content="#4c5bf0">
+  <meta name="theme-color" content="#0e0809">
+  <link rel="preload" as="image" href="assets/hero-smoke.webp" fetchpriority="high">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="alternate icon" href="favicon.ico">
   <link rel="canonical" href="https://ramil-tools.ru/">
 
+  <!-- Open Graph / Превью в Telegram, WhatsApp, VK -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Рамиль — Веб-разработка для бизнеса">
   <meta property="og:title" content="Рамиль — Сайты, калькуляторы и Telegram-боты под ключ">
   <meta property="og:description" content="Инструменты для роста заявок малого бизнеса: сайты, калькуляторы расчёта цены, квизы и Telegram-боты. 0 ₽ абонплаты.">
   <meta property="og:url" content="https://ramil-tools.ru/">
-  <meta property="og:image" content="https://ramil-tools.ru/og-cover.svg">
+  <meta property="og:image" content="https://ramil-tools.ru/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Рамиль — сайты, калькуляторы и Telegram-боты, которые приводят заявки">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Рамиль — Сайты, калькуляторы и Telegram-боты для бизнеса">
+  <meta name="twitter:description" content="Делаю одностраничные сайты, интерактивные калькуляторы, квизы и Telegram-боты для малого бизнеса.">
+  <meta name="twitter:image" content="https://ramil-tools.ru/og-cover.jpg">
 
-  <script type="application/ld+json">
+  <!-- Микроразметка Schema.org. TODO: заменить email на почту домена. Адрес используется и в контактах. -->
+  <script type="application/ld+json" id="serviceSchema">
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -27,6 +37,8 @@
     "image": "https://ramil-tools.ru/photo_2026-11-05_17-56-09.jpg",
     "url": "https://ramil-tools.ru/",
     "telephone": "+79613626062",
+    "areaServed": ["Стерлитамак", "Республика Башкортостан", "Россия"],
+    "sameAs": ["https://t.me/ramiltools"],
     "email": "idrisov.smm@gmail.com",
     "address": {
       "@type": "PostalAddress",
@@ -38,770 +50,2380 @@
   }
   </script>
 
+  <!-- Шрифты с полной поддержкой кириллицы (Onest и Inter) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Onest:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --ink: #0f141c; --mut: #525d6f; --bg: #f4f6fb; --card: #ffffff;
-      --subtle: #edf1f9; --line: #dde4f0; --acc: #4c5bf0; --acc-hover: #3b49df;
-      --acc-soft: #eef0ff; --ok: #10b981; --ok-soft: rgba(16, 185, 129, 0.12);
-      --wa: #25d366; --wa-hover: #20bd5a; --warn: #f59e0b;
-      --radius: 22px;
-      --shadow-sm: 0 4px 12px rgba(15, 20, 28, 0.04), 0 12px 28px -6px rgba(15, 20, 28, 0.06);
-      --shadow-hover: 0 22px 44px -10px rgba(76, 91, 240, 0.18), 0 8px 18px -4px rgba(15, 20, 28, 0.06);
-      --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      --font-display: "Onest", "Inter", system-ui, -apple-system, sans-serif;
+      --ink: #0f141c;
+      --mut: #525d6f;
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --subtle: #eef2f8;
+      --line: #e1e7f0;
+      --acc: #4c5bf0;
+      --acc-hover: #3b49df;
+      --acc-soft: #eef0ff;
+      --ok: #10b981;
+      --wa: #25d366;
+      --wa-hover: #20bd5a;
+      --radius: 20px;
+      --shadow-sm: 0 2px 6px rgba(15, 20, 28, 0.03), 0 10px 24px -4px rgba(15, 20, 28, 0.05);
+      --shadow-hover: 0 20px 40px -8px rgba(76, 91, 240, 0.15), 0 6px 16px -4px rgba(15, 20, 28, 0.06);
+      --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      --font-display: "Onest", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
-    [data-theme="dark"] {
-      --ink: #f3f5f8; --mut: #94a3b8; --bg: #090d16; --card: #121826;
-      --subtle: #1a2234; --line: #243047; --acc: #6875ff; --acc-hover: #818cf8;
-      --acc-soft: rgba(104, 117, 255, 0.16); --ok: #34d399; --ok-soft: rgba(52, 211, 153, 0.14);
-      --shadow-sm: 0 6px 24px rgba(0, 0, 0, 0.4);
-      --shadow-hover: 0 22px 44px rgba(0, 0, 0, 0.65);
+
+    .privacy-note {
+      margin: 8px 0 0;
+      font-size: 12px;
+      line-height: 1.5;
     }
-    *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+
+    .privacy-note a,
+    .hero-guarantees a,
+    .about-content a,
+    .footer-note a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: .16em;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
     body {
-      margin: 0; width: 100%; max-width: 100%; overflow-x: hidden;
-      font: 16px/1.6 var(--font-sans); background-color: var(--bg);
+      margin: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      font: 16px/1.6 var(--font-sans);
+      background-color: var(--bg);
       background-image:
-        radial-gradient(at 8% 4%, rgba(76, 91, 240, 0.11) 0px, transparent 42%),
-        radial-gradient(at 92% 10%, rgba(14, 165, 233, 0.09) 0px, transparent 38%),
+        radial-gradient(at 10% 5%, rgba(76, 91, 240, 0.07) 0px, transparent 45%),
+        radial-gradient(at 90% 12%, rgba(56, 189, 248, 0.06) 0px, transparent 40%),
         linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
       background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
-      color: var(--ink); -webkit-font-smoothing: antialiased;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
       transition: background-color 0.25s ease, color 0.25s ease;
     }
-    h1, h2, h3, .logo, .price-card b, .stat-box b, .est-sum { font-family: var(--font-display); }
-    a { color: inherit; }
-    .wrap { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-    /* Навигация */
+    h1, h2, h3, .logo, .price-card b, .stat-box b, .est-sum {
+      font-family: var(--font-display);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Шапка и навигация (с фолбэком для браузеров без color-mix) */
     .site-header {
-      position: sticky; top: 0; z-index: 40; width: 100%;
-      padding-top: max(env(safe-area-inset-top, 0px), 6px);
-      background: var(--bg); background: color-mix(in srgb, var(--bg) 86%, transparent);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      width: 100%;
+      padding-top: max(env(safe-area-inset-top, 0px), 8px);
+      background: var(--bg);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--line);
     }
-    .nav-bar { display: flex; align-items: center; justify-content: space-between; min-height: 74px; padding: 12px 0; gap: 12px; }
-    .logo { font-weight: 800; font-size: 19px; letter-spacing: -0.03em; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .logo-dot { width: 11px; height: 11px; border-radius: 50%; background: linear-gradient(135deg, var(--acc), #38bdf8); box-shadow: 0 0 0 4px var(--acc-soft); flex-shrink: 0; }
-    .nav-links { display: flex; flex-wrap: wrap; gap: 18px; font-size: 14px; font-weight: 600; color: var(--mut); }
-    .nav-links a { text-decoration: none; transition: color 0.15s ease; white-space: nowrap; }
-    .nav-links a:hover { color: var(--acc); }
-    .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .theme-toggle { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; transition: 0.15s ease; }
-    .theme-toggle:hover { border-color: var(--acc); transform: translateY(-1px); }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      gap: 12px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 4px;
+      flex-shrink: 0;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--acc);
+      box-shadow: 0 0 0 4px var(--acc-soft);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--mut);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      transition: color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--acc);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
 
     /* Кнопки */
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 13px; background: linear-gradient(135deg, var(--acc), #3b49df); color: #fff; text-decoration: none; font-weight: 700; font-size: 14.5px; border: 1.5px solid var(--acc); cursor: pointer; white-space: nowrap; transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease; font-family: inherit; text-align: center; box-shadow: 0 4px 14px rgba(76, 91, 240, 0.25); }
-    .btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(76, 91, 240, 0.35); }
-    .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
-    .btn.alt { background: var(--card); color: var(--ink); border: 1.5px solid var(--line); box-shadow: none; }
-    .btn.alt:hover:not(:disabled) { border-color: var(--acc); color: var(--acc); box-shadow: var(--shadow-sm); }
-    .btn.sm { padding: 9px 16px; font-size: 13.5px; border-radius: 11px; }
-    .btn.btn-wa { background: var(--wa); border-color: var(--wa); color: #fff; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.22); }
-    .btn.btn-wa:hover:not(:disabled) { background: var(--wa-hover); border-color: var(--wa-hover); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.34); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: var(--acc);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14.5px;
+      border: 1.5px solid var(--acc);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.24s cubic-bezier(.16, 1, .3, 1), background 0.2s cubic-bezier(.16, 1, .3, 1), box-shadow 0.24s cubic-bezier(.16, 1, .3, 1), opacity 0.2s ease;
+      font-family: inherit;
+      text-align: center;
+    }
+
+    .btn:hover:not(:disabled) {
+      background: var(--acc-hover);
+      border-color: var(--acc-hover);
+      transform: translate3d(0, -2px, 0);
+      box-shadow: 0 8px 20px rgba(76, 91, 240, 0.28);
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn.alt {
+      background: var(--card);
+      color: var(--ink);
+      border: 1.5px solid var(--line);
+    }
+
+    .btn.alt:hover:not(:disabled) {
+      background: var(--card);
+      border-color: var(--acc);
+      color: var(--acc);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn.sm {
+      padding: 9px 16px;
+      font-size: 14px;
+      border-radius: 12px;
+    }
+
+    .btn.btn-wa {
+      background: var(--wa);
+      border-color: var(--wa);
+      color: #ffffff;
+    }
+
+    .btn.btn-wa:hover:not(:disabled) {
+      background: var(--wa-hover);
+      border-color: var(--wa-hover);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.32);
+    }
 
     /* 1. Первый экран (Hero) */
-    .hero { padding: 42px 0 34px; display: grid; grid-template-columns: 1.22fr 0.98fr; gap: 26px; align-items: stretch; }
-    .hero-main { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; min-width: 0; }
-    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .geo-tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); color: var(--mut); font-size: 12.5px; font-weight: 600; box-shadow: var(--shadow-sm); }
-    .geo-tag svg { width: 14px; height: 14px; color: var(--acc); flex-shrink: 0; }
-    .avail-tag { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 99px; background: var(--ok-soft); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--ok); font-size: 12.5px; font-weight: 700; }
-    .avail-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25); animation: pulseDot 2s infinite; }
-    @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+    .hero {
+      padding: 48px 0 36px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
 
-    .hero h1 { font-size: clamp(27px, 4.3vw, 44px); line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 16px; }
-    .text-grad { background: linear-gradient(135deg, var(--acc), #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero p.lead { font-size: 16.5px; color: var(--mut); max-width: 600px; margin: 0 0 22px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; width: 100%; }
-    .hero-quick-links { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; font-size: 13.5px; font-weight: 600; color: var(--mut); }
-    .social-icons { display: inline-flex; align-items: center; gap: 8px; }
-    .social-icon-link { width: 38px; height: 38px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: var(--shadow-sm); transition: transform 0.15s ease; text-decoration: none; }
-    .social-icon-link:hover { transform: translateY(-2px); }
-    .social-icon-link svg { width: 100%; height: 100%; display: block; }
-    .hero-guarantees { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--mut); }
-    .hero-guarantees span { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--card); border: 1px solid var(--line); border-radius: 99px; }
-    .hero-guarantees span::before { content: "✓"; color: var(--ok); font-weight: 800; }
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      min-width: 0;
+    }
 
-    /* Правая карточка разработчика (без пустых дыр) */
+    .geo-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 10px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      color: var(--mut);
+      font-size: clamp(11px, 3.1vw, 13px);
+      font-weight: 600;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .geo-tag svg {
+      width: 14px;
+      height: 14px;
+      color: var(--acc);
+      flex-shrink: 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(26px, 4.4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin: 0 0 14px;
+      word-wrap: break-word;
+    }
+
+    .hero p.lead {
+      font-size: 16.5px;
+      color: var(--mut);
+      max-width: 600px;
+      margin: 0 0 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      width: 100%;
+    }
+
+    .hero-quick-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--mut);
+    }
+
+    .social-icons {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .social-icon-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .social-icon-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .social-icon-link svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hero-guarantees {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--mut);
+    }
+
+    .hero-guarantees span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      box-shadow: 0 1px 3px rgba(15, 20, 28, 0.03);
+    }
+
+    .hero-guarantees span::before {
+      content: "✓ ";
+      color: var(--acc);
+      font-weight: 800;
+    }
+
     .hero-card {
-      background: var(--card); border: 1.5px solid var(--line); border-radius: var(--radius);
-      padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
-      gap: 16px; position: relative; overflow: hidden; min-width: 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
     }
-    .hero-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--acc), #0ea5e9, var(--ok)); }
-    .profile-top { display: flex; align-items: center; gap: 18px; min-width: 0; }
-    .avatar-wrap { position: relative; width: 98px; height: 98px; flex-shrink: 0; }
-    .avatar {
-      width: 98px; height: 98px; border-radius: 24px; object-fit: cover; object-position: center 18%;
-      background: linear-gradient(135deg, var(--acc), #1d4ed8);
-      border: 2.5px solid var(--acc); box-shadow: 0 10px 24px rgba(76, 91, 240, 0.28); display: block;
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--acc), #38bdf8);
     }
-    .status-dot { position: absolute; bottom: -2px; right: -2px; width: 20px; height: 20px; border-radius: 50%; background: var(--ok); border: 3px solid var(--card); }
-    .profile-meta h2 { margin: 0 0 6px; font-size: 22px; letter-spacing: -0.02em; }
-    .profile-badge { font-size: 12px; font-weight: 700; color: var(--acc); background: var(--acc-soft); padding: 4px 10px; border-radius: 8px; display: inline-block; margin-bottom: 6px; }
-    .profile-sub { font-size: 12.5px; color: var(--mut); display: block; font-weight: 500; }
-    .profile-bio { margin: 0; font-size: 14px; color: var(--mut); line-height: 1.5; background: var(--subtle); padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line); }
-    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .stat-box { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 11px 14px; min-width: 0; }
-    .stat-box b { display: block; font-size: 19px; color: var(--acc); line-height: 1.2; }
-    .stat-box small { color: var(--mut); font-size: 12px; display: block; line-height: 1.3; margin-top: 2px; }
-    .hero-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--mut); }
-    .hero-card-foot a { color: var(--acc); text-decoration: none; font-weight: 700; }
-    .hero-card-foot a:hover { text-decoration: underline; }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .profile-top h2 {
+      margin: 0 0 5px;
+      font-size: 21px;
+    }
+
+    .profile-badge {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--acc);
+      background: var(--acc-soft);
+      padding: 4px 10px;
+      border-radius: 7px;
+      display: inline-block;
+    }
+
+    .profile-bio {
+      margin: 0;
+      font-size: 14.5px;
+      color: var(--mut);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .stat-box {
+      background: var(--subtle);
+      border-radius: 12px;
+      padding: 12px 14px;
+      min-width: 0;
+    }
+
+    .stat-box b {
+      display: block;
+      font-size: 20px;
+      color: var(--acc);
+    }
+
+    .stat-box small {
+      color: var(--mut);
+      font-size: 12.5px;
+      display: block;
+      line-height: 1.35;
+    }
 
     /* Секции */
-    section { padding: 38px 0; scroll-margin-top: 84px; }
-    .sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 24px; }
-    .sec-head > div { min-width: 0; }
-    .sec-badge { display: inline-block; font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--acc); background: var(--acc-soft); padding: 4px 10px; border-radius: 6px; margin-bottom: 8px; }
-    .sec-head h2 { font-size: clamp(22px, 3.5vw, 32px); letter-spacing: -0.03em; margin: 0; }
-    .sec-head p { margin: 6px 0 0; color: var(--mut); max-width: 650px; }
+    section {
+      padding: 36px 0;
+      scroll-margin-top: 84px;
+    }
 
-    /* 2. Интерактивный симулятор заявок в Telegram */
-    .tg-showcase { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); display: grid; grid-template-columns: 1.1fr 1fr; gap: 26px; align-items: center; }
-    .tg-showcase h2 { margin: 0 0 10px; font-size: clamp(21px, 3vw, 27px); letter-spacing: -0.02em; }
-    .tg-showcase-desc { margin: 0 0 18px; color: var(--mut); font-size: 15px; }
-    .tg-benefits { display: grid; gap: 14px; }
-    .tg-benefit-item { display: flex; gap: 14px; align-items: flex-start; font-size: 14.5px; }
-    .tg-icon { width: 32px; height: 32px; border-radius: 10px; background: var(--acc-soft); color: var(--acc); font-weight: 800; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-    .tg-sim-wrap { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-    .tg-tabs { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tg-tab { padding: 6px 11px; border-radius: 9px; border: 1px solid var(--line); background: var(--subtle); color: var(--mut); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.15s ease; }
-    .tg-tab:hover { border-color: var(--acc); color: var(--ink); }
-    .tg-tab.active { background: var(--acc); color: #fff; border-color: var(--acc); }
-    .tg-mock { background: #17212b; color: #f5f5f5; border-radius: 18px; padding: 18px; font-size: 13.5px; box-shadow: 0 16px 36px rgba(15, 20, 28, 0.24); border: 1px solid #2b3847; }
-    .tg-mock-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-weight: 700; font-size: 13px; color: #cbd5e1; }
-    .tg-mock-tag { font-size: 11px; font-weight: 700; color: #34d399; background: rgba(52, 211, 153, 0.14); padding: 3px 8px; border-radius: 6px; }
-    .tg-bubble { background: #2b5278; border-radius: 14px 14px 14px 4px; padding: 14px 16px; line-height: 1.55; }
-    .tg-bubble-title { font-weight: 700; color: #fff; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
-    .tg-bubble b { color: #93c5fd; font-weight: 600; }
-    .tg-inline-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
-    .tg-inline-btn { background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 7px; text-align: center; font-size: 12px; font-weight: 600; color: #e2e8f0; }
+    .sec-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .sec-head > div {
+      min-width: 0;
+    }
+
+    .sec-head h2 {
+      font-size: clamp(22px, 3.5vw, 31px);
+      letter-spacing: -0.03em;
+      margin: 0;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .sec-head h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.16em;
+      bottom: 0.16em;
+      width: 4px;
+      border-radius: 4px;
+      background: var(--acc);
+    }
+
+    .sec-head p {
+      margin: 6px 0 0;
+      color: var(--mut);
+      max-width: 640px;
+    }
 
     /* 3. Портфолио */
-    .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; }
-    .filter-btn { padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--mut); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: 0.15s ease; }
-    .filter-btn:hover { border-color: var(--acc); color: var(--ink); }
-    .filter-btn.active { background: var(--acc); color: #fff; border-color: var(--acc); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr)); gap: 20px; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); min-width: 0; transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; }
-    .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-5px); border-color: var(--acc); }
-    .card .thumb { display: block; position: relative; line-height: 0; overflow: hidden; background: var(--subtle); height: 205px; border-bottom: 1px solid var(--line); }
-    .card img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.45s ease; }
-    .card:hover img { transform: scale(1.03); }
-    .card-tag { position: absolute; top: 12px; left: 12px; background: var(--card); background: color-mix(in srgb, var(--card) 92%, transparent); backdrop-filter: blur(6px); color: var(--ink); padding: 5px 10px; border-radius: 8px; font-size: 11.5px; font-weight: 700; border: 1px solid var(--line); }
-    .card-metric { position: absolute; bottom: 10px; right: 10px; background: rgba(15, 20, 28, 0.82); color: #34d399; padding: 4px 9px; border-radius: 7px; font-size: 11px; font-weight: 700; backdrop-filter: blur(4px); }
-    .card .b { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-    .card h3 { margin: 0; font-size: 18px; }
-    .card p { margin: 0; color: var(--mut); font-size: 14px; flex: 1; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
-    .preview-btn { background: var(--acc-soft); border: 1px solid transparent; color: var(--acc); border-radius: 9px; padding: 7px 12px; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; transition: 0.15s ease; }
-    .preview-btn:hover { background: var(--acc); color: #fff; }
-    .card-link { color: var(--ink); font-weight: 700; text-decoration: none; font-size: 13px; padding: 7px 10px; border-radius: 9px; border: 1px solid var(--line); transition: 0.15s ease; }
-    .card-link:hover { border-color: var(--acc); color: var(--acc); }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-    /* 4. Услуги и цены (с чек-листами и бейджами Хит) */
-    .price-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; align-items: stretch; }
-    .price-card { grid-column: span 2; background: var(--card); border: 1.5px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; box-shadow: var(--shadow-sm); position: relative; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
-    .price-card.featured { border-color: var(--acc); box-shadow: 0 12px 32px -6px rgba(76, 91, 240, 0.16); }
-    .price-card:hover { transform: translateY(-4px); border-color: var(--acc); box-shadow: var(--shadow-hover); }
-    .price-card:nth-child(4), .price-card:nth-child(5) { grid-column: span 3; }
-    .price-top-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
-    .price-card b { font-size: 23px; color: var(--acc); background: var(--acc-soft); padding: 4px 12px; border-radius: 9px; }
-    .hit-badge { font-size: 11px; font-weight: 800; text-transform: uppercase; background: linear-gradient(135deg, var(--acc), #0ea5e9); color: #fff; padding: 4px 9px; border-radius: 99px; }
-    .price-card h3 { font-weight: 800; font-size: 18.5px; margin: 0 0 6px; }
-    .price-card p { margin: 0 0 12px; font-size: 14px; color: var(--mut); }
-    .price-features { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font-size: 13.5px; color: var(--ink); border-top: 1px dashed var(--line); padding-top: 12px; }
-    .price-features li { display: flex; align-items: center; gap: 8px; }
-    .price-features li::before { content: "✓"; color: var(--ok); font-weight: 800; }
-    .price-order-link { font-size: 14px; font-weight: 700; color: #fff; background: var(--acc); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 11px 16px; border-radius: 11px; transition: background 0.15s ease; }
-    .price-order-link:hover { background: var(--acc-hover); }
+    .filter-btn {
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--mut);
+      font: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
 
-    /* 5. Сравнение выгоды */
-    .comp-table-wrap { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--radius); overflow-x: auto; box-shadow: var(--shadow-sm); }
-    .comp-table { width: 100%; border-collapse: collapse; min-width: 640px; text-align: left; font-size: 14.5px; }
-    .comp-table th, .comp-table td { padding: 16px 20px; border-bottom: 1px solid var(--line); }
-    .comp-table th { font-family: var(--font-display); font-size: 15.5px; background: var(--subtle); }
-    .comp-table th.hl, .comp-table td.hl { background: var(--acc-soft); border-left: 2px solid var(--acc); border-right: 2px solid var(--acc); font-weight: 600; }
-    .comp-table tr:last-child td { border-bottom: 0; }
-    .badge-ok { color: var(--ok); font-weight: 700; }
-    .badge-no { color: var(--mut); }
+    .filter-btn:hover {
+      border-color: var(--acc);
+      color: var(--ink);
+    }
 
-    /* 6. Умный калькулятор сметы со скидкой за комплект */
-    .estimator-card { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); display: grid; grid-template-columns: 1.28fr 0.92fr; gap: 24px; align-items: stretch; }
-    .est-options { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-    .est-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; border-radius: 13px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: 0.15s ease; width: 100%; }
-    .est-row:hover { border-color: var(--acc); }
-    .est-row.active { background: var(--acc-soft); border-color: var(--acc); }
-    .est-left { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14.5px; flex: 1; min-width: 0; }
-    .est-box { width: 21px; height: 21px; border-radius: 6px; border: 2px solid var(--mut); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0; }
-    .est-row.active .est-box { background: var(--acc); border-color: var(--acc); }
-    .est-price { font-weight: 800; font-size: 14.5px; white-space: nowrap; }
-    .est-total-panel { background: var(--subtle); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
-    .est-discount-pill { display: inline-block; background: var(--ok-soft); color: var(--ok); font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 99px; margin-bottom: 6px; }
-    .est-old-price { font-size: 15px; color: var(--mut); text-decoration: line-through; margin-right: 8px; font-weight: 600; }
-    .est-sum { font-size: clamp(28px, 4vw, 36px); font-weight: 800; color: var(--acc); line-height: 1.1; margin: 4px 0; }
-    .est-term { font-size: 13.5px; color: var(--mut); }
-    .est-bonuses { font-size: 12.5px; color: var(--mut); background: var(--card); padding: 10px 12px; border-radius: 11px; border: 1px solid var(--line); line-height: 1.45; }
-    .est-bonuses b { color: var(--ink); }
-    .est-input { width: 100%; padding: 12px 14px; border-radius: 11px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-size: 15px; margin-bottom: 10px; }
-    .est-input:focus { outline: none; border-color: var(--acc); }
-    .est-btn-group { display: flex; flex-direction: column; gap: 8px; }
+    .filter-btn.active {
+      background: var(--acc);
+      color: #fff;
+      border-color: var(--acc);
+    }
 
-    /* 7. Подход, Навыки, Отзывы, FAQ, Контакты */
-    .about-grid, .faq-list, .contact-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .box-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow-sm); }
-    .box-card h3 { margin: 0 0 12px; font-size: 19px; }
-    .box-card p { margin: 0 0 12px; color: var(--mut); }
-    .steps-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-    .steps-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14.5px; padding: 10px 12px; border-radius: 12px; background: var(--bg); }
-    .step-badge { width: 26px; height: 26px; border-radius: 8px; background: var(--acc); color: #fff; font-weight: 800; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .skill-group { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm); }
-    .skill-group h3 { margin: 0 0 12px; font-size: 16.5px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
-    .tag { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; font-size: 12.5px; font-weight: 600; }
-    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .review-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; box-shadow: var(--shadow-sm); }
-    .review-stars { color: var(--warn); font-size: 16px; letter-spacing: 2px; }
-    .review-card p { margin: 0; color: var(--mut); font-size: 14.5px; }
-    .review-author { display: flex; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
-    .review-avatar { width: 42px; height: 42px; border-radius: 12px; background: var(--acc-soft); color: var(--acc); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-    .review-info b { display: block; font-size: 14.5px; }
-    .review-info small { color: var(--mut); font-size: 12.5px; }
-    .faq-item { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow-sm); }
-    .faq-item[open] { border-color: var(--acc); }
-    .faq-item summary { font-weight: 700; font-size: 15px; cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary::after { content: "+"; font-size: 20px; font-weight: 700; color: var(--acc); }
-    .faq-item[open] summary::after { content: "−"; }
-    .faq-item p { margin: 10px 0 0; color: var(--mut); font-size: 14px; padding-top: 10px; border-top: 1px solid var(--line); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+      gap: 20px;
+    }
 
-    .contact-box { background: var(--card); border: 1.5px solid var(--line); border-radius: 24px; padding: 26px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
-    .contact-box::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--acc), #38bdf8, var(--acc)); }
-    .contact-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-radius: 14px; background: var(--bg); border: 1px solid var(--line); text-decoration: none; transition: 0.18s ease; }
-    .contact-item.full-row { grid-column: 1 / -1; }
-    .contact-item:hover { border-color: var(--acc); background: var(--card); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-    .contact-item-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .contact-brand-icon { width: 40px; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #fff; }
-    .contact-brand-icon svg { width: 22px; height: 22px; }
-    .tg-brand { background: linear-gradient(135deg, #2aabee, #229ed9); }
-    .wa-brand { background: linear-gradient(135deg, #25d366, #1ebe57); }
-    .max-brand { background: linear-gradient(135deg, #3b82f6, #8b5cf6); }
-    .vk-brand { background: linear-gradient(135deg, #0077ff, #0056cc); }
-    .mail-brand { background: linear-gradient(135deg, var(--acc), #6366f1); }
-    .contact-text-wrap { display: flex; flex-direction: column; min-width: 0; }
-    .contact-name { font-size: 15.5px; font-weight: 700; }
-    .contact-sub { font-size: 12.5px; color: var(--mut); }
-    .contact-item-arrow { color: var(--acc); font-weight: 700; font-size: 18px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+      transition: transform 0.34s cubic-bezier(.16, 1, .3, 1), box-shadow 0.34s cubic-bezier(.16, 1, .3, 1), border-color 0.28s ease;
+    }
 
-    /* Модальное окно и плавающая кнопка */
-    .modal-backdrop { position: fixed; inset: 0; background: rgba(11, 15, 23, 0.76); backdrop-filter: blur(6px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 16px; }
-    .modal-backdrop.open { display: flex; }
-    .modal-box { background: var(--card); border: 1px solid var(--line); border-radius: 22px; width: 100%; max-width: 440px; height: 88vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); position: relative; transition: max-width 0.25s ease; }
-    .modal-box.desktop-mode { max-width: 980px; }
-    .modal-spinner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 42px; height: 42px; border: 4px solid var(--line); border-top-color: var(--acc); border-radius: 50%; animation: modalSpin 0.75s linear infinite; z-index: 5; pointer-events: none; }
-    @keyframes modalSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-    .modal-head { padding: 12px 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--card); z-index: 10; flex-wrap: wrap; }
-    .modal-head b { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .modal-actions { display: flex; gap: 6px; flex-shrink: 0; }
-    .modal-iframe { width: 100%; flex: 1; border: 0; background: #fff; position: relative; z-index: 8; }
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 99px; font-size: 13.5px; font-weight: 700; opacity: 0; pointer-events: none; transition: 0.25s ease; z-index: 120; }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    footer.site-footer { margin: 36px 0 32px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--mut); font-size: 13.5px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translate3d(0, -5px, 0);
+      border-color: rgba(76, 91, 240, 0.4);
+    }
+
+    .card .thumb {
+      display: block;
+      position: relative;
+      line-height: 0;
+      overflow: hidden;
+      background: var(--subtle);
+      height: 210px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform 0.55s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .card:hover img {
+      transform: scale3d(1.03, 1.03, 1);
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      backdrop-filter: blur(6px);
+      color: var(--ink);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+      border: 1px solid var(--line);
+    }
+
+    .card .b {
+      padding: 18px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 18.5px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--mut);
+      font-size: 14.5px;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .card-link {
+      color: var(--acc);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .preview-btn {
+      background: var(--subtle);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 6px 11px;
+      font: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .preview-btn:hover {
+      border-color: var(--acc);
+      color: var(--acc);
+    }
+
+    /* 4. Услуги и цены */
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .price-card {
+      grid-column: span 2;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .price-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--acc);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .price-card:nth-child(4),
+    .price-card:nth-child(5) {
+      grid-column: span 3;
+    }
+
+    .price-card b,
+    .stat-box b,
+    .est-sum {
+      font-variant-numeric: lining-nums;
+    }
+
+    .price-card b {
+      font-size: 24px;
+      color: var(--acc);
+      display: inline-block;
+      margin-bottom: 6px;
+      background: var(--acc-soft);
+      padding: 4px 12px;
+      border-radius: 9px;
+    }
+
+    .price-card span {
+      font-weight: 700;
+      font-size: 17.5px;
+      display: block;
+    }
+
+    .price-card p {
+      margin: 6px 0 0;
+      font-size: 14.5px;
+      color: var(--mut);
+    }
+
+    .price-order-link {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--acc);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .price-order-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* 5. Интерактивный калькулятор сметы */
+    .estimator-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .est-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .est-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--ink);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .est-row:hover {
+      border-color: var(--acc);
+    }
+
+    .est-row.active {
+      background: var(--acc-soft);
+      border-color: var(--acc);
+    }
+
+    .est-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 14.5px;
+      line-height: 1.35;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .est-left span:last-child {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .est-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid var(--mut);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .est-row.active .est-box {
+      background: var(--acc);
+      border-color: var(--acc);
+    }
+
+    .est-price {
+      font-weight: 800;
+      font-size: 14.5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      color: var(--ink);
+    }
+
+    .est-total-panel {
+      background: var(--subtle);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .est-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--mut);
+    }
+
+    .est-sum {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 800;
+      color: var(--acc);
+      line-height: 1.1;
+      margin: 6px 0 4px;
+    }
+
+    .est-term {
+      font-size: 13.5px;
+      color: var(--mut);
+    }
+
+    .est-input {
+      width: 100%;
+      max-width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      font: inherit;
+      font-size: 16px;
+      margin-bottom: 10px;
+      transition: border-color 0.15s ease;
+    }
+
+    .est-input:focus {
+      outline: none;
+      border-color: var(--acc);
+    }
+
+    .est-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* 6. Обо мне */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .box-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .box-card h3 {
+      margin: 0 0 12px;
+      font-size: 19px;
+    }
+
+    .box-card p {
+      margin: 0 0 12px;
+      color: var(--mut);
+    }
+
+    .box-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .steps-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .steps-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 15px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--bg);
+    }
+
+    .step-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: var(--acc);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* 9. FAQ (Частые вопросы) */
+    .faq-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease;
+    }
+
+    .faq-item[open] {
+      border-color: var(--acc);
+    }
+
+    .faq-item summary {
+      font-weight: 700;
+      font-size: 15.5px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--acc);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-item p {
+      margin: 10px 0 0;
+      color: var(--mut);
+      font-size: 14.5px;
+      line-height: 1.55;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* 10. Контакты */
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--acc), #38bdf8, var(--acc));
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      text-decoration: none;
+      min-width: 0;
+      cursor: pointer;
+      transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .contact-item:hover {
+      border-color: var(--acc);
+      background: var(--card);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .contact-brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-brand-icon svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .contact-brand-icon.tg-brand {
+      background: linear-gradient(135deg, #2aabee, #229ed9);
+      color: #ffffff;
+    }
+
+    .contact-brand-icon.wa-brand {
+      background: linear-gradient(135deg, #25d366, #1ebe57);
+      color: #ffffff;
+    }
+
+    .contact-text-wrap {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .contact-name {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .contact-sub {
+      font-size: 12.5px;
+      color: var(--mut);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .contact-item-arrow {
+      color: var(--acc);
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.18s ease;
+    }
+
+    .contact-item:hover .contact-item-arrow {
+      transform: translateX(3px);
+    }
+
+    /* Модальное окно живого предпросмотра (с переключателем Мобильный / ПК) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 15, 23, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      width: 100%;
+      max-width: 440px;
+      height: 86vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      position: relative;
+      transition: max-width 0.25s ease;
+    }
+
+    .modal-box.desktop-mode {
+      max-width: 980px;
+    }
+
+    .modal-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 42px;
+      height: 42px;
+      border: 4px solid var(--line);
+      border-top-color: var(--acc);
+      border-radius: 50%;
+      animation: modalSpin 0.75s linear infinite;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    @keyframes modalSpin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .modal-head {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--card);
+      z-index: 10;
+    }
+
+    .modal-heading {
+      display: grid;
+      min-width: 0;
+    }
+
+    .modal-heading span {
+      color: var(--mut);
+      font-size: 12px;
+    }
+
+    .modal-heading b {
+      font-size: 14.5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .modal-actions > :is(a, button) {
+      min-width: 44px;
+      min-height: 44px;
+    }
+
+    .modal-iframe {
+      width: 100%;
+      flex: 1;
+      border: 0;
+      background: #fff;
+      position: relative;
+      z-index: 8;
+    }
+
+    /* Уведомление о копировании */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink);
+      color: var(--bg);
+      padding: 10px 18px;
+      border-radius: 99px;
+      font-size: 13.5px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease;
+      z-index: 120;
+      max-width: 90vw;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Подвал */
+    footer.site-footer {
+      margin: 36px 0 32px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--mut);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-note a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .footer-note {
+      max-width: 720px;
+      line-height: 1.45;
+    }
+
+    .footer-copy {
+      white-space: nowrap;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    @media (max-width: 768px) {
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      #modalViewportBtn {
+        display: none;
+      }
+    }
 
     @media (max-width: 920px) {
-      .hero, .tg-showcase, .estimator-card, .reviews-grid, .faq-list { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: repeat(2, 1fr); }
-      .price-card { grid-column: span 3; }
-      .price-card:nth-child(5) { grid-column: span 6; }
+      .hero,
+      .estimator-card,
+      .faq-list {
+        grid-template-columns: 1fr;
+      }
+      .price-card {
+        grid-column: span 3;
+      }
+      .price-card:nth-child(5) {
+        grid-column: span 6;
+      }
     }
+
     @media (max-width: 760px) {
-      .wrap { padding: 0 16px; }
-      #modalViewportBtn { display: none; }
-      .about-grid, .skills-grid, .price-grid, .contact-cards, .reviews-grid, .faq-list { grid-template-columns: 1fr; }
-      .contact-item.full-row, .price-card, .price-card:nth-child(4), .price-card:nth-child(5) { grid-column: span 1; }
-      .nav-bar { flex-wrap: wrap; padding: 10px 0; min-height: auto; }
-      .nav-links { order: 3; width: 100%; flex-wrap: nowrap; overflow-x: auto; gap: 8px; padding: 8px 0 4px; border-top: 1px solid var(--line); scrollbar-width: none; }
-      .nav-links::-webkit-scrollbar { display: none; }
-      .nav-links a { background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 6px 13px; font-size: 13px; flex-shrink: 0; }
-      footer.site-footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .wrap {
+        padding: 0 16px;
+      }
+      section {
+        scroll-margin-top: 112px;
+      }
+      .about-grid,
+      .price-grid,
+      .faq-list {
+        grid-template-columns: 1fr;
+      }
+      .price-card,
+      .price-card:nth-child(4),
+      .price-card:nth-child(5) {
+        grid-column: span 1;
+      }
+      .nav-bar {
+        flex-wrap: wrap;
+        padding: 12px 0 8px;
+        min-height: auto;
+        gap: 10px;
+      }
+      .logo {
+        padding-left: 2px;
+        font-size: 18px;
+      }
+      .nav-links {
+        order: 3;
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 8px;
+        padding: 8px 28px 4px 2px;
+        border-top: 1px solid var(--line);
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+      }
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+      .nav-links a {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        padding: 6px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+        flex-shrink: 0;
+        box-shadow: 0 1px 3px rgba(15, 20, 28, 0.04);
+      }
+      .hero {
+        padding: 20px 0 16px;
+        gap: 18px;
+      }
+      .hero h1 {
+        font-size: clamp(24px, 6.8vw, 36px);
+        line-height: 1.15;
+        margin-bottom: 12px;
+      }
+      .hero p.lead {
+        font-size: 15px;
+        line-height: 1.55;
+        margin-bottom: 18px;
+      }
+      .hero-card,
+      .box-card,
+      .contact-box,
+      .estimator-card,
+      .price-card {
+        padding: 20px;
+        border-radius: 18px;
+      }
+      .filter-bar {
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 28px 6px 0;
+        scrollbar-width: none;
+        mask-image: linear-gradient(to right, black 88%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
+      }
+      .filter-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .filter-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding: 7px 14px;
+        font-size: 13px;
+      }
+      .card-footer {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .card-footer .preview-btn {
+        flex: 1;
+        text-align: center;
+        padding: 9px 10px;
+        font-size: 13px;
+      }
+      .card-footer .card-link {
+        flex: 1;
+        text-align: center;
+        justify-content: center;
+        padding: 9px 10px;
+        font-size: 13px;
+        background: var(--acc-soft);
+        border-radius: 8px;
+      }
+      .est-total-panel {
+        padding: 18px;
+        border-radius: 14px;
+      }
+      .est-row {
+        padding: 12px;
+        gap: 10px;
+        border-radius: 10px;
+      }
+      .est-left {
+        font-size: 13.5px;
+        gap: 10px;
+      }
+      .est-price {
+        font-size: 13.5px;
+      }
+      .est-sum {
+        font-size: 28px;
+      }
+      #estSendBtn, #estSendWaBtn {
+        white-space: normal;
+        line-height: 1.3;
+        padding: 13px;
+        font-size: 14px;
+      }
+      footer.site-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin: 28px 0 24px;
+        padding-top: 18px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .modal-backdrop {
+        padding: 0;
+        align-items: flex-end;
+      }
+      .modal-box {
+        max-width: 100%;
+        width: 100%;
+        height: 92vh;
+        border-radius: 20px 20px 0 0;
+        border-bottom: 0;
+      }
+      .modal-head {
+        padding: 14px 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wrap {
+        padding: 0 14px;
+      }
+      .hero-guarantees {
+        gap: 6px 8px;
+      }
+      .hero-guarantees span {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        padding: 0;
+        gap: 10px;
+      }
+      .hero-actions .btn {
+        width: 100%;
+        padding: 13px 18px;
+        font-size: 14.5px;
+      }
+      .hero-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .stat-box {
+        padding: 10px 12px;
+      }
+      .stat-box b {
+        font-size: 18px;
+      }
+      .stat-box small {
+        font-size: 11.5px;
+      }
+      .card .thumb {
+        height: 185px;
+      }
     }
   </style>
+  <style>
+    @font-face {
+      font-family: "Cormorant Garamond";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url("fonts/cormorant-garamond-cyrillic.woff2") format("woff2");
+      unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    @font-face {
+      font-family: "Cormorant Garamond";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url("fonts/cormorant-garamond-latin.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    html:has(.portfolio-intro:not([hidden])) {
+      scrollbar-color: #121a27 #121a27;
+    }
+
+    .portfolio-intro {
+      --portfolio-intro-title-size: clamp(19px, 2.7vw, 52px);
+      position: fixed;
+      z-index: 200;
+      inset: 0;
+      isolation: isolate;
+      overflow: hidden;
+      color-scheme: dark;
+    }
+
+    .portfolio-intro[hidden] {
+      display: none;
+    }
+
+    .portfolio-intro__scene {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 48% 42%, #263448, #111924 57%, #070b12);
+      perspective: 1200px;
+      will-change: opacity;
+      transform: translateZ(0);
+    }
+
+    .portfolio-intro__slice {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .portfolio-intro.is-burning .portfolio-intro__slice--top {
+      animation: portfolio-intro-tear-up 1.18s cubic-bezier(.45, .02, .25, 1) both;
+    }
+
+    .portfolio-intro.is-burning .portfolio-intro__slice--bottom {
+      animation: portfolio-intro-tear-down 1.18s cubic-bezier(.45, .02, .25, 1) both;
+    }
+
+    .portfolio-intro.is-burning.is-fade .portfolio-intro__slice--top {
+      animation: portfolio-intro-fade 1.18s ease-in-out both;
+    }
+
+    .portfolio-intro.is-burning .portfolio-intro__skip {
+      animation: portfolio-intro-fade .37s ease .81s both;
+    }
+
+    @keyframes portfolio-intro-tear-up {
+      0%, 18% { transform: translateY(0); }
+      100% { transform: translateY(-60%); }
+    }
+
+    @keyframes portfolio-intro-tear-down {
+      0%, 18% { transform: translateY(0); }
+      100% { transform: translateY(60%); }
+    }
+
+    @keyframes portfolio-intro-fade {
+      to { opacity: 0; }
+    }
+
+    .portfolio-intro__wall {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(9px, 1.3vw, 22px);
+      width: max(150vw, 154vh);
+      transform: translate3d(-52%, -52%, 0) rotateX(23deg) rotateZ(-13deg) scale(1);
+      will-change: transform;
+      backface-visibility: hidden;
+      animation: portfolio-intro-drift 2.7s cubic-bezier(.16, 1, .3, 1) both;
+    }
+
+    .portfolio-intro.is-burning .portfolio-intro__wall {
+      animation-play-state: paused;
+    }
+
+    @keyframes portfolio-intro-drift {
+      to {
+        transform: translate3d(-48%, -47%, 0) rotateX(18deg) rotateZ(-11deg) scale(1.09);
+      }
+    }
+
+    .portfolio-intro__card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+      align-items: center;
+      gap: 5%;
+      min-width: 0;
+      aspect-ratio: 2.15;
+      padding: 6%;
+      overflow: hidden;
+      color: #141a24;
+      background: linear-gradient(145deg, #f0f0ef, #c3c8d0);
+      border: 1px solid #f2f0ea;
+      border-radius: 4px;
+      box-shadow: 0 8px 22px #070b1260;
+    }
+
+    .portfolio-intro__card:nth-child(even) {
+      background: linear-gradient(145deg, #d9dbe0, #afb8c5);
+    }
+
+    .portfolio-intro__copy {
+      container-type: inline-size;
+    }
+
+    .portfolio-intro__copy:only-child {
+      grid-column: 1 / -1;
+    }
+
+    .portfolio-intro__tag {
+      display: block;
+      margin-bottom: .65em;
+      color: #444e5c;
+      font: 700 clamp(8px, .77vw, 12px)/1.25 var(--font-sans);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .portfolio-intro__title {
+      display: block;
+      font: 600 var(--portfolio-intro-title-size)/.95 "Cormorant Garamond", Georgia, serif;
+      font-size: min(var(--portfolio-intro-title-size), calc(181cqi / var(--portfolio-intro-title-chars)));
+      letter-spacing: -.025em;
+      hyphens: auto;
+      overflow-wrap: break-word;
+    }
+
+    .portfolio-intro__preview {
+      display: block;
+      width: 100%;
+      aspect-ratio: 5 / 3;
+      object-fit: cover;
+      border: 1px solid #0e172940;
+      border-radius: 3px;
+      filter: grayscale(1) contrast(.9);
+      box-shadow: 0 5px 15px #121b3033;
+    }
+
+    .portfolio-intro__scene::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background: radial-gradient(ellipse at 49% 45%, transparent 16%, #0b14244d 55%, #080e1bd9 100%);
+    }
+
+    .portfolio-intro__fire {
+      position: absolute;
+      top: 40%;
+      left: 0;
+      width: 100%;
+      height: 20%;
+      overflow: visible;
+      pointer-events: none;
+      opacity: 0;
+      filter: drop-shadow(0 0 6px #ff6a00);
+    }
+
+    .portfolio-intro__edge {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .portfolio-intro__edge path {
+      vector-effect: non-scaling-stroke;
+    }
+
+    .portfolio-intro.is-burning:not(.is-fade) .portfolio-intro__fire {
+      animation: portfolio-intro-fire-light 1.18s ease both;
+    }
+
+    .portfolio-intro__fire path[data-seam] {
+      stroke-dasharray: 1 1;
+      stroke-dashoffset: 1;
+    }
+
+    .portfolio-intro.is-burning .portfolio-intro__fire path[data-seam] {
+      animation: portfolio-intro-fire-spread .55s cubic-bezier(.19, .74, .24, 1) both;
+    }
+
+    .portfolio-intro__branch {
+      opacity: 0;
+    }
+
+    .portfolio-intro.is-burning .portfolio-intro__branch {
+      animation: portfolio-intro-fire-light .75s ease .19s both;
+    }
+
+    @keyframes portfolio-intro-fire-spread {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes portfolio-intro-fire-light {
+      0%, 100% { opacity: 0; }
+      17%, 66% { opacity: 1; }
+    }
+
+    .portfolio-intro__skip {
+      position: absolute;
+      right: max(20px, env(safe-area-inset-right));
+      bottom: max(20px, env(safe-area-inset-bottom));
+      padding: 10px 16px;
+      border: 1px solid #ffffff65;
+      border-radius: 4px;
+      background: #0b111deb;
+      color: #fff;
+      font: 600 12px/1.4 var(--font-sans);
+      cursor: pointer;
+    }
+
+    .portfolio-intro__skip:hover,
+    .portfolio-intro__skip:focus-visible {
+      border-color: #ffb300;
+    }
+
+    @media (max-width: 640px) {
+      .portfolio-intro {
+        --portfolio-intro-title-size: clamp(16px, 4.9vw, 31px);
+      }
+
+      .portfolio-intro__wall {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: max(174vw, 92vh);
+        gap: 8px;
+      }
+
+      .portfolio-intro__card {
+        aspect-ratio: 1.7;
+      }
+
+      .portfolio-intro__fire {
+        filter: drop-shadow(0 0 5px #ff6a00);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .portfolio-intro {
+        display: none;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="hero.css">
+  <link rel="stylesheet" href="works-intro.css">
+  <link rel="stylesheet" href="portfolio.css">
+  <link rel="stylesheet" href="closing.css">
 </head>
 <body>
+  <div class="portfolio-intro" id="portfolioIntro" hidden>
+    <div class="portfolio-intro__slice portfolio-intro__slice--top" aria-hidden="true">
+      <div class="portfolio-intro__scene">
+        <div class="portfolio-intro__wall"></div>
+      </div>
+      <svg class="portfolio-intro__fire" viewBox="0 0 1 .2" preserveAspectRatio="none" focusable="false">
+        <g class="portfolio-intro__edge">
+          <path class="portfolio-intro__branch" stroke="#ff872e" stroke-width="1.1"></path>
+          <path data-seam="left" pathLength="1" stroke="#ff6a00" stroke-width="4"></path>
+          <path data-seam="right" pathLength="1" stroke="#ff6a00" stroke-width="4"></path>
+          <path data-seam="left" pathLength="1" stroke="#fff0d2" stroke-width="1.25"></path>
+          <path data-seam="right" pathLength="1" stroke="#fff0d2" stroke-width="1.25"></path>
+        </g>
+      </svg>
+    </div>
+    <button class="portfolio-intro__skip" data-goal="intro_skip" type="button">Пропустить</button>
+  </div>
 
+
+  <!-- Навигация -->
   <header class="site-header">
     <div class="wrap nav-bar">
       <a href="#" class="logo">
         <span class="logo-dot"></span>
         <span id="navName">Рамиль</span>
+        <span class="logo-tagline">Сайты и калькуляторы<br>Telegram-боты для бизнеса</span>
       </a>
       <nav class="nav-links" aria-label="Основная навигация">
-        <a href="#how-it-works">Симулятор заявок</a>
-        <a href="#portfolio">Портфолио (12)</a>
-        <a href="#services">Тарифы</a>
-        <a href="#comparison">Выгода</a>
+        <a href="#how-it-works">Как это работает</a>
+        <a href="#portfolio">Примеры (12)</a>
+        <a href="#services">Цены</a>
         <a href="#calc-section">Калькулятор</a>
+        <a href="#about">Подход</a>
         <a href="#faq">FAQ</a>
         <a href="#contacts">Контакты</a>
       </nav>
       <div class="nav-right">
-        <button class="theme-toggle" id="themeBtn" type="button" title="Сменить тему" aria-label="Сменить тему">🌙</button>
-        <a class="btn sm" id="navCta" href="https://t.me/ramiltools" target="_blank" rel="noopener">Написать в ТГ</a>
+        <a class="btn sm" id="navCta" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener">Связаться</a>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <!-- 1. Первый экран -->
-    <section class="hero">
-      <div class="hero-main">
-        <div class="hero-badges">
-          <div class="geo-tag">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span id="heroLocation">Стерлитамак • Работаю по всей РФ</span>
+  <main class="site-main">
+    <!-- 1. Первый экран (Hero) -->
+    <section class="hero" aria-labelledby="h1">
+      <div class="hero-pin">
+        <div class="hero-screen">
+          <div class="hero-atmosphere" aria-hidden="true"></div>
+          <div class="hero-layout hero-shell">
+            <div class="hero-main">
+              <p class="hero-kicker" data-hero-reveal>Сайты · Калькуляторы · Telegram-боты</p>
+              <h1 id="h1"><span class="hero-title-line" data-hero-reveal style="--hero-reveal-delay:80ms">Сайты, калькуляторы</span> <span class="hero-title-line" data-hero-reveal style="--hero-reveal-delay:160ms">и <span class="hero-title-product">Telegram-боты</span>,</span> <span class="hero-title-line" data-hero-reveal style="--hero-reveal-delay:240ms">которые приводят</span> <span class="hero-title-line" data-hero-reveal style="--hero-reveal-delay:320ms">заявки</span></h1>
+              <p class="lead" id="lead" data-hero-reveal style="--hero-reveal-delay:400ms">
+                Разрабатываю быстрые одностраничные сайты, интерактивные калькуляторы расчёта цены, квизы и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Фиксирую смету до старта, передаю проект без абонентской платы.
+              </p>
+              <div class="geo-tag" data-hero-reveal style="--hero-reveal-delay:440ms">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span id="heroLocation">Стерлитамак • Работаю с бизнесом по всей РФ</span>
+              </div>
+              <div class="hero-actions" data-hero-reveal style="--hero-reveal-delay:480ms">
+                <a class="btn hero-work-button" href="#portfolio">Смотреть работы <span aria-hidden="true">↗</span></a>
+              </div>
+              <div class="hero-quick-links" data-hero-reveal style="--hero-reveal-delay:560ms">
+                <span>Или напишите напрямую:</span>
+                <div class="social-icons">
+                  <!-- Иконка Max -->
+                  <a class="social-icon-link" id="contactMaxBtnHead" data-goal="max_click" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener" title="Написать в Max" aria-label="Написать в Max">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="maxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#3b82f6"/>
+                          <stop offset="52%" stop-color="#6d28d9"/>
+                          <stop offset="100%" stop-color="#9333ea"/>
+                        </linearGradient>
+                      </defs>
+                      <rect width="24" height="24" rx="5.5" fill="url(#maxGrad)"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4.7C7.97 4.7 4.7 7.82 4.7 11.68c0 2.02.88 3.84 2.28 5.12-.12.78-.42 1.68-.48 1.85-.08.22.14.42.36.33.24-.1 1.44-.65 2.28-1.15.88.35 1.84.55 2.86.55 4.03 0 7.3-3.12 7.3-6.98S16.03 4.7 12 4.7Zm0 10.68c-2.12 0-3.84-1.66-3.84-3.7s1.72-3.7 3.84-3.7 3.84 1.66 3.84 3.7-1.72 3.7-3.84 3.7Z" fill="#ffffff"/>
+                    </svg>
+                  </a>
+                  <!-- Иконка WhatsApp -->
+                  <a class="social-icon-link" id="contactWaBtnHead" data-goal="wa_click" href="https://wa.me/79613626062" target="_blank" rel="noopener" title="Написать в WhatsApp" aria-label="Написать в WhatsApp">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="waGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                          <stop offset="0%" stop-color="#5bf675"/>
+                          <stop offset="100%" stop-color="#25d366"/>
+                        </linearGradient>
+                      </defs>
+                      <rect width="24" height="24" rx="5.5" fill="url(#waGrad)"/>
+                      <g transform="translate(1.2, 1.2)">
+                        <path d="M10.8 3.3a7.5 7.5 0 0 0-6.4 11.4l-1 3.7 3.8-1a7.5 7.5 0 1 0 3.6-14.1Z" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8.4 7.6c-.16-.36-.33-.37-.48-.37h-.4c-.15 0-.4.05-.6.28-.2.23-.76.75-.76 1.83s.78 2.12.89 2.27c.11.15 1.52 2.43 3.74 3.3 1.85.73 2.23.59 2.63.55.4-.04 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.15-.42-.26l-1.26-.62c-.22-.11-.37-.16-.51.09-.14.22-.58.73-.71.88-.13.15-.26.17-.47.06-.22-.11-.93-.34-1.77-1.09-.66-.58-1.1-1.3-1.23-1.52-.13-.22-.02-.34.09-.45.1-.1.22-.25.33-.38.11-.13.15-.22.22-.37.07-.15.03-.28-.02-.38-.05-.1-.48-1.18-.66-1.61Z" fill="#ffffff"/>
+                      </g>
+                    </svg>
+                  </a>
+                  <!-- Иконка ВКонтакте -->
+                  <a class="social-icon-link" id="vk" data-goal="vk_click" href="https://vk.com/id449983999" target="_blank" rel="noopener" title="Страница ВКонтакте" aria-label="Страница ВКонтакте">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect width="24" height="24" rx="5.5" fill="#0077FF"/>
+                      <path d="M12.8 16.5c-4.5 0-7.1-3.1-7.2-8.3h2.3c.1 3.8 1.8 5.4 3.1 5.7V8.2h2.1v3.3c1.3-.1 2.6-1.6 3.1-3.3h2.1c-.4 2.1-1.8 3.6-2.8 4.2 1 .5 2.7 1.8 3.3 4.1h-2.3c-.5-1.6-1.8-2.8-3.5-3v3h-.2Z" fill="#ffffff"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="hero-visual">
+              <div class="hero-film" aria-hidden="true">
+                <img class="hero-film-poster" src="assets/hero-film.webp" alt="" width="900" height="750" decoding="async">
+              </div>
+              <a class="hero-demo-link" href="#portfolio"><span>Протестировать 12 решений ↓</span></a>
+            </div>
           </div>
-          <div class="avail-tag">
-            <span class="avail-dot"></span>
-            <span>Свободен для новых проектов</span>
+          <div class="hero-footer hero-shell">
+            <span class="hero-signature" id="heroSignature" aria-hidden="true">Рамиль</span>
+            <a class="hero-scroll" href="#how-it-works">Листайте <span aria-hidden="true">↓</span></a>
+            <a class="btn hero-telegram" id="tg" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener">Обсудить задачу в Telegram</a>
           </div>
-        </div>
-
-        <h1>Сайты, калькуляторы и Telegram-боты, <span class="text-grad">которые приводят заявки</span></h1>
-        <p class="lead" id="lead">
-          Разрабатываю быстрые веб-инструменты для малого бизнеса: клиент за 30 секунд считает стоимость услуги на сайте, а вы получаете готовую заявку с телефоном в Telegram. 0 ₽ абонентской платы.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn" id="tg" href="https://t.me/ramiltools" target="_blank" rel="noopener">Обсудить проект в Telegram →</a>
-          <a class="btn alt" href="#calc-section">Рассчитать смету со скидкой 10%</a>
-        </div>
-
-        <div class="hero-quick-links">
-          <span>Быстрая связь:</span>
-          <div class="social-icons">
-            <a class="social-icon-link" id="contactMaxBtnHead" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener" title="Max">
-              <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5.5" fill="#6d28d9"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12 4.7C7.97 4.7 4.7 7.82 4.7 11.68c0 2.02.88 3.84 2.28 5.12-.12.78-.42 1.68-.48 1.85-.08.22.14.42.36.33.24-.1 1.44-.65 2.28-1.15.88.35 1.84.55 2.86.55 4.03 0 7.3-3.12 7.3-6.98S16.03 4.7 12 4.7Zm0 10.68c-2.12 0-3.84-1.66-3.84-3.7s1.72-3.7 3.84-3.7 3.84 1.66 3.84 3.7-1.72 3.7-3.84 3.7Z" fill="#fff"/></svg>
-            </a>
-            <a class="social-icon-link" id="contactWaBtnHead" href="https://wa.me/79613626062" target="_blank" rel="noopener" title="WhatsApp">
-              <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5.5" fill="#25d366"/><g transform="translate(1.2, 1.2)"><path d="M10.8 3.3a7.5 7.5 0 0 0-6.4 11.4l-1 3.7 3.8-1a7.5 7.5 0 1 0 3.6-14.1Z" stroke="#fff" stroke-width="1.75"/><path d="M8.4 7.6c-.16-.36-.33-.37-.48-.37h-.4c-.15 0-.4.05-.6.28-.2.23-.76.75-.76 1.83s.78 2.12.89 2.27c.11.15 1.52 2.43 3.74 3.3 1.85.73 2.23.59 2.63.55.4-.04 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.15-.42-.26l-1.26-.62c-.22-.11-.37-.16-.51.09-.14.22-.58.73-.71.88-.13.15-.26.17-.47.06-.22-.11-.93-.34-1.77-1.09-.66-.58-1.1-1.3-1.23-1.52-.13-.22-.02-.34.09-.45.1-.1.22-.25.33-.38.11-.13.15-.22.22-.37.07-.15.03-.28-.02-.38-.05-.1-.48-1.18-.66-1.61Z" fill="#fff"/></g></svg>
-            </a>
-            <a class="social-icon-link" id="vk" href="https://vk.com/id449983999" target="_blank" rel="noopener" title="ВКонтакте">
-              <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5.5" fill="#0077FF"/><path d="M12.8 16.5c-4.5 0-7.1-3.1-7.2-8.3h2.3c.1 3.8 1.8 5.4 3.1 5.7V8.2h2.1v3.3c1.3-.1 2.6-1.6 3.1-3.3h2.1c-.4 2.1-1.8 3.6-2.8 4.2 1 .5 2.7 1.8 3.3 4.1h-2.3c-.5-1.6-1.8-2.8-3.5-3v3h-.2Z" fill="#fff"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-guarantees">
-          <span>Без абонплаты (0 ₽/мес)</span>
-          <span>Заявки в Telegram за 1 сек</span>
-          <span>Письменный договор</span>
-          <span>Соответствие 152-ФЗ РФ</span>
+            <div class="hero-exit" aria-hidden="true">
+              <div class="hero-exit__cream"></div>
+              <svg class="hero-exit__cracks" viewBox="0 0 1000 600" preserveAspectRatio="none" focusable="false">
+                <defs>
+                  <g id="heroExitFissures">
+                    <path pathLength="1" d="M-16 119L34 129 51 113 79 124 112 103 145 118 166 89 210 92 231 68 265 79 287 58 330 52 362 24 401 32 428 -8"/>
+                    <path pathLength="1" d="M78 124L91 150 124 156 129 177 167 186 181 210 221 220 243 249"/>
+                    <path pathLength="1" d="M230 68L223 44 240 19 226 -8M331 52L354 75 381 77 409 106 445 100 468 128"/>
+                    <path pathLength="1" d="M1016 336L965 323 937 341 907 328 871 358 842 347 811 378 772 379 758 403 712 414 691 449 657 457 621 491"/>
+                    <path pathLength="1" d="M908 328L885 311 887 289 851 270 857 247 820 224 815 201"/>
+                    <path pathLength="1" d="M1018 516L972 503 941 524 912 510 889 541 853 538 824 560 793 556 758 586 718 581 685 610"/>
+                    <path pathLength="1" d="M888 541L893 562 876 578 879 608M811 378L824 410 858 416 867 441 907 448"/>
+                    <path pathLength="1" d="M-13 447L32 429 68 455 109 447 133 470 161 472 188 501 231 510 265 545 298 549 326 578 361 580 396 607"/>
+                    <path pathLength="1" d="M132 469L145 440 171 436 178 415 212 405 229 376M231 509L224 545 253 567 244 591 271 609"/>
+                  </g>
+                </defs>
+                <use href="#heroExitFissures" stroke="#ff581d" stroke-width="4" opacity=".82"/>
+                <use href="#heroExitFissures" stroke="#fff2d1" stroke-width="1.25"/>
+              </svg>
+              <div class="hero-exit__flash"></div>
+            </div>
         </div>
       </div>
 
-      <aside class="hero-card">
-        <div class="profile-top">
-          <div class="avatar-wrap">
-            <img class="avatar" id="avatarImg" src="photo_2026-11-05_17-56-09.jpg" alt="Рамиль — Веб-разработчик">
-            <span class="status-dot" title="На связи"></span>
+      <div class="hero-profile">
+        <aside class="hero-card hero-shell">
+          <div class="profile-top">
+            <div class="avatar-wrap">
+              <img class="avatar" id="avatarImg" src="assets/avatar-192.webp" srcset="assets/avatar-192.webp 192w, assets/avatar-384.webp 384w" sizes="clamp(74px, calc(7.2vw - 8px), 100px)" width="192" height="192" decoding="async" alt="Рамиль — веб-разработчик">
+            </div>
+            <div>
+              <h2 id="cardName">Рамиль</h2>
+              <span class="profile-badge">Full-stack & Автоматизация</span>
+            </div>
           </div>
-          <div class="profile-meta">
-            <span class="profile-badge">Full-stack & Telegram Bots</span>
-            <h2 id="cardName">Рамиль</h2>
-            <span class="profile-sub">Веб-инструменты для роста продаж</span>
+          <p class="profile-bio">
+            Создаю быстрые веб-инструменты, которые за 30 секунд рассчитывают клиенту стоимость вашей услуги и отправляют вам готовую горячую заявку с номером телефона.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-box">
+              <b>12</b>
+              <small>готовых решений под разные ниши ниже</small>
+            </div>
+            <div class="stat-box">
+              <b>3–5 дней</b>
+              <small>запуск вашего проекта под ключ</small>
+            </div>
           </div>
-        </div>
-
-        <p class="profile-bio">
-          Вместо тяжёлых шаблонных конструкторов пишу чистый, молниеносный код под задачи вашего бизнеса. Передаю проект с удобной панелью настроек цен и полной независимостью от подписок.
-        </p>
-
-        <div class="hero-stats">
-          <div class="stat-box">
-            <b>12 решений</b>
-            <small>готовых интерактивных демо ниже</small>
+          <div class="hero-guarantees">
+            <span>Без абонентской платы (0 ₽/мес)</span>
+            <span>Заявки сразу в Telegram и WhatsApp</span>
+            <span>Письменный договор</span>
+            <span><a href="privacy.html">Есть политика конфиденциальности</a></span>
           </div>
-          <div class="stat-box">
-            <b>3–5 дней</b>
-            <small>срок запуска проекта под ключ</small>
-          </div>
-          <div class="stat-box">
-            <b>98 / 100</b>
-            <small>скорость загрузки на смартфонах</small>
-          </div>
-          <div class="stat-box">
-            <b>0 ₽ / мес</b>
-            <small>экономия ~12 000 ₽/год на Tilda</small>
-          </div>
-        </div>
-
-        <div class="hero-card-foot">
-          <span>Нужна оценка вашей задачи?</span>
-          <a href="#portfolio">Смотреть примеры работ ↓</a>
-        </div>
-      </aside>
+        </aside>
+      </div>
     </section>
-
-    <!-- 2. Интерактивный симулятор заявок в Telegram -->
+    <!-- 2. Как приходят заявки -->
     <section id="how-it-works">
-      <div class="tg-showcase">
+      <div class="tg-showcase hero-shell">
         <div>
-          <span class="sec-badge">Автоматизация продаж</span>
-          <h2>Посмотрите, как заявки от клиентов приходят вам в Telegram</h2>
+          <h2>Клиент сам считает цену — вы получаете готовую заявку в Telegram</h2>
           <p class="tg-showcase-desc">
-            Переключите сферу бизнеса справа — именно в таком виде бот присылает вам готовую смету через 1 секунду после того, как клиент нажал кнопку на сайте:
+            Больше не нужно тратить полдня на однотипные переписки «А сколько стоит?». Сайт сам опрашивает клиента по вашим расценкам и присылает готовую смету:
           </p>
           <div class="tg-benefits">
             <div class="tg-benefit-item">
               <span class="tg-icon">1</span>
-              <div><b>Отсекает пустые вопросы «А сколько стоит?».</b> Клиент сам выбирает параметры и видит прозрачный расчёт до звонка.</div>
+              <div><b>Работает 24/7 без вашего участия.</b> Клиент видит прозрачный расчёт вечером или в выходной и сразу оставляет контакт.</div>
             </div>
             <div class="tg-benefit-item">
               <span class="tg-icon">2</span>
-              <div><b>Горячий контакт в 1 клик.</b> Вы сразу видите имя, телефон, список выбранных услуг и предварительный чек.</div>
+              <div><b>Платите один раз, без ежемесячной подписки конструкторов.</b>
+                <!-- TODO: добавить расчёт экономии с реальными ценами подписок после подтверждения цифр. -->
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="tg-sim-wrap">
-          <div class="tg-tabs" id="tgSimTabs">
-            <button type="button" class="tg-tab active" data-niche="auto">🚗 Авто / Детейлинг</button>
-            <button type="button" class="tg-tab" data-niche="remont"> 🛠 Потолки / Ремонт</button>
-            <button type="button" class="tg-tab" data-niche="clean">✨ Клининг / Мебель</button>
-            <button type="button" class="tg-tab" data-niche="cafe">☕ Кафе / Доставка</button>
+        <div class="tg-mock" id="tgMock" role="group" aria-label="Демонстрация уведомлений о заявках в Telegram">
+          <div class="tg-mock-head">
+            <span class="tg-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.9 3.3 3.2 10.1c-.8.3-.8 1.4 0 1.7l4.5 1.5 1.7 5.2c.2.6 1 .8 1.4.3l2.4-2.4 4.4 3.2c.6.4 1.4.1 1.5-.6l2.9-14.7c.2-.9-.7-1.7-1.5-1.3Z"/><path class="tg-plane-fold" d="m8 13.4 9.4-6.2-7 7.3"/></svg></span>
+            <span class="tg-who">
+              <b>Бот заявок вашего сайта</b>
+              <small class="tg-status">
+                <i aria-hidden="true"></i>
+                <span class="tg-status-default">бот · мгновенно в Telegram</span>
+                <span class="tg-status-typing">печатает…</span>
+              </small>
+            </span>
+            <button class="tg-replay" type="button" hidden title="Показать ещё раз" aria-label="Показать анимацию заявки ещё раз">
+              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M13.2 8A5.2 5.2 0 1 1 11.7 4.3M13.4 2.4v3.2h-3.2"/></svg>
+            </button>
           </div>
 
-          <div class="tg-mock" aria-live="polite">
-            <div class="tg-mock-head">
-              <span>🤖 Бот заявок вашего сайта</span>
-              <span class="tg-mock-tag">● Онлайн 24/7</span>
-            </div>
-            <div class="tg-bubble" id="tgSimBubble"></div>
-            <div class="tg-inline-btns">
-              <div class="tg-inline-btn">📞 Позвонить клиенту</div>
-              <div class="tg-inline-btn">💬 Написать в WhatsApp</div>
+          <!-- Пуш-уведомления: только для анимации, контент дублируется в сообщениях ниже -->
+          <div class="tg-push tg-push--1" aria-hidden="true">
+            <span class="tg-push-icon"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.9 3.3 3.2 10.1c-.8.3-.8 1.4 0 1.7l4.5 1.5 1.7 5.2c.2.6 1 .8 1.4.3l2.4-2.4 4.4 3.2c.6.4 1.4.1 1.5-.6l2.9-14.7c.2-.9-.7-1.7-1.5-1.3Z"/><path class="tg-plane-fold" d="m8 13.4 9.4-6.2-7 7.3"/></svg></span>
+            <span class="tg-push-text">
+              <span class="tg-push-top"><b>Заявки · ваш сайт</b><em>сейчас</em></span>
+              <span class="tg-push-body"><b>🔥 Новая заявка · 28&nbsp;400&nbsp;₽</b><span>Андрей · Натяжной потолок, 24&nbsp;м²</span></span>
+            </span>
+          </div>
+          <div class="tg-push tg-push--2" aria-hidden="true">
+            <span class="tg-push-icon"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.9 3.3 3.2 10.1c-.8.3-.8 1.4 0 1.7l4.5 1.5 1.7 5.2c.2.6 1 .8 1.4.3l2.4-2.4 4.4 3.2c.6.4 1.4.1 1.5-.6l2.9-14.7c.2-.9-.7-1.7-1.5-1.3Z"/><path class="tg-plane-fold" d="m8 13.4 9.4-6.2-7 7.3"/></svg></span>
+            <span class="tg-push-text">
+              <span class="tg-push-top"><b>Заявки · ваш сайт</b><em>сейчас</em></span>
+              <span class="tg-push-body"><b>🔥 Новая заявка · 6&nbsp;750&nbsp;₽</b><span>Марина · Уборка квартиры, 54&nbsp;м²</span></span>
+            </span>
+          </div>
+
+          <div class="tg-chat">
+            <div class="tg-date">Сегодня</div>
+            <div class="tg-stack">
+              <div class="tg-skeleton" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="tg-bubble tg-bubble--1">
+                <div class="tg-bubble-title">🔥 Новая заявка с калькулятора</div>
+                <div class="tg-bubble-fields">
+                  <div><b>Имя:</b> Андрей</div>
+                  <div><b>Телефон:</b> +7 (917) 000-00-00</div>
+                  <div><b>Услуга:</b> Натяжной потолок (матовый, 24 м²)</div>
+                  <div><b>Опции:</b> Точечные светильники ×6, скрытый карниз 3 м</div>
+                  <div class="tg-total"><b>Предварительный расчёт:</b> <span class="tg-sum" data-sum="28400">28&nbsp;400&nbsp;₽</span></div>
+                </div>
+                <div class="tg-meta"><time>21:47</time><svg class="tg-checks" viewBox="0 0 18 11" aria-hidden="true" focusable="false"><path class="tg-check-1" pathLength="1" d="M1.2 5.9 4.5 9.2 11.2 1.7"/><path class="tg-check-2" pathLength="1" d="M7.2 8.4 8 9.2 14.9 1.7"/></svg></div>
+              </div>
+              <div class="tg-bubble tg-bubble--2" aria-hidden="true">
+                <div class="tg-bubble-title">🔥 Новая заявка с калькулятора</div>
+                <div class="tg-bubble-fields">
+                  <div><b>Имя:</b> Марина</div>
+                  <div><b>Телефон:</b> +7 (987) 000-00-00</div>
+                  <div><b>Услуга:</b> Уборка квартиры (генеральная, 54 м²)</div>
+                  <div><b>Опции:</b> Мытьё окон ×4, балкон</div>
+                  <div class="tg-total"><b>Предварительный расчёт:</b> <span class="tg-sum" data-sum="6750">6&nbsp;750&nbsp;₽</span></div>
+                </div>
+                <div class="tg-meta"><time>23:40</time><svg class="tg-checks" viewBox="0 0 18 11" aria-hidden="true" focusable="false"><path class="tg-check-1" pathLength="1" d="M1.2 5.9 4.5 9.2 11.2 1.7"/><path class="tg-check-2" pathLength="1" d="M7.2 8.4 8 9.2 14.9 1.7"/></svg></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3. Портфолио -->
-    <section id="portfolio">
-      <div class="sec-head">
-        <div>
-          <span class="sec-badge">Портфолио • 12 рабочих систем</span>
-          <h2>Протестируйте готовые инструменты вживую</h2>
-          <p>Каждая карточка — это полноценное рабочее веб-приложение. Нажмите «Предпросмотр» (можно переключать вид Смартфон / ПК) или откройте проект в новой вкладке.</p>
-        </div>
-        <div class="filter-bar" id="filterBar">
-          <button class="filter-btn active" type="button" data-cat="all">Все работы</button>
-          <button class="filter-btn" type="button" data-cat="calc">Калькуляторы и квизы</button>
-          <button class="filter-btn" type="button" data-cat="site">Сайты и онлайн-меню</button>
-          <button class="filter-btn" type="button" data-cat="promo">CRM и промо-акции</button>
-        </div>
+    <section class="works-interlude" aria-labelledby="worksInterludeTitle">
+      <div class="works-interlude__glows" aria-hidden="true">
+        <span class="works-interlude__glow" style="--top:11%;--left:22%;--size:clamp(38px,9vw,127px);--speed:.62;--float-x:25px;--duration:8s"></span>
+        <span class="works-interlude__glow" style="--top:59%;--left:9%;--size:clamp(48px,10vw,145px);--speed:-.71;--opacity:.74;--blur:31px;--float-x:-18px;--duration:11s"></span>
+        <span class="works-interlude__glow" style="--top:23%;--left:69%;--size:clamp(42px,7.5vw,110px);--speed:.85;--opacity:.72;--blur:23px;--float-y:16px;--duration:7s"></span>
+        <span class="works-interlude__glow" style="--top:72%;--left:67%;--size:clamp(55px,13vw,182px);--speed:-.40;--opacity:.60;--blur:38px;--float-x:-25px;--duration:12s"></span>
+        <span class="works-interlude__glow" style="--top:35%;--left:91%;--size:clamp(38px,6vw,82px);--speed:1.1;--opacity:.73;--blur:22px;--float-y:21px;--duration:9s"></span>
+        <span class="works-interlude__glow" style="--top:78%;--left:37%;--size:clamp(26px,4vw,60px);--speed:.42;--opacity:.56;--blur:22px;--duration:10s"></span>
       </div>
-      <div class="grid" id="projectsGrid"></div>
-    </section>
+      <h2 class="works-interlude__title" id="worksInterludeTitle"><span>Дизайн</span> <span>и код</span></h2>
 
-    <!-- 4. Тарифы и цены -->
-    <section id="services">
-      <div class="sec-head">
-        <div>
-          <span class="sec-badge">Прайс-лист по Стерлитамаку и РФ</span>
-          <h2>Услуги и фиксированные цены</h2>
-          <p>Никаких скрытых доплат и ежемесячных подписок. В каждую услугу уже включена мобильная адаптация и привязка заявок к вашему мессенджеру.</p>
-        </div>
+      <div class="works-seal" aria-hidden="true">
+        <svg viewBox="0 0 320 320" focusable="false">
+          <defs>
+            <ellipse id="worksSealLoop" cx="160" cy="160" rx="49" ry="134"/>
+          </defs>
+          <circle cx="160" cy="160" r="143" fill="#f4eee9" fill-opacity=".93" stroke="currentColor" stroke-width="1.1"/>
+          <circle cx="160" cy="160" r="139" fill="none" stroke="currentColor" stroke-width=".65" stroke-dasharray="1 3"/>
+          <g fill="none" stroke="currentColor" stroke-width=".78" opacity=".79">
+            <use href="#worksSealLoop"/>
+            <use href="#worksSealLoop" transform="rotate(15 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(30 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(45 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(60 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(75 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(90 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(105 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(120 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(135 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(150 160 160)"/>
+            <use href="#worksSealLoop" transform="rotate(165 160 160)"/>
+          </g>
+          <ellipse cx="160" cy="160" rx="106" ry="54" fill="#f4eee9" stroke="currentColor" stroke-width=".95"/>
+          <ellipse cx="160" cy="160" rx="101" ry="49" fill="none" stroke="currentColor" stroke-width=".65"/>
+          <path d="M160 5v17m0 276v17M5 160h17m276 0h17" stroke="currentColor" stroke-width="1.3"/>
+          <path d="m160 75 3 6-3 6-3-6Zm0 158 3 6-3 6-3-6Z" fill="currentColor"/>
+        </svg>
+        <span class="works-seal__name">Рамиль</span>
       </div>
-      <div class="price-grid" id="servicesGrid"></div>
-    </section>
 
-    <!-- 5. Таблица сравнения выгоды -->
-    <section id="comparison">
-      <div class="sec-head">
-        <div>
-          <span class="sec-badge">Сравнение подходов</span>
-          <h2>Почему разработка на чистом коде выгоднее конструкторов и студий</h2>
-          <p>Сравните реальные расходы бизнеса за 1 год использования сайта.</p>
-        </div>
-      </div>
-      <div class="comp-table-wrap">
-        <table class="comp-table">
-          <thead>
-            <tr>
-              <th>Критерий</th>
-              <th class="hl">Разработка у меня</th>
-              <th>Конструкторы (Tilda / Wix)</th>
-              <th>Веб-студии города</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><b>Стоимость создания</b></td>
-              <td class="hl"><span class="badge-ok">от 12 000 ₽ (один раз)</span></td>
-              <td>от 10 000 ₽ + настройка</td>
-              <td>от 40 000 – 80 000 ₽</td>
-            </tr>
-            <tr>
-              <td><b>Абонентская плата</b></td>
-              <td class="hl"><span class="badge-ok">0 ₽ / мес (навсегда)</span></td>
-              <td class="badge-no">9 000 – 15 000 ₽ каждый год</td>
-              <td class="badge-no">Платная техподдержка</td>
-            </tr>
-            <tr>
-              <td><b>Скорость загрузки с телефона</b></td>
-              <td class="hl"><span class="badge-ok">Мгновенно (0.4 сек, чистый код)</span></td>
-              <td class="badge-no">Тяжёлые скрипты (2–4 сек)</td>
-              <td>Зависит от CMS</td>
-            </tr>
-            <tr>
-              <td><b>Срок запуска в работу</b></td>
-              <td class="hl"><span class="badge-ok">3–5 дней под ключ</span></td>
-              <td>5–10 дней</td>
-              <td class="badge-no">От 3–4 недель</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="works-interlude__cards" aria-hidden="true">
+        <figure class="works-interlude__card" style="--left:7%;--top:12%;--side:-1;--tilt:-10deg;--speed:.32">
+          <img src="thumbs/potolki.svg" alt="" width="700" height="420" loading="lazy" decoding="async">
+          <figcaption>Калькулятор стоимости потолков</figcaption>
+        </figure>
+        <figure class="works-interlude__card" style="--right:7%;--top:16%;--side:1;--tilt:10deg;--speed:-.41;--width:13vw">
+          <img src="thumbs/menu_kafe.svg" alt="" width="700" height="420" loading="lazy" decoding="async">
+          <figcaption>Меню и заказ с телефона</figcaption>
+        </figure>
+        <figure class="works-interlude__card" style="--left:10%;--bottom:9%;--side:-1;--tilt:7deg;--speed:.67;--width:13vw">
+          <img src="thumbs/crm_zakazy.svg" alt="" width="700" height="420" loading="lazy" decoding="async">
+          <figcaption>Учёт заказов</figcaption>
+        </figure>
+        <figure class="works-interlude__card" style="--right:9%;--bottom:10%;--side:1;--tilt:-8deg;--speed:-.58;--width:15vw">
+          <img src="thumbs/demo_barbershop.svg" alt="" width="700" height="420" loading="lazy" decoding="async">
+          <figcaption>Сайт барбершопа с записью</figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- 6. Умный калькулятор сметы -->
-    <section id="calc-section">
-      <div class="sec-head">
+    <section class="works-smoke" aria-labelledby="worksSmokeTitle">
+      <div class="works-smoke__atmosphere" aria-hidden="true"></div>
+      <div class="works-smoke__light" aria-hidden="true"></div>
+      <h2 class="works-smoke__title" id="worksSmokeTitle">Работы.</h2>
+    </section>
+
+    <!-- 3. Портфолио проектов -->
+    <section id="portfolio" aria-labelledby="portfolioTitle">
+      <div class="sec-head portfolio-heading portfolio-width">
         <div>
-          <span class="sec-badge">Интерактивный расчёт + Скидка 10% за комплекс</span>
-          <h2>Соберите свой проект за 20 секунд</h2>
-          <p>При выборе 2 и более модулей автоматически активируется скидка 10% за комплексный заказ.</p>
+          <h2 id="portfolioTitle">Интерактивные решения в действии</h2>
+          <p>Каждый проект можно поклацать прямо здесь: нажмите «Предпросмотр» (доступен режим смартфона и ПК) или откройте на весь экран.</p>
         </div>
       </div>
+      <div class="portfolio-track">
+        <div class="portfolio-stage">
+          <div class="portfolio-mosaic" aria-hidden="true"></div>
+          <div class="portfolio-toolbar portfolio-width">
+            <div class="filter-bar" id="filterBar">
+              <button class="filter-btn active" type="button" data-cat="all">Все работы</button>
+              <button class="filter-btn" type="button" data-cat="calc">Калькуляторы и квизы</button>
+              <button class="filter-btn" type="button" data-cat="site">Сайты и онлайн-меню</button>
+              <button class="filter-btn" type="button" data-cat="promo">CRM и промо-акции</button>
+            </div>
+            <div class="portfolio-pager" role="group" aria-label="Переключение проектов" hidden>
+              <button type="button" aria-label="Предыдущий проект">↑</button>
+              <output aria-label="Текущий проект" aria-live="polite"></output>
+              <button type="button" aria-label="Следующий проект">↓</button>
+            </div>
+          </div>
+          <div class="grid portfolio-width" id="projectsGrid"></div>
+        </div>
+      </div>
+    </section>
 
-      <div class="estimator-card">
-        <div class="est-options" id="estList"></div>
-        <div class="est-total-panel">
+    <div class="pricing-band">
+      <div class="wrap">
+      <!-- 4. Что делаю и сколько это стоит -->
+      <section id="services">
+        <div class="sec-head">
           <div>
-            <div class="est-discount-pill" id="estDiscountBadge" style="display:none">🔥 Скидка 10% за комплект активна!</div>
-            <div class="est-sum-row">
-              <span class="est-old-price" id="estOldSum" style="display:none">0 ₽</span>
+            <h2>Услуги и актуальные цены</h2>
+            <p>Стоимость фиксируется до старта работ и не меняется в процессе. Нажмите на нужную услугу, чтобы обсудить детали в Telegram.</p>
+          </div>
+        </div>
+
+        <div class="price-grid" id="servicesGrid"></div>
+      </section>
+
+      <!-- 5. Интерактивный калькулятор сметы -->
+      <section id="calc-section">
+        <div class="sec-head">
+          <div>
+            <h2>Посчитайте смету вашей задачи за 20 секунд</h2>
+            <p>Отметьте нужные модули — точно такой же удобный расчёт мы можем внедрить на ваш сайт для ваших клиентов.</p>
+          </div>
+        </div>
+
+        <div class="estimator-card">
+          <div class="est-options" id="estList"></div>
+          <div class="est-total-panel">
+            <div>
+              <span class="est-label">Ориентировочная инвестиция</span>
               <div class="est-sum" id="estSum">12 000 ₽</div>
+              <div class="est-term" id="estTerm">Ориентировочный срок: 3–5 дн.</div>
             </div>
-            <div class="est-term" id="estTerm">Ориентировочный срок: 4–6 дн.</div>
+            <form id="estForm" onsubmit="event.preventDefault()">
+              <input type="text" class="est-input" id="estBusiness" placeholder="Ваша ниша, например: ремонт" aria-label="Ваша сфера бизнеса">
+              <div class="est-btn-group">
+                <button type="button" class="btn" style="width:100%" id="estSendBtn" data-goal="calc_send_tg" aria-describedby="estPrivacyNote">Отправить расчёт в Telegram →</button>
+                <button type="button" class="btn btn-wa" style="width:100%" id="estSendWaBtn" data-goal="calc_send_wa" aria-describedby="estPrivacyNote">Отправить расчёт в WhatsApp →</button>
+              </div>
+              <p class="privacy-note" id="estPrivacyNote">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+      </div>
+    </div>
+
+    <div class="order-transition" aria-hidden="true"></div>
+
+    <div class="closing-dark">
+      <!-- 6. Раздел «Обо мне» -->
+      <section id="about" class="order-section" aria-labelledby="orderTitle">
+        <div class="order-scene">
+          <div class="order-width">
+            <h2 class="order-heading" id="orderTitle" data-text="Как заказать." aria-label="Как заказать.">Как заказать.</h2>
+            <h3 class="order-steps-title" id="orderStepsTitle">Как строится работа (4 простых шага)</h3>
+            <ol class="steps-list" role="list" aria-labelledby="orderStepsTitle">
+              <li class="is-current">
+                <span class="step-badge" aria-hidden="true">01</span>
+                <span class="order-step-name">Задача и смета</span>
+                <p class="order-step-description">Разбираем вашу задачу в мессенджере за 15 минут. Фиксируем точную стоимость и сроки в договоре.</p>
+              </li>
+              <li>
+                <span class="step-badge" aria-hidden="true">02</span>
+                <span class="order-step-name">Рабочая версия</span>
+                <p class="order-step-description">После предоплаты 30–50% собираю рабочую версию под вашу нишу и присылаю ссылку для теста на телефоне.</p>
+              </li>
+              <li>
+                <span class="step-badge" aria-hidden="true">03</span>
+                <span class="order-step-name">Правки и заявки</span>
+                <p class="order-step-description">Дорабатываем детали по вашим пожеланиям, настраиваем отправку заявок в ваш Telegram или WhatsApp.</p>
+              </li>
+              <li>
+                <span class="step-badge" aria-hidden="true">04</span>
+                <span class="order-step-name">Передача проекта</span>
+                <p class="order-step-description">После оплаты остатка передаю все исходники, помогаю привязать домен и даю инструкцию по смене цен.</p>
+              </li>
+            </ol>
+          </div>
+          <svg class="order-sparks" viewBox="0 0 1000 112" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <defs>
+              <g id="orderSparksPaths">
+                <path d="M-9 64l46-7 21 13 35-19 33 5 20-19 40 5 24-17 48 4 19-13 48 13 25-9 37 14 55 5"/>
+                <path d="m92 51 7 17 26 6 13 14 46 8 18 21m56-88 15 13 31 3 19 16 34 2 23 14"/>
+                <path d="M1009 49l-53 7-24-16-31 13-25-15-44 15-25-10-30 22-31-4-21 14-42-4-31 14-38-4-29 15"/>
+                <path d="m877 38-11-19-29 4-26-15-26 5m-47 50-12-16-34 3-22-13-40 7"/>
+                <path d="M-12 107l57-8 38 13 34-8 29 12m674 1 25-16 33 5 21-16 26 9 32-14 45 12"/>
+              </g>
+            </defs>
+            <use href="#orderSparksPaths" stroke="#ff4a23" stroke-width="3.3" opacity=".62"/>
+            <use href="#orderSparksPaths" stroke="#ffe1ba" stroke-width="1"/>
+          </svg>
+        </div>
+
+        <div class="wrap about-content">
+          <div class="sec-head">
+            <div>
+              <h2>Подход к разработке и гарантии</h2>
+              <p>Делаю ставку на высокую конверсию с мобильных телефонов, мгновенную загрузку и независимость владельца бизнеса.</p>
+            </div>
           </div>
 
-          <div class="est-bonuses">
-            <b>🎁 Бесплатно включено в смету:</b><br>
-            • Настройка быстрого хостинга и SSL (https)<br>
-            • Подключение уведомлений в ваш Telegram<br>
-            • Панель быстрой смены цен без программиста
+          <div class="about-grid">
+            <div class="box-card">
+              <h3>Почему предприниматели выбирают такой формат</h3>
+              <p>
+                85% клиентов в Стерлитамаке ищут услуги со смартфона. Тяжёлые шаблонные сайты долго грузятся и запутывают посетителя, из-за чего вы теряете рекламный бюджет.
+              </p>
+              <p>
+                Я пишу чистый, лёгкий код без лишних конструкторов: страницы открываются за доли секунды даже при слабом мобильном интернете. В каждом проекте предусмотрен понятный блок конфигурации, где вы можете сами за минуту поменять цены, акции или контакты без помощи программиста.
+              </p>
+              <p><a href="privacy.html">Есть политика конфиденциальности</a>.</p>
+            </div>
           </div>
-
-          <form id="estForm" onsubmit="event.preventDefault()">
-            <input type="text" class="est-input" id="estBusiness" placeholder="Ваша ниша (например: детейлинг, потолки, кафе)" aria-label="Ваша сфера бизнеса">
-            <div class="est-btn-group">
-              <button type="button" class="btn" style="width:100%" id="estSendBtn">Зафиксировать расчёт в Telegram →</button>
-              <button type="button" class="btn btn-wa" style="width:100%" id="estSendWaBtn">Отправить расчёт в WhatsApp →</button>
-            </div>
-          </form>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 7. Подход и этапы -->
-    <section id="about">
-      <div class="sec-head">
-        <div>
-          <span class="sec-badge">Прозрачный процесс</span>
-          <h2>Как строится работа над вашим проектом</h2>
-          <p>Никакой бюрократии — общаемся напрямую, результат показываю на вашем смартфоне уже через 2–3 дня.</p>
-        </div>
-      </div>
-
-      <div class="about-grid">
-        <div class="box-card">
-          <h3>Фокус на окупаемости вложений</h3>
-          <p>
-            Большинству компаний в Стерлитамаке не нужен сложный корпоративный портал за 100 тысяч рублей. Нужен чёткий, быстрый инструмент, куда можно пустить трафик из ВК, 2ГИС, Авито или Яндекс.Карт и сразу получать заявки.
-          </p>
-          <p>
-            Один заказ на полировку авто, монтаж потолков или химчистку мебели полностью отбивает вложения в калькулятор или лендинг в первую же неделю работы.
-          </p>
+      <div class="wrap closing-support">
+      <!-- 9. Частые вопросы (FAQ) -->
+      <section id="faq">
+        <div class="sec-head">
+          <div>
+            <h2>Частые вопросы перед стартом</h2>
+            <p>Коротко о том, как устроена оплата, поддержка и размещение готового сайта в интернете.</p>
+          </div>
         </div>
 
-        <div class="box-card">
-          <h3>4 шага от идеи до первых заявок</h3>
-          <ol class="steps-list">
-            <li><span class="step-badge">1</span><span>Обсуждаем задачу в мессенджере за 15 минут. Фиксируем точную стоимость и сроки в договоре.</span></li>
-            <li><span class="step-badge">2</span><span>После предоплаты 30–50% собираю рабочую версию под ваш прайс и присылаю ссылку для теста.</span></li>
-            <li><span class="step-badge">3</span><span>Вносим правки, подключаем вашего Telegram-бота для мгновенного приёма лидов.</span></li>
-            <li><span class="step-badge">4</span><span>Передаю все файлы, подключаю домен и показываю, как менять цены за 1 минуту.</span></li>
-          </ol>
-        </div>
-      </div>
-    </section>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Действительно ли нет абонентской платы?</summary>
+            <p>Да. Я не использую платные конструкторы вроде Tilda, где нужно платить по 750–1500 ₽ каждый месяц. Вы оплачиваете разработку один раз и получаете все исходные файлы. Единственный возможный расход — красивое доменное имя (.ru) около 200–500 ₽ раз в год.</p>
+          </details>
 
-    <!-- 8. Технологии -->
-    <section id="skills">
-      <div class="sec-head">
-        <div>
-          <span class="sec-badge">Архитектура и стек</span>
-          <h2>Технологии под капотом</h2>
-        </div>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <h3>Frontend & Скорость</h3>
-          <div class="tags"><span class="tag">HTML5 / CSS3</span><span class="tag">JavaScript ES6+</span><span class="tag">Mobile-First UI</span><span class="tag">Schema.org SEO</span></div>
-        </div>
-        <div class="skill-group">
-          <h3>Интерактив и лиды</h3>
-          <div class="tags"><span class="tag">Калькуляторы цен</span><span class="tag">Квиз-воронки</span><span class="tag">Онлайн-запись</span><span class="tag">Мини-CRM / CSV</span></div>
-        </div>
-        <div class="skill-group">
-          <h3>Telegram-решения</h3>
-          <div class="tags"><span class="tag">Telegram Bot API</span><span class="tag">Фильтр отзывов QR</span><span class="tag">Меню с корзиной</span><span class="tag">Автоворонки 24/7</span></div>
-        </div>
-        <div class="skill-group">
-          <h3>Видео и трафик</h3>
-          <div class="tags"><span class="tag">Reels / Shorts</span><span class="tag">TikTok / ВК Клипы</span><span class="tag">Динамические титры</span><span class="tag">Саунд-дизайн</span></div>
-        </div>
-      </div>
-    </section>
+          <details class="faq-item">
+            <summary>Смогу ли я сам поменять цены или телефон на сайте?</summary>
+            <p>Конечно. Вверху каждого файла вынесен понятный блок настроек (CONFIG), где все цены, названия услуг и контакты написаны обычным русским текстом. Плюс я записываю короткую памятку.</p>
+          </details>
 
-    <!-- 9. Отзывы -->
-    <section id="reviews">
-      <div class="sec-head">
-        <div>
-          <span class="sec-badge">Обратная связь</span>
-          <h2>Отзывы предпринимателей</h2>
-        </div>
-      </div>
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>«Заказывали калькулятор для клининга. Окупился в первую же неделю: клиенты перестали писать пустые сообщения "а сколько стоит", сразу выбирают площадь и присылают готовую смету в Telegram. Спасибо Рамилю!»</p>
-          <div class="review-author"><div class="review-avatar">АК</div><div class="review-info"><b>Алексей К.</b><small>Клининговая служба, Стерлитамак</small></div></div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>«Сделал сайт-квиз по натяжным потолкам за 4 дня под ключ, всё идеально летает с телефона. Чётко по договору и фиксированной цене, без навязывания платных подписок на конструкторы.»</p>
-          <div class="review-author"><div class="review-avatar">ДМ</div><div class="review-info"><b>Данил М.</b><small>Монтаж натяжных потолков</small></div></div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>«Очень довольны онлайн-меню для кофейни. Гости сканируют QR-код на столике, собирают корзину и заказ падает бариста в рабочий чат. Быстро, удобно и 0 рублей абонплаты!»</p>
-          <div class="review-author"><div class="review-avatar">АР</div><div class="review-info"><b>Алина Р.</b><small>Владелица кофейни</small></div></div>
-        </div>
-      </div>
-    </section>
+          <details class="faq-item">
+            <summary>Поможете ли вы выложить сайт в интернет и подключить домен?</summary>
+            <p>Да, я полностью помогаю с публикацией проекта на бесплатный быстрый хостинг, подключением SSL-сертификата безопасности (https) и привязкой вашего домена.</p>
+          </details>
 
-    <!-- 10. FAQ -->
-    <section id="faq">
-      <div class="sec-head">
-        <div>
-          <span class="sec-badge">Ответы на вопросы</span>
-          <h2>Частые вопросы перед стартом</h2>
+          <details class="faq-item">
+            <summary>Что если у меня нет готовых текстов и фотографий?</summary>
+            <p>Не проблема. Я сам составлю продающую структуру и тексты под вашу нишу на основе 3–5 вопросов о вашем бизнесе, а также подберу качественную графику и иконки.</p>
+          </details>
         </div>
-      </div>
-      <div class="faq-list">
-        <details class="faq-item">
-          <summary>Действительно ли нет абонентской платы?</summary>
-          <p>Да. Я не использую конструкторы вроде Tilda, где нужно платить по 750–1500 ₽ каждый месяц. Вы платите за разработку один раз и получаете чистый код навсегда. Единственный расход — домен (.ru) около 200–500 ₽ раз в год.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Смогу ли я сам поменять цены или телефон на сайте?</summary>
-          <p>Конечно. Вверху каждого файла вынесен понятный блок настроек (CONFIG), где все цены, названия услуг и контакты меняются за минуту обычным текстом. Плюс я записываю короткую инструкцию.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Поможете ли вы выложить сайт в интернет и подключить домен?</summary>
-          <p>Да, публикация проекта на быстрый бесплатный хостинг, подключение защищённого протокола HTTPS и привязка вашего домена уже входят в стоимость работ.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Что если у меня нет готовых текстов и фотографий?</summary>
-          <p>Я сам составлю продающую структуру, заголовки и формулировки под вашу нишу на основе короткого созвона или переписки, а также подберу качественную графику.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- 11. Контакты -->
-    <section id="contacts">
-      <div class="sec-head">
-        <div>
-          <span class="sec-badge">Прямая связь</span>
-          <h2>Обсудим вашу задачу сегодня</h2>
-          <p>Напишите в любой удобный мессенджер — бесплатно разберу ваш запрос и предложу оптимальный вариант.</p>
-        </div>
+      </section>
       </div>
 
-      <div class="contact-box">
-        <div class="contact-cards">
-          <a class="contact-item" id="contactTgRow" href="https://t.me/ramiltools" target="_blank" rel="noopener">
-            <div class="contact-item-left">
-              <div class="contact-brand-icon tg-brand"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></div>
-              <div class="contact-text-wrap"><span class="contact-name">Telegram</span><span class="contact-sub">@ramiltools • Отвечаю за 5–10 минут</span></div>
-            </div>
-            <span class="contact-item-arrow">→</span>
-          </a>
+      <!--
+      TODO: добавить отзывы после получения реальных текстов и разрешения на публикацию.
+      <section id="reviews" aria-labelledby="reviewsTitle">
+        <h2 id="reviewsTitle">Отзывы</h2>
+        <figure>
+          <blockquote><p>[Согласованный текст отзыва]</p></blockquote>
+          <figcaption>[Согласованные имя и проект]</figcaption>
+        </figure>
+      </section>
+      -->
 
-          <a class="contact-item" id="contactWaRow" href="https://wa.me/79613626062" target="_blank" rel="noopener">
-            <div class="contact-item-left">
-              <div class="contact-brand-icon wa-brand"><svg viewBox="0 0 24 24" fill="none"><g transform="translate(1.2, 1.2)"><path d="M10.8 3.3a7.5 7.5 0 0 0-6.4 11.4l-1 3.7 3.8-1a7.5 7.5 0 1 0 3.6-14.1Z" stroke="#fff" stroke-width="1.75"/><path d="M8.4 7.6c-.16-.36-.33-.37-.48-.37h-.4c-.15 0-.4.05-.6.28-.2.23-.76.75-.76 1.83s.78 2.12.89 2.27c.11.15 1.52 2.43 3.74 3.3 1.85.73 2.23.59 2.63.55.4-.04 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.15-.42-.26l-1.26-.62c-.22-.11-.37-.16-.51.09-.14.22-.58.73-.71.88-.13.15-.26.17-.47.06-.22-.11-.93-.34-1.77-1.09-.66-.58-1.1-1.3-1.23-1.52-.13-.22-.02-.34.09-.45.1-.1.22-.25.33-.38.11-.13.15-.22.22-.37.07-.15.03-.28-.02-.38-.05-.1-.48-1.18-.66-1.61Z" fill="#fff"/></g></svg></div>
-              <div class="contact-text-wrap"><span class="contact-name">WhatsApp</span><span class="contact-sub">+7 (961) 362-60-62</span></div>
-            </div>
-            <span class="contact-item-arrow">→</span>
-          </a>
-
-          <a class="contact-item" id="contactMaxRow" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener">
-            <div class="contact-item-left">
-              <div class="contact-brand-icon max-brand"><svg viewBox="0 0 24 24" fill="none"><path d="M6.2 16.5V7.5h2.4l3.4 5.2 3.4-5.2h2.4v9h-2.1v-5.6l-3.1 4.7h-1.2l-3.1-4.7v5.6H6.2Z" fill="#fff"/></svg></div>
-              <div class="contact-text-wrap"><span class="contact-name">Max</span><span class="contact-sub">Быстрый чат в мессенджере</span></div>
-            </div>
-            <span class="contact-item-arrow">→</span>
-          </a>
-
-          <a class="contact-item" id="contactVkRow" href="https://vk.com/id449983999" target="_blank" rel="noopener">
-            <div class="contact-item-left">
-              <div class="contact-brand-icon vk-brand"><svg viewBox="0 0 24 24" fill="none"><path d="M12.8 16.5c-4.5 0-7.1-3.1-7.2-8.3h2.3c.1 3.8 1.8 5.4 3.1 5.7V8.2h2.1v3.3c1.3-.1 2.6-1.6 3.1-3.3h2.1c-.4 2.1-1.8 3.6-2.8 4.2 1 .5 2.7 1.8 3.3 4.1h-2.3c-.5-1.6-1.8-2.8-3.5-3v3h-.2Z" fill="#fff"/></svg></div>
-              <div class="contact-text-wrap"><span class="contact-name">ВКонтакте</span><span class="contact-sub">Личная страница</span></div>
-            </div>
-            <span class="contact-item-arrow">→</span>
-          </a>
-
-          <a class="contact-item full-row" id="contactMailRow" href="mailto:idrisov.smm@gmail.com">
-            <div class="contact-item-left">
-              <div class="contact-brand-icon mail-brand"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
-              <div class="contact-text-wrap"><span class="contact-name" id="contactMailLabel">idrisov.smm@gmail.com</span><span class="contact-sub">Нажмите, чтобы скопировать адрес или отправить письмо</span></div>
-            </div>
-            <span class="contact-item-arrow">→</span>
-          </a>
+      <!-- 10. Контакты -->
+      <section id="contacts" class="final-contact" aria-labelledby="contactTitle">
+        <div class="contact-frame" aria-hidden="true">
+          <span class="contact-frame__corner" style="--x:0%;--y:0%"></span>
+          <span class="contact-frame__corner" style="--x:100%;--y:0%"></span>
+          <span class="contact-frame__corner" style="--x:0%;--y:100%"></span>
+          <span class="contact-frame__corner" style="--x:100%;--y:100%"></span>
         </div>
-      </div>
-    </section>
 
-    <footer class="site-footer">
-      <div>Работаю по письменному договору с фиксированной сметой. Все проекты соответствуют требованиям 152-ФЗ РФ.</div>
-      <div><b>© <span id="yearNow">2026</span> Рамиль</b></div>
-    </footer>
+        <div class="final-contact__center">
+          <h2 class="final-contact__title" id="contactTitle"><span>Есть идея?</span> <span>Напишите.</span></h2>
+          <p class="final-contact__lead">Напишите в удобный мессенджер — разберём вашу задачу, предложу подходящее решение и назову точную стоимость.</p>
+          <div class="contact-primary-links">
+            <a class="contact-item contact-primary" id="contactTgRow" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener">
+              <div class="contact-item-left">
+                <div class="contact-brand-icon tg-brand">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m22 2-7 20-4-9-9-4Z"/>
+                    <path d="M22 2 11 13"/>
+                  </svg>
+                </div>
+                <div class="contact-text-wrap">
+                  <span class="contact-name" id="contactTgLabel">Telegram</span>
+                  <span class="contact-sub">@ramiltools • Отвечаю быстрее всего</span>
+                </div>
+              </div>
+              <span class="contact-item-arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="contact-item contact-primary" id="contactWaRow" data-goal="wa_click" href="https://wa.me/79613626062" target="_blank" rel="noopener">
+              <div class="contact-item-left">
+                <div class="contact-brand-icon wa-brand">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <g transform="translate(1.2, 1.2)">
+                      <path d="M10.8 3.3a7.5 7.5 0 0 0-6.4 11.4l-1 3.7 3.8-1a7.5 7.5 0 1 0 3.6-14.1Z" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8.4 7.6c-.16-.36-.33-.37-.48-.37h-.4c-.15 0-.4.05-.6.28-.2.23-.76.75-.76 1.83s.78 2.12.89 2.27c.11.15 1.52 2.43 3.74 3.3 1.85.73 2.23.59 2.63.55.4-.04 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.15-.42-.26l-1.26-.62c-.22-.11-.37-.16-.51.09-.14.22-.58.73-.71.88-.13.15-.26.17-.47.06-.22-.11-.93-.34-1.77-1.09-.66-.58-1.1-1.3-1.23-1.52-.13-.22-.02-.34.09-.45.1-.1.22-.25.33-.38.11-.13.15-.22.22-.37.07-.15.03-.28-.02-.38-.05-.1-.48-1.18-.66-1.61Z" fill="#ffffff"/>
+                    </g>
+                  </svg>
+                </div>
+                <div class="contact-text-wrap">
+                  <span class="contact-name" id="contactWaLabel">WhatsApp</span>
+                  <span class="contact-sub">+7 (961) 362-60-62</span>
+                </div>
+              </div>
+              <span class="contact-item-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+          <span class="contact-signature" aria-hidden="true">Рамиль</span>
+        </div>
+
+        <div class="final-contact__channels">
+          <a id="contactVkRow" data-goal="vk_click" href="https://vk.com/id449983999" target="_blank" rel="noopener"><span id="contactVkLabel">ВКонтакте</span></a>
+          <a id="contactMaxRow" data-goal="max_click" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener"><span id="contactMaxLabel">Max</span></a>
+          <a id="contactMailRow" data-goal="email_copy" title="Скопировать адрес и открыть почту"><span id="contactMailLabel">Почта</span></a>
+        </div>
+      </section>
+
+      <!-- Подвал -->
+      <footer class="site-footer final-footer">
+        <div class="footer-note">
+          Работаю по письменному договору с фиксированной сметой.
+          <a href="privacy.html">Политика конфиденциальности</a>
+          <p class="footer-tech" id="skills">Технологии: HTML/CSS/JS, Telegram Bot API, Schema.org, экспорт CSV.</p>
+        </div>
+        <div class="footer-copy">
+          © <span id="yearNow">2026</span> <span id="footerName">Рамиль</span>
+        </div>
+      </footer>
+    </div>
   </main>
 
-  <div class="modal-backdrop" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <!-- Модальное окно живого предпросмотра проектов -->
+  <div class="modal-backdrop" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDemoLabel">
     <div class="modal-box" id="modalBox">
       <div class="modal-spinner" id="modalSpinner"></div>
       <div class="modal-head">
-        <b id="modalTitle">Предпросмотр</b>
+        <div class="modal-heading">
+          <b id="modalTitle">Предпросмотр</b>
+          <span id="modalDemoLabel">Демо-проект</span>
+        </div>
         <div class="modal-actions">
-          <button class="btn alt sm" id="modalViewportBtn" type="button">💻 Вид ПК</button>
-          <a class="btn sm" id="modalOrderSimilar" href="#" target="_blank" rel="noopener">Хочу похожий →</a>
-          <a class="btn alt sm" id="modalOpenFull" href="#" target="_blank" rel="noopener">↗</a>
-          <button class="btn alt sm" id="modalCloseBtn" type="button">✕</button>
+          <button class="btn alt sm" id="modalViewportBtn" type="button" title="Переключить вид Смартфон / ПК">💻 Вид ПК</button>
+          <a class="btn sm" id="modalOpenFull" data-goal="demo_open_new_tab" href="#" target="_blank" rel="noopener">На весь экран ↗</a>
+          <button class="btn alt sm" id="modalCloseBtn" type="button" aria-label="Закрыть предпросмотр">✕</button>
         </div>
       </div>
       <iframe class="modal-iframe" id="modalFrame" src="about:blank" title="Интерактивный пример проекта"></iframe>
@@ -811,193 +2433,301 @@
   <div class="toast" id="toast" role="status" aria-live="polite">Почта скопирована</div>
 
   <script>
+    // =========================================================================
+    // 1. БЛОК НАСТРОЕК (ВСЕ ДАННЫЕ И ФОТО В ОДНОМ МЕСТЕ)
+    // =========================================================================
     const CONFIG = {
       name: "Рамиль",
       initials: "РИ",
-      avatar: "photo_2026-11-05_17-56-09.jpg",
+      location: "Стерлитамак • Работаю с бизнесом по всей РФ",
+      heroTitle: "Сайты, калькуляторы и Telegram-боты, которые приводят заявки",
+      heroLead: "Разрабатываю быстрые одностраничные сайты, интерактивные калькуляторы расчёта цены, квизы и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Фиксирую смету до старта, передаю проект без абонентской платы.",
       telegram: "ramiltools",
       whatsapp: "79613626062",
-      email: "idrisov.smm@gmail.com"
+      whatsappLabel: "WhatsApp",
+      max: "https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc",
+      maxLabel: "Max",
+      vk: "https://vk.com/id449983999"
     };
 
-    const TG_SIM_DATA = {
-      auto: {
-        title: "🔥 Заявка с сайта: Детейлинг / Автосервис",
-        client: "Марат (+7 917 450-12-88)",
-        params: "Седан (Camry) • Глубокая полировка кузова + Керамика в 2 слоя",
-        extra: "Химчистка передних сидений, антидождь передней полусферы",
-        total: "26 500 ₽ (выбрана запись на пятницу)"
-      },
-      remont: {
-        title: "🔥 Заявка с калькулятора: Натяжные потолки",
-        client: "Андрей (+7 987 104-55-20)",
-        params: "Матовый ПВХ • Площадь: 28 м² (2 комнаты)",
-        extra: "Точечные светильники ×8, скрытый карниз с подсветкой 3.2 м",
-        total: "31 400 ₽ (нужен замер в Стерлитамаке)"
-      },
-      clean: {
-        title: "🔥 Заявка с калькулятора: Выездная химчистка",
-        client: "Елена (+7 961 360-99-14)",
-        params: "Угловой диван (4 посадочных места) + Матрас двуспальный",
-        extra: "Удаление запахов, экспресс-сушка турбофеном",
-        total: "5 800 ₽ (адрес: пр. Октября)"
-      },
-      cafe: {
-        title: "🔥 Новый заказ из QR-меню #104",
-        client: "Столик №4 / Самовывоз через 20 мин (+7 927 311-08-45)",
-        params: "Капучино 0.4 ×2, Боул с лососем ×1, Сырники с ягодами ×1",
-        extra: "Оплата по СБП при получении • Без сахара",
-        total: "1 290 ₽"
-      }
-    };
-
+    // Единый прайс-лист (рыночные цены по Стерлитамаку) — синхронизирован с калькулятором
     const SERVICES_DATA = [
       {
         title: "Одностраничный сайт под ключ",
-        calcName: "Продающий одностраничный сайт (лендинг / визитка) под ключ",
-        price: 12000, days: 4, defaultOn: true, featured: true, badge: "Хит для бизнеса",
-        desc: "Упакованный сайт с высокой конверсией, созданный специально под мобильный трафик из рекламы, ВК и карт.",
-        features: ["Продающая структура и тексты под вашу нишу", "Адаптивный дизайн + тёмная/светлая тема", "Прямая отправка заявок в Telegram и WhatsApp", "Бесплатный хостинг, SSL и панель смены цен"],
-        ctaText: "Заказать сайт под ключ →"
+        calcName: "Одностраничный сайт (лендинг / визитка) с формой заявки и картой",
+        price: 12000,
+        days: 3,
+        defaultOn: true,
+        desc: "За 3–5 дней: продающая структура, прайс, портфолио, отзывы, интерактивная карта и приём заявок в Telegram.",
+        ctaText: "Заказать сайт →"
       },
       {
         title: "Калькулятор или квиз-опросник",
         calcName: "Интерактивный калькулятор стоимости или пошаговый квиз",
-        price: 7000, days: 2, defaultOn: false, featured: true, badge: "Окупается с 1–2 заказов",
-        desc: "Интерактивный модуль расчёта цены: удерживает внимание посетителя и увеличивает число заявок в 2–3 раза.",
-        features: ["Индивидуальная формула под ваш прайс-лист", "Готовая смета клиента падает вам в мессенджер", "Можно встроить на ваш сайт или как отдельную ссылку", "Лёгкое редактирование расценок в блоке CONFIG"],
+        price: 7000,
+        days: 2,
+        defaultOn: false,
+        desc: "Автоматический расчёт стоимости по вашим расценкам за 30 секунд. Готовая смета клиента сразу падает вам в мессенджер.",
         ctaText: "Заказать калькулятор →"
       },
       {
         title: "Telegram-бот для бизнеса",
         calcName: "Telegram-бот (запись клиентов, воронка заявок, фильтр отзывов)",
-        price: 8000, days: 3, defaultOn: false, featured: false, badge: "Автоматизация 24/7",
-        desc: "Цифровой администратор, который принимает заказы, консультирует по ценам и защищает рейтинг на картах.",
-        features: ["Онлайн-запись клиентов и каталог услуг", "Умный перехват негативных отзывов по QR-коду", "Мгновенные уведомления менеджеру в рабочий чат", "Экспорт клиентской базы в таблицу CSV"],
-        ctaText: "Заказать Telegram-бота →"
+        price: 8000,
+        days: 3,
+        defaultOn: false,
+        desc: "Онлайн-запись клиентов 24/7, ответы на частые вопросы, приём заказов или умная фильтрация отзывов по QR-коду.",
+        ctaText: "Заказать бота →"
       },
       {
         title: "Интерактивные промо-акции",
         calcName: "Интерактивное колесо призов или промо-страница к акции",
-        price: 5000, days: 2, defaultOn: false, featured: false, badge: "Рост вовлечения",
-        desc: "Игровые механики для быстрого сбора телефонов потенциальных клиентов в соцсетях и точках продаж.",
-        features: ["Колесо фортуны с выдачей промокодов за контакт", "Защита от повторного прокручивания", "Брендирование под фирменный стиль компании"],
+        price: 5000,
+        days: 2,
+        defaultOn: false,
+        desc: "Беспроигрышное колесо фортуны с выдачей промокодов за контакт клиента или брендированные спецпроекты к праздникам.",
         ctaText: "Заказать промо-акцию →"
       },
       {
         title: "Монтаж вертикального видео",
         calcName: "Продающий монтаж вертикального ролика (Reels / Shorts / ВК Клипы)",
-        price: 1500, days: 1, defaultOn: false, featured: false, badge: "Контент для охватов",
-        desc: "Динамичные короткие ролики для привлечения бесплатного локального трафика из Reels, Shorts, TikTok и ВК.",
-        features: ["Цепляющий хук с первых 2 секунд и плотный ритм", "Стильные анимированные субтитры и саунд-дизайн", "Цветокоррекция и акцент на результате вашей работы"],
-        ctaText: "Заказать монтаж видео →"
+        price: 1500,
+        days: 1,
+        defaultOn: false,
+        desc: "Динамичные ролики с цепляющим началом, анимированными субтитрами и саунд-дизайном для привлечения локальных клиентов.",
+        ctaText: "Заказать видео →"
       }
     ];
 
-    const PROJECTS = [
-      { title: "Калькулятор уборки", desc: "Клининг: площадь, вид уборки, допуслуги. Готовая смета сразу уходит в Telegram.", href: "calc_klining.html", cat: "calc", tag: "Калькулятор", metric: "⚡ Смета за 30 сек", localThumb: "thumbs/calc_klining.svg" },
-      { title: "Калькулятор химчистки мебели", desc: "Выездная чистка диванов и матрасов: выбор мест, обивки и сушки с заявкой в Telegram.", href: "calc_himchistka.html", cat: "calc", tag: "Калькулятор", metric: "📈 +45% к заявкам", localThumb: "thumbs/calc_himchistka.svg" },
-      { title: "Учёт заказов (Мини-CRM)", desc: "Система учёта для малого бизнеса: статусы, подсчёт выручки, фильтрация и выгрузка в CSV.", href: "crm_zakazy.html", cat: "promo", tag: "Мини-CRM", metric: "📊 Учёт и экспорт CSV", localThumb: "thumbs/crm_zakazy.svg" },
-      { title: "Калькулятор стоимости потолков", desc: "Клиент сам считает цену натяжного потолка и светильников, заявка уходит мастеру.", href: "potolki.html", cat: "calc", tag: "Калькулятор", metric: "🔥 Хит для ремонта", localThumb: "thumbs/potolki.svg" },
-      { title: "Квиз для фитнес-клуба", desc: "Подбирает программу тренировок за 3 шага и собирает заявки на пробное занятие.", href: "quiz_fitness.html", cat: "calc", tag: "Квиз-воронка", metric: "🎯 Конверсия до 14%", localThumb: "thumbs/quiz_fitness.svg" },
-      { title: "QR-меню и заказ с телефона", desc: "Кофейня: меню по разделам, корзина и отправка заказа в Telegram без ожидания официанта.", href: "menu_kafe.html", cat: "site", tag: "Меню с корзиной", metric: "☕ 0% комиссии с заказов", localThumb: "thumbs/menu_kafe.svg" },
-      { title: "Калькулятор грузоперевозки", desc: "Машина, часы, грузчики и маршрут: прозрачный расчёт цены переезда за 30 секунд.", href: "calc_gruzoperevozki.html", cat: "calc", tag: "Калькулятор", metric: "🚚 Точный тариф", localThumb: "thumbs/calc_gruzoperevozki.svg" },
-      { title: "Колесо призов для акции", desc: "Интерактивный розыгрыш: клиент крутит колесо, получает промокод и оставляет телефон.", href: "koleso_akciya.html", cat: "promo", tag: "Лид-магнит", metric: "🎁 Сбор базы контактов", localThumb: "thumbs/koleso_akciya.svg" },
-      { title: "Визитка частного мастера", desc: "Продающая страница специалиста: преимущества, прайс-лист и быстрая запись в Telegram.", href: "vizitka_master.html", cat: "site", tag: "Сайт-визитка", metric: "📱 Загрузка 0.3 сек", localThumb: "thumbs/vizitka_master.svg" },
-      { title: "Сайт барбершопа с записью", desc: "Стильный лендинг с прайсом, выбором барбера и онлайн-записью на удобное время.", href: "demo_barbershop.html", cat: "site", tag: "Сайт + Запись", metric: "✂️ Запись в 2 клика", localThumb: "thumbs/demo_barbershop.svg" },
-      { title: "Калькулятор ремонта квартир", desc: "Тип ремонта, площадь и работы под ключ: ориентировочная смета помещения онлайн.", href: "calc_remont.html", cat: "calc", tag: "Калькулятор", metric: "🏠 Квалификация лида", localThumb: "thumbs/calc_remont.svg" },
-      { title: "Интерактивная промо-открытка", desc: "Персональное поздравление с именем клиента и генератором именных ссылок для рассылки.", href: "otkrytka_ny.html", cat: "promo", tag: "Спецпроект", metric: "✨ Лояльность клиентов", localThumb: "thumbs/otkrytka_ny.svg" }
-    ];
-
     function makeInitialsAvatar(text) {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" rx="44" fill="#4c5bf0"/><text x="50%" y="53%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="Onest, sans-serif" font-size="76" font-weight="800">${text}</text></svg>`;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4c5bf0"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
+          </linearGradient>
+        </defs>
+        <rect width="200" height="200" rx="44" fill="url(#g)"/>
+        <text x="50%" y="53%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="Onest, sans-serif" font-size="76" font-weight="800">${text}</text>
+      </svg>`;
       return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
     }
 
     function makeThumbFallback(title, tag) {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="380" viewBox="0 0 600 380"><rect width="600" height="380" fill="#1e293b"/><text x="40" y="175" fill="#93c5fd" font-family="Inter, sans-serif" font-size="20" font-weight="700">${tag}</text><text x="40" y="220" fill="#fff" font-family="Onest, sans-serif" font-size="28" font-weight="800">${title}</text></svg>`;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="380" viewBox="0 0 600 380">
+        <defs>
+          <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="100%" stop-color="#3b49df"/>
+          </linearGradient>
+        </defs>
+        <rect width="600" height="380" fill="url(#bg)"/>
+        <text x="40" y="180" fill="#93c5fd" font-family="Inter, sans-serif" font-size="20" font-weight="700">${tag}</text>
+        <text x="40" y="225" fill="#ffffff" font-family="Onest, sans-serif" font-size="30" font-weight="800">${title}</text>
+      </svg>`;
       return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
     }
 
+    // =========================================================================
+    // 2. СПИСОК ПРОЕКТОВ ПОРТФОЛИО (12 ПРОЕКТОВ)
+    // =========================================================================
+    const PROJECTS = [
+      {
+        title: "Калькулятор уборки",
+        desc: "Клининг: площадь, вид уборки, допуслуги. Готовая смета сразу уходит в Telegram.",
+        href: "calc_klining.html",
+        cat: "calc",
+        tag: "Калькулятор",
+        localThumb: "thumbs/calc_klining.svg"
+      },
+      {
+        title: "Калькулятор химчистки мебели",
+        desc: "Выездная чистка диванов и матрасов: выбор мест, обивки и сушки с заявкой в Telegram.",
+        href: "calc_himchistka.html",
+        cat: "calc",
+        tag: "Калькулятор",
+        localThumb: "thumbs/calc_himchistka.svg"
+      },
+      {
+        title: "Учёт заказов",
+        desc: "Мини-CRM для небольшого магазина: статусы, подсчёт выручки, поиск и выгрузка в CSV.",
+        href: "crm_zakazy.html",
+        cat: "promo",
+        tag: "Мини-CRM",
+        localThumb: "thumbs/crm_zakazy.svg"
+      },
+      {
+        title: "Калькулятор стоимости потолков",
+        desc: "Клиент сам считает цену натяжного потолка и светильников, заявка уходит мастеру.",
+        href: "potolki.html",
+        cat: "calc",
+        tag: "Калькулятор",
+        localThumb: "thumbs/potolki.svg"
+      },
+      {
+        title: "Квиз для фитнес-клуба",
+        desc: "Подбирает программу тренировок за 3 шага и собирает заявки на пробное занятие.",
+        href: "quiz_fitness.html",
+        cat: "calc",
+        tag: "Квиз",
+        localThumb: "thumbs/quiz_fitness.svg"
+      },
+      {
+        title: "Меню и заказ с телефона",
+        desc: "Кофейня: меню по разделам, корзина и отправка заказа в Telegram без звонков.",
+        href: "menu_kafe.html",
+        cat: "site",
+        tag: "Меню с корзиной",
+        localThumb: "thumbs/menu_kafe.svg"
+      },
+      {
+        title: "Калькулятор грузоперевозки",
+        desc: "Машина, часы, грузчики и маршрут: прозрачный расчёт цены за 30 секунд.",
+        href: "calc_gruzoperevozki.html",
+        cat: "calc",
+        tag: "Калькулятор",
+        localThumb: "thumbs/calc_gruzoperevozki.svg"
+      },
+      {
+        title: "Колесо призов для акции",
+        desc: "Интерактивный розыгрыш: клиент крутит колесо, получает промокод и оставляет контакт.",
+        href: "koleso_akciya.html",
+        cat: "promo",
+        tag: "Акция",
+        localThumb: "thumbs/koleso_akciya.svg"
+      },
+      {
+        title: "Визитка частного мастера",
+        desc: "Страница мастера: описание, наглядный прайс-лист и быстрая запись в Telegram.",
+        href: "vizitka_master.html",
+        cat: "site",
+        tag: "Сайт-визитка",
+        localThumb: "thumbs/vizitka_master.svg"
+      },
+      {
+        title: "Сайт барбершопа с записью",
+        desc: "Одностраничный сайт с прайсом, мастерами и формой записи на удобное время.",
+        href: "demo_barbershop.html",
+        cat: "site",
+        tag: "Сайт + Запись",
+        localThumb: "thumbs/demo_barbershop.svg"
+      },
+      {
+        title: "Калькулятор ремонта",
+        desc: "Тип ремонта и работы под ключ: ориентировочная смета помещения за 30 секунд.",
+        href: "calc_remont.html",
+        cat: "calc",
+        tag: "Калькулятор",
+        localThumb: "thumbs/calc_remont.svg"
+      },
+      {
+        title: "Новогодняя открытка",
+        desc: "Персональная открытка с именем и конструктор ссылок для поздравления клиентов.",
+        href: "otkrytka_ny.html",
+        cat: "promo",
+        tag: "Промо",
+        localThumb: "thumbs/otkrytka_ny.svg"
+      }
+    ];
+
+    // Привязка данных из CONFIG
     const tgLink = "https://t.me/" + CONFIG.telegram;
     const waLink = "https://wa.me/" + CONFIG.whatsapp.replace(/\D/g, "");
+
+    document.getElementById("navName").textContent = CONFIG.name;
+    document.getElementById("cardName").textContent = CONFIG.name;
+    document.getElementById("footerName").textContent = CONFIG.name;
+    document.getElementById("heroLocation").textContent = CONFIG.location;
+    const heroHeading = document.getElementById("h1");
+    if (heroHeading.textContent !== CONFIG.heroTitle) heroHeading.textContent = CONFIG.heroTitle;
+    document.getElementById("heroSignature").textContent = CONFIG.name;
+    document.getElementById("lead").textContent = CONFIG.heroLead;
     document.getElementById("yearNow").textContent = new Date().getFullYear();
 
     const avatarEl = document.getElementById("avatarImg");
     const defaultAvatar = makeInitialsAvatar(CONFIG.initials);
-    avatarEl.src = CONFIG.avatar ? CONFIG.avatar : defaultAvatar;
-    avatarEl.onerror = () => { avatarEl.onerror = null; avatarEl.src = defaultAvatar; };
+    avatarEl.onerror = () => {
+      avatarEl.onerror = null;
+      avatarEl.removeAttribute("srcset");
+      avatarEl.src = defaultAvatar;
+    };
 
-    // Симулятор Telegram
-    const tgBubbleEl = document.getElementById("tgSimBubble");
-    function renderTgSim(key) {
-      const d = TG_SIM_DATA[key] || TG_SIM_DATA.auto;
-      tgBubbleEl.innerHTML = `
-        <div class="tg-bubble-title">${d.title}</div>
-        <b>Клиент:</b> ${d.client}<br>
-        <b>Выбрано:</b> ${d.params}<br>
-        <b>Детали:</b> ${d.extra}<br>
-        <b>Итого по смете:</b> ${d.total}
-      `;
-    }
-    renderTgSim("auto");
-    document.querySelectorAll("#tgSimTabs .tg-tab").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll("#tgSimTabs .tg-tab").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderTgSim(btn.dataset.niche);
-      });
+    ["tg", "navCta", "contactTgRow"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = tgLink;
+    });
+    ["contactMaxBtnHead", "contactMaxRow"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = CONFIG.max;
+    });
+    ["contactWaBtnHead", "contactWaRow"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = waLink;
+    });
+    ["vk", "contactVkRow"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = CONFIG.vk;
     });
 
-    // Рендер карточек тарифов
+    document.getElementById("contactTgLabel").textContent = "Telegram";
+    document.getElementById("contactMaxLabel").textContent = CONFIG.maxLabel;
+    document.getElementById("contactWaLabel").textContent = CONFIG.whatsappLabel;
+    const contactEmail = JSON.parse(document.getElementById("serviceSchema").textContent).email;
+    document.getElementById("contactMailRow").href = "mailto:" + contactEmail;
+    document.getElementById("contactMailLabel").textContent = contactEmail;
+
+    // Рендер карточек услуг из единого массива SERVICES_DATA
     const servicesGridEl = document.getElementById("servicesGrid");
     SERVICES_DATA.forEach(srv => {
       const priceFormatted = `от ${srv.price.toLocaleString("ru-RU")} ₽`;
-      const msg = `Здравствуйте, Рамиль! Интересует услуга: ${srv.title} (${priceFormatted}). Расскажите подробнее?`;
+      const orderTitle = `${srv.title} (${priceFormatted})`;
+      const msg = `Здравствуйте, Рамиль! Интересует услуга: ${orderTitle}. Расскажите подробнее?`;
       const card = document.createElement("div");
-      card.className = "price-card" + (srv.featured ? " featured" : "");
+      card.className = "price-card";
       card.innerHTML = `
         <div>
-          <div class="price-top-row">
-            <b>${priceFormatted}</b>
-            <span class="hit-badge">${srv.badge}</span>
-          </div>
-          <h3>${srv.title}</h3>
+          <b>${priceFormatted}</b>
+          <span>${srv.title}</span>
           <p>${srv.desc}</p>
-          <ul class="price-features">
-            ${srv.features.map(f => `<li>${f}</li>`).join("")}
-          </ul>
         </div>
-        <a class="price-order-link" href="${tgLink}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${srv.ctaText}</a>
+        <a class="price-order-link" data-goal="tg_click" href="${tgLink}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${srv.ctaText}</a>
       `;
       servicesGridEl.appendChild(card);
     });
 
-    // Копирование почты
+    // Копирование почты при клике
     let toastTimer = null;
     const mailRow = document.getElementById("contactMailRow");
     if (mailRow) {
-      mailRow.addEventListener("click", () => {
+      mailRow.addEventListener("click", function () {
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(CONFIG.email).then(() => {
+          navigator.clipboard.writeText(contactEmail).then(() => {
             const toast = document.getElementById("toast");
-            toast.textContent = `Почта ${CONFIG.email} скопирована в буфер`;
-            toast.classList.add("show");
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+            if (toast) {
+              toast.textContent = `Почта ${contactEmail} скопирована в буфер`;
+              toast.classList.add("show");
+              clearTimeout(toastTimer);
+              toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+            }
           }).catch(() => {});
         }
       });
     }
 
-    // Фильтры и портфолио
-    const filterLabels = { all: "Все работы", calc: "Калькуляторы и квизы", site: "Сайты и онлайн-меню", promo: "CRM и промо-акции" };
+    // Автоматический подсчёт количества работ на кнопках фильтра
+    const filterLabels = {
+      all: "Все работы",
+      calc: "Калькуляторы и квизы",
+      site: "Сайты и онлайн-меню",
+      promo: "CRM и промо-акции"
+    };
     document.querySelectorAll("#filterBar .filter-btn").forEach(btn => {
       const cat = btn.dataset.cat;
       const count = cat === "all" ? PROJECTS.length : PROJECTS.filter(p => p.cat === cat).length;
       btn.textContent = `${filterLabels[cat]} (${count})`;
     });
 
+    // Отрисовка карточек портфолио с защитой от битых картинок
     const gridEl = document.getElementById("projectsGrid");
     function renderProjects(category = "all") {
       gridEl.innerHTML = "";
@@ -1005,22 +2735,27 @@
         const card = document.createElement("article");
         card.className = "card";
         card.innerHTML = `
-          <a class="thumb" href="${p.href}" target="_blank" rel="noopener" aria-label="Открыть проект ${p.title}">
-            <img src="${p.localThumb}" alt="${p.title}" loading="lazy">
-            <span class="card-tag">${p.tag}</span>
-            <span class="card-metric">${p.metric}</span>
+          <a class="thumb" href="${p.href}" aria-label="Открыть проект ${p.title}">
+            <img src="${p.localThumb}" alt="${p.title}" width="700" height="420" loading="lazy">
+            <span class="card-tag">Демо-проект · ${p.tag}</span>
           </a>
           <div class="b">
             <h3>${p.title}</h3>
             <p>${p.desc}</p>
             <div class="card-footer">
-              <button type="button" class="preview-btn">⚡ Предпросмотр</button>
-              <a class="card-link" href="${p.href}" target="_blank" rel="noopener">Открыть ↗</a>
+              <button type="button" class="preview-btn" data-goal="demo_preview_open">Предпросмотр</button>
+              <a class="card-link" data-goal="demo_open_new_tab" href="${p.href}" target="_blank" rel="noopener">Открыть ↗</a>
             </div>
-          </div>`;
+          </div>
+        `;
         const imgEl = card.querySelector("img");
-        imgEl.onerror = () => { imgEl.onerror = null; imgEl.src = makeThumbFallback(p.title, p.tag); };
-        card.querySelector(".preview-btn").addEventListener("click", () => openModal(p.href, p.title));
+        imgEl.onerror = () => {
+          imgEl.onerror = null;
+          imgEl.src = makeThumbFallback(p.title, p.tag);
+        };
+        card.querySelector(".preview-btn").addEventListener("click", () => {
+          openModal(p.href, p.title);
+        });
         gridEl.appendChild(card);
       });
     }
@@ -1034,7 +2769,7 @@
       });
     });
 
-    // Модальное окно
+    // Модальное окно предпросмотра со спиннером и переключателем Смартфон / ПК
     const modal = document.getElementById("previewModal");
     const modalBox = document.getElementById("modalBox");
     const modalFrame = document.getElementById("modalFrame");
@@ -1042,7 +2777,11 @@
     const modalViewportBtn = document.getElementById("modalViewportBtn");
     let spinnerTimeout = null;
 
-    modalFrame.addEventListener("load", () => { clearTimeout(spinnerTimeout); modalSpinner.style.display = "none"; });
+    modalFrame.addEventListener("load", () => {
+      clearTimeout(spinnerTimeout);
+      modalSpinner.style.display = "none";
+    });
+
     if (modalViewportBtn) {
       modalViewportBtn.addEventListener("click", () => {
         const isDesktop = modalBox.classList.toggle("desktop-mode");
@@ -1053,39 +2792,56 @@
     function openModal(href, title) {
       document.getElementById("modalTitle").textContent = title;
       document.getElementById("modalOpenFull").href = href;
-      const simMsg = `Здравствуйте, Рамиль! Понравился пример «${title}» в вашем портфолио. Хочу обсудить похожий инструмент под свою нишу.`;
-      document.getElementById("modalOrderSimilar").href = `${tgLink}?text=${encodeURIComponent(simMsg)}`;
       modalSpinner.style.display = "block";
       clearTimeout(spinnerTimeout);
-      spinnerTimeout = setTimeout(() => { modalSpinner.style.display = "none"; }, 2500);
+      spinnerTimeout = setTimeout(() => {
+        modalSpinner.style.display = "none";
+      }, 2500);
       modalFrame.src = href;
       modal.classList.add("open");
       document.body.style.overflow = "hidden";
     }
+
     function closeModal() {
       clearTimeout(spinnerTimeout);
       modal.classList.remove("open");
       modalFrame.src = "about:blank";
       document.body.style.overflow = "";
     }
+
     document.getElementById("modalCloseBtn").addEventListener("click", closeModal);
     modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+    });
 
-    // Умный калькулятор со скидкой 10% при выборе >= 2 услуг
-    const EST_DATA = SERVICES_DATA.map(s => ({ name: s.calcName, price: s.price, days: s.days, on: s.defaultOn }));
+    // Интерактивный калькулятор сметы (без разрушения DOM при клике)
+    const EST_DATA = SERVICES_DATA.map(s => ({
+      name: s.calcName,
+      price: s.price,
+      days: s.days,
+      on: s.defaultOn
+    }));
+
     const estListEl = document.getElementById("estList");
     const estSendBtn = document.getElementById("estSendBtn");
     const estSendWaBtn = document.getElementById("estSendWaBtn");
 
     function initEstimatorRows() {
       estListEl.innerHTML = "";
-      EST_DATA.forEach(item => {
+      EST_DATA.forEach((item, idx) => {
         const row = document.createElement("button");
         row.type = "button";
+        row.dataset.index = idx;
         row.className = "est-row" + (item.on ? " active" : "");
         row.setAttribute("aria-pressed", String(item.on));
-        row.innerHTML = `<div class="est-left"><span class="est-box">${item.on ? "✓" : ""}</span><span>${item.name}</span></div><b class="est-price">${item.price.toLocaleString("ru-RU")} ₽</b>`;
+        row.innerHTML = `
+          <div class="est-left">
+            <span class="est-box">${item.on ? "✓" : ""}</span>
+            <span>${item.name}</span>
+          </div>
+          <b class="est-price">${item.price.toLocaleString("ru-RU")} ₽</b>
+        `;
         row.addEventListener("click", () => {
           item.on = !item.on;
           row.classList.toggle("active", item.on);
@@ -1099,40 +2855,46 @@
     }
 
     function updateEstimatorTotals() {
-      let rawTotal = 0, maxDays = 1, count = 0;
-      EST_DATA.forEach(item => { if (item.on) { rawTotal += item.price; maxDays = Math.max(maxDays, item.days); count++; } });
-      const hasDiscount = count >= 2;
-      const finalTotal = hasDiscount ? Math.round(rawTotal * 0.9) : rawTotal;
+      let total = 0;
+      let maxDays = 1;
+      let count = 0;
+      EST_DATA.forEach(item => {
+        if (item.on) {
+          total += item.price;
+          maxDays = Math.max(maxDays, item.days);
+          count++;
+        }
+      });
+
       const totalDays = count > 1 ? maxDays + (count - 1) : (count === 1 ? maxDays : 0);
-
-      document.getElementById("estDiscountBadge").style.display = hasDiscount ? "inline-block" : "none";
-      const oldSumEl = document.getElementById("estOldSum");
-      oldSumEl.style.display = hasDiscount ? "inline" : "none";
-      oldSumEl.textContent = rawTotal.toLocaleString("ru-RU") + " ₽";
-
-      document.getElementById("estSum").textContent = finalTotal.toLocaleString("ru-RU") + " ₽";
-      document.getElementById("estTerm").textContent = finalTotal > 0 ? `Ориентировочный срок запуска: ${totalDays}–${totalDays + 2} дн.` : "Выберите хотя бы один модуль";
-      estSendBtn.disabled = finalTotal === 0;
-      if (estSendWaBtn) estSendWaBtn.disabled = finalTotal === 0;
+      document.getElementById("estSum").textContent = total.toLocaleString("ru-RU") + " ₽";
+      document.getElementById("estTerm").textContent = total > 0
+        ? `Ориентировочный срок: ${totalDays}–${totalDays + 2} дн.`
+        : "Выберите хотя бы одну услугу";
+      estSendBtn.disabled = total === 0;
+      if (estSendWaBtn) estSendWaBtn.disabled = total === 0;
     }
+
     initEstimatorRows();
 
     function getEstimateMessage() {
       const selected = EST_DATA.filter(x => x.on);
       if (!selected.length) return null;
       const biz = document.getElementById("estBusiness").value.trim() || "Не указана";
-      const rawTotal = selected.reduce((a, b) => a + b.price, 0);
-      const hasDiscount = selected.length >= 2;
-      const finalTotal = hasDiscount ? Math.round(rawTotal * 0.9) : rawTotal;
-      return `Здравствуйте, Рамиль! Собрал комплексный расчёт на вашем сайте:\n` +
+      const total = selected.reduce((a, b) => a + b.price, 0);
+      const count = selected.length;
+      const maxDays = selected.reduce((m, x) => Math.max(m, x.days), 1);
+      const totalDays = count > 1 ? maxDays + (count - 1) : maxDays;
+      return `Здравствуйте, Рамиль! Посчитал смету проекта на вашем сайте:\n` +
         selected.map(x => `• ${x.name} (${x.price.toLocaleString("ru-RU")} ₽)`).join("\n") +
-        `\n\nНиша бизнеса: ${biz}\nИтого со скидкой: ${finalTotal.toLocaleString("ru-RU")} ₽${hasDiscount ? ` (выгода ${(rawTotal - finalTotal).toLocaleString("ru-RU")} ₽ за комплект)` : ""}`;
+        `\n\nНиша бизнеса: ${biz}\nОриентировочный бюджет: ${total.toLocaleString("ru-RU")} ₽ (срок: ${totalDays}–${totalDays + 2} дн.)`;
     }
 
     estSendBtn.addEventListener("click", () => {
       const text = getEstimateMessage();
       if (text) window.open(`${tgLink}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
     });
+
     if (estSendWaBtn) {
       estSendWaBtn.addEventListener("click", () => {
         const text = getEstimateMessage();
@@ -1140,19 +2902,284 @@
       });
     }
 
-    const themeBtn = document.getElementById("themeBtn");
-    const savedTheme = localStorage.getItem("ramil_theme");
-    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    function applyTheme(theme) {
-      document.documentElement.setAttribute("data-theme", theme);
-      themeBtn.textContent = theme === "dark" ? "☀️" : "🌙";
-    }
-    applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
-    themeBtn.addEventListener("click", () => {
-      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(next);
-      localStorage.setItem("ramil_theme", next);
+    document.getElementById("estBusiness").addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        estSendBtn.click();
+      }
     });
+
   </script>
+  <script>
+    (() => {
+      const intro = document.getElementById("portfolioIntro");
+      const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+      if (motionPreference.matches || location.hash || scrollY || document.hidden ||
+          typeof PROJECTS === "undefined" || !PROJECTS.length) return;
+
+      const storageKey = "ramil_intro_seen";
+      try {
+        if (sessionStorage.getItem(storageKey) === "1") return;
+      } catch {}
+
+      const wall = intro.querySelector(".portfolio-intro__wall");
+      const skip = intro.querySelector(".portfolio-intro__skip");
+      const scene = intro.querySelector(".portfolio-intro__scene");
+      const slice = scene.parentElement;
+      const supportsSplit = CSS.supports("clip-path", "polygon(0 0, 100% 0, 100% 50%, 0 50%)");
+      const listeners = new AbortController();
+      const listenerOptions = { signal: listeners.signal };
+      let burnTimer;
+      let deadline;
+
+      function closeIntro() {
+        clearTimeout(burnTimer);
+        clearTimeout(deadline);
+        listeners.abort();
+        intro.remove();
+      }
+
+      const cards = document.createDocumentFragment();
+      for (const project of [...PROJECTS, ...PROJECTS]) {
+        const card = document.createElement("div");
+        card.className = "portfolio-intro__card";
+        const copy = document.createElement("span");
+        copy.className = "portfolio-intro__copy";
+        const longestWord = Math.max(...project.title.split(/\s+/).map(word => word.length));
+        copy.style.setProperty("--portfolio-intro-title-chars", String(longestWord));
+        const tag = document.createElement("span");
+        tag.className = "portfolio-intro__tag";
+        tag.textContent = project.tag;
+        const title = document.createElement("span");
+        title.className = "portfolio-intro__title";
+        title.textContent = project.title;
+        copy.append(tag, title);
+
+        const preview = document.createElement("img");
+        preview.className = "portfolio-intro__preview";
+        preview.alt = "";
+        preview.decoding = "async";
+        preview.fetchPriority = "low";
+        preview.addEventListener("error", () => preview.remove(), { once: true });
+        preview.width = 700;
+        preview.height = 420;
+        preview.src = project.localThumb;
+        card.append(copy, preview);
+        cards.append(card);
+      }
+      wall.append(cards);
+
+      if (supportsSplit) {
+        const count = matchMedia("(max-width: 640px)").matches ? 28 : 46;
+        const ridge = Array.from({ length: count + 1 }, (_, index) => {
+          const x = index / count;
+          const jitter = Math.sin(index * 7.31) * .012 + Math.cos(index * 2.13) * .014;
+          return [x, .49 + Math.sin((x - .5) * 9) * .042 + jitter];
+        });
+        const coordinates = (points, overlap) => points.map(([x, y]) =>
+          (x * 100).toFixed(2) + "% " + ((y + overlap) * 100).toFixed(2) + "%").join(", ");
+        const pathThrough = points => "M" + points.map(([x, y]) =>
+          x.toFixed(4) + " " + (y - .4).toFixed(4)).join("L");
+        const center = count / 2;
+        const seams = {
+          left: pathThrough(ridge.slice(0, center + 1).reverse()),
+          right: pathThrough(ridge.slice(center))
+        };
+        for (const edge of slice.querySelectorAll("[data-seam]")) {
+          edge.setAttribute("d", seams[edge.dataset.seam]);
+        }
+        const branches = [];
+        for (const fraction of [.15, .31, .43, .61, .76, .85]) {
+          const [x, y] = ridge[Math.round(count * fraction)];
+          const dx = x < .5 ? -.063 : .063;
+          branches.push(pathThrough([[x, y], [x + dx * .3, y - .017], [x + dx * .57, y - .012],
+            [x + dx, y - .046]]));
+        }
+        slice.querySelector(".portfolio-intro__branch").setAttribute("d", branches.join(""));
+
+        const bottom = slice.cloneNode(true);
+        bottom.classList.replace("portfolio-intro__slice--top", "portfolio-intro__slice--bottom");
+        scene.style.clipPath = "polygon(0% 0%, 100% 0%, " + coordinates([...ridge].reverse(), .0007) + ")";
+        bottom.querySelector(".portfolio-intro__scene").style.clipPath =
+          "polygon(0% 100%, " + coordinates(ridge, -.0007) + ", 100% 100%)";
+        slice.after(bottom);
+      } else {
+        intro.classList.add("is-fade");
+      }
+
+      skip.addEventListener("click", closeIntro, listenerOptions);
+      window.addEventListener("wheel", closeIntro, { ...listenerOptions, passive: true });
+      window.addEventListener("touchmove", closeIntro, { ...listenerOptions, passive: true });
+      window.addEventListener("pagehide", closeIntro, listenerOptions);
+      window.addEventListener("hashchange", closeIntro, listenerOptions);
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) closeIntro();
+      }, listenerOptions);
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeIntro();
+      }, listenerOptions);
+      document.addEventListener("focusin", event => {
+        if (!intro.contains(event.target)) closeIntro();
+      }, listenerOptions);
+      motionPreference.addEventListener("change", closeIntro, listenerOptions);
+
+      intro.hidden = false;
+      try { sessionStorage.setItem(storageKey, "1"); } catch {}
+      burnTimer = setTimeout(() => intro.classList.add("is-burning"), 1300);
+      deadline = setTimeout(closeIntro, 2510);
+    })();
+  </script>
+  <script src="assets/scene-rendering.js"></script>
+  <script>
+    (() => {
+      const screen = document.querySelector(".hero-screen");
+      const intro = document.getElementById("portfolioIntro");
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+      const desktopMotion = matchMedia("(min-width: 821px) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+      const destination = document.getElementById(location.hash.slice(1));
+      let waitingForAnchor = destination && !screen.contains(destination);
+      const introIsVisible = intro && !intro.hidden;
+      let canLoadScene = !introIsVisible;
+      let visible = false;
+      let queued = false;
+      let revealTimer;
+      let revealed = false;
+
+      function revealHero() {
+        if (revealed) return;
+        revealed = true;
+        clearTimeout(revealTimer);
+        screen.classList.remove("is-waiting");
+        if (!introIsVisible || reducedMotion.matches || location.hash || screen.getBoundingClientRect().bottom <= 0) return;
+        screen.classList.add("is-revealing");
+        setTimeout(() => screen.classList.remove("is-revealing"), 1450);
+      }
+
+      function loadHeroScene() {
+        if (queued || waitingForAnchor || !canLoadScene || !visible || !desktopMotion.matches ||
+            navigator.connection?.saveData || navigator.deviceMemory < 4) return;
+        queued = true;
+        const load = () => {
+          if (!visible || !desktopMotion.matches || document.hidden) {
+            queued = false;
+            return;
+          }
+          const script = document.createElement("script");
+          script.src = "assets/hero-scene.js";
+          document.head.append(script);
+        };
+        if ("requestIdleCallback" in window) requestIdleCallback(load, { timeout: 180 });
+        else setTimeout(load, 80);
+      }
+
+      if (canLoadScene) {
+        revealHero();
+      } else {
+        if (!reducedMotion.matches) screen.classList.add("is-waiting");
+        const introObserver = new MutationObserver(() => {
+          if (!intro.isConnected || intro.hidden) {
+            canLoadScene = true;
+            introObserver.disconnect();
+            revealHero();
+            loadHeroScene();
+          } else if (intro.classList.contains("is-burning") && !revealTimer) {
+            revealTimer = setTimeout(revealHero, 515);
+          }
+        });
+        introObserver.observe(intro, { attributes: true, attributeFilter: ["class", "hidden"] });
+        introObserver.observe(document.body, { childList: true });
+      }
+
+      const visibility = new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        if (!visible) waitingForAnchor = false;
+        loadHeroScene();
+      });
+      visibility.observe(screen);
+      desktopMotion.addEventListener("change", loadHeroScene);
+      document.addEventListener("visibilitychange", loadHeroScene);
+
+      const header = document.querySelector(".site-header");
+      const navigation = Array.from(header.querySelectorAll(".nav-links a"));
+      const sections = navigation.map(link => [
+        link.hash === "#portfolio" ? document.querySelector(".works-interlude") : document.getElementById(link.hash.slice(1)),
+        link
+      ]);
+      let activeLink;
+      let navigationFrame = 0;
+
+      function updateNavigation() {
+        navigationFrame = 0;
+        const readingLine = header.offsetHeight + 35;
+        let nextLink;
+        for (const [section, link] of sections) {
+          if (section && section.getBoundingClientRect().top <= readingLine) nextLink = link;
+        }
+        if (nextLink === activeLink) return;
+        activeLink?.removeAttribute("aria-current");
+        nextLink?.setAttribute("aria-current", "location");
+        activeLink = nextLink;
+      }
+
+      function scheduleNavigation() {
+        if (!navigationFrame) navigationFrame = requestAnimationFrame(updateNavigation);
+      }
+
+      window.addEventListener("scroll", scheduleNavigation, { passive: true });
+      window.addEventListener("resize", scheduleNavigation);
+      window.addEventListener("hashchange", scheduleNavigation);
+      updateNavigation();
+
+      for (const button of document.querySelectorAll(".hero .btn, .site-header .btn")) {
+        const reset = () => {
+          button.style.removeProperty("--magnetic-x");
+          button.style.removeProperty("--magnetic-y");
+        };
+        button.addEventListener("pointermove", event => {
+          if (!desktopMotion.matches || event.pointerType !== "mouse") return;
+          const box = button.getBoundingClientRect();
+          const shift = distance => Math.max(-6, Math.min(6, distance * .12)) + "px";
+          button.style.setProperty("--magnetic-x", shift(event.clientX - box.left - box.width / 2));
+          button.style.setProperty("--magnetic-y", shift(event.clientY - box.top - box.height / 2));
+        });
+        button.addEventListener("pointerleave", reset);
+        desktopMotion.addEventListener("change", reset);
+      }
+    })();
+  </script>
+  <script>
+    (() => {
+      const scenes = Array.from(document.querySelectorAll(".works-interlude, .works-smoke"));
+      const header = document.querySelector(".site-header");
+      const motion = matchMedia("(min-width: 821px) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+      let loaded = false;
+
+      function loadWorksMotion() {
+        if (loaded || !motion.matches || navigator.connection?.saveData || navigator.deviceMemory < 4) return;
+        const nearScene = scenes.some(scene => {
+          const box = scene.getBoundingClientRect();
+          return box.top < innerHeight + 245 && box.bottom > header.offsetHeight + 32;
+        });
+        if (!nearScene) return;
+        loaded = true;
+        observer.disconnect();
+        motion.removeEventListener("change", loadWorksMotion);
+        const script = document.createElement("script");
+        script.src = "assets/works-intro.js";
+        document.head.append(script);
+      }
+
+      const observer = new IntersectionObserver(loadWorksMotion, {
+        rootMargin: "-74px 0px 260px",
+        threshold: .045
+      });
+      for (const scene of scenes) observer.observe(scene);
+      motion.addEventListener("change", loadWorksMotion);
+    })();
+  </script>
+  <script src="assets/portfolio-gallery.js" defer></script>
+  <script src="assets/closing-scenes.js" defer></script>
+  <script src="assets/tg-notify.js" defer></script>
+  <script src="assets/analytics.js" defer></script>
 </body>
 </html>

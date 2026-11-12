@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Калькулятор стоимости уборки</title>
+<meta name="description" content="Демо калькулятора уборки с выбором типа уборки, площади помещения и дополнительных работ.">
+<meta name="robots" content="noindex,follow">
 <style>
 :root {
   --ink: #111827;
@@ -188,6 +190,10 @@ button.main:active { transform: scale(0.99); }
 .tg-modal-close { width: 100%; background: #3b82f6; color: #fff; border: 0; border-radius: 10px; padding: 12px; font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
 .tg-modal-close:hover { background: #2563eb; }
 </style>
+
+<link rel="stylesheet" href="assets/demo-bar.css">
+<script src="assets/demo-bar.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -214,6 +220,7 @@ button.main:active { transform: scale(0.99); }
       <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
     </div>
     <button class="main" id="send" style="margin-top:16px">Отправить заявку в Telegram</button>
+    <p class="demo-privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p>
     <div id="box"></div>
     <div class="note" id="note"></div>
   </div>
@@ -479,5 +486,6 @@ document.addEventListener("keydown", function(e) {
     <button type="button" class="tg-modal-close" onclick="closeTgModal()">Попробовать другой расчёт</button>
   </div>
 </div>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
 </body>
 </html>

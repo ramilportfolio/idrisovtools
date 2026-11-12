@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Подбор программы тренировок — Фитнес-квиз</title>
+<meta name="description" content="Демо фитнес-квиза, который подбирает программу тренировок по ответам посетителя.">
+<meta name="robots" content="noindex,follow">
 <style>
 :root{--ink:#14181f;--acc:#4c5bf0;--bg:#f5f7fb;--card:#fff;--mut:#525d6f;--line:#e1e7f0}
 *{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
@@ -38,7 +40,11 @@ input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;fo
 .tg-note { font-size: 12.5px; color: #cbd5e1; background: rgba(255,255,255,0.05); padding: 10px 12px; border-radius: 10px; border-left: 3px solid #38bdf8; margin-bottom: 16px; line-height: 1.4; }
 .tg-modal-close { width: 100%; background: #3b82f6; color: #fff; border: 0; border-radius: 10px; padding: 12px; font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
 .tg-modal-close:hover { background: #2563eb; }
-</style></head><body><div class="wrap">
+</style>
+<link rel="stylesheet" href="assets/demo-bar.css">
+<script src="assets/demo-bar.js" defer></script>
+<script src="assets/analytics.js" defer></script>
+</head><body><div class="wrap">
 
 <div class="card">
   <h1>Подбор программы тренировок</h1>
@@ -67,6 +73,7 @@ function draw(){
     <input id="nm" placeholder="Ваше имя" autocomplete="name">
     <input id="ph" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel">
     <button class="btn" id="send">Получить пробную тренировку</button>
+    <p class="demo-privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p>
     <button class="opt" id="agn" style="margin-top:8px;text-align:center">Пройти заново</button>`;
     
     const phEl = document.getElementById("ph");
@@ -138,4 +145,5 @@ document.addEventListener("keydown", function(e) {
     <button type="button" class="tg-modal-close" onclick="closeTgModal()">Попробовать снова</button>
   </div>
 </div>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
 </body></html>

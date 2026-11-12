@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Интерактивная новогодняя открытка</title>
+<meta name="description" content="Демо конструктора новогодних открыток с персональными поздравлениями по ссылке.">
+<meta name="robots" content="noindex,follow">
 <style>
 :root {
   --bg: #0b1d3a;
@@ -245,6 +247,10 @@ textarea { min-height: 112px; }
   cursor: pointer;
 }
 </style>
+
+<link rel="stylesheet" href="assets/demo-bar.css">
+<script src="assets/demo-bar.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 </head>
 <body>
 <canvas id="snow"></canvas>
@@ -268,6 +274,7 @@ const CONFIG = {
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 let typeTimer = null;
 let savedNamesText = "";
 
@@ -459,6 +466,10 @@ function type(s) {
   const el = $("txt");
   let i = 0;
   (function step() {
+    if (reduceMotion.matches) {
+      el.textContent = s;
+      return;
+    }
     if (i <= s.length) {
       const visible = esc(s.slice(0, i));
       const hidden = esc(s.slice(i));
@@ -492,8 +503,9 @@ for (let i = 0; i < 70; i++) {
     s: Math.random() * 6
   });
 }
-(function f() {
+function snowFrame() {
   c.clearRect(0, 0, W, H);
+  if (reduceMotion.matches) return;
   c.fillStyle = "#fff";
   fl.forEach(p => {
     p.y += p.v;
@@ -504,8 +516,16 @@ for (let i = 0; i < 70; i++) {
     c.arc(p.x % W, p.y, p.r, 0, 7);
     c.fill();
   });
-  requestAnimationFrame(f);
-})();
+  snowFrameId = requestAnimationFrame(snowFrame);
+}
+let snowFrameId;
+function syncSnow() {
+  cancelAnimationFrame(snowFrameId);
+  snowFrame();
+}
+reduceMotion.addEventListener("change", syncSnow);
+syncSnow();
 </script>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
 </body>
 </html>

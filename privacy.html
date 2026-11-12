@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0e0809">
+  <title>Политика конфиденциальности — Рамиль</title>
+  <meta name="description" content="Какие данные могут обрабатываться при обращении через сайт ramil-tools.ru и как обратиться по вопросам конфиденциальности.">
+  <link rel="canonical" href="https://ramil-tools.ru/privacy.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    @font-face {
+      font-family: Inter;
+      src: url("fonts/inter-variable.woff2") format("woff2");
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Cormorant Garamond";
+      src: url("fonts/cormorant-garamond-latin.woff2") format("woff2");
+      font-weight: 300 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Cormorant Garamond";
+      src: url("fonts/cormorant-garamond-cyrillic.woff2") format("woff2");
+      font-weight: 300 700;
+      font-display: swap;
+      unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+    @font-face {
+      font-family: "Great Vibes";
+      src: url("fonts/great-vibes-cyrillic.woff2") format("woff2");
+      font-display: swap;
+    }
+    :root {
+      --ink: #241718;
+      --paper: #f2f0ea;
+      --dark: #0e0809;
+      --accent: #9c221e;
+      --serif: "Cormorant Garamond", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font: 1rem/1.65 Inter, system-ui, sans-serif; }
+    .site-header, .site-footer { background: var(--dark); color: var(--paper); }
+    .bar { width: min(100%, 1580px); margin: auto; padding-inline: clamp(22px, 4.1vw, 72px); }
+    .nav-bar { min-height: 74px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; }
+    .nav-bar a, .site-footer a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-underline-offset: .18em; }
+    .nav-bar .logo { gap: clamp(10px, 1.1vw, 20px); text-decoration: none; }
+    .logo-name { font: 400 clamp(32px, 3.2vw, 48px)/.9 "Great Vibes", cursive; }
+    .logo-tagline { padding-inline-start: 12px; border-inline-start: 1px solid #f2f0ea28; color: #d8c5c0; font-size: 11px; font-weight: 650; line-height: 1.4; text-transform: uppercase; }
+    .nav-links { display: flex; flex-wrap: wrap; justify-content: center; column-gap: clamp(10px, 1.4vw, 24px); }
+    .nav-links a, .nav-cta { font-size: 11px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: #ffb4a3; text-decoration: underline; }
+    .nav-bar .nav-cta { padding-inline: 12px; border-radius: 3px; background: #c91610; color: #fff; text-decoration: none; }
+    @media (max-width: 1000px) { .logo-tagline { display: none; } }
+    @media (max-width: 760px) {
+      .nav-bar { padding-block: 10px 4px; }
+      .nav-links { order: 1; width: 100%; justify-content: flex-start; }
+      .nav-links a { min-height: 32px; }
+    }
+    main { width: min(100%, 820px); margin: auto; padding: clamp(32px, 6vw, 82px) clamp(22px, 4.1vw, 72px); }
+    h1, h2 { font-family: var(--serif); line-height: 1; }
+    h1 { margin: 0 0 18px; font-size: clamp(35px, 7vw, 72px); overflow-wrap: anywhere; }
+    h2 { margin: 32px 0 8px; font-size: clamp(26px, 4vw, 37px); }
+    p { margin: 0 0 10px; }
+    .draft { color: var(--accent); font-weight: 600; }
+    .site-footer .bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 16px; padding-block: 12px; font-size: 12px; }
+  </style>
+  <script src="assets/analytics.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="bar nav-bar">
+      <a class="logo" href="./" aria-label="Рамиль — на главную">
+        <span class="logo-name">Рамиль</span>
+        <span class="logo-tagline">Сайты и калькуляторы<br>Telegram-боты для бизнеса</span>
+      </a>
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="./#how-it-works">Как это работает</a>
+        <a href="./#portfolio">Примеры (12)</a>
+        <a href="./#services">Цены</a>
+        <a href="./#calc-section">Калькулятор</a>
+        <a href="./#about">Подход</a>
+        <a href="./#faq">FAQ</a>
+        <a href="./#contacts">Контакты</a>
+      </nav>
+      <a class="nav-cta" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener">Связаться</a>
+    </div>
+  </header>
+  <main>
+    <h1>Политика конфиденциальности</h1>
+    <p class="draft">Проект документа · редакция от <time datetime="2026-11-13">13 ноября 2026 года</time></p>
+    <h2>Оператор персональных данных</h2>
+    <!-- TODO: указать ФИО оператора, правовой статус (самозанятый или ИП) и ИНН. -->
+    <p>Оператор сайта —
+  <span style="white-space: nowrap">Идрисов Рамиль Расимович, самозанятый, ИНН 023817849262</span>
+</p>
+    <h2>Какие данные могут быть получены</h2>
+    <p>При обращении оператор может получить имя, номер телефона, текст сообщения, нишу бизнеса и сведения, которые вы сами укажете. Кнопки отправки расчёта открывают Telegram или WhatsApp с подготовленным текстом. Отправку сообщения вы подтверждаете в мессенджере. Сайт не хранит заявки на своей стороне. При обращении по электронной почте или в других указанных на сайте каналах данные поступают через выбранный канал.</p>
+    <p>Формы заявок в демонстрационных проектах имитируют отправку. Демо учёта заказов может сохранять введённые записи в памяти браузера.</p>
+    <h2>Для чего обрабатываются данные</h2>
+    <p>Данные используются для ответа на обращение, подготовки расчёта и обсуждения условий работы. При заключении договора данные могут использоваться для его исполнения.</p>
+    <h2>Срок хранения</h2>
+    <!-- TODO: подтвердить фактические сроки хранения и порядок удаления переписки и договорных данных. -->
+    <p>Предполагаемый срок хранения зависит от цели обработки. Переписка хранится на время рассмотрения обращения, а при заключении договора — на время его исполнения и в течение применимых обязательных сроков. Конкретные сроки и порядок удаления уточняются.</p>
+    <h2>Ваши права и контакты</h2>
+    <p>Вы можете запросить сведения об обработке ваших данных, попросить их уточнить, заблокировать или удалить при наличии оснований, а также отозвать согласие, если обработка основана на нём.</p>
+    <!-- TODO: указать рабочий email для обращений по обработке данных и отзыва согласия. -->
+    <p>Электронная почта для обращений и отзыва согласия — idrisov.smm@gmail.com .</p>
+    <h2>Cookie и Яндекс Метрика</h2>
+    <p>Для запоминания показа заставки сайт использует хранилище текущей сессии браузера. При включённом счётчике Яндекс Метрика может использовать cookie и хранилище браузера для статистики посещений. Вебвизор отключён. Управлять cookie можно в настройках браузера.</p>
+  </main>
+  <footer class="site-footer">
+    <div class="bar">
+      <div>Работаю по письменному договору с фиксированной сметой.
+        <a href="privacy.html" aria-current="page">Политика конфиденциальности</a>
+      </div>
+      <b>© 2026 Рамиль</b>
+    </div>
+  </footer>
+</body>
+</html>

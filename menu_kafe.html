@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Кофейня «Мята» — онлайн-меню</title>
+<meta name="description" content="Демо меню кофейни с категориями, корзиной и предварительным просмотром заказа.">
+<meta name="robots" content="noindex,follow">
 <style>
 :root{--g:#1f5a45;--g2:#e8f3ee;--ink:#1c2a25;--bg:#fbfaf6;--line:#e3e8e2;--acc:#d9822b;--mut:#6a7a73}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:96px}
+body{margin:0;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px))}
 .wrap{max-width:560px;margin:0 auto;padding:12px 14px}
 .demo{background:#fff3cd;border:1px solid #f1d98a;border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:10px}
 header{padding:10px 0 6px}
@@ -28,7 +30,7 @@ header p{margin:4px 0 0;color:var(--mut);font-size:15px}
 .ctl button:active{background:var(--g2)}
 .ctl b{min-width:20px;text-align:center}
 .ctl .add{width:100%;padding:0 14px;background:var(--g2);color:var(--g);font-size:15px;font-weight:700;border-color:var(--g2)}
-.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 14px;z-index:3}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 14px calc(12px + env(safe-area-inset-bottom, 0px));z-index:3}
 .bar button{display:block;width:100%;max-width:560px;margin:0 auto;padding:15px;border:0;border-radius:14px;background:var(--acc);color:#fff;font-weight:700;font-size:17px;font-family:inherit;cursor:pointer}
 .bar button:disabled{background:#c9cfcb;cursor:default}
 dialog{border:0;border-radius:18px;padding:18px;width:min(92vw,480px);max-height:88vh;background:#fff;color:var(--ink)}
@@ -74,6 +76,10 @@ input:focus,select:focus{border-color:var(--g)}
 .tg-modal-close { width: 100%; background: #3b82f6; color: #fff; border: 0; border-radius: 10px; padding: 12px; font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
 .tg-modal-close:hover { background: #2563eb; }
 </style>
+
+<link rel="stylesheet" href="assets/demo-bar.css">
+<script src="assets/demo-bar.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -104,6 +110,7 @@ input:focus,select:focus{border-color:var(--g)}
   <div class="row2">
     <button type="button" id="cl">Назад</button>
     <button type="button" class="ok" id="ok">Отправить заказ</button>
+    <p class="demo-privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p>
   </div>
   <div id="box"></div>
 </dialog>
@@ -307,5 +314,6 @@ document.addEventListener("keydown", function(e) {
     <button type="button" class="tg-modal-close" onclick="closeTgModal()">Попробовать снова</button>
   </div>
 </div>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
 </body>
 </html>

@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Калькулятор натяжных потолков</title>
+<meta name="description" content="Демо калькулятора натяжных потолков с выбором полотна, площади, светильников и опций.">
+<meta name="robots" content="noindex,follow">
 <style>
 :root{--ink:#14213d;--acc:#e07a1f;--bg:#f4f6fa;--card:#fff;--mut:#5b6882;--line:#dfe5ef}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -62,6 +64,10 @@ button.main:active{transform:scale(0.99)}
 .tg-modal-close { width: 100%; background: #3b82f6; color: #fff; border: 0; border-radius: 10px; padding: 12px; font-size: 14.5px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
 .tg-modal-close:hover { background: #2563eb; }
 </style>
+
+<link rel="stylesheet" href="assets/demo-bar.css">
+<script src="assets/demo-bar.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -125,6 +131,7 @@ button.main:active{transform:scale(0.99)}
     <label for="phone">Телефон</label>
     <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
     <button type="button" class="main" id="send" style="margin-top:14px">Отправить заявку</button>
+    <p class="demo-privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p>
     <div id="box"></div>
     <div class="note">Точную цену назовёт мастер после замера. Расчёт не является офертой.</div>
   </div>
@@ -258,5 +265,6 @@ document.addEventListener("keydown", function(e) {
     <button type="button" class="tg-modal-close" onclick="closeTgModal()">Попробовать другой расчёт</button>
   </div>
 </div>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
 </body>
 </html>
