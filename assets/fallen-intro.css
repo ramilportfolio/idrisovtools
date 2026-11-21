@@ -1,0 +1,523 @@
+/* ==========================================================================
+   Вступление «Падение» (60fps) и главный зал с полотном «Падший ангел»
+   Строго GPU-композитор: transform + opacity (без CPU mask-image и filter: blur)
+   ========================================================================== */
+
+.fallen-screen {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - var(--fallen-header-height, 74px));
+  min-height: calc(100svh - var(--fallen-header-height, 74px));
+  overflow: hidden;
+  background: var(--bg-void);
+  color: var(--ink-primary);
+}
+
+.fallen-picture,
+.fallen-grain {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 66%;
+  height: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 36%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 36%);
+}
+
+.fallen-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) scale(1.045);
+  will-change: transform;
+}
+
+.fallen-shade,
+.fallen-grain {
+  pointer-events: none;
+}
+
+.fallen-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--bg-void) 0%, rgba(11, 7, 8, 0.94) 27%, rgba(11, 7, 8, 0.42) 48%, transparent 64%),
+    linear-gradient(180deg, rgba(11, 7, 8, 0.25) 0%, transparent 24%, transparent 72%, var(--bg-void) 100%),
+    radial-gradient(115% 88% at 68% 48%, transparent 52%, rgba(11, 7, 8, 0.74) 100%);
+}
+
+.fallen-grain {
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.2 -.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.fallen-copy {
+  position: relative;
+  z-index: 2;
+  width: min(46vw, 660px);
+  padding: 68px 0 132px var(--shell-pad);
+}
+
+.fallen-reveal {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 0.9s cubic-bezier(.16, 1, .3, 1) var(--d, 0ms),
+    transform 0.9s cubic-bezier(.16, 1, .3, 1) var(--d, 0ms);
+}
+
+html.is-intro-pending .fallen-reveal,
+.fallen-screen.is-pre .fallen-reveal {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition: none;
+}
+
+.fallen-screen .hero-kicker {
+  margin: 0 0 1rem;
+  color: var(--ink-muted);
+  font: 500 12px/1.4 var(--font-sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.fallen-screen h1 {
+  margin: 0 0 1.25rem;
+  color: var(--ink-primary);
+  font: 500 clamp(2.35rem, 4.15vw, 4.25rem)/1.02 var(--font-serif);
+  letter-spacing: -0.016em;
+  text-wrap: balance;
+}
+
+.fallen-screen .hero-title-product {
+  color: #E25144;
+  font-style: italic;
+}
+
+.fallen-screen p.lead {
+  max-width: 34rem;
+  margin: 0 0 1.4rem;
+  color: var(--ink-muted);
+  font-size: clamp(0.95rem, 1.12vw, 1.04rem);
+  line-height: 1.66;
+}
+
+.fallen-screen .geo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  padding: 7px 14px;
+  margin-bottom: 1.45rem;
+  border-radius: var(--radius-sm);
+  background: rgba(20, 14, 16, 0.72);
+  border: 1px solid var(--line-warm);
+  color: var(--ink-primary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.fallen-screen .geo-tag svg {
+  width: 15px;
+  height: 15px;
+  color: #E25144;
+  flex-shrink: 0;
+}
+
+.fallen-screen .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 1.35rem;
+}
+
+.fallen-screen .hero-work-button {
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+}
+
+.fallen-screen .hero-quick-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--ink-muted);
+}
+
+.social-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-icon-link {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--line-hairline);
+  background: rgba(20, 14, 16, 0.72);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(.16, 1, .3, 1), border-color 0.2s ease;
+}
+
+.social-icon-link svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  border-radius: 5px;
+  filter: saturate(0.25) brightness(1.04);
+  opacity: 0.82;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.social-icon-link:hover,
+.social-icon-link:focus-visible {
+  transform: translate3d(0, -2px, 0);
+  border-color: var(--line-warm);
+}
+
+.social-icon-link:hover svg,
+.social-icon-link:focus-visible svg {
+  filter: saturate(0.95);
+  opacity: 1;
+}
+
+.hero-demo-link {
+  position: absolute;
+  z-index: 3;
+  right: var(--shell-pad);
+  bottom: 92px;
+  padding: 11px 18px;
+  border: 1px solid var(--line-warm);
+  border-radius: var(--radius-sm);
+  background: rgba(11, 7, 8, 0.74);
+  color: var(--ink-primary);
+  font: 500 12px/1.2 var(--font-sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-demo-link:hover {
+  background: rgba(240, 236, 228, 0.12);
+  border-color: var(--ink-primary);
+}
+
+.hero-footer {
+  position: absolute;
+  z-index: 3;
+  right: var(--shell-pad);
+  bottom: 26px;
+  left: var(--shell-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.hero-signature {
+  color: rgba(240, 236, 228, 0.24);
+  font: 400 clamp(2rem, 2.8vw, 2.7rem)/1 var(--font-signature);
+}
+
+.hero-scroll {
+  margin-right: auto;
+  margin-left: 20px;
+  color: var(--ink-muted);
+  font: 500 11.5px/1 var(--font-sans);
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.hero-scroll:hover {
+  color: var(--ink-primary);
+}
+
+.fallen-screen .hero-telegram {
+  border-color: var(--line-warm);
+  background: rgba(11, 7, 8, 0.68);
+  color: var(--ink-primary);
+}
+
+.fallen-screen .hero-telegram:hover {
+  background: rgba(240, 236, 228, 0.12);
+  border-color: var(--ink-primary);
+  box-shadow: none;
+}
+
+/* Полноэкранный пролог падения (60fps видео + мгновенный постер) */
+.fallen-intro,
+.fallen-mist {
+  position: fixed;
+  inset: 0;
+}
+
+.fallen-intro {
+  z-index: 300;
+  background: var(--bg-void);
+  overflow: hidden;
+}
+
+.fallen-intro__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.fallen-intro.is-playing .fallen-intro__poster {
+  opacity: 0;
+}
+
+.fallen-intro video {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Zero-FOUC до инициализации JS при первом визите */
+html.is-intro-pending .fallen-intro[hidden] {
+  display: block;
+}
+
+html.is-intro-pending body {
+  overflow: hidden;
+}
+
+/* Двухслойная GPU-дымка, расходящаяся от взгляда «Падшего ангела» */
+.fallen-mist {
+  --ex: 68vw;
+  --ey: 44vh;
+  z-index: 301;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.fallen-mist__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(62% 52% at 32% 38%, rgba(214, 198, 182, 0.34), transparent 72%),
+    radial-gradient(66% 58% at 72% 64%, rgba(124, 102, 92, 0.45), transparent 70%),
+    #140E10;
+  opacity: 1;
+  will-change: opacity;
+}
+
+.fallen-mist__iris {
+  position: absolute;
+  left: var(--ex);
+  top: var(--ey);
+  width: 240vmax;
+  height: 240vmax;
+  transform: translate3d(-50%, -50%, 0) scale3d(0.12, 0.12, 1);
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    transparent 12%,
+    rgba(28, 20, 22, 0.72) 26%,
+    rgba(16, 11, 12, 0.96) 44%,
+    #0B0708 66%
+  );
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.fallen-mist.is-in {
+  opacity: 1;
+  transition: opacity 0.38s ease-in;
+}
+
+.fallen-mist.is-full {
+  opacity: 1;
+}
+
+.fallen-mist.is-out {
+  animation: fallen-mist-fade 1.35s cubic-bezier(.22, 0.7, .24, 1) both;
+}
+
+.fallen-mist.is-out .fallen-mist__veil {
+  animation: fallen-veil-drop 0.9s cubic-bezier(.22, 0.7, .24, 1) both;
+}
+
+.fallen-mist.is-out .fallen-mist__iris {
+  animation: fallen-iris-open 1.35s cubic-bezier(.2, 0.75, .25, 1) both;
+}
+
+.fallen-mist.is-out.is-quick,
+.fallen-mist.is-out.is-quick .fallen-mist__veil,
+.fallen-mist.is-out.is-quick .fallen-mist__iris {
+  animation-duration: 0.55s;
+}
+
+@keyframes fallen-mist-fade {
+  0% { opacity: 1; }
+  68% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes fallen-veil-drop {
+  0% { opacity: 0.92; }
+  100% { opacity: 0; }
+}
+
+@keyframes fallen-iris-open {
+  0% {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0) scale3d(0.14, 0.14, 1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale3d(2.35, 2.35, 1);
+  }
+}
+
+/* Кнопки управления вступлением */
+.fallen-control {
+  position: absolute;
+  z-index: 4;
+  top: max(18px, env(safe-area-inset-top));
+  right: max(18px, env(safe-area-inset-right));
+  max-width: calc(100% - 36px);
+  min-height: 40px;
+  padding: 9px 16px;
+  border: 1px solid var(--line-warm);
+  border-radius: var(--radius-sm);
+  background: rgba(11, 7, 8, 0.74);
+  color: var(--ink-primary);
+  font: 500 11px/1.2 var(--font-sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.fallen-control--skip {
+  position: fixed;
+  z-index: 302;
+}
+
+.fallen-control:hover {
+  background: rgba(240, 236, 228, 0.14);
+  border-color: var(--ink-primary);
+}
+
+.fallen-intro[hidden],
+.fallen-mist[hidden],
+.fallen-control[hidden] {
+  display: none;
+}
+
+body.has-fallen-intro {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+@media (max-width: 700px), (orientation: portrait) {
+  .fallen-picture,
+  .fallen-grain {
+    left: 0;
+    right: auto;
+    width: 100%;
+    height: 54vh;
+    height: 54svh;
+    -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+  }
+
+  .fallen-photo {
+    object-position: 52% 46%;
+  }
+
+  .fallen-shade {
+    background:
+      linear-gradient(0deg, var(--bg-void) 0%, var(--bg-void) 34%, transparent 62%),
+      radial-gradient(110% 70% at 48% 32%, transparent 52%, rgba(11, 7, 8, 0.72));
+  }
+
+  .fallen-screen {
+    display: block;
+  }
+
+  .fallen-copy {
+    width: auto;
+    padding: 46vh var(--shell-pad) 10px;
+    padding: 46svh var(--shell-pad) 10px;
+  }
+
+  .fallen-screen h1 {
+    font-size: clamp(2.1rem, 9vw, 3rem);
+  }
+
+  .fallen-screen .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-demo-link {
+    position: static;
+    display: inline-flex;
+    margin: 12px var(--shell-pad) 6px;
+  }
+
+  .hero-footer {
+    position: static;
+    display: block;
+    padding: 10px var(--shell-pad) 38px;
+  }
+
+  .hero-signature,
+  .hero-scroll {
+    display: none;
+  }
+
+  .fallen-screen .hero-telegram {
+    width: 100%;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fallen-intro,
+  .fallen-mist,
+  .fallen-control {
+    display: none !important;
+  }
+
+  .fallen-photo {
+    transform: none !important;
+  }
+
+  html.is-intro-pending .fallen-reveal,
+  .fallen-screen.is-pre .fallen-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

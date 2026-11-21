@@ -263,7 +263,7 @@ button.main:hover { background: var(--acc-hover); }
     <input type="tel" id="phone" inputmode="tel" autocomplete="tel" placeholder="+7 (900) 000-00-00" maxlength="18">
     <div class="err" id="err" role="alert"></div>
     <button class="main" id="send" type="button" style="margin-top:14px">Отправить расчёт в Telegram</button>
-    <p class="demo-privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p>
+    <p class="demo-privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a>.</p>
     <div id="box"></div>
     <div class="note" id="note"></div>
   </div>
@@ -279,7 +279,7 @@ const CONFIG = {
   "base": 0,
   "min": 50000,
   "termLabel": "Срок работ",
-  "termRule": "(S.area>70?'от 50 дней':S.area>40?'от 35 дней':'от 20 дней')",
+  "term": S => (S.area > 70 ? "от 50 дней" : S.area > 40 ? "от 35 дней" : "от 20 дней"),
   "note": "Точную смету составит мастер после бесплатного замера. Расчёт не является офертой.",
   "fields": [
     {
@@ -430,7 +430,7 @@ function build() {
   });
 }
 
-CONFIG.term = CONFIG.termRule ? new Function("S", "return " + CONFIG.termRule) : null;
+// Срок рассчитывается напрямую функцией CONFIG.term(S) без динамического eval/Function.
 
 function calc() {
   let sum = CONFIG.base || 0;
@@ -548,8 +548,32 @@ $("send").onclick = () => {
 
   const b = $("box");
   b.style.display = "block";
-  b.innerHTML = `<span class="copy-ok">✓ Расчёт скопирован в буфер обмена</span>` + t;
-  try { navigator.clipboard.writeText(t); } catch (e) {}
+  b.replaceChildren(document.createTextNode(t));
+
+  const markCopied = () => {
+    if (b.querySelector(".copy-ok")) return;
+    const okBadge = document.createElement("span");
+    okBadge.className = "copy-ok";
+    okBadge.textContent = "✓ Расчёт скопирован в буфер обмена";
+    b.prepend(okBadge);
+  };
+  const fallbackCopy = () => {
+    const ta = document.createElement("textarea");
+    ta.value = t;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      if (document.execCommand("copy")) markCopied();
+    } catch {}
+    ta.remove();
+  };
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+    navigator.clipboard.writeText(t).then(markCopied, fallbackCopy);
+  } else {
+    fallbackCopy();
+  }
 
   showTgModal(t);
 };
@@ -595,6 +619,6 @@ document.addEventListener("keydown", function(e) {
     <button type="button" class="tg-modal-close" onclick="closeTgModal()">Попробовать другой расчёт</button>
   </div>
 </div>
-  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a></footer>
 </body>
 </html>

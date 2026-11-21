@@ -2,12 +2,11 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <link rel="preload" as="font" href="fonts/cormorant-garamond-cyrillic.woff2" type="font/woff2" crossorigin>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Рамиль — Разработка сайтов, калькуляторов и Telegram-ботов для бизнеса</title>
   <meta name="description" content="Разработка продающих сайтов, интерактивных калькуляторов, квизов и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Заявки напрямую в Telegram, 0 ₽ абонплаты.">
-  <meta name="theme-color" content="#0e0809">
-  <link rel="preload" as="image" href="assets/hero-smoke.webp" fetchpriority="high">
+  <meta name="theme-color" content="#0B0708">
+  <link rel="preload" as="image" href="assets/hero-hd.webp" fetchpriority="high">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="alternate icon" href="favicon.ico">
@@ -28,7 +27,7 @@
   <meta name="twitter:description" content="Делаю одностраничные сайты, интерактивные калькуляторы, квизы и Telegram-боты для малого бизнеса.">
   <meta name="twitter:image" content="https://ramil-tools.ru/og-cover.jpg">
 
-  <!-- Микроразметка Schema.org. TODO: заменить email на почту домена. Адрес используется и в контактах. -->
+  <!-- Микроразметка Schema.org -->
   <script type="application/ld+json" id="serviceSchema">
   {
     "@context": "https://schema.org",
@@ -50,1801 +49,39 @@
   }
   </script>
 
-  <!-- Шрифты с полной поддержкой кириллицы (Onest и Inter) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Onest:wght@700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --ink: #0f141c;
-      --mut: #525d6f;
-      --bg: #f5f7fb;
-      --card: #ffffff;
-      --subtle: #eef2f8;
-      --line: #e1e7f0;
-      --acc: #4c5bf0;
-      --acc-hover: #3b49df;
-      --acc-soft: #eef0ff;
-      --ok: #10b981;
-      --wa: #25d366;
-      --wa-hover: #20bd5a;
-      --radius: 20px;
-      --shadow-sm: 0 2px 6px rgba(15, 20, 28, 0.03), 0 10px 24px -4px rgba(15, 20, 28, 0.05);
-      --shadow-hover: 0 20px 40px -8px rgba(76, 91, 240, 0.15), 0 6px 16px -4px rgba(15, 20, 28, 0.06);
-      --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      --font-display: "Onest", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    }
-
-    .privacy-note {
-      margin: 8px 0 0;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .privacy-note a,
-    .hero-guarantees a,
-    .about-content a,
-    .footer-note a {
-      color: inherit;
-      text-decoration: underline;
-      text-underline-offset: .16em;
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      max-width: 100%;
-    }
-
-    body {
-      margin: 0;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-      font: 16px/1.6 var(--font-sans);
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(at 10% 5%, rgba(76, 91, 240, 0.07) 0px, transparent 45%),
-        radial-gradient(at 90% 12%, rgba(56, 189, 248, 0.06) 0px, transparent 40%),
-        linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
-      color: var(--ink);
-      -webkit-font-smoothing: antialiased;
-      transition: background-color 0.25s ease, color 0.25s ease;
-    }
-
-    h1, h2, h3, .logo, .price-card b, .stat-box b, .est-sum {
-      font-family: var(--font-display);
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Шапка и навигация (с фолбэком для браузеров без color-mix) */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      width: 100%;
-      padding-top: max(env(safe-area-inset-top, 0px), 8px);
-      background: var(--bg);
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 76px;
-      padding-top: 14px;
-      padding-bottom: 14px;
-      gap: 12px;
-    }
-
-    .logo {
-      font-weight: 800;
-      font-size: 19px;
-      letter-spacing: -0.03em;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding-left: 4px;
-      flex-shrink: 0;
-    }
-
-    .logo-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--acc);
-      box-shadow: 0 0 0 4px var(--acc-soft);
-      flex-shrink: 0;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--mut);
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      transition: color 0.15s ease;
-      white-space: nowrap;
-    }
-
-    .nav-links a:hover {
-      color: var(--acc);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    /* Кнопки */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 20px;
-      border-radius: 12px;
-      background: var(--acc);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 14.5px;
-      border: 1.5px solid var(--acc);
-      cursor: pointer;
-      white-space: nowrap;
-      transition: transform 0.24s cubic-bezier(.16, 1, .3, 1), background 0.2s cubic-bezier(.16, 1, .3, 1), box-shadow 0.24s cubic-bezier(.16, 1, .3, 1), opacity 0.2s ease;
-      font-family: inherit;
-      text-align: center;
-    }
-
-    .btn:hover:not(:disabled) {
-      background: var(--acc-hover);
-      border-color: var(--acc-hover);
-      transform: translate3d(0, -2px, 0);
-      box-shadow: 0 8px 20px rgba(76, 91, 240, 0.28);
-    }
-
-    .btn:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .btn.alt {
-      background: var(--card);
-      color: var(--ink);
-      border: 1.5px solid var(--line);
-    }
-
-    .btn.alt:hover:not(:disabled) {
-      background: var(--card);
-      border-color: var(--acc);
-      color: var(--acc);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .btn.sm {
-      padding: 9px 16px;
-      font-size: 14px;
-      border-radius: 12px;
-    }
-
-    .btn.btn-wa {
-      background: var(--wa);
-      border-color: var(--wa);
-      color: #ffffff;
-    }
-
-    .btn.btn-wa:hover:not(:disabled) {
-      background: var(--wa-hover);
-      border-color: var(--wa-hover);
-      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.32);
-    }
-
-    /* 1. Первый экран (Hero) */
-    .hero {
-      padding: 48px 0 36px;
-      display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .hero-main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      min-width: 0;
-    }
-
-    .geo-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 10px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      color: var(--mut);
-      font-size: clamp(11px, 3.1vw, 13px);
-      font-weight: 600;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-sm);
-      max-width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .geo-tag svg {
-      width: 14px;
-      height: 14px;
-      color: var(--acc);
-      flex-shrink: 0;
-    }
-
-    .hero h1 {
-      font-size: clamp(26px, 4.4vw, 44px);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin: 0 0 14px;
-      word-wrap: break-word;
-    }
-
-    .hero p.lead {
-      font-size: 16.5px;
-      color: var(--mut);
-      max-width: 600px;
-      margin: 0 0 22px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-      width: 100%;
-    }
-
-    .hero-quick-links {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 22px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--mut);
-    }
-
-    .social-icons {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .social-icon-link {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-
-    .social-icon-link:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .social-icon-link svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .hero-guarantees {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 12px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--mut);
-    }
-
-    .hero-guarantees span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 99px;
-      box-shadow: 0 1px 3px rgba(15, 20, 28, 0.03);
-    }
-
-    .hero-guarantees span::before {
-      content: "✓ ";
-      color: var(--acc);
-      font-weight: 800;
-    }
-
-    .hero-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-      position: relative;
-      overflow: hidden;
-      min-width: 0;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--acc), #38bdf8);
-    }
-
-    .profile-top {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      min-width: 0;
-    }
-
-    .profile-top h2 {
-      margin: 0 0 5px;
-      font-size: 21px;
-    }
-
-    .profile-badge {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--acc);
-      background: var(--acc-soft);
-      padding: 4px 10px;
-      border-radius: 7px;
-      display: inline-block;
-    }
-
-    .profile-bio {
-      margin: 0;
-      font-size: 14.5px;
-      color: var(--mut);
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .stat-box {
-      background: var(--subtle);
-      border-radius: 12px;
-      padding: 12px 14px;
-      min-width: 0;
-    }
-
-    .stat-box b {
-      display: block;
-      font-size: 20px;
-      color: var(--acc);
-    }
-
-    .stat-box small {
-      color: var(--mut);
-      font-size: 12.5px;
-      display: block;
-      line-height: 1.35;
-    }
-
-    /* Секции */
-    section {
-      padding: 36px 0;
-      scroll-margin-top: 84px;
-    }
-
-    .sec-head {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-
-    .sec-head > div {
-      min-width: 0;
-    }
-
-    .sec-head h2 {
-      font-size: clamp(22px, 3.5vw, 31px);
-      letter-spacing: -0.03em;
-      margin: 0;
-      position: relative;
-      padding-left: 14px;
-    }
-
-    .sec-head h2::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.16em;
-      bottom: 0.16em;
-      width: 4px;
-      border-radius: 4px;
-      background: var(--acc);
-    }
-
-    .sec-head p {
-      margin: 6px 0 0;
-      color: var(--mut);
-      max-width: 640px;
-    }
-
-    /* 3. Портфолио */
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .filter-btn {
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      color: var(--mut);
-      font: inherit;
-      font-size: 13.5px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.15s ease;
-    }
-
-    .filter-btn:hover {
-      border-color: var(--acc);
-      color: var(--ink);
-    }
-
-    .filter-btn.active {
-      background: var(--acc);
-      color: #fff;
-      border-color: var(--acc);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-sm);
-      min-width: 0;
-      transition: transform 0.34s cubic-bezier(.16, 1, .3, 1), box-shadow 0.34s cubic-bezier(.16, 1, .3, 1), border-color 0.28s ease;
-    }
-
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translate3d(0, -5px, 0);
-      border-color: rgba(76, 91, 240, 0.4);
-    }
-
-    .card .thumb {
-      display: block;
-      position: relative;
-      line-height: 0;
-      overflow: hidden;
-      background: var(--subtle);
-      height: 210px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      transition: transform 0.55s cubic-bezier(.16, 1, .3, 1);
-    }
-
-    .card:hover img {
-      transform: scale3d(1.03, 1.03, 1);
-    }
-
-    .card-tag {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: rgba(255, 255, 255, 0.92);
-      background: color-mix(in srgb, var(--card) 92%, transparent);
-      backdrop-filter: blur(6px);
-      color: var(--ink);
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.2;
-      border: 1px solid var(--line);
-    }
-
-    .card .b {
-      padding: 18px 20px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex: 1;
-    }
-
-    .card h3 {
-      margin: 0;
-      font-size: 18.5px;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--mut);
-      font-size: 14.5px;
-      flex: 1;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-      padding-top: 12px;
-      border-top: 1px solid var(--line);
-    }
-
-    .card-link {
-      color: var(--acc);
-      font-weight: 700;
-      text-decoration: none;
-      font-size: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .card-link:hover {
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-
-    .preview-btn {
-      background: var(--subtle);
-      border: 1px solid var(--line);
-      color: var(--ink);
-      border-radius: 8px;
-      padding: 6px 11px;
-      font: inherit;
-      font-size: 12.5px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.15s ease;
-    }
-
-    .preview-btn:hover {
-      border-color: var(--acc);
-      color: var(--acc);
-    }
-
-    /* 4. Услуги и цены */
-    .price-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .price-card {
-      grid-column: span 2;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 14px;
-      box-shadow: var(--shadow-sm);
-      min-width: 0;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .price-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--acc);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .price-card:nth-child(4),
-    .price-card:nth-child(5) {
-      grid-column: span 3;
-    }
-
-    .price-card b,
-    .stat-box b,
-    .est-sum {
-      font-variant-numeric: lining-nums;
-    }
-
-    .price-card b {
-      font-size: 24px;
-      color: var(--acc);
-      display: inline-block;
-      margin-bottom: 6px;
-      background: var(--acc-soft);
-      padding: 4px 12px;
-      border-radius: 9px;
-    }
-
-    .price-card span {
-      font-weight: 700;
-      font-size: 17.5px;
-      display: block;
-    }
-
-    .price-card p {
-      margin: 6px 0 0;
-      font-size: 14.5px;
-      color: var(--mut);
-    }
-
-    .price-order-link {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--acc);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding-top: 10px;
-      border-top: 1px solid var(--line);
-    }
-
-    .price-order-link:hover {
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-
-    /* 5. Интерактивный калькулятор сметы */
-    .estimator-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow-sm);
-      display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
-      gap: 24px;
-      align-items: stretch;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .est-options {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      min-width: 0;
-      width: 100%;
-    }
-
-    .est-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 13px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: var(--bg);
-      color: var(--ink);
-      font: inherit;
-      text-align: left;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
-      width: 100%;
-      min-width: 0;
-    }
-
-    .est-row:hover {
-      border-color: var(--acc);
-    }
-
-    .est-row.active {
-      background: var(--acc-soft);
-      border-color: var(--acc);
-    }
-
-    .est-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 600;
-      font-size: 14.5px;
-      line-height: 1.35;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .est-left span:last-child {
-      word-break: break-word;
-      overflow-wrap: anywhere;
-    }
-
-    .est-box {
-      width: 20px;
-      height: 20px;
-      border-radius: 6px;
-      border: 2px solid var(--mut);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 800;
-      color: #fff;
-      flex-shrink: 0;
-      transition: background-color 0.15s ease, border-color 0.15s ease;
-    }
-
-    .est-row.active .est-box {
-      background: var(--acc);
-      border-color: var(--acc);
-    }
-
-    .est-price {
-      font-weight: 800;
-      font-size: 14.5px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      color: var(--ink);
-    }
-
-    .est-total-panel {
-      background: var(--subtle);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-      min-width: 0;
-      width: 100%;
-    }
-
-    .est-label {
-      font-size: 12.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--mut);
-    }
-
-    .est-sum {
-      font-size: clamp(28px, 4vw, 36px);
-      font-weight: 800;
-      color: var(--acc);
-      line-height: 1.1;
-      margin: 6px 0 4px;
-    }
-
-    .est-term {
-      font-size: 13.5px;
-      color: var(--mut);
-    }
-
-    .est-input {
-      width: 100%;
-      max-width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      color: var(--ink);
-      font: inherit;
-      font-size: 16px;
-      margin-bottom: 10px;
-      transition: border-color 0.15s ease;
-    }
-
-    .est-input:focus {
-      outline: none;
-      border-color: var(--acc);
-    }
-
-    .est-btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    /* 6. Обо мне */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      align-items: stretch;
-    }
-
-    .box-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    .box-card h3 {
-      margin: 0 0 12px;
-      font-size: 19px;
-    }
-
-    .box-card p {
-      margin: 0 0 12px;
-      color: var(--mut);
-    }
-
-    .box-card p:last-child {
-      margin-bottom: 0;
-    }
-
-    .steps-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 12px;
-    }
-
-    .steps-list li {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      font-size: 15px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: var(--bg);
-    }
-
-    .step-badge {
-      width: 26px;
-      height: 26px;
-      border-radius: 8px;
-      background: var(--acc);
-      color: #fff;
-      font-weight: 800;
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    /* 9. FAQ (Частые вопросы) */
-    .faq-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      align-items: start;
-    }
-
-    .faq-item {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px 20px;
-      box-shadow: var(--shadow-sm);
-      transition: border-color 0.15s ease;
-    }
-
-    .faq-item[open] {
-      border-color: var(--acc);
-    }
-
-    .faq-item summary {
-      font-weight: 700;
-      font-size: 15.5px;
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .faq-item summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .faq-item summary::after {
-      content: "+";
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--acc);
-      flex-shrink: 0;
-      transition: transform 0.2s ease;
-    }
-
-    .faq-item[open] summary::after {
-      transform: rotate(45deg);
-    }
-
-    .faq-item p {
-      margin: 10px 0 0;
-      color: var(--mut);
-      font-size: 14.5px;
-      line-height: 1.55;
-      padding-top: 10px;
-      border-top: 1px solid var(--line);
-    }
-
-    /* 10. Контакты */
-    .contact-box {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 28px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-box::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--acc), #38bdf8, var(--acc));
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 18px;
-      border-radius: 14px;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      text-decoration: none;
-      min-width: 0;
-      cursor: pointer;
-      transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .contact-item:hover {
-      border-color: var(--acc);
-      background: var(--card);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .contact-item-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .contact-brand-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    }
-
-    .contact-brand-icon svg {
-      width: 22px;
-      height: 22px;
-      display: block;
-    }
-
-    .contact-brand-icon.tg-brand {
-      background: linear-gradient(135deg, #2aabee, #229ed9);
-      color: #ffffff;
-    }
-
-    .contact-brand-icon.wa-brand {
-      background: linear-gradient(135deg, #25d366, #1ebe57);
-      color: #ffffff;
-    }
-
-    .contact-text-wrap {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    .contact-name {
-      font-size: 15.5px;
-      font-weight: 700;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .contact-sub {
-      font-size: 12.5px;
-      color: var(--mut);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .contact-item-arrow {
-      color: var(--acc);
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 1;
-      flex-shrink: 0;
-      transition: transform 0.18s ease;
-    }
-
-    .contact-item:hover .contact-item-arrow {
-      transform: translateX(3px);
-    }
-
-    /* Модальное окно живого предпросмотра (с переключателем Мобильный / ПК) */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(11, 15, 23, 0.75);
-      backdrop-filter: blur(6px);
-      z-index: 100;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal-box {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      width: 100%;
-      max-width: 440px;
-      height: 86vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-      position: relative;
-      transition: max-width 0.25s ease;
-    }
-
-    .modal-box.desktop-mode {
-      max-width: 980px;
-    }
-
-    .modal-spinner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 42px;
-      height: 42px;
-      border: 4px solid var(--line);
-      border-top-color: var(--acc);
-      border-radius: 50%;
-      animation: modalSpin 0.75s linear infinite;
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    @keyframes modalSpin {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    .modal-head {
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      background: var(--card);
-      z-index: 10;
-    }
-
-    .modal-heading {
-      display: grid;
-      min-width: 0;
-    }
-
-    .modal-heading span {
-      color: var(--mut);
-      font-size: 12px;
-    }
-
-    .modal-heading b {
-      font-size: 14.5px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    .modal-actions > :is(a, button) {
-      min-width: 44px;
-      min-height: 44px;
-    }
-
-    .modal-iframe {
-      width: 100%;
-      flex: 1;
-      border: 0;
-      background: #fff;
-      position: relative;
-      z-index: 8;
-    }
-
-    /* Уведомление о копировании */
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: var(--ink);
-      color: var(--bg);
-      padding: 10px 18px;
-      border-radius: 99px;
-      font-size: 13.5px;
-      font-weight: 700;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s ease;
-      z-index: 120;
-      max-width: 90vw;
-      text-align: center;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* Подвал */
-    footer.site-footer {
-      margin: 36px 0 32px;
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
-      color: var(--mut);
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .footer-note a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-    }
-
-    .footer-note {
-      max-width: 720px;
-      line-height: 1.45;
-    }
-
-    .footer-copy {
-      white-space: nowrap;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    @media (max-width: 768px) {
-      input, select, textarea {
-        font-size: 16px !important;
+  <!-- Исключаем вспышку Hero до старта вступления при первом визите -->
+  <script>
+    try {
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches && sessionStorage.getItem("padenie-intro-seen") !== "1") {
+        document.documentElement.classList.add("is-intro-pending");
       }
-      #modalViewportBtn {
-        display: none;
-      }
-    }
+    } catch {}
+  </script>
 
-    @media (max-width: 920px) {
-      .hero,
-      .estimator-card,
-      .faq-list {
-        grid-template-columns: 1fr;
-      }
-      .price-card {
-        grid-column: span 3;
-      }
-      .price-card:nth-child(5) {
-        grid-column: span 6;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .wrap {
-        padding: 0 16px;
-      }
-      section {
-        scroll-margin-top: 112px;
-      }
-      .about-grid,
-      .price-grid,
-      .faq-list {
-        grid-template-columns: 1fr;
-      }
-      .price-card,
-      .price-card:nth-child(4),
-      .price-card:nth-child(5) {
-        grid-column: span 1;
-      }
-      .nav-bar {
-        flex-wrap: wrap;
-        padding: 12px 0 8px;
-        min-height: auto;
-        gap: 10px;
-      }
-      .logo {
-        padding-left: 2px;
-        font-size: 18px;
-      }
-      .nav-links {
-        order: 3;
-        width: 100%;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 8px;
-        padding: 8px 28px 4px 2px;
-        border-top: 1px solid var(--line);
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-        mask-image: linear-gradient(to right, black 85%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
-      }
-      .nav-links::-webkit-scrollbar {
-        display: none;
-      }
-      .nav-links a {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 99px;
-        padding: 6px 14px;
-        font-size: 13px;
-        font-weight: 600;
-        white-space: nowrap;
-        flex-shrink: 0;
-        box-shadow: 0 1px 3px rgba(15, 20, 28, 0.04);
-      }
-      .hero {
-        padding: 20px 0 16px;
-        gap: 18px;
-      }
-      .hero h1 {
-        font-size: clamp(24px, 6.8vw, 36px);
-        line-height: 1.15;
-        margin-bottom: 12px;
-      }
-      .hero p.lead {
-        font-size: 15px;
-        line-height: 1.55;
-        margin-bottom: 18px;
-      }
-      .hero-card,
-      .box-card,
-      .contact-box,
-      .estimator-card,
-      .price-card {
-        padding: 20px;
-        border-radius: 18px;
-      }
-      .filter-bar {
-        width: 100%;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding: 0 28px 6px 0;
-        scrollbar-width: none;
-        mask-image: linear-gradient(to right, black 88%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
-      }
-      .filter-bar::-webkit-scrollbar {
-        display: none;
-      }
-      .filter-btn {
-        flex-shrink: 0;
-        white-space: nowrap;
-        padding: 7px 14px;
-        font-size: 13px;
-      }
-      .card-footer {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-      .card-footer .preview-btn {
-        flex: 1;
-        text-align: center;
-        padding: 9px 10px;
-        font-size: 13px;
-      }
-      .card-footer .card-link {
-        flex: 1;
-        text-align: center;
-        justify-content: center;
-        padding: 9px 10px;
-        font-size: 13px;
-        background: var(--acc-soft);
-        border-radius: 8px;
-      }
-      .est-total-panel {
-        padding: 18px;
-        border-radius: 14px;
-      }
-      .est-row {
-        padding: 12px;
-        gap: 10px;
-        border-radius: 10px;
-      }
-      .est-left {
-        font-size: 13.5px;
-        gap: 10px;
-      }
-      .est-price {
-        font-size: 13.5px;
-      }
-      .est-sum {
-        font-size: 28px;
-      }
-      #estSendBtn, #estSendWaBtn {
-        white-space: normal;
-        line-height: 1.3;
-        padding: 13px;
-        font-size: 14px;
-      }
-      footer.site-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        margin: 28px 0 24px;
-        padding-top: 18px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .modal-backdrop {
-        padding: 0;
-        align-items: flex-end;
-      }
-      .modal-box {
-        max-width: 100%;
-        width: 100%;
-        height: 92vh;
-        border-radius: 20px 20px 0 0;
-        border-bottom: 0;
-      }
-      .modal-head {
-        padding: 14px 18px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .wrap {
-        padding: 0 14px;
-      }
-      .hero-guarantees {
-        gap: 6px 8px;
-      }
-      .hero-guarantees span {
-        font-size: 12px;
-        padding: 5px 10px;
-      }
-      .hero-actions {
-        flex-direction: column;
-        padding: 0;
-        gap: 10px;
-      }
-      .hero-actions .btn {
-        width: 100%;
-        padding: 13px 18px;
-        font-size: 14.5px;
-      }
-      .hero-stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-      }
-      .stat-box {
-        padding: 10px 12px;
-      }
-      .stat-box b {
-        font-size: 18px;
-      }
-      .stat-box small {
-        font-size: 11.5px;
-      }
-      .card .thumb {
-        height: 185px;
-      }
-    }
-  </style>
-  <style>
-    @font-face {
-      font-family: "Cormorant Garamond";
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url("fonts/cormorant-garamond-cyrillic.woff2") format("woff2");
-      unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-    }
-
-    @font-face {
-      font-family: "Cormorant Garamond";
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url("fonts/cormorant-garamond-latin.woff2") format("woff2");
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-
-    html:has(.portfolio-intro:not([hidden])) {
-      scrollbar-color: #121a27 #121a27;
-    }
-
-    .portfolio-intro {
-      --portfolio-intro-title-size: clamp(19px, 2.7vw, 52px);
-      position: fixed;
-      z-index: 200;
-      inset: 0;
-      isolation: isolate;
-      overflow: hidden;
-      color-scheme: dark;
-    }
-
-    .portfolio-intro[hidden] {
-      display: none;
-    }
-
-    .portfolio-intro__scene {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      background: radial-gradient(ellipse at 48% 42%, #263448, #111924 57%, #070b12);
-      perspective: 1200px;
-      will-change: opacity;
-      transform: translateZ(0);
-    }
-
-    .portfolio-intro__slice {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .portfolio-intro.is-burning .portfolio-intro__slice--top {
-      animation: portfolio-intro-tear-up 1.18s cubic-bezier(.45, .02, .25, 1) both;
-    }
-
-    .portfolio-intro.is-burning .portfolio-intro__slice--bottom {
-      animation: portfolio-intro-tear-down 1.18s cubic-bezier(.45, .02, .25, 1) both;
-    }
-
-    .portfolio-intro.is-burning.is-fade .portfolio-intro__slice--top {
-      animation: portfolio-intro-fade 1.18s ease-in-out both;
-    }
-
-    .portfolio-intro.is-burning .portfolio-intro__skip {
-      animation: portfolio-intro-fade .37s ease .81s both;
-    }
-
-    @keyframes portfolio-intro-tear-up {
-      0%, 18% { transform: translateY(0); }
-      100% { transform: translateY(-60%); }
-    }
-
-    @keyframes portfolio-intro-tear-down {
-      0%, 18% { transform: translateY(0); }
-      100% { transform: translateY(60%); }
-    }
-
-    @keyframes portfolio-intro-fade {
-      to { opacity: 0; }
-    }
-
-    .portfolio-intro__wall {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: clamp(9px, 1.3vw, 22px);
-      width: max(150vw, 154vh);
-      transform: translate3d(-52%, -52%, 0) rotateX(23deg) rotateZ(-13deg) scale(1);
-      will-change: transform;
-      backface-visibility: hidden;
-      animation: portfolio-intro-drift 2.7s cubic-bezier(.16, 1, .3, 1) both;
-    }
-
-    .portfolio-intro.is-burning .portfolio-intro__wall {
-      animation-play-state: paused;
-    }
-
-    @keyframes portfolio-intro-drift {
-      to {
-        transform: translate3d(-48%, -47%, 0) rotateX(18deg) rotateZ(-11deg) scale(1.09);
-      }
-    }
-
-    .portfolio-intro__card {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
-      align-items: center;
-      gap: 5%;
-      min-width: 0;
-      aspect-ratio: 2.15;
-      padding: 6%;
-      overflow: hidden;
-      color: #141a24;
-      background: linear-gradient(145deg, #f0f0ef, #c3c8d0);
-      border: 1px solid #f2f0ea;
-      border-radius: 4px;
-      box-shadow: 0 8px 22px #070b1260;
-    }
-
-    .portfolio-intro__card:nth-child(even) {
-      background: linear-gradient(145deg, #d9dbe0, #afb8c5);
-    }
-
-    .portfolio-intro__copy {
-      container-type: inline-size;
-    }
-
-    .portfolio-intro__copy:only-child {
-      grid-column: 1 / -1;
-    }
-
-    .portfolio-intro__tag {
-      display: block;
-      margin-bottom: .65em;
-      color: #444e5c;
-      font: 700 clamp(8px, .77vw, 12px)/1.25 var(--font-sans);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .portfolio-intro__title {
-      display: block;
-      font: 600 var(--portfolio-intro-title-size)/.95 "Cormorant Garamond", Georgia, serif;
-      font-size: min(var(--portfolio-intro-title-size), calc(181cqi / var(--portfolio-intro-title-chars)));
-      letter-spacing: -.025em;
-      hyphens: auto;
-      overflow-wrap: break-word;
-    }
-
-    .portfolio-intro__preview {
-      display: block;
-      width: 100%;
-      aspect-ratio: 5 / 3;
-      object-fit: cover;
-      border: 1px solid #0e172940;
-      border-radius: 3px;
-      filter: grayscale(1) contrast(.9);
-      box-shadow: 0 5px 15px #121b3033;
-    }
-
-    .portfolio-intro__scene::after {
-      position: absolute;
-      inset: 0;
-      content: "";
-      pointer-events: none;
-      background: radial-gradient(ellipse at 49% 45%, transparent 16%, #0b14244d 55%, #080e1bd9 100%);
-    }
-
-    .portfolio-intro__fire {
-      position: absolute;
-      top: 40%;
-      left: 0;
-      width: 100%;
-      height: 20%;
-      overflow: visible;
-      pointer-events: none;
-      opacity: 0;
-      filter: drop-shadow(0 0 6px #ff6a00);
-    }
-
-    .portfolio-intro__edge {
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .portfolio-intro__edge path {
-      vector-effect: non-scaling-stroke;
-    }
-
-    .portfolio-intro.is-burning:not(.is-fade) .portfolio-intro__fire {
-      animation: portfolio-intro-fire-light 1.18s ease both;
-    }
-
-    .portfolio-intro__fire path[data-seam] {
-      stroke-dasharray: 1 1;
-      stroke-dashoffset: 1;
-    }
-
-    .portfolio-intro.is-burning .portfolio-intro__fire path[data-seam] {
-      animation: portfolio-intro-fire-spread .55s cubic-bezier(.19, .74, .24, 1) both;
-    }
-
-    .portfolio-intro__branch {
-      opacity: 0;
-    }
-
-    .portfolio-intro.is-burning .portfolio-intro__branch {
-      animation: portfolio-intro-fire-light .75s ease .19s both;
-    }
-
-    @keyframes portfolio-intro-fire-spread {
-      to { stroke-dashoffset: 0; }
-    }
-
-    @keyframes portfolio-intro-fire-light {
-      0%, 100% { opacity: 0; }
-      17%, 66% { opacity: 1; }
-    }
-
-    .portfolio-intro__skip {
-      position: absolute;
-      right: max(20px, env(safe-area-inset-right));
-      bottom: max(20px, env(safe-area-inset-bottom));
-      padding: 10px 16px;
-      border: 1px solid #ffffff65;
-      border-radius: 4px;
-      background: #0b111deb;
-      color: #fff;
-      font: 600 12px/1.4 var(--font-sans);
-      cursor: pointer;
-    }
-
-    .portfolio-intro__skip:hover,
-    .portfolio-intro__skip:focus-visible {
-      border-color: #ffb300;
-    }
-
-    @media (max-width: 640px) {
-      .portfolio-intro {
-        --portfolio-intro-title-size: clamp(16px, 4.9vw, 31px);
-      }
-
-      .portfolio-intro__wall {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        width: max(174vw, 92vh);
-        gap: 8px;
-      }
-
-      .portfolio-intro__card {
-        aspect-ratio: 1.7;
-      }
-
-      .portfolio-intro__fire {
-        filter: drop-shadow(0 0 5px #ff6a00);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto !important; }
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-      .portfolio-intro {
-        display: none;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="museum-base.css">
   <link rel="stylesheet" href="hero.css">
-  <link rel="stylesheet" href="works-intro.css">
   <link rel="stylesheet" href="portfolio.css">
+  <link rel="stylesheet" href="pricing.css">
   <link rel="stylesheet" href="closing.css">
+  <link rel="stylesheet" href="assets/fallen-intro.css">
 </head>
 <body>
-  <div class="portfolio-intro" id="portfolioIntro" hidden>
-    <div class="portfolio-intro__slice portfolio-intro__slice--top" aria-hidden="true">
-      <div class="portfolio-intro__scene">
-        <div class="portfolio-intro__wall"></div>
-      </div>
-      <svg class="portfolio-intro__fire" viewBox="0 0 1 .2" preserveAspectRatio="none" focusable="false">
-        <g class="portfolio-intro__edge">
-          <path class="portfolio-intro__branch" stroke="#ff872e" stroke-width="1.1"></path>
-          <path data-seam="left" pathLength="1" stroke="#ff6a00" stroke-width="4"></path>
-          <path data-seam="right" pathLength="1" stroke="#ff6a00" stroke-width="4"></path>
-          <path data-seam="left" pathLength="1" stroke="#fff0d2" stroke-width="1.25"></path>
-          <path data-seam="right" pathLength="1" stroke="#fff0d2" stroke-width="1.25"></path>
-        </g>
-      </svg>
-    </div>
-    <button class="portfolio-intro__skip" data-goal="intro_skip" type="button">Пропустить</button>
-  </div>
+  <a class="skip-link" href="#main-content">Перейти к содержимому</a>
 
+  <div class="fallen-intro" id="fallenIntro" aria-hidden="true" hidden>
+    <img class="fallen-intro__poster" id="fallenPoster" src="assets/fall-poster.webp" alt="" decoding="async">
+    <video id="fallenClip" muted playsinline preload="none" disablepictureinpicture></video>
+  </div>
+  <div class="fallen-mist" id="fallenMist" aria-hidden="true" hidden>
+    <div class="fallen-mist__veil"></div>
+    <div class="fallen-mist__iris"></div>
+  </div>
+  <button class="fallen-control fallen-control--skip" id="fallenSkip" data-goal="intro_skip" type="button" hidden>Пропустить</button>
 
   <!-- Навигация -->
   <header class="site-header">
-    <div class="wrap nav-bar">
+    <div class="nav-bar">
       <a href="#" class="logo">
-        <span class="logo-dot"></span>
         <span id="navName">Рамиль</span>
         <span class="logo-tagline">Сайты и калькуляторы<br>Telegram-боты для бизнеса</span>
       </a>
@@ -1858,111 +95,87 @@
         <a href="#contacts">Контакты</a>
       </nav>
       <div class="nav-right">
-        <a class="btn sm" id="navCta" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener">Связаться</a>
+        <a class="btn sm" id="navCta" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener noreferrer">Связаться</a>
       </div>
     </div>
   </header>
 
-  <main class="site-main">
+  <main class="site-main" id="main-content">
     <!-- 1. Первый экран (Hero) -->
     <section class="hero" aria-labelledby="h1">
-      <div class="hero-pin">
-        <div class="hero-screen">
-          <div class="hero-atmosphere" aria-hidden="true"></div>
-          <div class="hero-layout hero-shell">
-            <div class="hero-main">
-              <p class="hero-kicker" data-hero-reveal>Сайты · Калькуляторы · Telegram-боты</p>
-              <h1 id="h1"><span class="hero-title-line" data-hero-reveal style="--hero-reveal-delay:80ms">Сайты, калькуляторы</span> <span class="hero-title-line" data-hero-reveal style="--hero-reveal-delay:160ms">и <span class="hero-title-product">Telegram-боты</span>,</span> <span class="hero-title-line" data-hero-reveal style="--hero-reveal-delay:240ms">которые приводят</span> <span class="hero-title-line" data-hero-reveal style="--hero-reveal-delay:320ms">заявки</span></h1>
-              <p class="lead" id="lead" data-hero-reveal style="--hero-reveal-delay:400ms">
-                Разрабатываю быстрые одностраничные сайты, интерактивные калькуляторы расчёта цены, квизы и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Фиксирую смету до старта, передаю проект без абонентской платы.
-              </p>
-              <div class="geo-tag" data-hero-reveal style="--hero-reveal-delay:440ms">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                  <circle cx="12" cy="10" r="3"/>
+      <div class="fallen-screen" id="fallenHero">
+        <picture class="fallen-picture">
+          <source media="(max-width: 700px)" srcset="assets/hero-hd-mobile.webp" type="image/webp">
+          <source srcset="assets/hero-hd.webp" type="image/webp">
+          <img class="fallen-photo" id="fallenPhoto" src="assets/hero.jpg" width="1600" height="1200" fetchpriority="high" decoding="async" alt="Падший ангел прячет лицо за рукой, виден взгляд">
+        </picture>
+        <div class="fallen-shade" aria-hidden="true"></div>
+        <div class="fallen-grain" aria-hidden="true"></div>
+        <div class="fallen-copy">
+          <p class="hero-kicker fallen-reveal" style="--d:0ms">Сайты · Калькуляторы · Telegram-боты</p>
+          <h1 id="h1" class="fallen-reveal" style="--d:80ms">
+            Сайты, калькуляторы и <span class="hero-title-product">Telegram-боты</span>, которые приводят заявки
+          </h1>
+          <p class="fallen-reveal lead" id="lead" style="--d:180ms">
+            Разрабатываю быстрые одностраничные сайты, интерактивные калькуляторы расчёта цены, квизы и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Фиксирую смету до старта, передаю проект без абонентской платы.
+          </p>
+          <div class="fallen-reveal geo-tag" style="--d:240ms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span id="heroLocation">Стерлитамак · Работаю с бизнесом по всей РФ</span>
+          </div>
+          <div class="fallen-reveal hero-actions" style="--d:300ms">
+            <a class="btn hero-work-button" href="#portfolio">Смотреть работы <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="fallen-reveal hero-quick-links" style="--d:360ms">
+            <span>Или напишите напрямую:</span>
+            <div class="social-icons">
+              <a class="social-icon-link" id="contactMaxBtnHead" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener noreferrer" title="Написать в Max" aria-label="Написать в Max">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="maxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#3b82f6"/>
+                      <stop offset="52%" stop-color="#6d28d9"/>
+                      <stop offset="100%" stop-color="#9333ea"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="24" height="24" rx="5.5" fill="url(#maxGrad)"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4.7C7.97 4.7 4.7 7.82 4.7 11.68c0 2.02.88 3.84 2.28 5.12-.12.78-.42 1.68-.48 1.85-.08.22.14.42.36.33.24-.1 1.44-.65 2.28-1.15.88.35 1.84.55 2.86.55 4.03 0 7.3-3.12 7.3-6.98S16.03 4.7 12 4.7Zm0 10.68c-2.12 0-3.84-1.66-3.84-3.7s1.72-3.7 3.84-3.7 3.84 1.66 3.84 3.7-1.72 3.7-3.84 3.7Z" fill="#ffffff"/>
                 </svg>
-                <span id="heroLocation">Стерлитамак • Работаю с бизнесом по всей РФ</span>
-              </div>
-              <div class="hero-actions" data-hero-reveal style="--hero-reveal-delay:480ms">
-                <a class="btn hero-work-button" href="#portfolio">Смотреть работы <span aria-hidden="true">↗</span></a>
-              </div>
-              <div class="hero-quick-links" data-hero-reveal style="--hero-reveal-delay:560ms">
-                <span>Или напишите напрямую:</span>
-                <div class="social-icons">
-                  <!-- Иконка Max -->
-                  <a class="social-icon-link" id="contactMaxBtnHead" data-goal="max_click" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener" title="Написать в Max" aria-label="Написать в Max">
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <defs>
-                        <linearGradient id="maxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stop-color="#3b82f6"/>
-                          <stop offset="52%" stop-color="#6d28d9"/>
-                          <stop offset="100%" stop-color="#9333ea"/>
-                        </linearGradient>
-                      </defs>
-                      <rect width="24" height="24" rx="5.5" fill="url(#maxGrad)"/>
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4.7C7.97 4.7 4.7 7.82 4.7 11.68c0 2.02.88 3.84 2.28 5.12-.12.78-.42 1.68-.48 1.85-.08.22.14.42.36.33.24-.1 1.44-.65 2.28-1.15.88.35 1.84.55 2.86.55 4.03 0 7.3-3.12 7.3-6.98S16.03 4.7 12 4.7Zm0 10.68c-2.12 0-3.84-1.66-3.84-3.7s1.72-3.7 3.84-3.7 3.84 1.66 3.84 3.7-1.72 3.7-3.84 3.7Z" fill="#ffffff"/>
-                    </svg>
-                  </a>
-                  <!-- Иконка WhatsApp -->
-                  <a class="social-icon-link" id="contactWaBtnHead" data-goal="wa_click" href="https://wa.me/79613626062" target="_blank" rel="noopener" title="Написать в WhatsApp" aria-label="Написать в WhatsApp">
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <defs>
-                        <linearGradient id="waGrad" x1="50%" y1="0%" x2="50%" y2="100%">
-                          <stop offset="0%" stop-color="#5bf675"/>
-                          <stop offset="100%" stop-color="#25d366"/>
-                        </linearGradient>
-                      </defs>
-                      <rect width="24" height="24" rx="5.5" fill="url(#waGrad)"/>
-                      <g transform="translate(1.2, 1.2)">
-                        <path d="M10.8 3.3a7.5 7.5 0 0 0-6.4 11.4l-1 3.7 3.8-1a7.5 7.5 0 1 0 3.6-14.1Z" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8.4 7.6c-.16-.36-.33-.37-.48-.37h-.4c-.15 0-.4.05-.6.28-.2.23-.76.75-.76 1.83s.78 2.12.89 2.27c.11.15 1.52 2.43 3.74 3.3 1.85.73 2.23.59 2.63.55.4-.04 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.15-.42-.26l-1.26-.62c-.22-.11-.37-.16-.51.09-.14.22-.58.73-.71.88-.13.15-.26.17-.47.06-.22-.11-.93-.34-1.77-1.09-.66-.58-1.1-1.3-1.23-1.52-.13-.22-.02-.34.09-.45.1-.1.22-.25.33-.38.11-.13.15-.22.22-.37.07-.15.03-.28-.02-.38-.05-.1-.48-1.18-.66-1.61Z" fill="#ffffff"/>
-                      </g>
-                    </svg>
-                  </a>
-                  <!-- Иконка ВКонтакте -->
-                  <a class="social-icon-link" id="vk" data-goal="vk_click" href="https://vk.com/id449983999" target="_blank" rel="noopener" title="Страница ВКонтакте" aria-label="Страница ВКонтакте">
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <rect width="24" height="24" rx="5.5" fill="#0077FF"/>
-                      <path d="M12.8 16.5c-4.5 0-7.1-3.1-7.2-8.3h2.3c.1 3.8 1.8 5.4 3.1 5.7V8.2h2.1v3.3c1.3-.1 2.6-1.6 3.1-3.3h2.1c-.4 2.1-1.8 3.6-2.8 4.2 1 .5 2.7 1.8 3.3 4.1h-2.3c-.5-1.6-1.8-2.8-3.5-3v3h-.2Z" fill="#ffffff"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="hero-visual">
-              <div class="hero-film" aria-hidden="true">
-                <img class="hero-film-poster" src="assets/hero-film.webp" alt="" width="900" height="750" decoding="async">
-              </div>
-              <a class="hero-demo-link" href="#portfolio"><span>Протестировать 12 решений ↓</span></a>
-            </div>
-          </div>
-          <div class="hero-footer hero-shell">
-            <span class="hero-signature" id="heroSignature" aria-hidden="true">Рамиль</span>
-            <a class="hero-scroll" href="#how-it-works">Листайте <span aria-hidden="true">↓</span></a>
-            <a class="btn hero-telegram" id="tg" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener">Обсудить задачу в Telegram</a>
-          </div>
-            <div class="hero-exit" aria-hidden="true">
-              <div class="hero-exit__cream"></div>
-              <svg class="hero-exit__cracks" viewBox="0 0 1000 600" preserveAspectRatio="none" focusable="false">
-                <defs>
-                  <g id="heroExitFissures">
-                    <path pathLength="1" d="M-16 119L34 129 51 113 79 124 112 103 145 118 166 89 210 92 231 68 265 79 287 58 330 52 362 24 401 32 428 -8"/>
-                    <path pathLength="1" d="M78 124L91 150 124 156 129 177 167 186 181 210 221 220 243 249"/>
-                    <path pathLength="1" d="M230 68L223 44 240 19 226 -8M331 52L354 75 381 77 409 106 445 100 468 128"/>
-                    <path pathLength="1" d="M1016 336L965 323 937 341 907 328 871 358 842 347 811 378 772 379 758 403 712 414 691 449 657 457 621 491"/>
-                    <path pathLength="1" d="M908 328L885 311 887 289 851 270 857 247 820 224 815 201"/>
-                    <path pathLength="1" d="M1018 516L972 503 941 524 912 510 889 541 853 538 824 560 793 556 758 586 718 581 685 610"/>
-                    <path pathLength="1" d="M888 541L893 562 876 578 879 608M811 378L824 410 858 416 867 441 907 448"/>
-                    <path pathLength="1" d="M-13 447L32 429 68 455 109 447 133 470 161 472 188 501 231 510 265 545 298 549 326 578 361 580 396 607"/>
-                    <path pathLength="1" d="M132 469L145 440 171 436 178 415 212 405 229 376M231 509L224 545 253 567 244 591 271 609"/>
+              </a>
+              <a class="social-icon-link" id="contactWaBtnHead" href="https://wa.me/79613626062" target="_blank" rel="noopener noreferrer" title="Написать в WhatsApp" aria-label="Написать в WhatsApp">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="waGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                      <stop offset="0%" stop-color="#5bf675"/>
+                      <stop offset="100%" stop-color="#25d366"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="24" height="24" rx="5.5" fill="url(#waGrad)"/>
+                  <g transform="translate(1.2, 1.2)">
+                    <path d="M10.8 3.3a7.5 7.5 0 0 0-6.4 11.4l-1 3.7 3.8-1a7.5 7.5 0 1 0 3.6-14.1Z" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.4 7.6c-.16-.36-.33-.37-.48-.37h-.4c-.15 0-.4.05-.6.28-.2.23-.76.75-.76 1.83s.78 2.12.89 2.27c.11.15 1.52 2.43 3.74 3.3 1.85.73 2.23.59 2.63.55.4-.04 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.15-.42-.26l-1.26-.62c-.22-.11-.37-.16-.51.09-.14.22-.58.73-.71.88-.13.15-.26.17-.47.06-.22-.11-.93-.34-1.77-1.09-.66-.58-1.1-1.3-1.23-1.52-.13-.22-.02-.34.09-.45.1-.1.22-.25.33-.38.11-.13.15-.22.22-.37.07-.15.03-.28-.02-.38-.05-.1-.48-1.18-.66-1.61Z" fill="#ffffff"/>
                   </g>
-                </defs>
-                <use href="#heroExitFissures" stroke="#ff581d" stroke-width="4" opacity=".82"/>
-                <use href="#heroExitFissures" stroke="#fff2d1" stroke-width="1.25"/>
-              </svg>
-              <div class="hero-exit__flash"></div>
+                </svg>
+              </a>
+              <a class="social-icon-link" id="vk" href="https://vk.com/id449983999" target="_blank" rel="noopener noreferrer" title="Страница ВКонтакте" aria-label="Страница ВКонтакте">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect width="24" height="24" rx="5.5" fill="#0077FF"/>
+                  <path d="M12.8 16.5c-4.5 0-7.1-3.1-7.2-8.3h2.3c.1 3.8 1.8 5.4 3.1 5.7V8.2h2.1v3.3c1.3-.1 2.6-1.6 3.1-3.3h2.1c-.4 2.1-1.8 3.6-2.8 4.2 1 .5 2.7 1.8 3.3 4.1h-2.3c-.5-1.6-1.8-2.8-3.5-3v3h-.2Z" fill="#ffffff"/>
+                </svg>
+              </a>
             </div>
+          </div>
         </div>
+        <a class="hero-demo-link fallen-reveal" style="--d:420ms" href="#portfolio">Протестировать 12 решений ↓</a>
+        <div class="hero-footer fallen-reveal" style="--d:480ms">
+          <span class="hero-signature" aria-hidden="true">Рамиль</span>
+          <a class="hero-scroll" href="#how-it-works">Листайте <span aria-hidden="true">↓</span></a>
+          <a class="btn hero-telegram" id="tg" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener noreferrer">Обсудить задачу в Telegram</a>
+        </div>
+        <button class="fallen-control" id="fallenReplay" type="button" hidden>Повторить вступление</button>
       </div>
 
       <div class="hero-profile">
@@ -1973,7 +186,7 @@
             </div>
             <div>
               <h2 id="cardName">Рамиль</h2>
-              <span class="profile-badge">Full-stack & Автоматизация</span>
+              <span class="profile-badge">Full-stack &amp; Автоматизация</span>
             </div>
           </div>
           <p class="profile-bio">
@@ -1993,11 +206,12 @@
             <span>Без абонентской платы (0 ₽/мес)</span>
             <span>Заявки сразу в Telegram и WhatsApp</span>
             <span>Письменный договор</span>
-            <span><a href="privacy.html">Есть политика конфиденциальности</a></span>
+            <span><a href="privacy.html">Политика конфиденциальности</a></span>
           </div>
         </aside>
       </div>
     </section>
+
     <!-- 2. Как приходят заявки -->
     <section id="how-it-works">
       <div class="tg-showcase hero-shell">
@@ -2008,14 +222,12 @@
           </p>
           <div class="tg-benefits">
             <div class="tg-benefit-item">
-              <span class="tg-icon">1</span>
+              <span class="tg-icon" aria-hidden="true">I</span>
               <div><b>Работает 24/7 без вашего участия.</b> Клиент видит прозрачный расчёт вечером или в выходной и сразу оставляет контакт.</div>
             </div>
             <div class="tg-benefit-item">
-              <span class="tg-icon">2</span>
-              <div><b>Платите один раз, без ежемесячной подписки конструкторов.</b>
-                <!-- TODO: добавить расчёт экономии с реальными ценами подписок после подтверждения цифр. -->
-              </div>
+              <span class="tg-icon" aria-hidden="true">II</span>
+              <div><b>Платите один раз, без ежемесячной подписки конструкторов.</b> Без конструкторов и скрытых тарифов — после сдачи весь чистый код и исходные файлы полностью принадлежат вам.</div>
             </div>
           </div>
         </div>
@@ -2036,19 +248,18 @@
             </button>
           </div>
 
-          <!-- Пуш-уведомления: только для анимации, контент дублируется в сообщениях ниже -->
           <div class="tg-push tg-push--1" aria-hidden="true">
             <span class="tg-push-icon"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.9 3.3 3.2 10.1c-.8.3-.8 1.4 0 1.7l4.5 1.5 1.7 5.2c.2.6 1 .8 1.4.3l2.4-2.4 4.4 3.2c.6.4 1.4.1 1.5-.6l2.9-14.7c.2-.9-.7-1.7-1.5-1.3Z"/><path class="tg-plane-fold" d="m8 13.4 9.4-6.2-7 7.3"/></svg></span>
             <span class="tg-push-text">
               <span class="tg-push-top"><b>Заявки · ваш сайт</b><em>сейчас</em></span>
-              <span class="tg-push-body"><b>🔥 Новая заявка · 28&nbsp;400&nbsp;₽</b><span>Андрей · Натяжной потолок, 24&nbsp;м²</span></span>
+              <span class="tg-push-body"><b>Новая заявка · 28&nbsp;400&nbsp;₽</b><span>Андрей · Натяжной потолок, 24&nbsp;м²</span></span>
             </span>
           </div>
           <div class="tg-push tg-push--2" aria-hidden="true">
             <span class="tg-push-icon"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.9 3.3 3.2 10.1c-.8.3-.8 1.4 0 1.7l4.5 1.5 1.7 5.2c.2.6 1 .8 1.4.3l2.4-2.4 4.4 3.2c.6.4 1.4.1 1.5-.6l2.9-14.7c.2-.9-.7-1.7-1.5-1.3Z"/><path class="tg-plane-fold" d="m8 13.4 9.4-6.2-7 7.3"/></svg></span>
             <span class="tg-push-text">
               <span class="tg-push-top"><b>Заявки · ваш сайт</b><em>сейчас</em></span>
-              <span class="tg-push-body"><b>🔥 Новая заявка · 6&nbsp;750&nbsp;₽</b><span>Марина · Уборка квартиры, 54&nbsp;м²</span></span>
+              <span class="tg-push-body"><b>Новая заявка · 6&nbsp;750&nbsp;₽</b><span>Марина · Уборка квартиры, 54&nbsp;м²</span></span>
             </span>
           </div>
 
@@ -2059,7 +270,7 @@
                 <span></span><span></span><span></span><span></span><span></span>
               </div>
               <div class="tg-bubble tg-bubble--1">
-                <div class="tg-bubble-title">🔥 Новая заявка с калькулятора</div>
+                <div class="tg-bubble-title">Новая заявка с калькулятора</div>
                 <div class="tg-bubble-fields">
                   <div><b>Имя:</b> Андрей</div>
                   <div><b>Телефон:</b> +7 (917) 000-00-00</div>
@@ -2070,7 +281,7 @@
                 <div class="tg-meta"><time>21:47</time><svg class="tg-checks" viewBox="0 0 18 11" aria-hidden="true" focusable="false"><path class="tg-check-1" pathLength="1" d="M1.2 5.9 4.5 9.2 11.2 1.7"/><path class="tg-check-2" pathLength="1" d="M7.2 8.4 8 9.2 14.9 1.7"/></svg></div>
               </div>
               <div class="tg-bubble tg-bubble--2" aria-hidden="true">
-                <div class="tg-bubble-title">🔥 Новая заявка с калькулятора</div>
+                <div class="tg-bubble-title">Новая заявка с калькулятора</div>
                 <div class="tg-bubble-fields">
                   <div><b>Имя:</b> Марина</div>
                   <div><b>Телефон:</b> +7 (987) 000-00-00</div>
@@ -2086,82 +297,16 @@
       </div>
     </section>
 
-    <section class="works-interlude" aria-labelledby="worksInterludeTitle">
-      <div class="works-interlude__glows" aria-hidden="true">
-        <span class="works-interlude__glow" style="--top:11%;--left:22%;--size:clamp(38px,9vw,127px);--speed:.62;--float-x:25px;--duration:8s"></span>
-        <span class="works-interlude__glow" style="--top:59%;--left:9%;--size:clamp(48px,10vw,145px);--speed:-.71;--opacity:.74;--blur:31px;--float-x:-18px;--duration:11s"></span>
-        <span class="works-interlude__glow" style="--top:23%;--left:69%;--size:clamp(42px,7.5vw,110px);--speed:.85;--opacity:.72;--blur:23px;--float-y:16px;--duration:7s"></span>
-        <span class="works-interlude__glow" style="--top:72%;--left:67%;--size:clamp(55px,13vw,182px);--speed:-.40;--opacity:.60;--blur:38px;--float-x:-25px;--duration:12s"></span>
-        <span class="works-interlude__glow" style="--top:35%;--left:91%;--size:clamp(38px,6vw,82px);--speed:1.1;--opacity:.73;--blur:22px;--float-y:21px;--duration:9s"></span>
-        <span class="works-interlude__glow" style="--top:78%;--left:37%;--size:clamp(26px,4vw,60px);--speed:.42;--opacity:.56;--blur:22px;--duration:10s"></span>
-      </div>
-      <h2 class="works-interlude__title" id="worksInterludeTitle"><span>Дизайн</span> <span>и код</span></h2>
-
-      <div class="works-seal" aria-hidden="true">
-        <svg viewBox="0 0 320 320" focusable="false">
-          <defs>
-            <ellipse id="worksSealLoop" cx="160" cy="160" rx="49" ry="134"/>
-          </defs>
-          <circle cx="160" cy="160" r="143" fill="#f4eee9" fill-opacity=".93" stroke="currentColor" stroke-width="1.1"/>
-          <circle cx="160" cy="160" r="139" fill="none" stroke="currentColor" stroke-width=".65" stroke-dasharray="1 3"/>
-          <g fill="none" stroke="currentColor" stroke-width=".78" opacity=".79">
-            <use href="#worksSealLoop"/>
-            <use href="#worksSealLoop" transform="rotate(15 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(30 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(45 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(60 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(75 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(90 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(105 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(120 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(135 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(150 160 160)"/>
-            <use href="#worksSealLoop" transform="rotate(165 160 160)"/>
-          </g>
-          <ellipse cx="160" cy="160" rx="106" ry="54" fill="#f4eee9" stroke="currentColor" stroke-width=".95"/>
-          <ellipse cx="160" cy="160" rx="101" ry="49" fill="none" stroke="currentColor" stroke-width=".65"/>
-          <path d="M160 5v17m0 276v17M5 160h17m276 0h17" stroke="currentColor" stroke-width="1.3"/>
-          <path d="m160 75 3 6-3 6-3-6Zm0 158 3 6-3 6-3-6Z" fill="currentColor"/>
-        </svg>
-        <span class="works-seal__name">Рамиль</span>
-      </div>
-
-      <div class="works-interlude__cards" aria-hidden="true">
-        <figure class="works-interlude__card" style="--left:7%;--top:12%;--side:-1;--tilt:-10deg;--speed:.32">
-          <img src="thumbs/potolki.svg" alt="" width="700" height="420" loading="lazy" decoding="async">
-          <figcaption>Калькулятор стоимости потолков</figcaption>
-        </figure>
-        <figure class="works-interlude__card" style="--right:7%;--top:16%;--side:1;--tilt:10deg;--speed:-.41;--width:13vw">
-          <img src="thumbs/menu_kafe.svg" alt="" width="700" height="420" loading="lazy" decoding="async">
-          <figcaption>Меню и заказ с телефона</figcaption>
-        </figure>
-        <figure class="works-interlude__card" style="--left:10%;--bottom:9%;--side:-1;--tilt:7deg;--speed:.67;--width:13vw">
-          <img src="thumbs/crm_zakazy.svg" alt="" width="700" height="420" loading="lazy" decoding="async">
-          <figcaption>Учёт заказов</figcaption>
-        </figure>
-        <figure class="works-interlude__card" style="--right:9%;--bottom:10%;--side:1;--tilt:-8deg;--speed:-.58;--width:15vw">
-          <img src="thumbs/demo_barbershop.svg" alt="" width="700" height="420" loading="lazy" decoding="async">
-          <figcaption>Сайт барбершопа с записью</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="works-smoke" aria-labelledby="worksSmokeTitle">
-      <div class="works-smoke__atmosphere" aria-hidden="true"></div>
-      <div class="works-smoke__light" aria-hidden="true"></div>
-      <h2 class="works-smoke__title" id="worksSmokeTitle">Работы.</h2>
-    </section>
-
     <!-- 3. Портфолио проектов -->
     <section id="portfolio" aria-labelledby="portfolioTitle">
       <div class="sec-head portfolio-heading portfolio-width">
         <div>
           <h2 id="portfolioTitle">Интерактивные решения в действии</h2>
-          <p>Каждый проект можно поклацать прямо здесь: нажмите «Предпросмотр» (доступен режим смартфона и ПК) или откройте на весь экран.</p>
+          <p>Каждый проект можно протестировать прямо здесь: нажмите на превью или кнопку «Предпросмотр» (доступен вид смартфона и ПК), либо откройте на весь экран.</p>
         </div>
       </div>
       <div class="portfolio-track">
-        <div class="portfolio-stage">
+        <div class="portfolio-stage" data-tone="calc">
           <div class="portfolio-mosaic" aria-hidden="true"></div>
           <div class="portfolio-toolbar portfolio-width">
             <div class="filter-bar" id="filterBar">
@@ -2181,61 +326,57 @@
       </div>
     </section>
 
+    <!-- 4. Услуги и цены + 5. Калькулятор сметы -->
     <div class="pricing-band">
       <div class="wrap">
-      <!-- 4. Что делаю и сколько это стоит -->
-      <section id="services">
-        <div class="sec-head">
-          <div>
-            <h2>Услуги и актуальные цены</h2>
-            <p>Стоимость фиксируется до старта работ и не меняется в процессе. Нажмите на нужную услугу, чтобы обсудить детали в Telegram.</p>
-          </div>
-        </div>
-
-        <div class="price-grid" id="servicesGrid"></div>
-      </section>
-
-      <!-- 5. Интерактивный калькулятор сметы -->
-      <section id="calc-section">
-        <div class="sec-head">
-          <div>
-            <h2>Посчитайте смету вашей задачи за 20 секунд</h2>
-            <p>Отметьте нужные модули — точно такой же удобный расчёт мы можем внедрить на ваш сайт для ваших клиентов.</p>
-          </div>
-        </div>
-
-        <div class="estimator-card">
-          <div class="est-options" id="estList"></div>
-          <div class="est-total-panel">
+        <section id="services">
+          <div class="sec-head">
             <div>
-              <span class="est-label">Ориентировочная инвестиция</span>
-              <div class="est-sum" id="estSum">12 000 ₽</div>
-              <div class="est-term" id="estTerm">Ориентировочный срок: 3–5 дн.</div>
+              <h2>Услуги и актуальные цены</h2>
+              <p>Стоимость фиксируется до старта работ и не меняется в процессе. Нажмите на нужную услугу, чтобы обсудить детали в Telegram.</p>
             </div>
-            <form id="estForm" onsubmit="event.preventDefault()">
-              <input type="text" class="est-input" id="estBusiness" placeholder="Ваша ниша, например: ремонт" aria-label="Ваша сфера бизнеса">
-              <div class="est-btn-group">
-                <button type="button" class="btn" style="width:100%" id="estSendBtn" data-goal="calc_send_tg" aria-describedby="estPrivacyNote">Отправить расчёт в Telegram →</button>
-                <button type="button" class="btn btn-wa" style="width:100%" id="estSendWaBtn" data-goal="calc_send_wa" aria-describedby="estPrivacyNote">Отправить расчёт в WhatsApp →</button>
-              </div>
-              <p class="privacy-note" id="estPrivacyNote">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</p>
-            </form>
           </div>
-        </div>
-      </section>
+          <div class="price-grid" id="servicesGrid"></div>
+        </section>
+
+        <section id="calc-section">
+          <div class="sec-head">
+            <div>
+              <h2>Посчитайте смету вашей задачи за 20 секунд</h2>
+              <p>Отметьте нужные модули — точно такой же удобный расчёт мы можем внедрить на ваш сайт для ваших клиентов.</p>
+            </div>
+          </div>
+
+          <div class="estimator-card">
+            <div class="est-options" id="estList"></div>
+            <div class="est-total-panel">
+              <div>
+                <span class="est-label">Ориентировочная инвестиция</span>
+                <div class="est-sum" id="estSum">12 000 ₽</div>
+                <div class="est-term" id="estTerm">Ориентировочный срок: 3–5 дн.</div>
+              </div>
+              <form id="estForm">
+                <input type="text" class="est-input" id="estBusiness" name="business" autocomplete="off" placeholder="Ваша ниша, например: ремонт…" aria-label="Ваша сфера бизнеса">
+                <div class="est-btn-group">
+                  <button type="button" class="btn" id="estSendBtn" data-goal="calc_send_tg" aria-describedby="estPrivacyNote">Отправить расчёт в Telegram →</button>
+                  <button type="button" class="btn btn-wa" id="estSendWaBtn" data-goal="calc_send_wa" aria-describedby="estPrivacyNote">Отправить расчёт в WhatsApp →</button>
+                </div>
+                <p class="privacy-note" id="estPrivacyNote">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</p>
+              </form>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
 
-    <div class="order-transition" aria-hidden="true"></div>
-
+    <!-- 6. Как заказать, Подход, FAQ, Контакты -->
     <div class="closing-dark">
-      <!-- 6. Раздел «Обо мне» -->
       <section id="about" class="order-section" aria-labelledby="orderTitle">
         <div class="order-scene">
           <div class="order-width">
-            <h2 class="order-heading" id="orderTitle" data-text="Как заказать." aria-label="Как заказать.">Как заказать.</h2>
-            <h3 class="order-steps-title" id="orderStepsTitle">Как строится работа (4 простых шага)</h3>
-            <ol class="steps-list" role="list" aria-labelledby="orderStepsTitle">
+            <h2 class="order-heading" id="orderTitle">Как заказать.</h2>
+            <h3 class="order-steps-title" id="orderStepsTitle">Порядок работы — 4 понятных шага</h3>
+            <ol class="steps-list" aria-labelledby="orderStepsTitle">
               <li class="is-current">
                 <span class="step-badge" aria-hidden="true">01</span>
                 <span class="order-step-name">Задача и смета</span>
@@ -2258,19 +399,6 @@
               </li>
             </ol>
           </div>
-          <svg class="order-sparks" viewBox="0 0 1000 112" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <defs>
-              <g id="orderSparksPaths">
-                <path d="M-9 64l46-7 21 13 35-19 33 5 20-19 40 5 24-17 48 4 19-13 48 13 25-9 37 14 55 5"/>
-                <path d="m92 51 7 17 26 6 13 14 46 8 18 21m56-88 15 13 31 3 19 16 34 2 23 14"/>
-                <path d="M1009 49l-53 7-24-16-31 13-25-15-44 15-25-10-30 22-31-4-21 14-42-4-31 14-38-4-29 15"/>
-                <path d="m877 38-11-19-29 4-26-15-26 5m-47 50-12-16-34 3-22-13-40 7"/>
-                <path d="M-12 107l57-8 38 13 34-8 29 12m674 1 25-16 33 5 21-16 26 9 32-14 45 12"/>
-              </g>
-            </defs>
-            <use href="#orderSparksPaths" stroke="#ff4a23" stroke-width="3.3" opacity=".62"/>
-            <use href="#orderSparksPaths" stroke="#ffe1ba" stroke-width="1"/>
-          </svg>
         </div>
 
         <div class="wrap about-content">
@@ -2290,59 +418,48 @@
               <p>
                 Я пишу чистый, лёгкий код без лишних конструкторов: страницы открываются за доли секунды даже при слабом мобильном интернете. В каждом проекте предусмотрен понятный блок конфигурации, где вы можете сами за минуту поменять цены, акции или контакты без помощи программиста.
               </p>
-              <p><a href="privacy.html">Есть политика конфиденциальности</a>.</p>
+              <p><a href="privacy.html">Политика конфиденциальности</a>.</p>
             </div>
           </div>
         </div>
       </section>
 
       <div class="wrap closing-support">
-      <!-- 9. Частые вопросы (FAQ) -->
-      <section id="faq">
-        <div class="sec-head">
-          <div>
-            <h2>Частые вопросы перед стартом</h2>
-            <p>Коротко о том, как устроена оплата, поддержка и размещение готового сайта в интернете.</p>
+        <section id="faq">
+          <div class="sec-head">
+            <div>
+              <h2>Частые вопросы перед стартом</h2>
+              <p>Коротко о том, как устроена оплата, поддержка и размещение готового сайта в интернете.</p>
+            </div>
           </div>
-        </div>
 
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>Действительно ли нет абонентской платы?</summary>
-            <p>Да. Я не использую платные конструкторы вроде Tilda, где нужно платить по 750–1500 ₽ каждый месяц. Вы оплачиваете разработку один раз и получаете все исходные файлы. Единственный возможный расход — красивое доменное имя (.ru) около 200–500 ₽ раз в год.</p>
-          </details>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Действительно ли нет абонентской платы?</summary>
+              <p>Да. Я не использую платные конструкторы вроде Tilda, где нужно платить по 750–1500 ₽ каждый месяц. Вы оплачиваете разработку один раз и получаете все исходные файлы. Единственный возможный расход — доменное имя (.ru) около 200–500 ₽ раз в год.</p>
+            </details>
 
-          <details class="faq-item">
-            <summary>Смогу ли я сам поменять цены или телефон на сайте?</summary>
-            <p>Конечно. Вверху каждого файла вынесен понятный блок настроек (CONFIG), где все цены, названия услуг и контакты написаны обычным русским текстом. Плюс я записываю короткую памятку.</p>
-          </details>
+            <details class="faq-item">
+              <summary>Смогу ли я сам поменять цены или телефон на сайте?</summary>
+              <p>Конечно. Вверху каждого файла вынесен понятный блок настроек (CONFIG), где все цены, названия услуг и контакты написаны обычным русским текстом. Плюс я записываю короткую памятку.</p>
+            </details>
 
-          <details class="faq-item">
-            <summary>Поможете ли вы выложить сайт в интернет и подключить домен?</summary>
-            <p>Да, я полностью помогаю с публикацией проекта на бесплатный быстрый хостинг, подключением SSL-сертификата безопасности (https) и привязкой вашего домена.</p>
-          </details>
+            <details class="faq-item">
+              <summary>Поможете ли вы выложить сайт в интернет и подключить домен?</summary>
+              <p>Да, я полностью помогаю с публикацией проекта на быстрый бесплатный хостинг, подключением SSL-сертификата безопасности (HTTPS) и привязкой вашего домена.</p>
+            </details>
 
-          <details class="faq-item">
-            <summary>Что если у меня нет готовых текстов и фотографий?</summary>
-            <p>Не проблема. Я сам составлю продающую структуру и тексты под вашу нишу на основе 3–5 вопросов о вашем бизнесе, а также подберу качественную графику и иконки.</p>
-          </details>
-        </div>
-      </section>
+            <details class="faq-item">
+              <summary>Что если у меня нет готовых текстов и фотографий?</summary>
+              <p>Не проблема. Я сам составлю продающую структуру и тексты под вашу нишу на основе 3–5 вопросов о вашем бизнесе, а также подберу качественную графику и иконки.</p>
+            </details>
+          </div>
+        </section>
       </div>
-
-      <!--
-      TODO: добавить отзывы после получения реальных текстов и разрешения на публикацию.
-      <section id="reviews" aria-labelledby="reviewsTitle">
-        <h2 id="reviewsTitle">Отзывы</h2>
-        <figure>
-          <blockquote><p>[Согласованный текст отзыва]</p></blockquote>
-          <figcaption>[Согласованные имя и проект]</figcaption>
-        </figure>
-      </section>
-      -->
 
       <!-- 10. Контакты -->
       <section id="contacts" class="final-contact" aria-labelledby="contactTitle">
+        <div class="final-contact__aura" aria-hidden="true"></div>
         <div class="contact-frame" aria-hidden="true">
           <span class="contact-frame__corner" style="--x:0%;--y:0%"></span>
           <span class="contact-frame__corner" style="--x:100%;--y:0%"></span>
@@ -2354,22 +471,22 @@
           <h2 class="final-contact__title" id="contactTitle"><span>Есть идея?</span> <span>Напишите.</span></h2>
           <p class="final-contact__lead">Напишите в удобный мессенджер — разберём вашу задачу, предложу подходящее решение и назову точную стоимость.</p>
           <div class="contact-primary-links">
-            <a class="contact-item contact-primary" id="contactTgRow" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener">
+            <a class="contact-item contact-primary" id="contactTgRow" data-goal="tg_click" href="https://t.me/ramiltools" target="_blank" rel="noopener noreferrer">
               <div class="contact-item-left">
                 <div class="contact-brand-icon tg-brand">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="m22 2-7 20-4-9-9-4Z"/>
                     <path d="M22 2 11 13"/>
                   </svg>
                 </div>
                 <div class="contact-text-wrap">
                   <span class="contact-name" id="contactTgLabel">Telegram</span>
-                  <span class="contact-sub">@ramiltools • Отвечаю быстрее всего</span>
+                  <span class="contact-sub">@ramiltools · Отвечаю быстрее всего</span>
                 </div>
               </div>
               <span class="contact-item-arrow" aria-hidden="true">→</span>
             </a>
-            <a class="contact-item contact-primary" id="contactWaRow" data-goal="wa_click" href="https://wa.me/79613626062" target="_blank" rel="noopener">
+            <a class="contact-item contact-primary" id="contactWaRow" data-goal="wa_click" href="https://wa.me/79613626062" target="_blank" rel="noopener noreferrer">
               <div class="contact-item-left">
                 <div class="contact-brand-icon wa-brand">
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -2391,28 +508,30 @@
         </div>
 
         <div class="final-contact__channels">
-          <a id="contactVkRow" data-goal="vk_click" href="https://vk.com/id449983999" target="_blank" rel="noopener"><span id="contactVkLabel">ВКонтакте</span></a>
-          <a id="contactMaxRow" data-goal="max_click" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener"><span id="contactMaxLabel">Max</span></a>
-          <a id="contactMailRow" data-goal="email_copy" title="Скопировать адрес и открыть почту"><span id="contactMailLabel">Почта</span></a>
+          <a id="contactVkRow" data-goal="vk_click" href="https://vk.com/id449983999" target="_blank" rel="noopener noreferrer"><span id="contactVkLabel">ВКонтакте</span></a>
+          <a id="contactMaxRow" data-goal="max_click" href="https://max.ru/u/f9LHodD0cOKUT9Qx7M8l7-z1B5b1mJChwpyNh470i044B4hqYtEhpy00MMc" target="_blank" rel="noopener noreferrer"><span id="contactMaxLabel">Max</span></a>
+          <a id="contactMailRow" data-goal="email_copy" href="mailto:idrisov.smm@gmail.com" title="Скопировать адрес и открыть почту"><span id="contactMailLabel">idrisov.smm@gmail.com</span></a>
         </div>
       </section>
-
-      <!-- Подвал -->
-      <footer class="site-footer final-footer">
-        <div class="footer-note">
-          Работаю по письменному договору с фиксированной сметой.
-          <a href="privacy.html">Политика конфиденциальности</a>
-          <p class="footer-tech" id="skills">Технологии: HTML/CSS/JS, Telegram Bot API, Schema.org, экспорт CSV.</p>
-        </div>
-        <div class="footer-copy">
-          © <span id="yearNow">2026</span> <span id="footerName">Рамиль</span>
-        </div>
-      </footer>
     </div>
   </main>
 
+  <!-- Подвал (снаружи <main> по стандарту HTML5) -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="footer-note">
+        Работаю по письменному договору с фиксированной сметой.
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <p class="footer-tech" id="skills">Технологии: HTML/CSS/JS, Telegram Bot API, Schema.org, экспорт CSV.</p>
+      </div>
+      <div class="footer-copy">
+        © <span id="yearNow">2026</span> <span id="footerName">Рамиль</span>
+      </div>
+    </div>
+  </footer>
+
   <!-- Модальное окно живого предпросмотра проектов -->
-  <div class="modal-backdrop" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDemoLabel">
+  <div class="modal-backdrop" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDemoLabel" hidden>
     <div class="modal-box" id="modalBox">
       <div class="modal-spinner" id="modalSpinner"></div>
       <div class="modal-head">
@@ -2421,12 +540,18 @@
           <span id="modalDemoLabel">Демо-проект</span>
         </div>
         <div class="modal-actions">
-          <button class="btn alt sm" id="modalViewportBtn" type="button" title="Переключить вид Смартфон / ПК">💻 Вид ПК</button>
-          <a class="btn sm" id="modalOpenFull" data-goal="demo_open_new_tab" href="#" target="_blank" rel="noopener">На весь экран ↗</a>
+          <button class="btn alt sm" id="modalViewportBtn" type="button" title="Переключить вид Смартфон / ПК">Вид ПК</button>
+          <a class="btn sm" id="modalOpenFull" data-goal="demo_open_new_tab" href="#" target="_blank" rel="noopener noreferrer">На весь экран ↗</a>
           <button class="btn alt sm" id="modalCloseBtn" type="button" aria-label="Закрыть предпросмотр">✕</button>
         </div>
       </div>
-      <iframe class="modal-iframe" id="modalFrame" src="about:blank" title="Интерактивный пример проекта"></iframe>
+      <iframe
+        class="modal-iframe"
+        id="modalFrame"
+        src="about:blank"
+        sandbox="allow-scripts allow-forms allow-popups allow-downloads"
+        title="Интерактивный пример проекта"></iframe>
+      <span tabindex="0" class="sr-only" id="modalEndGuard"></span>
     </div>
   </div>
 
@@ -2434,14 +559,12 @@
 
   <script>
     // =========================================================================
-    // 1. БЛОК НАСТРОЕК (ВСЕ ДАННЫЕ И ФОТО В ОДНОМ МЕСТЕ)
+    // 1. БЛОК НАСТРОЕК (ВСЕ ДАННЫЕ В ОДНОМ МЕСТЕ)
     // =========================================================================
     const CONFIG = {
       name: "Рамиль",
       initials: "РИ",
-      location: "Стерлитамак • Работаю с бизнесом по всей РФ",
-      heroTitle: "Сайты, калькуляторы и Telegram-боты, которые приводят заявки",
-      heroLead: "Разрабатываю быстрые одностраничные сайты, интерактивные калькуляторы расчёта цены, квизы и Telegram-ботов для бизнеса в Стерлитамаке и по всей России. Фиксирую смету до старта, передаю проект без абонентской платы.",
+      location: "Стерлитамак · Работаю с бизнесом по всей РФ",
       telegram: "ramiltools",
       whatsapp: "79613626062",
       whatsappLabel: "WhatsApp",
@@ -2450,7 +573,6 @@
       vk: "https://vk.com/id449983999"
     };
 
-    // Единый прайс-лист (рыночные цены по Стерлитамаку) — синхронизирован с калькулятором
     const SERVICES_DATA = [
       {
         title: "Одностраничный сайт под ключ",
@@ -2499,38 +621,6 @@
       }
     ];
 
-    function makeInitialsAvatar(text) {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-        <defs>
-          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#4c5bf0"/>
-            <stop offset="100%" stop-color="#1d4ed8"/>
-          </linearGradient>
-        </defs>
-        <rect width="200" height="200" rx="44" fill="url(#g)"/>
-        <text x="50%" y="53%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="Onest, sans-serif" font-size="76" font-weight="800">${text}</text>
-      </svg>`;
-      return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
-    }
-
-    function makeThumbFallback(title, tag) {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="380" viewBox="0 0 600 380">
-        <defs>
-          <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1e293b"/>
-            <stop offset="100%" stop-color="#3b49df"/>
-          </linearGradient>
-        </defs>
-        <rect width="600" height="380" fill="url(#bg)"/>
-        <text x="40" y="180" fill="#93c5fd" font-family="Inter, sans-serif" font-size="20" font-weight="700">${tag}</text>
-        <text x="40" y="225" fill="#ffffff" font-family="Onest, sans-serif" font-size="30" font-weight="800">${title}</text>
-      </svg>`;
-      return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
-    }
-
-    // =========================================================================
-    // 2. СПИСОК ПРОЕКТОВ ПОРТФОЛИО (12 ПРОЕКТОВ)
-    // =========================================================================
     const PROJECTS = [
       {
         title: "Калькулятор уборки",
@@ -2630,7 +720,23 @@
       }
     ];
 
-    // Привязка данных из CONFIG
+    function makeInitialsAvatar(text) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+        <rect width="200" height="200" fill="#140E10"/>
+        <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#F0ECE4" font-family="Georgia, serif" font-size="76">${text}</text>
+      </svg>`;
+      return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+    }
+
+    function makeThumbFallback(title, tag) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="380" viewBox="0 0 600 380">
+        <rect width="600" height="380" fill="#140E10"/>
+        <text x="40" y="176" fill="#E5B9A0" font-family="sans-serif" font-size="18">${tag}</text>
+        <text x="40" y="220" fill="#F0ECE4" font-family="Georgia, serif" font-size="30">${title}</text>
+      </svg>`;
+      return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+    }
+
     const tgLink = "https://t.me/" + CONFIG.telegram;
     const waLink = "https://wa.me/" + CONFIG.whatsapp.replace(/\D/g, "");
 
@@ -2638,11 +744,7 @@
     document.getElementById("cardName").textContent = CONFIG.name;
     document.getElementById("footerName").textContent = CONFIG.name;
     document.getElementById("heroLocation").textContent = CONFIG.location;
-    const heroHeading = document.getElementById("h1");
-    if (heroHeading.textContent !== CONFIG.heroTitle) heroHeading.textContent = CONFIG.heroTitle;
-    document.getElementById("heroSignature").textContent = CONFIG.name;
-    document.getElementById("lead").textContent = CONFIG.heroLead;
-    document.getElementById("yearNow").textContent = new Date().getFullYear();
+    document.getElementById("yearNow").textContent = String(new Date().getFullYear());
 
     const avatarEl = document.getElementById("avatarImg");
     const defaultAvatar = makeInitialsAvatar(CONFIG.initials);
@@ -2676,12 +778,12 @@
     document.getElementById("contactMailRow").href = "mailto:" + contactEmail;
     document.getElementById("contactMailLabel").textContent = contactEmail;
 
-    // Рендер карточек услуг из единого массива SERVICES_DATA
+    // Рендер карточек услуг
     const servicesGridEl = document.getElementById("servicesGrid");
     SERVICES_DATA.forEach(srv => {
       const priceFormatted = `от ${srv.price.toLocaleString("ru-RU")} ₽`;
       const orderTitle = `${srv.title} (${priceFormatted})`;
-      const msg = `Здравствуйте, Рамиль! Интересует услуга: ${orderTitle}. Расскажите подробнее?`;
+      const msg = `Здравствуйте, ${CONFIG.name}! Интересует услуга: ${orderTitle}. Расскажите подробнее?`;
       const card = document.createElement("div");
       card.className = "price-card";
       card.innerHTML = `
@@ -2690,7 +792,7 @@
           <span>${srv.title}</span>
           <p>${srv.desc}</p>
         </div>
-        <a class="price-order-link" data-goal="tg_click" href="${tgLink}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${srv.ctaText}</a>
+        <a class="price-order-link" data-goal="tg_click" href="${tgLink}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener noreferrer">${srv.ctaText}</a>
       `;
       servicesGridEl.appendChild(card);
     });
@@ -2699,7 +801,7 @@
     let toastTimer = null;
     const mailRow = document.getElementById("contactMailRow");
     if (mailRow) {
-      mailRow.addEventListener("click", function () {
+      mailRow.addEventListener("click", () => {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(contactEmail).then(() => {
             const toast = document.getElementById("toast");
@@ -2714,7 +816,7 @@
       });
     }
 
-    // Автоматический подсчёт количества работ на кнопках фильтра
+    // Счётчики фильтра портфолио
     const filterLabels = {
       all: "Все работы",
       calc: "Калькуляторы и квизы",
@@ -2727,7 +829,7 @@
       btn.textContent = `${filterLabels[cat]} (${count})`;
     });
 
-    // Отрисовка карточек портфолио с защитой от битых картинок
+    // Отрисовка карточек портфолио
     const gridEl = document.getElementById("projectsGrid");
     function renderProjects(category = "all") {
       gridEl.innerHTML = "";
@@ -2735,16 +837,16 @@
         const card = document.createElement("article");
         card.className = "card";
         card.innerHTML = `
-          <a class="thumb" href="${p.href}" aria-label="Открыть проект ${p.title}">
+          <a class="thumb" href="${p.href}" target="_blank" rel="noopener noreferrer" aria-label="Предпросмотр проекта ${p.title}">
             <img src="${p.localThumb}" alt="${p.title}" width="700" height="420" loading="lazy">
-            <span class="card-tag">Демо-проект · ${p.tag}</span>
+            <span class="card-tag">${p.tag}</span>
           </a>
           <div class="b">
             <h3>${p.title}</h3>
             <p>${p.desc}</p>
             <div class="card-footer">
               <button type="button" class="preview-btn" data-goal="demo_preview_open">Предпросмотр</button>
-              <a class="card-link" data-goal="demo_open_new_tab" href="${p.href}" target="_blank" rel="noopener">Открыть ↗</a>
+              <a class="card-link" data-goal="demo_open_new_tab" href="${p.href}" target="_blank" rel="noopener noreferrer">Открыть ↗</a>
             </div>
           </div>
         `;
@@ -2753,9 +855,8 @@
           imgEl.onerror = null;
           imgEl.src = makeThumbFallback(p.title, p.tag);
         };
-        card.querySelector(".preview-btn").addEventListener("click", () => {
-          openModal(p.href, p.title);
-        });
+        const previewBtn = card.querySelector(".preview-btn");
+        previewBtn.addEventListener("click", () => openModal(p.href, p.title, previewBtn));
         gridEl.appendChild(card);
       });
     }
@@ -2769,13 +870,16 @@
       });
     });
 
-    // Модальное окно предпросмотра со спиннером и переключателем Смартфон / ПК
+    // Модальное окно предпросмотра с focus-trap, inert фона и возвратом фокуса
     const modal = document.getElementById("previewModal");
     const modalBox = document.getElementById("modalBox");
     const modalFrame = document.getElementById("modalFrame");
     const modalSpinner = document.getElementById("modalSpinner");
     const modalViewportBtn = document.getElementById("modalViewportBtn");
+    const modalCloseBtn = document.getElementById("modalCloseBtn");
     let spinnerTimeout = null;
+    let modalTriggerEl = null;
+    let modalLockedRoots = [];
 
     modalFrame.addEventListener("load", () => {
       clearTimeout(spinnerTimeout);
@@ -2785,37 +889,99 @@
     if (modalViewportBtn) {
       modalViewportBtn.addEventListener("click", () => {
         const isDesktop = modalBox.classList.toggle("desktop-mode");
-        modalViewportBtn.textContent = isDesktop ? "📱 Вид смартфона" : "💻 Вид ПК";
+        modalViewportBtn.textContent = isDesktop ? "Вид смартфона" : "Вид ПК";
       });
     }
 
-    function openModal(href, title) {
+    function openModal(href, title, triggerEl) {
+      modalTriggerEl = triggerEl || document.activeElement;
       document.getElementById("modalTitle").textContent = title;
       document.getElementById("modalOpenFull").href = href;
+      modalBox.classList.remove("desktop-mode");
+      if (modalViewportBtn) modalViewportBtn.textContent = "Вид ПК";
       modalSpinner.style.display = "block";
       clearTimeout(spinnerTimeout);
       spinnerTimeout = setTimeout(() => {
         modalSpinner.style.display = "none";
       }, 2500);
       modalFrame.src = href;
+      modal.hidden = false;
       modal.classList.add("open");
       document.body.style.overflow = "hidden";
+
+      modalLockedRoots = Array.from(
+        document.querySelectorAll(".skip-link, .site-header, .site-main, .site-footer"),
+        el => [el, el.inert]
+      );
+      for (const [el] of modalLockedRoots) el.inert = true;
+      modalCloseBtn.focus({ preventScroll: true });
     }
+    window.openModal = openModal;
 
     function closeModal() {
+      if (!modal.classList.contains("open")) return;
       clearTimeout(spinnerTimeout);
       modal.classList.remove("open");
+      modal.hidden = true;
+      modalBox.classList.remove("desktop-mode");
       modalFrame.src = "about:blank";
       document.body.style.overflow = "";
+      for (const [el, wasInert] of modalLockedRoots) el.inert = wasInert;
+      modalLockedRoots = [];
+      if (modalTriggerEl && typeof modalTriggerEl.focus === "function") {
+        modalTriggerEl.focus({ preventScroll: true });
+      }
+      modalTriggerEl = null;
     }
 
-    document.getElementById("modalCloseBtn").addEventListener("click", closeModal);
-    modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+    function getModalFocusables() {
+      return Array.from(
+        modalBox.querySelectorAll('a[href], button:not(:disabled), iframe, [tabindex]:not([tabindex="-1"])')
+      ).filter(el => el.id !== "modalEndGuard" && el.offsetParent !== null);
+    }
+
+    const modalEndGuard = document.getElementById("modalEndGuard");
+    if (modalEndGuard) {
+      modalEndGuard.addEventListener("focus", () => {
+        if (!modal.classList.contains("open")) return;
+        const focusable = getModalFocusables();
+        if (focusable.length) focusable[0].focus({ preventScroll: true });
+      });
+    }
+
+    modalCloseBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", e => {
+      if (e.target === modal) closeModal();
+    });
+    window.addEventListener("message", e => {
+      if (modal.hidden || !modal.classList.contains("open")) return;
+      if (e.source === modalFrame.contentWindow && e.data && e.data.type === "preview-modal-escape") {
+        closeModal();
+      }
+    });
     document.addEventListener("keydown", e => {
-      if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+      if (!modal.classList.contains("open")) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeModal();
+        return;
+      }
+      if (e.key === "Tab") {
+        const focusable = getModalFocusables();
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
 
-    // Интерактивный калькулятор сметы (без разрушения DOM при клике)
+    // Интерактивный калькулятор сметы
     const EST_DATA = SERVICES_DATA.map(s => ({
       name: s.calcName,
       price: s.price,
@@ -2832,12 +998,12 @@
       EST_DATA.forEach((item, idx) => {
         const row = document.createElement("button");
         row.type = "button";
-        row.dataset.index = idx;
+        row.dataset.index = String(idx);
         row.className = "est-row" + (item.on ? " active" : "");
         row.setAttribute("aria-pressed", String(item.on));
         row.innerHTML = `
           <div class="est-left">
-            <span class="est-box">${item.on ? "✓" : ""}</span>
+            <span class="est-box" aria-hidden="true">${item.on ? "✓" : ""}</span>
             <span>${item.name}</span>
           </div>
           <b class="est-price">${item.price.toLocaleString("ru-RU")} ₽</b>
@@ -2867,7 +1033,11 @@
       });
 
       const totalDays = count > 1 ? maxDays + (count - 1) : (count === 1 ? maxDays : 0);
-      document.getElementById("estSum").textContent = total.toLocaleString("ru-RU") + " ₽";
+      if (typeof window.animateEstimateSum === "function") {
+        window.animateEstimateSum(total);
+      } else {
+        document.getElementById("estSum").textContent = total.toLocaleString("ru-RU") + " ₽";
+      }
       document.getElementById("estTerm").textContent = total > 0
         ? `Ориентировочный срок: ${totalDays}–${totalDays + 2} дн.`
         : "Выберите хотя бы одну услугу";
@@ -2885,300 +1055,32 @@
       const count = selected.length;
       const maxDays = selected.reduce((m, x) => Math.max(m, x.days), 1);
       const totalDays = count > 1 ? maxDays + (count - 1) : maxDays;
-      return `Здравствуйте, Рамиль! Посчитал смету проекта на вашем сайте:\n` +
+      return `Здравствуйте, ${CONFIG.name}! Посчитал смету проекта на вашем сайте:\n` +
         selected.map(x => `• ${x.name} (${x.price.toLocaleString("ru-RU")} ₽)`).join("\n") +
         `\n\nНиша бизнеса: ${biz}\nОриентировочный бюджет: ${total.toLocaleString("ru-RU")} ₽ (срок: ${totalDays}–${totalDays + 2} дн.)`;
     }
 
     estSendBtn.addEventListener("click", () => {
       const text = getEstimateMessage();
-      if (text) window.open(`${tgLink}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+      if (text) window.open(`${tgLink}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
     });
 
     if (estSendWaBtn) {
       estSendWaBtn.addEventListener("click", () => {
         const text = getEstimateMessage();
-        if (text) window.open(`${waLink}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+        if (text) window.open(`${waLink}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
       });
     }
 
-    document.getElementById("estBusiness").addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        estSendBtn.click();
-      }
+    document.getElementById("estForm").addEventListener("submit", e => {
+      e.preventDefault();
+      estSendBtn.click();
     });
-
   </script>
-  <script>
-    (() => {
-      const intro = document.getElementById("portfolioIntro");
-      const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
-      if (motionPreference.matches || location.hash || scrollY || document.hidden ||
-          typeof PROJECTS === "undefined" || !PROJECTS.length) return;
-
-      const storageKey = "ramil_intro_seen";
-      try {
-        if (sessionStorage.getItem(storageKey) === "1") return;
-      } catch {}
-
-      const wall = intro.querySelector(".portfolio-intro__wall");
-      const skip = intro.querySelector(".portfolio-intro__skip");
-      const scene = intro.querySelector(".portfolio-intro__scene");
-      const slice = scene.parentElement;
-      const supportsSplit = CSS.supports("clip-path", "polygon(0 0, 100% 0, 100% 50%, 0 50%)");
-      const listeners = new AbortController();
-      const listenerOptions = { signal: listeners.signal };
-      let burnTimer;
-      let deadline;
-
-      function closeIntro() {
-        clearTimeout(burnTimer);
-        clearTimeout(deadline);
-        listeners.abort();
-        intro.remove();
-      }
-
-      const cards = document.createDocumentFragment();
-      for (const project of [...PROJECTS, ...PROJECTS]) {
-        const card = document.createElement("div");
-        card.className = "portfolio-intro__card";
-        const copy = document.createElement("span");
-        copy.className = "portfolio-intro__copy";
-        const longestWord = Math.max(...project.title.split(/\s+/).map(word => word.length));
-        copy.style.setProperty("--portfolio-intro-title-chars", String(longestWord));
-        const tag = document.createElement("span");
-        tag.className = "portfolio-intro__tag";
-        tag.textContent = project.tag;
-        const title = document.createElement("span");
-        title.className = "portfolio-intro__title";
-        title.textContent = project.title;
-        copy.append(tag, title);
-
-        const preview = document.createElement("img");
-        preview.className = "portfolio-intro__preview";
-        preview.alt = "";
-        preview.decoding = "async";
-        preview.fetchPriority = "low";
-        preview.addEventListener("error", () => preview.remove(), { once: true });
-        preview.width = 700;
-        preview.height = 420;
-        preview.src = project.localThumb;
-        card.append(copy, preview);
-        cards.append(card);
-      }
-      wall.append(cards);
-
-      if (supportsSplit) {
-        const count = matchMedia("(max-width: 640px)").matches ? 28 : 46;
-        const ridge = Array.from({ length: count + 1 }, (_, index) => {
-          const x = index / count;
-          const jitter = Math.sin(index * 7.31) * .012 + Math.cos(index * 2.13) * .014;
-          return [x, .49 + Math.sin((x - .5) * 9) * .042 + jitter];
-        });
-        const coordinates = (points, overlap) => points.map(([x, y]) =>
-          (x * 100).toFixed(2) + "% " + ((y + overlap) * 100).toFixed(2) + "%").join(", ");
-        const pathThrough = points => "M" + points.map(([x, y]) =>
-          x.toFixed(4) + " " + (y - .4).toFixed(4)).join("L");
-        const center = count / 2;
-        const seams = {
-          left: pathThrough(ridge.slice(0, center + 1).reverse()),
-          right: pathThrough(ridge.slice(center))
-        };
-        for (const edge of slice.querySelectorAll("[data-seam]")) {
-          edge.setAttribute("d", seams[edge.dataset.seam]);
-        }
-        const branches = [];
-        for (const fraction of [.15, .31, .43, .61, .76, .85]) {
-          const [x, y] = ridge[Math.round(count * fraction)];
-          const dx = x < .5 ? -.063 : .063;
-          branches.push(pathThrough([[x, y], [x + dx * .3, y - .017], [x + dx * .57, y - .012],
-            [x + dx, y - .046]]));
-        }
-        slice.querySelector(".portfolio-intro__branch").setAttribute("d", branches.join(""));
-
-        const bottom = slice.cloneNode(true);
-        bottom.classList.replace("portfolio-intro__slice--top", "portfolio-intro__slice--bottom");
-        scene.style.clipPath = "polygon(0% 0%, 100% 0%, " + coordinates([...ridge].reverse(), .0007) + ")";
-        bottom.querySelector(".portfolio-intro__scene").style.clipPath =
-          "polygon(0% 100%, " + coordinates(ridge, -.0007) + ", 100% 100%)";
-        slice.after(bottom);
-      } else {
-        intro.classList.add("is-fade");
-      }
-
-      skip.addEventListener("click", closeIntro, listenerOptions);
-      window.addEventListener("wheel", closeIntro, { ...listenerOptions, passive: true });
-      window.addEventListener("touchmove", closeIntro, { ...listenerOptions, passive: true });
-      window.addEventListener("pagehide", closeIntro, listenerOptions);
-      window.addEventListener("hashchange", closeIntro, listenerOptions);
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) closeIntro();
-      }, listenerOptions);
-      document.addEventListener("keydown", event => {
-        if (event.key === "Escape") closeIntro();
-      }, listenerOptions);
-      document.addEventListener("focusin", event => {
-        if (!intro.contains(event.target)) closeIntro();
-      }, listenerOptions);
-      motionPreference.addEventListener("change", closeIntro, listenerOptions);
-
-      intro.hidden = false;
-      try { sessionStorage.setItem(storageKey, "1"); } catch {}
-      burnTimer = setTimeout(() => intro.classList.add("is-burning"), 1300);
-      deadline = setTimeout(closeIntro, 2510);
-    })();
-  </script>
-  <script src="assets/scene-rendering.js"></script>
-  <script>
-    (() => {
-      const screen = document.querySelector(".hero-screen");
-      const intro = document.getElementById("portfolioIntro");
-      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-      const desktopMotion = matchMedia("(min-width: 821px) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
-      const destination = document.getElementById(location.hash.slice(1));
-      let waitingForAnchor = destination && !screen.contains(destination);
-      const introIsVisible = intro && !intro.hidden;
-      let canLoadScene = !introIsVisible;
-      let visible = false;
-      let queued = false;
-      let revealTimer;
-      let revealed = false;
-
-      function revealHero() {
-        if (revealed) return;
-        revealed = true;
-        clearTimeout(revealTimer);
-        screen.classList.remove("is-waiting");
-        if (!introIsVisible || reducedMotion.matches || location.hash || screen.getBoundingClientRect().bottom <= 0) return;
-        screen.classList.add("is-revealing");
-        setTimeout(() => screen.classList.remove("is-revealing"), 1450);
-      }
-
-      function loadHeroScene() {
-        if (queued || waitingForAnchor || !canLoadScene || !visible || !desktopMotion.matches ||
-            navigator.connection?.saveData || navigator.deviceMemory < 4) return;
-        queued = true;
-        const load = () => {
-          if (!visible || !desktopMotion.matches || document.hidden) {
-            queued = false;
-            return;
-          }
-          const script = document.createElement("script");
-          script.src = "assets/hero-scene.js";
-          document.head.append(script);
-        };
-        if ("requestIdleCallback" in window) requestIdleCallback(load, { timeout: 180 });
-        else setTimeout(load, 80);
-      }
-
-      if (canLoadScene) {
-        revealHero();
-      } else {
-        if (!reducedMotion.matches) screen.classList.add("is-waiting");
-        const introObserver = new MutationObserver(() => {
-          if (!intro.isConnected || intro.hidden) {
-            canLoadScene = true;
-            introObserver.disconnect();
-            revealHero();
-            loadHeroScene();
-          } else if (intro.classList.contains("is-burning") && !revealTimer) {
-            revealTimer = setTimeout(revealHero, 515);
-          }
-        });
-        introObserver.observe(intro, { attributes: true, attributeFilter: ["class", "hidden"] });
-        introObserver.observe(document.body, { childList: true });
-      }
-
-      const visibility = new IntersectionObserver(([entry]) => {
-        visible = entry.isIntersecting;
-        if (!visible) waitingForAnchor = false;
-        loadHeroScene();
-      });
-      visibility.observe(screen);
-      desktopMotion.addEventListener("change", loadHeroScene);
-      document.addEventListener("visibilitychange", loadHeroScene);
-
-      const header = document.querySelector(".site-header");
-      const navigation = Array.from(header.querySelectorAll(".nav-links a"));
-      const sections = navigation.map(link => [
-        link.hash === "#portfolio" ? document.querySelector(".works-interlude") : document.getElementById(link.hash.slice(1)),
-        link
-      ]);
-      let activeLink;
-      let navigationFrame = 0;
-
-      function updateNavigation() {
-        navigationFrame = 0;
-        const readingLine = header.offsetHeight + 35;
-        let nextLink;
-        for (const [section, link] of sections) {
-          if (section && section.getBoundingClientRect().top <= readingLine) nextLink = link;
-        }
-        if (nextLink === activeLink) return;
-        activeLink?.removeAttribute("aria-current");
-        nextLink?.setAttribute("aria-current", "location");
-        activeLink = nextLink;
-      }
-
-      function scheduleNavigation() {
-        if (!navigationFrame) navigationFrame = requestAnimationFrame(updateNavigation);
-      }
-
-      window.addEventListener("scroll", scheduleNavigation, { passive: true });
-      window.addEventListener("resize", scheduleNavigation);
-      window.addEventListener("hashchange", scheduleNavigation);
-      updateNavigation();
-
-      for (const button of document.querySelectorAll(".hero .btn, .site-header .btn")) {
-        const reset = () => {
-          button.style.removeProperty("--magnetic-x");
-          button.style.removeProperty("--magnetic-y");
-        };
-        button.addEventListener("pointermove", event => {
-          if (!desktopMotion.matches || event.pointerType !== "mouse") return;
-          const box = button.getBoundingClientRect();
-          const shift = distance => Math.max(-6, Math.min(6, distance * .12)) + "px";
-          button.style.setProperty("--magnetic-x", shift(event.clientX - box.left - box.width / 2));
-          button.style.setProperty("--magnetic-y", shift(event.clientY - box.top - box.height / 2));
-        });
-        button.addEventListener("pointerleave", reset);
-        desktopMotion.addEventListener("change", reset);
-      }
-    })();
-  </script>
-  <script>
-    (() => {
-      const scenes = Array.from(document.querySelectorAll(".works-interlude, .works-smoke"));
-      const header = document.querySelector(".site-header");
-      const motion = matchMedia("(min-width: 821px) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
-      let loaded = false;
-
-      function loadWorksMotion() {
-        if (loaded || !motion.matches || navigator.connection?.saveData || navigator.deviceMemory < 4) return;
-        const nearScene = scenes.some(scene => {
-          const box = scene.getBoundingClientRect();
-          return box.top < innerHeight + 245 && box.bottom > header.offsetHeight + 32;
-        });
-        if (!nearScene) return;
-        loaded = true;
-        observer.disconnect();
-        motion.removeEventListener("change", loadWorksMotion);
-        const script = document.createElement("script");
-        script.src = "assets/works-intro.js";
-        document.head.append(script);
-      }
-
-      const observer = new IntersectionObserver(loadWorksMotion, {
-        rootMargin: "-74px 0px 260px",
-        threshold: .045
-      });
-      for (const scene of scenes) observer.observe(scene);
-      motion.addEventListener("change", loadWorksMotion);
-    })();
-  </script>
+  <script src="assets/fallen-intro.js"></script>
   <script src="assets/portfolio-gallery.js" defer></script>
-  <script src="assets/closing-scenes.js" defer></script>
+  <script src="assets/pricing.js" defer></script>
+  <script src="assets/museum-motion.js" defer></script>
   <script src="assets/tg-notify.js" defer></script>
   <script src="assets/analytics.js" defer></script>
 </body>

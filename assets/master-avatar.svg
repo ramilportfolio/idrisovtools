@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Портрет мастера">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6e7e3"/>
+      <stop offset="100%" stop-color="#e8c8c0"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4e302c"/>
+      <stop offset="100%" stop-color="#2e1a18"/>
+    </linearGradient>
+    <linearGradient id="dress" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b76e79"/>
+      <stop offset="100%" stop-color="#8b4a56"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="100" fill="url(#bg)"/>
+  <circle cx="100" cy="88" r="46" fill="url(#hair)"/>
+  <path d="M54 96c0 22 4 44 12 56h68c8-12 12-34 12-56Z" fill="url(#hair)"/>
+  <path d="M36 200c6-38 28-56 64-56s58 18 64 56Z" fill="url(#dress)"/>
+  <rect x="88" y="114" width="24" height="32" rx="11" fill="#ecc4b4"/>
+  <ellipse cx="100" cy="92" rx="31" ry="36" fill="#f3cfc0"/>
+  <path d="M68 84c8-20 26-28 46-24 12 2 18 10 19 20-12-10-28-12-46-6-8 2-14 6-19 10Z" fill="url(#hair)"/>
+  <ellipse cx="88" cy="91" rx="3" ry="3.2" fill="#2e1a18"/>
+  <ellipse cx="112" cy="91" rx="3" ry="3.2" fill="#2e1a18"/>
+  <path d="M90 107c5 5 15 5 20 0" fill="none" stroke="#a65d63" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="80" cy="99" r="5" fill="#e5989b" opacity=".32"/>
+  <circle cx="120" cy="99" r="5" fill="#e5989b" opacity=".32"/>
+</svg>

@@ -1,5 +1,7 @@
 (() => {
-  const YM_ID = 0; // TODO: подставить номер счётчика Яндекс Метрики.
+  "use strict";
+
+  const YM_ID = 0;
   if (window.self !== window.top || !Number.isSafeInteger(YM_ID) || YM_ID <= 0) return;
 
   function track(goal) {

@@ -487,22 +487,26 @@
       }, 3500);
     }
 
+    let storageAvailable = true;
     function load() {
       try {
         const raw = localStorage.getItem(CONFIG.key);
         const parsed = JSON.parse(raw || "[]");
         data = Array.isArray(parsed) ? parsed : [];
       } catch (e) {
+        storageAvailable = false;
         data = [];
-        $("storageStatus").textContent = "Режим без сохранения (ошибка памяти)";
+        $("storageStatus").textContent = "Демо-режим предпросмотра (в памяти)";
       }
     }
 
     function save() {
+      if (!storageAvailable) return;
       try {
         localStorage.setItem(CONFIG.key, JSON.stringify(data));
       } catch (e) {
-        showNotice("Не удалось сохранить изменения в память браузера", "err");
+        storageAvailable = false;
+        $("storageStatus").textContent = "Демо-режим предпросмотра (в памяти)";
       }
     }
 
@@ -720,28 +724,44 @@
       }
     };
 
-    // Очистка всех заказов
+    // Очистка всех заказов (безопасное двухкликовое подтверждение вместо блокирующего confirm)
+    let clearArmed = false;
+    let clearTimer = null;
     $("clr").onclick = () => {
       if (!data.length) return;
-      if (confirm("Удалить все заказы на этом устройстве?")) {
-        data = [];
-        $("flt").value = "";
-        $("srch").value = "";
-        save();
-        draw();
-        showNotice("Все заказы удалены.", "ok");
+      if (!clearArmed) {
+        clearArmed = true;
+        $("clr").textContent = "Точно очистить всё?";
+        clearTimer = setTimeout(() => {
+          clearArmed = false;
+          $("clr").textContent = "Очистить всё";
+        }, 3500);
+        return;
       }
+      clearArmed = false;
+      clearTimeout(clearTimer);
+      $("clr").textContent = "Очистить всё";
+      data = [];
+      $("flt").value = "";
+      $("srch").value = "";
+      save();
+      draw();
+      showNotice("Все заказы удалены.", "ok");
     };
 
-    // Скачивание CSV (выгружает в порядке отображения на экране: от новых к старым)
+    // Скачивание CSV с защитой от CSV Formula Injection (=, +, -, @, табуляция)
     $("csv").onclick = () => {
       if (!data.length) return;
       const rowsToExport = getFilteredRows().slice().reverse();
       const exportList = rowsToExport.length ? rowsToExport : data.slice().reverse();
 
-      const q = v => '"' + String(v ?? "").replace(/"/g, '""') + '"';
+      const safeCsvCell = v => {
+        const str = String(v ?? "");
+        const neutralized = /^[=+\-@\t\r]/.test(str) ? "'" + str : str;
+        return '"' + neutralized.replace(/"/g, '""') + '"';
+      };
       const csvContent = "\uFEFFДата;Клиент;Контакт;Заказ;Сумма;Статус\n" +
-        exportList.map(o => [o.d, o.cl, o.ph, o.it, o.pr, o.st].map(q).join(";")).join("\n");
+        exportList.map(o => [o.d, o.cl, o.ph, o.it, o.pr, o.st].map(safeCsvCell).join(";")).join("\n");
 
       const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
       const url = URL.createObjectURL(blob);
@@ -757,6 +777,6 @@
     load();
     draw();
   </script>
-  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a></footer>
 </body>
 </html>

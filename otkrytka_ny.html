@@ -338,7 +338,7 @@ function renderGreeting(recipientName) {
   $("back-builder").onclick = () => {
     if (typeTimer) clearTimeout(typeTimer);
     if (isWebProtocol() && location.search) {
-      history.pushState({}, "", location.pathname);
+      try { history.pushState({}, "", location.pathname); } catch {}
     }
     renderBuilder();
   };
@@ -403,7 +403,7 @@ function renderBuilder() {
       b.onclick = () => {
         const name = b.dataset.name;
         if (isWebProtocol()) {
-          history.pushState({ to: name }, "", location.pathname + "?to=" + encodeURIComponent(name));
+          try { history.pushState({ to: name }, "", location.pathname + "?to=" + encodeURIComponent(name)); } catch {}
         }
         renderGreeting(name);
       };
@@ -526,6 +526,6 @@ function syncSnow() {
 reduceMotion.addEventListener("change", syncSnow);
 syncSnow();
 </script>
-  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></footer>
+  <footer class="demo-privacy-footer"><a href="privacy.html" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a></footer>
 </body>
 </html>
